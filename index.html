@@ -604,10 +604,9 @@
       .ccc-reader input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
       .ccc-note { font-size: 0.85rem; color: var(--muted); margin-top: 12px; }
       .section-jump {
-        display: flex; gap: 8px; align-items: center; overflow-x: auto;
-        padding: 12px 4px 4px; margin: 0; scrollbar-width: none;
+        display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
+        padding: 12px 4px 4px; margin: 0;
       }
-      .section-jump::-webkit-scrollbar { display: none; }
       .section-jump-label { font-size: 0.85rem; color: var(--muted); white-space: nowrap; font-weight: 600; }
       .section-jump a {
         white-space: nowrap; font-size: 0.88rem; font-weight: 600; color: var(--wine);

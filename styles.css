@@ -650,6 +650,10 @@
         padding: 7px 14px; text-decoration: none; flex: 0 0 auto;
       }
       .section-jump a:hover, .section-jump a:focus-visible { background: var(--wine); color: #fff; border-color: var(--wine); }
+      .section-jump a[aria-current="true"] { background: var(--wine); color: #fff; border-color: var(--wine); }
+      .jump-group { display: inline-flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+      .jump-group + .jump-group { border-left: 1px solid var(--line-strong); padding-left: 12px; margin-left: 4px; }
+      .jump-group-name { font-size: 0.75rem; color: var(--muted); white-space: nowrap; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
       .site-footer { border-top: 1px solid var(--line); margin-top: 44px; padding: 28px 0 46px; color: var(--muted); font-size: 0.92rem; }
       .site-footer p { margin: 5px 0; }
       .site-footer strong { color: var(--ink); }

@@ -43,7 +43,8 @@
         "title": "Purgatory — an unbiblical medieval invention",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Sacraments & Worship"
   },
   {
     "slug": "infant-baptism",
@@ -89,7 +90,8 @@
         "title": "Faith alone — Catholics teach salvation by works",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Sacraments & Worship"
   },
   {
     "slug": "purgatory",
@@ -135,7 +137,8 @@
         "title": "Indulgences — the Church sold forgiveness",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Sacraments & Worship"
   },
   {
     "slug": "indulgences",
@@ -181,7 +184,8 @@
         "title": "Confession — why tell your sins to a priest?",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Sacraments & Worship"
   },
   {
     "slug": "assumption",
@@ -227,7 +231,8 @@
         "title": "Mother of God — Mary can't be God's mother",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Mary & Saints"
   },
   {
     "slug": "mother-of-god",
@@ -273,7 +278,8 @@
         "title": "Catholics worship Mary",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Mary & Saints"
   },
   {
     "slug": "rosary",
@@ -319,7 +325,8 @@
         "title": "Prayer doesn't work",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Mary & Saints"
   },
   {
     "slug": "sunday-worship",
@@ -365,7 +372,8 @@
         "title": "Priestly celibacy — and the abuse crisis",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Sacraments & Worship"
   },
   {
     "slug": "faith-alone",
@@ -411,7 +419,8 @@
         "title": "Infant baptism — babies can't believe",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Moral Life"
   },
   {
     "slug": "priestly-celibacy",
@@ -457,7 +466,8 @@
         "title": "Crusades, Inquisition, Galileo — the Church’s crimes",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Moral Life"
   },
   {
     "slug": "annulments",
@@ -503,7 +513,8 @@
         "title": "The Eucharist — cannibalism, or just a symbol?",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Sacraments & Worship"
   },
   {
     "slug": "women-ordination-contraception",
@@ -549,7 +560,8 @@
         "title": "Annulments — Catholic divorce by another name",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Moral Life"
   },
   {
     "slug": "church-crimes",
@@ -595,7 +607,8 @@
         "title": "Priestly celibacy — and the abuse crisis",
         "description": ""
       }
-    ]
+    ],
+    "topic": "The Church"
   },
   {
     "slug": "vatican-wealth",
@@ -641,7 +654,8 @@
         "title": "Religion causes wars and violence",
         "description": ""
       }
-    ]
+    ],
+    "topic": "The Church"
   },
   {
     "slug": "catholicism-paganism",
@@ -687,7 +701,8 @@
         "title": "Statues, icons, and relics are idolatry",
         "description": ""
       }
-    ]
+    ],
+    "topic": "The Church"
   },
   {
     "slug": "nicaea-councils",
@@ -737,7 +752,8 @@
         "title": "The deuterocanonical books — Catholics added books to the Bible",
         "description": ""
       }
-    ]
+    ],
+    "topic": "The Church"
   },
   {
     "slug": "catholic-fragmentation",
@@ -783,7 +799,8 @@
         "title": "The papacy is unbiblical — Peter was never pope of Rome",
         "description": ""
       }
-    ]
+    ],
+    "topic": "The Church"
   },
   {
     "slug": "orthodox-one-true-church",
@@ -829,7 +846,8 @@
         "title": "Catholics are fragmented too — rites and Orthodox schisms",
         "description": ""
       }
-    ]
+    ],
+    "topic": "The Church"
   },
   {
     "slug": "trinity-contradiction",
@@ -875,7 +893,8 @@
         "title": "Christianity was invented at Nicaea — councils made it man-made",
         "description": ""
       }
-    ]
+    ],
+    "topic": "God & Reason"
   },
   {
     "slug": "god-exists-evidence",
@@ -925,7 +944,8 @@
         "title": "Faith is just belief without evidence — blind faith",
         "description": ""
       }
-    ]
+    ],
+    "topic": "God & Reason"
   },
   {
     "slug": "original-sin-unfair",
@@ -971,7 +991,8 @@
         "title": "Natural evil — animal suffering, earthquakes, disease",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Jesus Christ"
   },
   {
     "slug": "immaculate-conception",
@@ -1021,7 +1042,8 @@
         "title": "Catholics worship Mary",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Mary & Saints"
   },
   {
     "slug": "doctrinal-development",
@@ -1071,7 +1093,8 @@
         "title": "Papal infallibility means the pope is sinless and perfect",
         "description": ""
       }
-    ]
+    ],
+    "topic": "The Church"
   },
   {
     "slug": "bad-popes",
@@ -1121,7 +1144,8 @@
         "title": "Crusades, Inquisition, Galileo — the Church’s crimes",
         "description": ""
       }
-    ]
+    ],
+    "topic": "The Church"
   },
   {
     "slug": "mary-perpetual-virginity",
@@ -1171,7 +1195,8 @@
         "title": "The Assumption — Mary's assumption is unbiblical",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Mary & Saints"
   },
   {
     "slug": "apostolic-succession",
@@ -1221,7 +1246,8 @@
         "title": "Sola Scriptura — the Bible alone is the authority",
         "description": ""
       }
-    ]
+    ],
+    "topic": "The Church"
   },
   {
     "slug": "failed-apocalyptic-prophet",
@@ -1271,6 +1297,7 @@
         "title": "The resurrection has natural explanations",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Jesus Christ"
   }
 ]

@@ -1,20 +1,24 @@
 # Christian Armory — your own website
 
-A mobile-friendly Catholic apologetics field guide (Christian Armory): 50 swipeable defense cards,
+A mobile-friendly Catholic apologetics field guide (Christian Armory): swipeable defense cards,
 each with a Catholic response, a one-liner, verses to remember, Catechism
 references, and related topics. Plus a search-first hero ("What objection did
-you hear?") and a "Jump to a defense" index.
+you hear?"), a "Jump to a defense" index, a glossary carousel, and apostle profiles.
 
 **How it's built:** plain static files — no server, no database, no build step,
-nothing to maintain. All 50 defenses live in **`defenses.json`**; `index.html`
-renders them at load. To change content you edit one JSON file, never the code.
+nothing to maintain. All defenses live in the **`defenses-N.json`** shard files
+(`defenses-1.json`, `defenses-2.json`, … — split so each file stays small as the
+deck grows); `index.html` loads and concatenates them at startup. To change
+content you edit the JSON data files, never the code.
 
 ## Files
 
 | File | What it is |
 |---|---|
 | `index.html` | The whole site (layout, styling, app logic). You should never need to edit this. |
-| `defenses.json` | **All 50 defenses — this is the file you edit to update the site.** |
+| `defenses-1.json`, `defenses-2.json`, … | **The defenses, sharded** — this is what you edit to update the site. Add new cards to the end of the last shard; if it nears ~100KB, start a new `defenses-N.json` and add it to the `DEFENSE_SHARDS` list in `index.html`. |
+| `glossary.json` | Glossary terms (shown as a swipeable carousel). |
+| `apostles.json` | Apostle profiles (shown as a swipeable carousel). |
 | `.nojekyll` | Tells GitHub Pages to serve files as-is. Leave it alone. |
 | `README.md` | This guide. |
 
@@ -23,7 +27,8 @@ renders them at load. To change content you edit one JSON file, never the code.
 1. On github.com, create a new **public** repository (e.g. `apologetics-guide`).
    Don't add a README/license — you'll upload files next.
 2. On the repo page click **Add file → Upload files**, drag in `index.html`,
-   `defenses.json`, and `.nojekyll`, then **Commit changes**.
+   the `defenses-N.json` files, `glossary.json`, `apostles.json`,
+   and `.nojekyll`, then **Commit changes**.
 3. Go to **Settings → Pages**. Under "Build and deployment", set Source to
    **Deploy from a branch**, Branch to **main** / **(root)**, Save.
 4. Wait ~1 minute. Your site is live at
@@ -43,7 +48,8 @@ renders them at load. To change content you edit one JSON file, never the code.
 
 ## Updating the site later
 
-Every defense is one object in `defenses.json`:
+Every defense is one object in the `defenses-N.json` shard files (cards stay in
+deck order across the shards: shard 1 first, then shard 2, and so on):
 
 ```json
 {
@@ -68,7 +74,7 @@ Every defense is one object in `defenses.json`:
 - **Fix a typo / reword a card:** edit the fields, commit. The site rebuilds
   itself in about a minute. Nothing else to do.
 - **Add a new defense:** copy any card object, paste it at the end of the
-  array (before the closing `]`), give it a unique `slug` (lowercase,
+  **last** shard's array (before the closing `]`), give it a unique `slug` (lowercase,
   hyphens), fill in the fields, commit. It appears automatically as the new
   last card, in the deck, the jump index, counters, and search.
 - **Tips:** `objection`, `summary`, `body`, and `oneLiner` may contain simple
@@ -85,4 +91,7 @@ as-is or ask to have it converted to the standard format.
 - Fonts (Literata + Public Sans) load from Google Fonts, so the site needs
   internet access — normal for any website.
 - The deck counter, jump carousel, dots, and search all update automatically
-  from `defenses.json`. You never touch `index.html`.
+  from the shard files. You never touch `index.html`.
+- `glossary.json` is a flat array of `{term, pronunciation, definition}` objects,
+  sorted A–Z automatically and shown as a carousel, so it can grow freely.
+  `apostles.json` works the same way.

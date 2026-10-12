@@ -402,16 +402,15 @@
       .quiz-score { margin: 14px 0 0; color: var(--muted); font-size: .92rem; }
 
       .glossary-section { border-top: 1px solid var(--line); }
-      .glossary-az { margin-left: 210px; display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; }
-      .glossary-az a { min-width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--line-strong); border-radius: 8px; color: var(--wine); text-decoration: none; font-weight: 700; font-size: .9rem; }
-      .glossary-az a:hover { background: var(--surface); border-color: var(--wine); }
-      .glossary-list { margin-left: 210px; max-width: 720px; }
-      .glossary-group h3 { font-family: "Literata", Georgia, serif; color: var(--gold); font-size: 1.35rem; margin: 28px 0 10px; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
-      .glossary-group:first-child h3 { margin-top: 0; }
-      .glossary-entry { margin: 0 0 14px; }
-      .glossary-entry dt { font-weight: 700; color: var(--ink); font-size: 1.02rem; }
+      .glossary-carousel { margin-left: 210px; max-width: 1020px; }
+      .glossary-carousel .deck-controls { margin-bottom: 18px; }
+      .glossary-viewport { touch-action: pan-y; scroll-margin-top: 18px; }
+      .glossary-track > .glossary-slide[aria-hidden="true"] { display: none; }
+      .glossary-slide { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: clamp(20px, 3vw, 30px); box-shadow: var(--shadow); }
+      .glossary-letter { text-transform: uppercase; letter-spacing: .08em; font-size: .72rem; color: var(--gold); font-weight: 700; margin: 0 0 6px; }
+      .glossary-slide h3 { font-family: "Literata", Georgia, serif; font-size: 1.4rem; margin: 0 0 4px; color: var(--ink); }
       .glossary-pron { font-weight: 400; color: var(--muted); font-size: .88rem; font-style: italic; }
-      .glossary-entry dd { margin: 2px 0 0; color: var(--muted); font-size: .98rem; line-height: 1.55; }
+      .glossary-slide p { color: var(--muted); font-size: .98rem; line-height: 1.6; margin: 8px 0 0; }
 
       .apostles-section { border-top: 1px solid var(--line); }
       .apostles-legend { margin-left: 210px; display: flex; flex-wrap: wrap; gap: 8px 22px; margin-bottom: 24px; color: var(--muted); font-size: .9rem; }
@@ -454,7 +453,7 @@
         .entry-nav { position: static; flex-direction: row; flex-wrap: wrap; gap: 6px 14px; border-bottom: 1px solid var(--line); padding-bottom: 16px; margin-bottom: 8px; }
         .deck-controls { grid-template-columns: 44px minmax(0, 1fr) 44px; gap: 10px; }
         .deck-arrow { width: 44px; height: 42px; }
-        .tools, .roadmap-grid, .empty, .suggest-form, .quiz-card, .glossary-az, .glossary-list, .apostles-legend, .apostles-carousel { margin-left: 0; }
+        .tools, .roadmap-grid, .empty, .suggest-form, .quiz-card, .glossary-carousel, .apostles-legend, .apostles-carousel { margin-left: 0; }
         .tools { grid-template-columns: 1fr; }
         .roadmap-grid { grid-template-columns: 1fr; }
         .topic:nth-child(odd), .topic:nth-child(even) { padding: 17px 0; border-right: 0; }
@@ -506,7 +505,7 @@
             <div class="hero-search-box">
               <input id="heroSearch" type="search" placeholder="What objection did you hear?" autocomplete="off" aria-describedby="heroSearchHelp" aria-controls="heroSearchResults" aria-expanded="false" />
             </div>
-            <p class="hero-search-help" id="heroSearchHelp">Search all fifty defenses, then press Enter to open the first match.</p>
+            <p class="hero-search-help" id="heroSearchHelp">Search every defense, then press Enter to open the first match.</p>
             <div class="topic-chips" aria-label="Quick topics">
               <button class="topic-chip" type="button" data-hero-query="Jesus" aria-pressed="false">Jesus</button>
               <button class="topic-chip" type="button" data-hero-query="Scripture" aria-pressed="false">Scripture</button>
@@ -522,7 +521,7 @@
         <nav class="jump-index" id="completed-index" aria-label="Jump to a completed defense">
           <div class="jump-index-head">
             <h2>Jump to a defense</h2>
-            <p>Fifty completed answers, ready to open.</p>
+            <p>Completed answers, ready to open.</p>
           </div>
           <div class="jump-carousel">
             <div class="jump-links" id="jumpCards" role="region" aria-roledescription="carousel" aria-label="Completed defense cards" tabindex="0">
@@ -595,7 +594,7 @@
             <div class="section-no">Swipeable defenses</div>
             <div>
               <h2>Answers ready for review</h2>
-              <p>Fifty completed entries now model the guide’s full format: the objection in its strongest form, a Catholic response, a practical one-liner, and connected topics.</p>
+              <p>Each completed entry models the guide’s full format: the objection in its strongest form, a Catholic response, a practical one-liner, and connected topics.</p>
             </div>
           </div>
 
@@ -603,7 +602,7 @@
             <div class="deck-controls" aria-label="Defense card controls">
               <button class="deck-arrow" id="deckPrev" type="button" aria-label="Previous defense">←</button>
               <div class="deck-position">
-                <span id="deckCounter" aria-live="polite">Defense 1 of 50</span>
+                <span id="deckCounter" aria-live="polite">Loading defenses…</span>
                 <div class="deck-dots" id="deckDots" aria-label="Choose a defense"></div>
               </div>
               <button class="deck-arrow" id="deckNext" type="button" aria-label="Next defense">→</button>
@@ -755,11 +754,22 @@
             <div class="section-no">Reference</div>
             <div>
               <h2>Glossary</h2>
-              <p>Thirty words the cards use and the objections assume. Know them, and no one will ever talk past you again.</p>
+              <p>The words the cards use and the objections assume. Know them, and no one will ever talk past you again.</p>
             </div>
           </div>
-          <nav class="glossary-az" id="glossaryAz" aria-label="Jump to a letter"></nav>
-          <div class="glossary-list" id="glossaryList" aria-live="polite"></div>
+          <div class="glossary-carousel">
+            <div class="deck-controls" aria-label="Glossary controls">
+              <button class="deck-arrow" id="glossaryPrev" type="button" aria-label="Previous term">←</button>
+              <div class="deck-position">
+                <span id="glossaryCounter" aria-live="polite">Loading glossary…</span>
+                <div class="deck-dots" id="glossaryDots" aria-label="Choose a term"></div>
+              </div>
+              <button class="deck-arrow" id="glossaryNext" type="button" aria-label="Next term">→</button>
+            </div>
+            <div class="glossary-viewport" id="glossaryViewport" role="region" tabindex="0" aria-roledescription="carousel" aria-label="Glossary terms">
+              <div class="glossary-track" id="glossaryTrack"></div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -831,8 +841,13 @@
     </main>
 
     <script>
-/* Boot: render the 50 defenses from defenses.json, then start the app.
-   To update content, edit defenses.json — no code changes needed. */
+/* Boot: render the defenses from the defenses-N.json shards, then start the app.
+   The cards live in shards (not one big file) because a single defenses.json
+   outgrew what the push tooling can transport. The loader concatenates the
+   shards in order below, so the rest of the app sees one plain array.
+   To update content, edit the shard files — no code changes needed.
+   If the last shard nears ~100KB, start a new defenses-N.json and add it to
+   the SHARDS list in the fetch call. */
 function pad2(n) { return String(n).padStart(2, "0"); }
 
 function escapeHtml(s) {
@@ -844,30 +859,90 @@ function escapeHtml(s) {
 }
 
 function renderGlossary(items) {
-  var az = document.getElementById("glossaryAz");
-  var list = document.getElementById("glossaryList");
-  if (!az || !list || !items || !items.length) return;
+  var track = document.getElementById("glossaryTrack");
+  var dotsWrap = document.getElementById("glossaryDots");
+  var counter = document.getElementById("glossaryCounter");
+  var prev = document.getElementById("glossaryPrev");
+  var next = document.getElementById("glossaryNext");
+  var viewport = document.getElementById("glossaryViewport");
+  if (!track || !items || !items.length) return;
   var sorted = items.slice().sort(function (a, b) {
     return a.term.toLowerCase().localeCompare(b.term.toLowerCase());
   });
-  var azHtml = "";
-  var listHtml = "";
-  var currentLetter = "";
-  sorted.forEach(function (item) {
+  track.innerHTML = sorted.map(function (item, i) {
     var letter = item.term.charAt(0).toUpperCase();
-    if (letter !== currentLetter) {
-      if (currentLetter) listHtml += "</div>";
-      currentLetter = letter;
-      azHtml += '<a href="#glossary-' + letter + '">' + letter + "</a>";
-      listHtml += '<div class="glossary-group"><h3 id="glossary-' + letter + '">' + letter + "</h3>";
+    return '<article class="glossary-slide" aria-hidden="' + (i === 0 ? "false" : "true") + '"' +
+      (i === 0 ? "" : " inert") + ">" +
+      '<p class="glossary-letter">' + escapeHtml(letter) + "</p>" +
+      "<h3>" + escapeHtml(item.term) +
+      ' <span class="glossary-pron">(' + escapeHtml(item.pronunciation) + ")</span></h3>" +
+      "<p>" + escapeHtml(item.definition) + "</p>" +
+      "</article>";
+  }).join("");
+  var slides = Array.prototype.slice.call(track.children);
+  var current = 0;
+
+  if (dotsWrap) {
+    dotsWrap.innerHTML = "";
+    slides.forEach(function (slide, i) {
+      var dot = document.createElement("button");
+      dot.type = "button";
+      dot.className = "deck-dot";
+      dot.setAttribute("aria-label", "Show term " + (i + 1) + ": " + sorted[i].term);
+      dot.setAttribute("aria-current", i === 0 ? "true" : "false");
+      dot.addEventListener("click", function () { showTerm(i, true); });
+      dotsWrap.appendChild(dot);
+    });
+  }
+
+  function showTerm(index, scroll) {
+    current = Math.max(0, Math.min(slides.length - 1, index));
+    slides.forEach(function (slide, si) {
+      var active = si === current;
+      slide.setAttribute("aria-hidden", active ? "false" : "true");
+      if (active) slide.removeAttribute("inert");
+      else slide.setAttribute("inert", "");
+    });
+    if (dotsWrap) {
+      Array.prototype.slice.call(dotsWrap.children).forEach(function (dot, di) {
+        dot.setAttribute("aria-current", di === current ? "true" : "false");
+      });
     }
-    listHtml += '<dl class="glossary-entry"><dt>' + escapeHtml(item.term) +
-      ' <span class="glossary-pron">(' + escapeHtml(item.pronunciation) + ")</span></dt>" +
-      "<dd>" + escapeHtml(item.definition) + "</dd></dl>";
-  });
-  if (currentLetter) listHtml += "</div>";
-  az.innerHTML = azHtml;
-  list.innerHTML = listHtml;
+    if (prev) prev.disabled = current === 0;
+    if (next) next.disabled = current === slides.length - 1;
+    if (counter) counter.textContent = "Term " + (current + 1) + " of " + slides.length;
+    if (scroll && viewport) viewport.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  if (prev) prev.addEventListener("click", function () { showTerm(current - 1); });
+  if (next) next.addEventListener("click", function () { showTerm(current + 1); });
+  if (viewport) {
+    viewport.addEventListener("keydown", function (event) {
+      if (event.target !== viewport) return;
+      if (event.key === "ArrowLeft") { event.preventDefault(); showTerm(current - 1); }
+      if (event.key === "ArrowRight") { event.preventDefault(); showTerm(current + 1); }
+    });
+    var touchStartX = 0;
+    var touchStartY = 0;
+    var touchTracking = false;
+    viewport.addEventListener("touchstart", function (event) {
+      if (event.touches.length !== 1) return;
+      touchStartX = event.touches[0].clientX;
+      touchStartY = event.touches[0].clientY;
+      touchTracking = true;
+    }, { passive: true });
+    viewport.addEventListener("touchend", function (event) {
+      if (!touchTracking || !event.changedTouches.length) return;
+      touchTracking = false;
+      var dx = event.changedTouches[0].clientX - touchStartX;
+      var dy = event.changedTouches[0].clientY - touchStartY;
+      if (Math.abs(dx) < 52 || Math.abs(dx) <= Math.abs(dy) * 1.2) return;
+      showTerm(dx < 0 ? current + 1 : current - 1);
+    }, { passive: true });
+    viewport.addEventListener("touchcancel", function () { touchTracking = false; }, { passive: true });
+  }
+
+  showTerm(0);
 }
 
 function renderApostles(items) {
@@ -1440,8 +1515,11 @@ function initApp(defenses) {
       
 }
 
-fetch("defenses.json")
-  .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+var DEFENSE_SHARDS = ["defenses-1.json", "defenses-2.json", "defenses-3.json"];
+Promise.all(DEFENSE_SHARDS.map(function (f) {
+  return fetch(f).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); });
+}))
+  .then(function (parts) { return [].concat.apply([], parts); })
   .then(function (defenses) { renderSite(defenses); initApp(defenses); })
   .catch(function () {
     var track = document.getElementById("deckTrack");
@@ -1452,8 +1530,8 @@ fetch("glossary.json")
   .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
   .then(renderGlossary)
   .catch(function () {
-    var list = document.getElementById("glossaryList");
-    if (list) list.innerHTML = '<p class="load-error" style="padding:1rem">Could not load the glossary. Check your connection and reload.</p>';
+    var track = document.getElementById("glossaryTrack");
+    if (track) track.innerHTML = '<p class="load-error" style="padding:1rem">Could not load the glossary. Check your connection and reload.</p>';
   });
 
 fetch("apostles.json")

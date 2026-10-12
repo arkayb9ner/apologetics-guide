@@ -108,6 +108,8 @@
       .hero-copy { max-width: 680px; font-size: clamp(1rem, 1.8vw, 1.25rem); color: var(--muted); margin: 0; }
       .hero-verse { max-width: 680px; font-size: 0.98rem; font-style: italic; color: var(--muted); margin: 14px 0 0; }
       .hero-verse span { font-style: normal; font-weight: 600; color: var(--wine); }
+      .hero-start { margin: 16px 0 0; font-size: 1rem; }
+      .hero-start a { color: var(--gold); font-weight: 700; text-decoration: none; border-bottom: 2px solid var(--gold); padding-bottom: 2px; }
       .hero-search { align-self: end; min-width: 0; }
       .hero-search-label {
         display: block;
@@ -659,6 +661,7 @@
             <h1>Know what you believe. Answer with charity.</h1>
             <p class="hero-copy">A Catholic field guide for meeting hard questions honestly—with Scripture, reason, history, and the teaching of the Church.</p>
             <p class="hero-verse">&ldquo;Put on the whole armour of God, that you may be able to stand against the wiles of the devil.&rdquo; <span>&mdash; Ephesians 6:11</span></p>
+            <p class="hero-start"><a href="#start-here">New here? Take the 8-defense guided path &rarr;</a></p>
           </div>
           <aside class="hero-search" aria-label="Find a defense">
             <label class="hero-search-label" for="heroSearch">Find the answer you need</label>
@@ -960,7 +963,7 @@
             <div class="section-no">Reference</div>
             <div>
               <h2>Glossary</h2>
-              <p>The words the cards use and the objections assume. Know them, and no one will ever talk past you again.</p>
+              <p>The words the cards use and the objections assume. Know them, and you&rsquo;ll follow the argument wherever it goes.</p>
             </div>
           </div>
           <div class="glossary-carousel">
@@ -985,7 +988,7 @@
             <div class="section-no">Witnesses</div>
             <div>
               <h2>Meet the Apostles</h2>
-              <p>The men behind the mission — what Scripture says, what tradition hands down, and an honest label for how certain each part is.</p>
+              <p>The men behind the mission &mdash; what Scripture says, what tradition hands down, and an honest label for how certain each part is. Fourteen entries, not twelve: the Twelve as restored with Matthias, plus Paul the apostle to the Gentiles &mdash; and Judas Iscariot, whose betrayal belongs to the story too.</p>
             </div>
           </div>
           <div class="apostles-legend" aria-label="How to read the tradition labels">
@@ -2122,7 +2125,7 @@ var topicCarousels = document.getElementById("topicCarousels");
         cccJumpInput.addEventListener("keydown", function (event) { if (event.key === "Enter") cccDoJump(); });
 }
 
-var ASSET_V = "20261012h"; /* bump on every content push: defeats CDN/browser cache */
+var ASSET_V = "20261012i"; /* bump on every content push: defeats CDN/browser cache */
 var DEFENSE_SHARDS = ["defenses-1.json", "defenses-2.json", "defenses-3.json", "defenses-4.json", "defenses-5.json"];
 Promise.all(DEFENSE_SHARDS.map(function (f) {
   return fetch(f + "?v=" + ASSET_V).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); });

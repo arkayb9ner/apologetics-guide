@@ -357,5 +357,60 @@
   "level": "intermediate",
   "basis": "doctrine",
   "audience": "c"
+ },
+ {
+  "title": "If Jesus is God and He died, did God die? Wouldn’t creation die with Him?",
+  "slug": "did-god-die",
+  "jumpLabel": "Did God die?",
+  "topic": "Jesus Christ",
+  "objection": "You say Jesus is truly God, and you say He died on the cross. So God died. But God is the source of all life — “in him we live and move and have our being.” If the source of life dies, everything depending on Him dies too. Either Jesus wasn’t really God, or your theology collapses into absurdity. You can’t have a dead God and a living universe.",
+  "summary": "Chalcedon (451): one divine Person, two natures. Death — the separation of soul and body — happened to Christ’s human nature; the divine nature is immortal spirit (1 Timothy 6:16) and never for an instant ceased upholding all things (Hebrews 1:3). “God died” is orthodox when it means the God-man, as man.",
+  "response": [
+   {
+    "heading": "Two natures, one Person — death happened to the human one",
+    "body": "<p>The Council of Chalcedon (451) confesses one divine Person — the eternal Son — with two complete natures, divine and human, “without confusion, without change, without division, without separation.” Death is the separation of soul and body: a <i>human</i> event, the kind of thing that happens to composite, mortal natures. The divine Person truly underwent it — in His humanity. The divine nature, pure spirit, “who alone has immortality” (1 Timothy 6:16), cannot die, any more than justice can catch a cold. CCC 627: Christ’s death “put an end to his earthly <i>human</i> existence.”</p>"
+   },
+   {
+    "heading": "“God died” is orthodox — said the right way",
+    "body": "<p>The Church has never flinched from the phrase. Constantinople II (553) confesses that “one of the Holy Trinity suffered in the flesh.” By the <i>communication of idioms</i>, what belongs to either nature may be truly said of the Person: so Christians do say “God died on the cross” — meaning the God-man, <i>as man</i>. The objection thinks it has caught Christianity in a contradiction; it has actually quoted the creed. The scandal was never hidden — it was preached.</p>"
+   },
+   {
+    "heading": "Creation didn’t die, because God doesn’t sustain the universe the way a heart sustains a body",
+    "body": "<p>The objection pictures God as the universe’s battery: drain it, and the lights go out everywhere. But God upholds all things by His will and word — “upholding the universe by his word of power” (Hebrews 1:3), “in him all things hold together” (Colossians 1:17). The divine nature never ceased, never flickered, for an instant on Good Friday. Only the human composite — body and soul — underwent death. Nothing was ever unplugged, because the sustaining act isn’t the kind of thing that can die.</p>"
+   },
+   {
+    "heading": "The objection treats God as a very large creature",
+    "body": "<p>Underneath sits a picture of God as <i>a</i> being among beings — the biggest item in the universe, subject to the universe’s rules, including mortality. But God is not the biggest creature; He is Being itself, the uncaused cause outside the system He sustains. A creature’s death is an event <i>within</i> creation. The Creator’s act of sustaining creation isn’t an event in the same sense at all — so “God died, therefore everything died” mixes categories, like saying “the author fell asleep, so the novel’s characters stopped existing.”</p>"
+   },
+   {
+    "heading": "This is the scandal — and the glory",
+    "body": "<p>Nobody invents a dying God. Crucifixion was the most shameful death in the ancient world, and “we preach Christ crucified, a stumbling block” (1 Corinthians 1:23) — the embarrassment of the claim is evidence for it. And it is precisely <i>because</i> the Person who died is divine that His death has infinite worth: a mere man’s death saves no one, but the God-man’s death can satisfy for all. The objection meant to expose an absurdity; followed through, it opens the heart of the faith.</p>"
+   }
+  ],
+  "verses": [
+   "1 Timothy 6:16",
+   "Colossians 1:17",
+   "Hebrews 1:3"
+  ],
+  "ccc": "CCC 464, 626-627",
+  "simple": "Jesus is one divine Person with two natures. He truly died — in His human nature, the way humans die, soul separated from body. His divine nature can’t die: it’s immortal spirit, and it kept holding the universe together the whole time. “God died” is true when you mean the God-man, as man.",
+  "oneLiner": "The divine Person truly died — in His human nature. The divine nature never flickered; it kept sustaining the universe throughout.",
+  "related": [
+   {
+    "title": "Did Jesus really die on the cross?",
+    "description": "The historical case for the crucifixion"
+   },
+   {
+    "title": "Jesus is not God",
+    "description": "The divinity claim, head-on"
+   },
+   {
+    "title": "How does Jesus dying save anyone — isn’t that cosmic child abuse?",
+    "description": "Why His death has infinite worth"
+   }
+  ],
+  "level": "advanced",
+  "basis": "doctrine",
+  "audience": "g"
  }
 ]

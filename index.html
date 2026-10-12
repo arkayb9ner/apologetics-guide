@@ -360,6 +360,12 @@
       .closing p { margin: 0; max-width: 730px; color: var(--muted); font-size: 1.08rem; }
       .closing strong { color: var(--ink); }
 
+      .support { margin-top: 6px; padding: clamp(40px, 6vw, 64px) 0 calc(72px + env(safe-area-inset-bottom)); display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 30px; border-top: 1px solid var(--line); }
+      .support h2 { font-family: "Literata", Georgia, serif; font-size: clamp(1.4rem, 3vw, 1.9rem); margin: 0 0 10px; color: var(--ink); font-weight: 600; }
+      .support p { margin: 0 0 20px; max-width: 640px; color: var(--muted); font-size: 1.05rem; }
+      .support-btn { display: inline-block; background: var(--wine); color: #fff; font-weight: 600; text-decoration: none; padding: 13px 30px; border-radius: 999px; font-size: 1.02rem; }
+      .support-btn:hover, .support-btn:focus-visible { background: var(--wine-strong); color: #fff; }
+
       @media (max-width: 780px) {
         .page { width: min(100% - 28px, 650px); }
         .hero, .entry-top { grid-template-columns: 1fr; }
@@ -371,7 +377,7 @@
         .jump-links::after { flex-basis: 44px; }
         .method ol { grid-template-columns: 1fr 1fr; gap: 20px 0; }
         .method li:nth-child(3) { border-left: 0; padding-left: 0; }
-        .section-head, .entry-body, .closing { grid-template-columns: 1fr; gap: 14px; }
+        .section-head, .entry-body, .closing, .support { grid-template-columns: 1fr; gap: 14px; }
         .section-no { padding-top: 0; }
         .entry-nav { position: static; flex-direction: row; flex-wrap: wrap; gap: 6px 14px; border-bottom: 1px solid var(--line); padding-bottom: 16px; margin-bottom: 8px; }
         .deck-controls { grid-template-columns: 44px minmax(0, 1fr) 44px; gap: 10px; }
@@ -380,7 +386,7 @@
         .tools { grid-template-columns: 1fr; }
         .roadmap-grid { grid-template-columns: 1fr; }
         .topic:nth-child(odd), .topic:nth-child(even) { padding: 17px 0; border-right: 0; }
-        .closing { gap: 10px; }
+        .closing, .support { gap: 10px; }
       }
       @media (max-width: 480px) {
         h1 { font-size: 2.75rem; }
@@ -669,6 +675,14 @@
           <div class="section-no">Guiding rule</div>
           <p><strong>“Always be ready to give an explanation… but do it with gentleness and reverence.”</strong><br />The aim is not to win an exchange. It is to tell the truth clearly, listen carefully, and leave the door open for grace. <span aria-label="First Peter chapter 3 verses 15 to 16">— 1 Peter 3:15–16</span></p>
         </footer>
+        <section class="support" aria-label="Support Christian Armory">
+          <div class="section-no">Support</div>
+          <div>
+            <h2>Help keep the armory open</h2>
+            <p>Christian Armory is free for everyone, always. If it has helped you or your parish, a small gift helps cover the cost of keeping it online and growing.</p>
+            <a class="support-btn" href="https://ko-fi.com/christianarmory" target="_blank" rel="noopener">☕ Support on Ko-fi</a>
+          </div>
+        </section>
       </div>
     </main>
 

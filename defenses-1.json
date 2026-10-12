@@ -49,7 +49,8 @@
         "title": "All religions are basically the same",
         "description": "Why Christianity’s claims about Christ cannot simply be reduced to one spiritual path among many."
       }
-    ]
+    ],
+    "topic": "Jesus Christ"
   },
   {
     "slug": "accident-of-birth",
@@ -57,7 +58,9 @@
     "customBody": "<div class=\"entry-top\">\n              <div>\n                <span class=\"status\">Defense 2 of 50 · Ready for review</span>\n                <h3>“If you were born in India, you would be Hindu.”</h3>\n                <p class=\"entry-lede\">This is a serious reminder that upbringing shapes belief. But it does not show that Christianity is false—or that any other worldview is true.</p>\n              </div>\n              <blockquote>The place where a belief begins may explain how you encountered it. It cannot, by itself, decide whether it is true.</blockquote>\n            </div>\n\n            <div class=\"entry-body\">\n              <nav class=\"entry-nav\" aria-label=\"Answer sections\" role=\"tablist\">\n                <button type=\"button\" role=\"tab\" aria-selected=\"true\" aria-controls=\"accident-answer\" data-panel=\"answer\">Core answer</button>\n                <button type=\"button\" role=\"tab\" aria-selected=\"false\" aria-controls=\"accident-conversation\" data-panel=\"conversation\">Say it aloud</button>\n                <button type=\"button\" role=\"tab\" aria-selected=\"false\" aria-controls=\"accident-cautions\" data-panel=\"cautions\">Avoid mistakes</button>\n                <button type=\"button\" role=\"tab\" aria-selected=\"false\" aria-controls=\"accident-sources\" data-panel=\"sources\">References</button>\n              </nav>\n\n              <div>\n                <section class=\"panel active\" id=\"accident-answer\" role=\"tabpanel\">\n                  <h4>Start by conceding what is true</h4>\n                  <p>Geography, family, and culture strongly influence what people first believe. A Christian should not deny that. The question is whether those influences settle the truth of the belief. They do not.</p>\n                  <ol class=\"answer-pillars\">\n                    <li><span class=\"num\">01</span><div><b>The objection applies to every worldview.</b><p>If birthplace discredits Christianity, it also discredits Hinduism, atheism, secular humanism, and the objector’s own outlook. Everyone begins somewhere. The test must be evidence and truth, not origin alone.</p></div></li>\n                    <li><span class=\"num\">02</span><div><b>Origin is not the same as truth.</b><p>Rejecting a claim because of how someone came to believe it is the genetic fallacy. A person may learn a true fact from an unreliable teacher—or inherit a belief that later survives careful examination.</p></div></li>\n                    <li><span class=\"num\">03</span><div><b>People can examine inherited beliefs.</b><p>Human beings are influenced, not imprisoned, by culture. People convert, deconvert, and revise their convictions in every direction. The existence of honest disagreement makes investigation necessary; it does not make truth impossible.</p></div></li>\n                    <li><span class=\"num\">04</span><div><b>Christianity makes public claims.</b><p>The central Christian claim is not “my culture feels right.” It is that Jesus lived, was crucified, and rose from the dead. That claim must be assessed historically and philosophically. Birthplace does not answer it.</p></div></li>\n                  </ol>\n                  <aside class=\"quick-ref\" aria-label=\"Quick references\">\n                    <h4>Verses to remember</h4>\n                    <div class=\"verse-list\"><span>Matthew 28:19</span><span>John 14:6</span></div>\n                    <p><b>Catechism:</b> CCC 846-848</p>\n                  </aside>\n                  <h4>The right question</h4>\n                  <p>Replace “Where did you get this belief?” with “What reasons support it?” Biography can explain belief, but argument and evidence must evaluate it.</p>\n                </section>\n\n                <section class=\"panel\" id=\"accident-conversation\" role=\"tabpanel\">\n                  <h4>A short reply</h4>\n                  <p class=\"say-it\">“You’re right that where we are born strongly shapes what we first believe. But that is true of every worldview, including mine and yours. It explains how a belief reached us; it does not tell us whether the belief is true. The real question is whether Christianity’s claims—especially the resurrection—stand up to examination.”</p>\n                  <h4>A one-line reply</h4>\n                  <p class=\"say-it\">“Truth does not have a postal code; the question is not where you heard the claim, but whether the claim is true.”</p>\n                  <h4>A question that keeps the conversation open</h4>\n                  <p>“What evidence would you want us to examine together to decide whether Christianity is true?”</p>\n                </section>\n\n                <section class=\"panel\" id=\"accident-cautions\" role=\"tabpanel\">\n                  <h4>What not to do</h4>\n                  <ul class=\"avoid-list\">\n                    <li><b>Do not dismiss the influence of culture.</b> The objection contains a real insight. Admit it before explaining its limits.</li>\n                    <li><b>Do not answer with conversion statistics alone.</b> Conversions show that upbringing is not destiny, but they do not prove Christianity.</li>\n                    <li><b>Do not insult Hinduism or India.</b> The issue is the logic of the objection, not the dignity or intelligence of people from another faith.</li>\n                    <li><b>Do not claim that sincerity guarantees truth.</b> People can be sincere and mistaken, including Christians. That is why reasons matter.</li>\n                    <li><b>Do not confuse this with the salvation of the unevangelized.</b> That is a separate question and deserves its own careful answer.</li>\n                  </ul>\n                  <h4>Pastoral posture</h4>\n                  <p>Apologetics is not about scoring a point. Ask what experience lies behind the objection. Sometimes the speaker is raising an intellectual question; sometimes they are expressing frustration with religious certainty. Answer the person as well as the argument.</p>\n                </section>\n\n                <section class=\"panel\" id=\"accident-sources\" role=\"tabpanel\">\n                  <h4>Scripture and Catholic context</h4>\n                  <div class=\"references\">\n                    <div class=\"reference\"><b>1 Peter 3:15–16</b><span>Give a reason for your hope, but do it with gentleness, reverence, and a clear conscience.</span></div>\n                    <div class=\"reference\"><b>Acts 17:22–31</b><span>Paul recognizes the religious search of another culture, then reasons publicly about God and the resurrection.</span></div>\n                    <div class=\"reference\"><b>John 18:37</b><span>Christ’s claim is framed in terms of testimony to the truth, not loyalty to a tribe.</span></div>\n                    <div class=\"reference\"><b>Catechism of the Catholic Church, 843</b><span>The Church recognizes goodness and truth present in other religions as a preparation for the Gospel.</span></div>\n                    <div class=\"reference\"><b>Catechism of the Catholic Church, 31–35</b><span>Human reason can reach real knowledge of God, even though our circumstances and limitations make the search difficult.</span></div>\n                  </div>\n                </section>\n              </div>\n            </div>",
     "title": "“If you were born in India, you would be Hindu.”",
     "objection": "This is a serious reminder that upbringing shapes belief. But it does not show that Christianity is false—or that any other worldview is true.",
-    "summary": "The place where a belief begins may explain how you encountered it. It cannot, by itself, decide whether it is true."
+    "summary": "The place where a belief begins may explain how you encountered it. It cannot, by itself, decide whether it is true.",
+    "topic": "Salvation & Last Things",
+    "oneLiner": "“Where you were born may explain how you heard a belief — it cannot decide whether the belief is true.”"
   },
   {
     "slug": "problem-of-evil",
@@ -106,7 +109,8 @@
         "title": "Natural evil — animal suffering, earthquakes, disease",
         "description": ""
       }
-    ]
+    ],
+    "topic": "God & Reason"
   },
   {
     "slug": "divine-hiddenness",
@@ -156,7 +160,8 @@
         "title": "Faith is just belief without evidence — blind faith",
         "description": ""
       }
-    ]
+    ],
+    "topic": "God & Reason"
   },
   {
     "slug": "science-religion",
@@ -201,7 +206,8 @@
         "title": "“Who created God?” — the infinite regress",
         "description": ""
       }
-    ]
+    ],
+    "topic": "God & Reason"
   },
   {
     "slug": "bible-contradictions",
@@ -250,7 +256,8 @@
         "title": "The deuterocanonical books — Catholics added books to the Bible",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Scripture"
   },
   {
     "slug": "miracles-unscientific",
@@ -299,7 +306,8 @@
         "title": "The resurrection has natural explanations",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Jesus Christ"
   },
   {
     "slug": "old-testament-atrocities",
@@ -348,7 +356,8 @@
         "title": "The Bible endorses slavery and oppresses women",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Moral Life"
   },
   {
     "slug": "pagan-myths",
@@ -393,7 +402,8 @@
         "title": "Catholicism is just paganism with a Christian coat",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Scripture"
   },
   {
     "slug": "resurrection-natural-explanations",
@@ -443,7 +453,8 @@
         "title": "Christianity borrowed from pagan myths",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Jesus Christ"
   },
   {
     "slug": "hell-unjust",
@@ -493,7 +504,8 @@
         "title": "What about those who never heard the Gospel?",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Salvation & Last Things"
   },
   {
     "slug": "foreknowledge-and-hell",
@@ -543,7 +555,8 @@
         "title": "What about those who never heard the Gospel?",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Salvation & Last Things"
   },
   {
     "slug": "religion-war-violence",
@@ -593,7 +606,8 @@
         "title": "Religion is a psychological crutch",
         "description": ""
       }
-    ]
+    ],
+    "topic": "The Church"
   },
   {
     "slug": "prayer-doesnt-work",
@@ -639,7 +653,8 @@
         "title": "Faith is just belief without evidence — blind faith",
         "description": ""
       }
-    ]
+    ],
+    "topic": "God & Reason"
   },
   {
     "slug": "jesus-forsaken",
@@ -688,7 +703,8 @@
         "title": "The Bible contradicts itself",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Jesus Christ"
   },
   {
     "slug": "faith-and-evidence",
@@ -734,7 +750,8 @@
         "title": "Science has disproved religion",
         "description": ""
       }
-    ]
+    ],
+    "topic": "God & Reason"
   },
   {
     "slug": "psychological-crutch",
@@ -780,6 +797,7 @@
         "title": "The problem of evil",
         "description": ""
       }
-    ]
+    ],
+    "topic": "God & Reason"
   }
 ]

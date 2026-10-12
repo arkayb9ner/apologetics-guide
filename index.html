@@ -447,7 +447,13 @@
       .suggest-form .support-btn { justify-self: start; border: 0; cursor: pointer; font: inherit; margin-top: 6px; }
       .suggest-note { min-height: 1.4em; color: var(--muted); font-size: .95rem; margin: 4px 0 0; }
 
-      .deck-shuffle-row { display: flex; justify-content: center; margin: 2px 0 20px; }
+      .deck-shuffle-row { display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; margin: 2px 0 20px; }
+      .deck-jump { display: flex; align-items: center; gap: 8px; }
+      .deck-jump label { font-size: 0.88rem; color: var(--muted); font-weight: 600; white-space: nowrap; }
+      .deck-jump input { width: 72px; font: inherit; padding: 8px 10px; border-radius: 10px; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); text-align: center; }
+      .deck-jump input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+      .deck-jump-go { font: inherit; font-weight: 700; padding: 8px 18px; border-radius: 999px; border: 1px solid var(--wine); background: var(--wine); color: #fff; cursor: pointer; }
+      .deck-jump-go:hover, .deck-jump-go:focus-visible { background: var(--wine-strong); }
       .shuffle-btn { background: transparent; border: 1px solid var(--line-strong); color: var(--wine); border-radius: 999px; padding: 9px 22px; font: inherit; font-size: .95rem; font-weight: 600; cursor: pointer; }
       .shuffle-btn:hover { background: var(--surface); border-color: var(--wine); }
 
@@ -713,6 +719,11 @@
             </div>
             <div class="deck-shuffle-row">
               <button class="shuffle-btn" id="deckShuffle" type="button">🔀 Surprise me</button>
+              <form class="deck-jump" id="deckJumpForm" aria-label="Jump to a defense by number">
+                <label for="deckJumpInput">Go to defense</label>
+                <input id="deckJumpInput" type="number" min="1" placeholder="#" inputmode="numeric" aria-label="Defense number" />
+                <button type="submit" class="deck-jump-go">Go</button>
+              </form>
             </div>
             <div class="deck-viewport" id="defenseDeck" role="region" tabindex="0" aria-roledescription="carousel" aria-label="Completed defenses">
               <div class="deck-track" id="deckTrack">
@@ -1833,6 +1844,23 @@ var topicCarousels = document.getElementById("topicCarousels");
             var next = currentCard;
             while (next === currentCard) next = Math.floor(Math.random() * cards.length);
             showCard(next, { scroll: true });
+          });
+        }
+        var deckJumpForm = document.getElementById("deckJumpForm");
+        var deckJumpInput = document.getElementById("deckJumpInput");
+        if (deckJumpForm && deckJumpInput) {
+          deckJumpInput.setAttribute("max", String(cards.length));
+          deckJumpForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+            var n = parseInt(deckJumpInput.value, 10);
+            if (n >= 1 && n <= cards.length) {
+              showCard(n - 1, { scroll: true });
+              deckJumpInput.value = "";
+              deckJumpInput.blur();
+            } else {
+              deckJumpInput.focus();
+              deckJumpInput.select();
+            }
           });
         }
         viewport.addEventListener("keydown", function (event) {

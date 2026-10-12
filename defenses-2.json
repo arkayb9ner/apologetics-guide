@@ -43,7 +43,8 @@
         "title": "“Jesus is the only way” is arrogant and exclusionary",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Salvation & Last Things"
   },
   {
     "slug": "jesus-only-way",
@@ -89,7 +90,8 @@
         "title": "Hell is unjust — eternal punishment for finite sins",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Jesus Christ"
   },
   {
     "slug": "natural-evil",
@@ -134,7 +136,8 @@
         "title": "Science has disproved religion",
         "description": ""
       }
-    ]
+    ],
+    "topic": "God & Reason"
   },
   {
     "slug": "slavery-women",
@@ -180,7 +183,8 @@
         "title": "Religion causes wars and violence",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Moral Life"
   },
   {
     "slug": "morality-without-god",
@@ -225,7 +229,8 @@
         "title": "Science has disproved religion",
         "description": ""
       }
-    ]
+    ],
+    "topic": "God & Reason"
   },
   {
     "slug": "who-created-god",
@@ -271,7 +276,8 @@
         "title": "Faith is just belief without evidence — blind faith",
         "description": ""
       }
-    ]
+    ],
+    "topic": "God & Reason"
   },
   {
     "slug": "omnipotence-paradox",
@@ -317,7 +323,8 @@
         "title": "Faith is just belief without evidence — blind faith",
         "description": ""
       }
-    ]
+    ],
+    "topic": "God & Reason"
   },
   {
     "slug": "never-heard-gospel",
@@ -363,7 +370,8 @@
         "title": "Hell is unjust — eternal punishment for finite sins",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Salvation & Last Things"
   },
   {
     "slug": "catholics-worship-mary",
@@ -409,7 +417,8 @@
         "title": "Statues, icons, and relics are idolatry",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Mary & Saints"
   },
   {
     "slug": "saints-necromancy",
@@ -455,7 +464,8 @@
         "title": "Statues, icons, and relics are idolatry",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Mary & Saints"
   },
   {
     "slug": "statues-icons-relics",
@@ -501,7 +511,8 @@
         "title": "Praying to saints is necromancy",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Mary & Saints"
   },
   {
     "slug": "papacy-unbiblical",
@@ -547,7 +558,8 @@
         "title": "Sola Scriptura — the Bible alone is the authority",
         "description": ""
       }
-    ]
+    ],
+    "topic": "The Church"
   },
   {
     "slug": "papal-infallibility",
@@ -593,7 +605,8 @@
         "title": "Sola Scriptura — the Bible alone is the authority",
         "description": ""
       }
-    ]
+    ],
+    "topic": "The Church"
   },
   {
     "slug": "sola-scriptura",
@@ -639,7 +652,8 @@
         "title": "The papacy is unbiblical — Peter was never pope of Rome",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Scripture"
   },
   {
     "slug": "deuterocanonical-books",
@@ -684,7 +698,8 @@
         "title": "Purgatory — an unbiblical medieval invention",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Scripture"
   },
   {
     "slug": "call-no-man-father",
@@ -730,7 +745,8 @@
         "title": "Priestly celibacy — and the abuse crisis",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Sacraments & Worship"
   },
   {
     "slug": "eucharist",
@@ -772,6 +788,7 @@
         "title": "Confession — why tell your sins to a priest?",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Sacraments & Worship"
   }
 ]

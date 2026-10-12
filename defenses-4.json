@@ -51,7 +51,8 @@
     "topic": "Salvation & Last Things",
     "simple": "The Qur’an denies the crucifixion — yet every historian, even hostile ones, affirms it happened. Islam asks you to trust one man’s private revelation over public history. The evidence points to the cross, not away from it.",
     "level": "intermediate",
-    "basis": "history"
+    "basis": "history",
+    "audience": "g"
   },
   {
     "slug": "heaven-free-will-no-sin",
@@ -105,7 +106,8 @@
     "topic": "God & Reason",
     "simple": "Heaven doesn’t remove freedom — it perfects it. The saints can’t sin the way a healthy eye can’t choose blindness. Freedom was always meant to end in choosing good forever.",
     "level": "advanced",
-    "basis": "theology"
+    "basis": "theology",
+    "audience": "g"
   },
   {
     "slug": "bible-manuscripts-reliable",
@@ -159,7 +161,8 @@
     "topic": "Scripture",
     "simple": "We have 5,800+ Greek manuscripts — more than any ancient book, by far. The differences are trivial: spelling, word order. Even skeptical scholars admit we’ve got the original text.",
     "level": "intermediate",
-    "basis": "history"
+    "basis": "history",
+    "audience": "g"
   },
   {
     "slug": "extraordinary-claims-evidence",
@@ -213,7 +216,8 @@
     "topic": "God & Reason",
     "simple": "“Extraordinary claims require extraordinary evidence” sounds wise, but it’s a slogan, not an argument — it proves nothing by itself. The real question is whether the evidence we have is good. For the Resurrection, it is.",
     "level": "advanced",
-    "basis": "theology"
+    "basis": "theology",
+    "audience": "g"
   },
   {
     "slug": "mass-re-sacrifice",
@@ -267,7 +271,8 @@
     "topic": "Sacraments & Worship",
     "simple": "The Mass doesn’t repeat the cross — it makes it present, the way a video call makes someone present without cloning them. One sacrifice, here and now. “Once for all” is exactly what Catholics believe.",
     "level": "intermediate",
-    "basis": "doctrine"
+    "basis": "doctrine",
+    "audience": "c"
   },
   {
     "slug": "church-banned-bible",
@@ -321,7 +326,8 @@
     "topic": "Scripture",
     "simple": "Chained Bibles were chained OPEN — like library reference books anyone could read. Catholics printed Bibles before Luther was born. The Church restricted bad translations, not the Bible itself.",
     "level": "intermediate",
-    "basis": "history"
+    "basis": "history",
+    "audience": "c"
   },
   {
     "slug": "pius-xii-hitlers-pope",
@@ -375,7 +381,8 @@
     "topic": "The Church",
     "simple": "“Hitler’s Pope” was coined by a 1963 play, not by historians. Pius XII hid thousands of Jews and was praised by Jewish leaders at the time. The slogan collapses when you meet the actual record.",
     "level": "intermediate",
-    "basis": "history"
+    "basis": "history",
+    "audience": "c"
   },
   {
     "slug": "church-and-slavery",
@@ -429,7 +436,8 @@
     "topic": "The Church",
     "simple": "Some Christians failed terribly here, and the Church confesses it. But popes condemned slavery centuries before abolition, and Catholic missionaries fought it on the ground. The doctrine of human dignity is what finally killed slavery.",
     "level": "intermediate",
-    "basis": "history"
+    "basis": "history",
+    "audience": "c"
   },
   {
     "slug": "church-homosexuality",
@@ -479,7 +487,8 @@
     "topic": "Moral Life",
     "simple": "The Church says two things at once: every person has infinite dignity, and every sexual act belongs in marriage. Love the person, tell the truth about the act. Charity without clarity isn’t kindness — it’s cruelty.",
     "level": "intermediate",
-    "basis": "doctrine"
+    "basis": "doctrine",
+    "audience": "g"
   },
   {
     "slug": "thief-on-the-cross",
@@ -533,7 +542,8 @@
     "topic": "Sacraments & Worship",
     "simple": "The thief proves God isn’t trapped by His own sacraments — baptism of desire is real. But the exception proves the rule: the rest of us should get baptized. Don’t build your theology on deathbeds.",
     "level": "beginner",
-    "basis": "doctrine"
+    "basis": "doctrine",
+    "audience": "c"
   },
   {
     "slug": "vatican-ii-changed-doctrine",
@@ -587,7 +597,8 @@
     "topic": "The Church",
     "simple": "Vatican II changed disciplines and tone, not doctrines. Read it in continuity with everything before, and it all fits. The “rupture” reading is what creates the contradictions.",
     "level": "intermediate",
-    "basis": "theology"
+    "basis": "theology",
+    "audience": "c"
   },
   {
     "slug": "im-a-good-person",
@@ -641,7 +652,8 @@
     "topic": "Jesus Christ",
     "simple": "Heaven’s standard isn’t “decent” — it’s perfect. And good deeds don’t cancel bad ones, any more than good driving cancels a robbery. We don’t need a performance review; we need grace.",
     "level": "beginner",
-    "basis": "theology"
+    "basis": "theology",
+    "audience": "g"
   },
   {
     "slug": "confirmation-unbiblical",
@@ -695,7 +707,8 @@
     "topic": "Sacraments & Worship",
     "simple": "Acts shows a second rite after baptism — hands laid on, Spirit received. Baptism is birth; Confirmation is strengthening. Even the apostles, already disciples, still needed Pentecost.",
     "level": "beginner",
-    "basis": "theology"
+    "basis": "theology",
+    "audience": "c"
   },
   {
     "slug": "anointing-of-the-sick",
@@ -749,7 +762,8 @@
     "topic": "Sacraments & Worship",
     "simple": "James 5 gives the recipe: oil, elders, prayer — with healing and forgiveness as the results. It’s for the seriously ill, not just the dying. It’s Christ coming to the sickbed.",
     "level": "beginner",
-    "basis": "theology"
+    "basis": "theology",
+    "audience": "c"
   },
   {
     "slug": "hebrews-3-2-made-jesus",
@@ -803,7 +817,8 @@
     "topic": "Jesus Christ",
     "simple": "“Made” here means appointed — like “I made him a judge” doesn’t mean I created him. Hebrews 1 already placed Jesus in the Creator’s category. The “making” is His appointment as high priest.",
     "level": "intermediate",
-    "basis": "theology"
+    "basis": "theology",
+    "audience": "g"
   },
   {
     "slug": "why-not-judaism",
@@ -857,7 +872,8 @@
     "topic": "Salvation & Last Things",
     "simple": "The prophets foretold a rejected Messiah AND the nations streaming in — both came true. The Church doesn’t replace Israel; she’s Israel expanded to the world. And the first Christians were all Jews.",
     "level": "intermediate",
-    "basis": "theology"
+    "basis": "theology",
+    "audience": "g"
   },
   {
     "slug": "atonement-how-cross-saves",
@@ -911,7 +927,8 @@
     "topic": "Jesus Christ",
     "simple": "Nobody was unwilling — Jesus laid down His own life, so this isn’t cosmic child abuse. The cross isn’t God punishing a victim; it’s God paying sin’s price Himself, then uniting us to it.",
     "level": "advanced",
-    "basis": "theology"
+    "basis": "theology",
+    "audience": "g"
   },
   {
     "slug": "canon-who-decided",
@@ -965,7 +982,8 @@
     "topic": "Scripture",
     "simple": "No book lists its own table of contents — so every Bible’s canon rests on the Church’s discernment. Hippo and Carthage recognized what Christians already read. Your Bible is a Catholic artifact.",
     "level": "intermediate",
-    "basis": "history"
+    "basis": "history",
+    "audience": "c"
   },
   {
     "slug": "judge-not-judgmental",
@@ -1019,7 +1037,8 @@
     "topic": "Moral Life",
     "simple": "“Judge not” is verse 1 — verse 5 says take the log out of your eye, THEN help your brother with his speck. Jesus commands clear-eyed judgment, not condemnation. And love warns: silence isn’t kindness.",
     "level": "beginner",
-    "basis": "theology"
+    "basis": "theology",
+    "audience": "g"
   },
   {
     "slug": "church-colonialism",
@@ -1073,7 +1092,8 @@
     "topic": "The Church",
     "simple": "The record is mixed, and the Church has confessed it — no whitewash. But the fiercest enemies of conquest were Catholics: Las Casas, Montesinos, Pope Paul III. Human rights were born in Catholic pulpits.",
     "level": "intermediate",
-    "basis": "history"
+    "basis": "history",
+    "audience": "c"
   },
   {
     "title": "All churches are the same — as long as you believe in Jesus, you're saved",
@@ -1130,7 +1150,8 @@
       }
     ],
     "level": "beginner",
-    "basis": "theology"
+    "basis": "theology",
+    "audience": "c"
   },
   {
     "title": "I don't need church — as long as I believe in Jesus",
@@ -1187,7 +1208,8 @@
       }
     ],
     "level": "beginner",
-    "basis": "theology"
+    "basis": "theology",
+    "audience": "c"
   },
   {
     "title": "Queen of Heaven — isn’t Marian devotion just pagan goddess worship?",
@@ -1238,7 +1260,8 @@
       }
     ],
     "level": "intermediate",
-    "basis": "theology"
+    "basis": "theology",
+    "audience": "c"
   },
   {
     "title": "Once saved, always saved — a Christian can’t lose salvation",
@@ -1290,7 +1313,8 @@
       }
     ],
     "level": "intermediate",
-    "basis": "theology"
+    "basis": "theology",
+    "audience": "c"
   },
   {
     "title": "The Gospels were written too late to be reliable",
@@ -1340,7 +1364,8 @@
       }
     ],
     "level": "intermediate",
-    "basis": "history"
+    "basis": "history",
+    "audience": "g"
   },
   {
     "title": "Did the apostles even exist — or are they legends?",
@@ -1389,6 +1414,7 @@
       }
     ],
     "level": "intermediate",
-    "basis": "history"
+    "basis": "history",
+    "audience": "g"
   }
 ]

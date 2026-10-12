@@ -47,7 +47,8 @@
         "title": "All religions are basically the same",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Salvation & Last Things"
   },
   {
     "slug": "heaven-free-will-no-sin",
@@ -97,7 +98,8 @@
         "title": "Why would God create people He knows will go to hell?",
         "description": ""
       }
-    ]
+    ],
+    "topic": "God & Reason"
   },
   {
     "slug": "bible-manuscripts-reliable",
@@ -147,7 +149,8 @@
         "title": "Christianity borrowed from pagan myths",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Scripture"
   },
   {
     "slug": "extraordinary-claims-evidence",
@@ -197,7 +200,8 @@
         "title": "Faith is just belief without evidence — blind faith",
         "description": ""
       }
-    ]
+    ],
+    "topic": "God & Reason"
   },
   {
     "slug": "mass-re-sacrifice",
@@ -247,7 +251,8 @@
         "title": "Sola Scriptura — the Bible alone is the authority",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Sacraments & Worship"
   },
   {
     "slug": "church-banned-bible",
@@ -297,7 +302,8 @@
         "title": "The Bible contradicts itself",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Scripture"
   },
   {
     "slug": "pius-xii-hitlers-pope",
@@ -347,7 +353,8 @@
         "title": "Some popes were corrupt — so much for a Spirit-guided Church",
         "description": ""
       }
-    ]
+    ],
+    "topic": "The Church"
   },
   {
     "slug": "church-and-slavery",
@@ -397,7 +404,8 @@
         "title": "The Old Testament God commands atrocities",
         "description": ""
       }
-    ]
+    ],
+    "topic": "The Church"
   },
   {
     "slug": "church-homosexuality",
@@ -443,7 +451,8 @@
         "title": "Original sin is unjust — and Adam and Eve weren’t real",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Moral Life"
   },
   {
     "slug": "thief-on-the-cross",
@@ -493,7 +502,8 @@
         "title": "What about those who never heard the Gospel?",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Sacraments & Worship"
   },
   {
     "slug": "vatican-ii-changed-doctrine",
@@ -543,7 +553,8 @@
         "title": "Sunday worship — the Sabbath is Saturday",
         "description": ""
       }
-    ]
+    ],
+    "topic": "The Church"
   },
   {
     "slug": "im-a-good-person",
@@ -593,6 +604,7 @@
         "title": "You don't need God to be moral — atheists can be good people",
         "description": ""
       }
-    ]
+    ],
+    "topic": "Jesus Christ"
   }
 ]

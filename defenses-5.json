@@ -46,7 +46,8 @@
       }
     ],
     "level": "intermediate",
-    "basis": "history"
+    "basis": "history",
+    "audience": "c"
   },
   {
     "title": "Why does the Church oppose abortion?",
@@ -96,7 +97,8 @@
       }
     ],
     "level": "beginner",
-    "basis": "doctrine"
+    "basis": "doctrine",
+    "audience": "g"
   },
   {
     "title": "Why does the Church teach that euthanasia is wrong?",
@@ -145,6 +147,7 @@
       }
     ],
     "level": "intermediate",
-    "basis": "doctrine"
+    "basis": "doctrine",
+    "audience": "g"
   }
 ]

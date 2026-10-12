@@ -64,9 +64,7 @@
       html { scroll-behavior: smooth; }
       body {
         margin: 0;
-        background:
-          linear-gradient(90deg, transparent 0, transparent calc(50% - 1px), color-mix(in srgb, var(--line) 18%, transparent) 50%, transparent calc(50% + 1px)) top center / min(100%, 1180px) 100% no-repeat,
-          var(--paper);
+        background: var(--paper);
         color: var(--ink);
         font-family: "Public Sans", sans-serif;
         line-height: 1.6;
@@ -2125,7 +2123,7 @@ var topicCarousels = document.getElementById("topicCarousels");
         cccJumpInput.addEventListener("keydown", function (event) { if (event.key === "Enter") cccDoJump(); });
 }
 
-var ASSET_V = "20261012j"; /* bump on every content push: defeats CDN/browser cache */
+var ASSET_V = "20261012k"; /* bump on every content push: defeats CDN/browser cache */
 var DEFENSE_SHARDS = ["defenses-1.json", "defenses-2.json", "defenses-3.json", "defenses-4.json", "defenses-5.json"];
 Promise.all(DEFENSE_SHARDS.map(function (f) {
   return fetch(f + "?v=" + ASSET_V).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); });

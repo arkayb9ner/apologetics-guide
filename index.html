@@ -276,6 +276,8 @@
       .deck-position { display: grid; justify-items: center; gap: 8px; min-width: 0; }
       #deckCounter { color: var(--muted); font-size: .82rem; font-weight: 700; letter-spacing: .04em; }
       .deck-dots { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; }
+      .deck-progress { height: 8px; border-radius: 999px; background: var(--paper-deep); border: 1px solid var(--line); overflow: hidden; min-width: 140px; }
+      .deck-progress-fill { height: 100%; width: 0; border-radius: 999px; background: linear-gradient(90deg, var(--gold), var(--wine)); transition: width 0.3s ease; }
       .deck-dot {
         width: 10px;
         height: 10px;
@@ -347,6 +349,12 @@
       .reference b { display: block; color: var(--wine); }
       .entry-topic { display: inline-block; margin-left: 10px; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--wine); border: 1px solid var(--line-strong); padding: 2px 8px; border-radius: 999px; vertical-align: middle; }
       .browse-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+      .browse-selects { display: grid; gap: 14px; }
+      @media (min-width: 720px) { .browse-selects { grid-template-columns: 1fr 1fr; } }
+      .browse-select-wrap { display: flex; flex-direction: column; gap: 6px; }
+      .browse-select-label { font-weight: 700; font-size: 0.95rem; }
+      .browse-select { font: inherit; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); max-width: 100%; cursor: pointer; }
+      .browse-select:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
       .browse-chip { font: inherit; font-size: .85rem; padding: 8px 14px; border: 1px solid var(--line-strong); border-radius: 999px; background: transparent; color: inherit; cursor: pointer; }
       .browse-chip:hover, .browse-chip:focus-visible { border-color: var(--wine); color: var(--wine); }
       .browse-chip[aria-pressed="true"] { background: var(--wine); border-color: var(--wine); color: #fff; }
@@ -607,6 +615,10 @@
         padding: 7px 14px; text-decoration: none; flex: 0 0 auto;
       }
       .section-jump a:hover, .section-jump a:focus-visible { background: var(--wine); color: #fff; border-color: var(--wine); }
+      .site-footer { border-top: 1px solid var(--line); margin-top: 44px; padding: 28px 0 46px; color: var(--muted); font-size: 0.92rem; }
+      .site-footer p { margin: 5px 0; }
+      .site-footer strong { color: var(--ink); }
+      .site-footer a { color: var(--wine); }
     </style>
   </head>
   <body>
@@ -640,10 +652,9 @@
         <nav class="jump-index" id="completed-index" aria-label="Jump to a completed defense">
           <div class="jump-index-head">
             <h2>Browse the defenses</h2>
-            <p>Pick a topic, then a defense — tap to open it.</p>
+            <p>Pick a topic, then choose a defense — every defense is numbered in order.</p>
           </div>
-          <div class="browse-chips" id="topicChips" role="group" aria-label="Filter defenses by topic"></div>
-          <div class="browse-groups" id="browseGroups"></div>
+          <div class="browse-selects" id="browseSelects"></div>
         </nav>
 
         <section class="method" aria-label="How to use the guide">
@@ -683,7 +694,7 @@
             <div class="section-no">Swipeable defenses</div>
             <div>
               <h2>Answers ready for review</h2>
-              <p>Each completed entry models the guide’s full format: the objection in its strongest form, a Catholic response, a practical one-liner, and connected topics.</p>
+              <p>Every defense is numbered in order — swipe or arrow through them all, or jump straight to one from Browse above. Each entry states the objection in its strongest form, then answers with a Catholic response, a practical one-liner, and connected topics.</p>
             </div>
           </div>
 
@@ -692,7 +703,9 @@
               <button class="deck-arrow" id="deckPrev" type="button" aria-label="Previous defense">←</button>
               <div class="deck-position">
                 <span id="deckCounter" aria-live="polite">Loading defenses…</span>
-                <div class="deck-dots" id="deckDots" aria-label="Choose a defense"></div>
+                <div class="deck-progress" id="deckProgress" role="progressbar" aria-label="Progress through the defenses" aria-valuemin="1" aria-valuemax="1" aria-valuenow="1">
+                  <div class="deck-progress-fill" id="deckProgressFill"></div>
+                </div>
               </div>
               <button class="deck-arrow" id="deckNext" type="button" aria-label="Next defense">→</button>
             </div>
@@ -986,6 +999,13 @@
             <p style="margin-top:14px;font-size:.92rem;">Heard an objection the armory doesn't answer yet? <a href="https://github.com/arkayb9ner/apologetics-guide/issues" target="_blank" rel="noopener">Suggest it here</a> — new defenses are added regularly.</p>
           </div>
         </section>
+      </div>
+
+      <div class="page">
+        <footer class="site-footer">
+          <p><strong>Christian Armory</strong> — a Catholic field guide for meeting hard questions honestly.</p>
+          <p>Catechism text © Libreria Editrice Vaticana · Verse epigraph from the Douay-Rheims Bible · © 2026 · Free for everyone, always.</p>
+        </footer>
       </div>
     </main>
 
@@ -1350,7 +1370,8 @@ function initApp(defenses) {
         var cards = Array.prototype.slice.call(track.querySelectorAll(".entry"));
         var prevButton = document.getElementById("deckPrev");
         var nextButton = document.getElementById("deckNext");
-        var dotsWrap = document.getElementById("deckDots");
+        var deckProgress = document.getElementById("deckProgress");
+        var deckProgressFill = document.getElementById("deckProgressFill");
         var deckCounter = document.getElementById("deckCounter");
         var currentCard = 0;
         var heroSearch = document.getElementById("heroSearch");
@@ -1589,94 +1610,50 @@ function initApp(defenses) {
         })();
 
 
-var browseGroups = document.getElementById("browseGroups");
-        var topicChips = document.getElementById("topicChips");
-        var activeTopic = "All";
+var browseSelects = document.getElementById("browseSelects");
 
-        function topicCount(t) {
-          return defenses.filter(function (d) { return d.topic === t; }).length;
-        }
-
-        TOPICS.forEach(function (t) {
-          var chip = document.createElement("button");
-          chip.type = "button";
-          chip.className = "browse-chip";
-          chip.textContent = t + " (" + topicCount(t) + ")";
-          chip.setAttribute("data-topic", t);
-          chip.setAttribute("aria-pressed", "false");
-          chip.addEventListener("click", function () { setTopic(t); });
-          topicChips.appendChild(chip);
-        });
-        var allChip = document.createElement("button");
-        allChip.type = "button";
-        allChip.className = "browse-chip browse-chip-all";
-        allChip.textContent = "All (" + defenses.length + ")";
-        allChip.setAttribute("data-topic", "All");
-        allChip.setAttribute("aria-pressed", "true");
-        allChip.addEventListener("click", function () { setTopic("All"); });
-        topicChips.insertBefore(allChip, topicChips.firstChild);
-
-        function setTopic(t) {
-          activeTopic = t;
-          Array.prototype.slice.call(topicChips.children).forEach(function (chip) {
-            chip.setAttribute("aria-pressed", chip.getAttribute("data-topic") === t ? "true" : "false");
-          });
-          renderBrowse();
-        }
-
-        function renderBrowse() {
-          browseGroups.innerHTML = "";
+        function renderBrowseSelects() {
+          browseSelects.innerHTML = "";
           TOPICS.forEach(function (t) {
-            if (activeTopic !== "All" && activeTopic !== t) return;
             var items = [];
             defenses.forEach(function (card, i) {
               if (card.topic === t) items.push({ card: card, index: i });
             });
             if (!items.length) return;
-            var group = document.createElement("section");
-            group.className = "browse-group";
-            var head = document.createElement("h3");
-            head.className = "browse-group-head";
-            var headTitle = document.createElement("span"); headTitle.textContent = t;
-            var headCount = document.createElement("span"); headCount.className = "browse-count"; headCount.textContent = items.length;
-            head.appendChild(headTitle); head.appendChild(headCount);
-            group.appendChild(head);
-            var list = document.createElement("div");
-            list.className = "browse-cards";
+            var wrap = document.createElement("div");
+            wrap.className = "browse-select-wrap";
+            var selId = "browse-" + t.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+            var label = document.createElement("label");
+            label.className = "browse-select-label";
+            label.setAttribute("for", selId);
+            label.textContent = t + " (" + items.length + ")";
+            var sel = document.createElement("select");
+            sel.className = "browse-select";
+            sel.id = selId;
+            var ph = document.createElement("option");
+            ph.value = "";
+            ph.textContent = "Choose a defense\u2026";
+            sel.appendChild(ph);
             items.forEach(function (it) {
-              var b = document.createElement("button");
-              b.type = "button";
-              b.className = "browse-card";
-              b.setAttribute("data-browse-target", String(it.index));
-              var num = document.createElement("span"); num.className = "jump-num"; num.textContent = pad2(it.index + 1);
-              var label = document.createElement("span"); label.textContent = it.card.jumpLabel;
-              var topic = document.createElement("span"); topic.className = "browse-card-topic"; topic.textContent = t;
-              b.appendChild(num); b.appendChild(label);
-              b.setAttribute("aria-label", "Open defense " + (it.index + 1) + ": " + it.card.jumpLabel);
-              list.appendChild(b);
+              var o = document.createElement("option");
+              o.value = String(it.index);
+              o.textContent = pad2(it.index + 1) + " \u00b7 " + it.card.jumpLabel;
+              sel.appendChild(o);
             });
-            group.appendChild(list);
-            browseGroups.appendChild(group);
+            sel.addEventListener("change", function () {
+              if (sel.value === "") return;
+              showCard(Number(sel.value), { scroll: true });
+              sel.value = "";
+            });
+            wrap.appendChild(label);
+            wrap.appendChild(sel);
+            browseSelects.appendChild(wrap);
           });
         }
 
-        browseGroups.addEventListener("click", function (event) {
-          var target = event.target;
-          var b = target && target.closest ? target.closest("[data-browse-target]") : null;
-          if (!b) return;
-          showCard(Number(b.getAttribute("data-browse-target")), { scroll: true });
-        });
+        renderBrowseSelects();
 
-        renderBrowse();
-
-        cards.forEach(function (card, index) {
-          var dot = document.createElement("button");
-          dot.type = "button";
-          dot.className = "deck-dot";
-          dot.setAttribute("aria-label", "Open defense " + (index + 1) + ": " + card.querySelector("h3").textContent);
-          dot.addEventListener("click", function () { showCard(index); });
-          dotsWrap.appendChild(dot);
-        });
+        if (deckProgress) deckProgress.setAttribute("aria-valuemax", String(cards.length));
 
         function updateDeckHeight() {
           viewport.style.height = "auto";
@@ -1692,9 +1669,8 @@ var browseGroups = document.getElementById("browseGroups");
             if (isActive) card.removeAttribute("inert");
             else card.setAttribute("inert", "");
           });
-          Array.prototype.slice.call(dotsWrap.children).forEach(function (dot, dotIndex) {
-            dot.setAttribute("aria-current", dotIndex === currentCard ? "true" : "false");
-          });
+          if (deckProgressFill) deckProgressFill.style.width = ((currentCard + 1) / cards.length * 100) + "%";
+          if (deckProgress) deckProgress.setAttribute("aria-valuenow", String(currentCard + 1));
           prevButton.disabled = currentCard === 0;
           nextButton.disabled = currentCard === cards.length - 1;
           deckCounter.textContent = "Defense " + (currentCard + 1) + " of " + cards.length;

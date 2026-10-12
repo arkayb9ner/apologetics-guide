@@ -420,7 +420,10 @@
       .rel-high { background: #e3efe6; color: #286644; }
       .rel-mid { background: #f3e8cf; color: #8a6414; }
       .rel-late { background: #ece7df; color: #6b6259; }
-      .apostles-grid { margin-left: 210px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; max-width: 1020px; }
+      .apostles-carousel { margin-left: 210px; max-width: 1020px; }
+      .apostles-carousel .deck-controls { margin-bottom: 18px; }
+      .apostles-viewport { touch-action: pan-y; scroll-margin-top: 18px; }
+      .apostles-track > .apostle[aria-hidden="true"] { display: none; }
       .apostle { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: clamp(20px, 3vw, 30px); box-shadow: var(--shadow); }
       .apostle-epithet { text-transform: uppercase; letter-spacing: .08em; font-size: .72rem; color: var(--gold); font-weight: 700; margin: 0 0 6px; }
       .apostle h3 { font-family: "Literata", Georgia, serif; font-size: 1.4rem; margin: 0 0 4px; color: var(--ink); }
@@ -451,8 +454,7 @@
         .entry-nav { position: static; flex-direction: row; flex-wrap: wrap; gap: 6px 14px; border-bottom: 1px solid var(--line); padding-bottom: 16px; margin-bottom: 8px; }
         .deck-controls { grid-template-columns: 44px minmax(0, 1fr) 44px; gap: 10px; }
         .deck-arrow { width: 44px; height: 42px; }
-        .tools, .roadmap-grid, .empty, .suggest-form, .quiz-card, .glossary-az, .glossary-list, .apostles-legend, .apostles-grid { margin-left: 0; }
-        .apostles-grid { grid-template-columns: 1fr; }
+        .tools, .roadmap-grid, .empty, .suggest-form, .quiz-card, .glossary-az, .glossary-list, .apostles-legend, .apostles-carousel { margin-left: 0; }
         .tools { grid-template-columns: 1fr; }
         .roadmap-grid { grid-template-columns: 1fr; }
         .topic:nth-child(odd), .topic:nth-child(even) { padding: 17px 0; border-right: 0; }
@@ -775,7 +777,19 @@
             <span><b class="rel rel-mid">Early tradition</b> ancient but thinner</span>
             <span><b class="rel rel-late">Later accounts</b> medieval, sometimes conflicting</span>
           </div>
-          <div class="apostles-grid" id="apostlesGrid" aria-live="polite"></div>
+          <div class="apostles-carousel">
+            <div class="deck-controls" aria-label="Apostle profile controls">
+              <button class="deck-arrow" id="apostlesPrev" type="button" aria-label="Previous apostle">←</button>
+              <div class="deck-position">
+                <span id="apostlesCounter" aria-live="polite">Apostle 1 of 14</span>
+                <div class="deck-dots" id="apostlesDots" aria-label="Choose an apostle"></div>
+              </div>
+              <button class="deck-arrow" id="apostlesNext" type="button" aria-label="Next apostle">→</button>
+            </div>
+            <div class="apostles-viewport" id="apostlesViewport" role="region" tabindex="0" aria-roledescription="carousel" aria-label="Apostle profiles">
+              <div class="apostles-track" id="apostlesTrack"></div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -857,19 +871,25 @@ function renderGlossary(items) {
 }
 
 function renderApostles(items) {
-  var grid = document.getElementById("apostlesGrid");
-  if (!grid || !items || !items.length) return;
+  var track = document.getElementById("apostlesTrack");
+  var dotsWrap = document.getElementById("apostlesDots");
+  var counter = document.getElementById("apostlesCounter");
+  var prev = document.getElementById("apostlesPrev");
+  var next = document.getElementById("apostlesNext");
+  var viewport = document.getElementById("apostlesViewport");
+  if (!track || !items || !items.length) return;
   var relClass = {
     "Well attested": "rel-high",
     "Early tradition": "rel-mid",
     "Later accounts": "rel-late",
     "Scripture": "rel-high"
   };
-  grid.innerHTML = items.map(function (a) {
+  track.innerHTML = items.map(function (a, i) {
     var meta = [];
     if (a.alsoKnownAs) meta.push("Also known as " + a.alsoKnownAs);
     meta.push("Feast: " + a.feast);
-    return '<article class="apostle">' +
+    return '<article class="apostle" aria-hidden="' + (i === 0 ? "false" : "true") + '"' +
+      (i === 0 ? "" : " inert") + ">" +
       '<p class="apostle-epithet">' + escapeHtml(a.epithet) + "</p>" +
       "<h3>" + escapeHtml(a.name) + "</h3>" +
       '<p class="apostle-meta">' + escapeHtml(meta.join(" · ")) + "</p>" +
@@ -881,6 +901,70 @@ function renderApostles(items) {
       '<p class="apostle-note">' + escapeHtml(a.reliabilityNote) + "</p>" +
       "</article>";
   }).join("");
+  var slides = Array.prototype.slice.call(track.children);
+  var current = 0;
+
+  if (dotsWrap) {
+    dotsWrap.innerHTML = "";
+    slides.forEach(function (slide, i) {
+      var dot = document.createElement("button");
+      dot.type = "button";
+      dot.className = "deck-dot";
+      dot.setAttribute("aria-label", "Show apostle " + (i + 1) + ": " + items[i].name);
+      dot.setAttribute("aria-current", i === 0 ? "true" : "false");
+      dot.addEventListener("click", function () { showApostle(i, true); });
+      dotsWrap.appendChild(dot);
+    });
+  }
+
+  function showApostle(index, scroll) {
+    current = Math.max(0, Math.min(slides.length - 1, index));
+    slides.forEach(function (slide, si) {
+      var active = si === current;
+      slide.setAttribute("aria-hidden", active ? "false" : "true");
+      if (active) slide.removeAttribute("inert");
+      else slide.setAttribute("inert", "");
+    });
+    if (dotsWrap) {
+      Array.prototype.slice.call(dotsWrap.children).forEach(function (dot, di) {
+        dot.setAttribute("aria-current", di === current ? "true" : "false");
+      });
+    }
+    if (prev) prev.disabled = current === 0;
+    if (next) next.disabled = current === slides.length - 1;
+    if (counter) counter.textContent = "Apostle " + (current + 1) + " of " + slides.length;
+    if (scroll && viewport) viewport.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  if (prev) prev.addEventListener("click", function () { showApostle(current - 1); });
+  if (next) next.addEventListener("click", function () { showApostle(current + 1); });
+  if (viewport) {
+    viewport.addEventListener("keydown", function (event) {
+      if (event.target !== viewport) return;
+      if (event.key === "ArrowLeft") { event.preventDefault(); showApostle(current - 1); }
+      if (event.key === "ArrowRight") { event.preventDefault(); showApostle(current + 1); }
+    });
+    var touchStartX = 0;
+    var touchStartY = 0;
+    var touchTracking = false;
+    viewport.addEventListener("touchstart", function (event) {
+      if (event.touches.length !== 1) return;
+      touchStartX = event.touches[0].clientX;
+      touchStartY = event.touches[0].clientY;
+      touchTracking = true;
+    }, { passive: true });
+    viewport.addEventListener("touchend", function (event) {
+      if (!touchTracking || !event.changedTouches.length) return;
+      touchTracking = false;
+      var dx = event.changedTouches[0].clientX - touchStartX;
+      var dy = event.changedTouches[0].clientY - touchStartY;
+      if (Math.abs(dx) < 52 || Math.abs(dx) <= Math.abs(dy) * 1.2) return;
+      showApostle(dx < 0 ? current + 1 : current - 1);
+    }, { passive: true });
+    viewport.addEventListener("touchcancel", function () { touchTracking = false; }, { passive: true });
+  }
+
+  showApostle(0);
 }
 
 function renderStandardCard(card, n, total) {
@@ -1376,8 +1460,8 @@ fetch("apostles.json")
   .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
   .then(renderApostles)
   .catch(function () {
-    var grid = document.getElementById("apostlesGrid");
-    if (grid) grid.innerHTML = '<p class="load-error" style="padding:1rem">Could not load the apostles. Check your connection and reload.</p>';
+    var track = document.getElementById("apostlesTrack");
+    if (track) track.innerHTML = '<p class="load-error" style="padding:1rem">Could not load the apostles. Check your connection and reload.</p>';
   });
 </script>
 

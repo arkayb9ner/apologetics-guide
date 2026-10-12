@@ -784,5 +784,51 @@
         "description": ""
       }
     ]
+  },
+  {
+    "slug": "orthodox-one-true-church",
+    "jumpLabel": "Why does Orthodoxy exist?",
+    "title": "If Catholicism is the one true Church, why does Eastern Orthodoxy exist?",
+    "objection": "If the Catholic Church is the one true Church founded by Christ, Eastern Orthodoxy should not exist — yet it does, with apostolic succession, valid sacraments, ancient liturgy, and two thousand years of saints, all while rejecting the Pope outright. For the first thousand years the East was half of Christianity. The schism of 1054 was not the East abandoning the Church; it was Rome breaking communion with the East over Roman innovations — papal supremacy, the filioque added to the Creed without an ecumenical council. A ‘one true Church’ that half of ancient Christianity walked away from looks like Roman propaganda, not divine institution.",
+    "summary": "The schism is real and remains a wound — but the Orthodox kept valid sacraments precisely because they kept what Rome kept; the one question that divides us is who holds the keys.",
+    "response": [
+      {
+        "heading": "Start with what the Church actually claims about the Orthodox.",
+        "body": "<p>The Catholic Church does not call Orthodoxy a fake church. The Catechism teaches that with the Orthodox Churches, our communion ‘lacks little to attain the fullness that would permit a common celebration of the Lord’s Eucharist’ (CCC 838), and Vatican II’s <i>Unitatis Redintegratio</i> recognizes their true sacraments — above all, priesthood and Eucharist. The claim was never ‘everyone outside Rome is graceless.’ The claim is narrower and more specific: the fullness of Christ’s Church subsists in communion with Peter’s successor — and the Orthodox, grievously, are not in that communion.</p>"
+      },
+      {
+        "heading": "1054 was a symptom, not the whole story.",
+        "body": "<p>The mutual excommunications of 1054 — Cardinal Humbert and Patriarch Cerularius excommunicating each other — crystallized centuries of estrangement: Greek versus Latin, the fall of the Western empire, Constantinople’s rise as ‘New Rome.’ Those excommunications were lifted in 1965 by Paul VI and Athenagoras I. And the East did not uniformly ‘leave’: the Maronites maintained communion with Rome throughout, and today twenty-three Eastern Catholic churches worship in Byzantine, Syriac, Armenian, and other Eastern traditions in full communion with the Pope. Eastern Christianity is not absent from Catholicism — Rome contains the East.</p>"
+      },
+      {
+        "heading": "The real dividing line is one question: the keys.",
+        "body": "<p>Strip away the politics and the dividing issue is papal primacy — not honorary primacy, which the Orthodox grant, but universal jurisdiction, defined at Vatican I. Rome’s case: Christ gave the keys to Peter personally (Matthew 16:18–19), prayed that Peter’s faith would not fail so he could strengthen the brethren (Luke 22:32), and the early Church acted like it — Clement of Rome settling Corinth’s dispute around 96 AD, Irenaeus insisting every church must agree with Rome ‘on account of its preeminent authority’ (<i>Adversus Haereses</i> 3.3.2). The filioque is the famous flashpoint, but even there Rome has acknowledged the manner of its addition to the Creed — without an ecumenical council — was a legitimate grievance. Name the disagreement honestly: it is about Peter’s chair, not about whether the East is Christian.</p>"
+      },
+      {
+        "heading": "‘They walked away, so Rome must be wrong’ proves nothing.",
+        "body": "<p>Truth is not settled by who left the room. If departure disproved authority, every schism in history would disprove somebody, and the argument would eat itself. The question is not which side kept more bishops in 1054; it is whether Christ gave Peter a universal charge or a merely honorary one. That is a historical and exegetical question — Matthew 16, the early appeals to Rome — and it has to be argued on those grounds, not by counting who walked out.</p>"
+      },
+      {
+        "heading": "The goal is reunion, not conquest — two lungs.",
+        "body": "<p>John Paul II’s image in <i>Ut Unum Sint</i> is the Church breathing with ‘two lungs,’ East and West. Catholicism’s posture toward Orthodoxy is not triumphalism but grief: a wound in the Body, not a defeated rival. The same Church that defined the scope of papal infallibility also committed herself to the work of reunion (<i>Unitatis Redintegratio</i>). The existence of Orthodoxy does not refute Rome’s claim; it is the reason Rome will not stop asking for the keys to bind us together again.</p>"
+      }
+    ],
+    "verses": [
+      "Matthew 16:18-19",
+      "John 17:21",
+      "Luke 22:32"
+    ],
+    "ccc": "CCC 838; cf. 813, 817",
+    "oneLiner": "“The East kept the sacraments and lost Peter’s communion — a wound Rome grieves, not a refutation of Rome’s claim.”",
+    "related": [
+      {
+        "title": "The papacy is unbiblical — Peter was never pope of Rome",
+        "description": ""
+      },
+      {
+        "title": "Catholics are fragmented too — rites and Orthodox schisms",
+        "description": ""
+      }
+    ]
   }
 ]

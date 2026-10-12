@@ -371,6 +371,27 @@
       .pocket-copy { font: inherit; font-size: .8rem; padding: 6px 14px; border: 1px solid var(--line-strong); background: transparent; color: inherit; cursor: pointer; border-radius: 999px; }
       .pocket-copy:hover, .pocket-copy:focus-visible { border-color: var(--wine); color: var(--wine); }
       .pocket-empty { color: var(--muted); }
+      .pocket-group { border: 1px solid var(--line); background: var(--surface); border-radius: 4px; }
+      .pocket-group + .pocket-group { margin-top: 10px; }
+      .pocket-summary { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 18px; cursor: pointer; font-weight: 700; list-style: none; }
+      .pocket-summary::-webkit-details-marker { display: none; }
+      .pocket-summary::after { content: "+"; font-size: 1.2rem; color: var(--wine); font-weight: 400; }
+      .pocket-group[open] .pocket-summary::after { content: "\u2212"; }
+      .pocket-summary:hover { color: var(--wine); }
+      .pocket-group .pocket-item { border: none; border-top: 1px solid var(--line); border-radius: 0; }
+      .sacraments-viewport { touch-action: pan-y; scroll-margin-top: 18px; }
+      .sacraments-track > .sacrament-slide[aria-hidden="true"] { display: none; }
+      .sacrament-slide { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: clamp(22px, 3vw, 32px); box-shadow: var(--shadow); text-align: center; }
+      .sacrament-icon { font-size: 3rem; line-height: 1; margin-bottom: 10px; }
+      .sacrament-tag { text-transform: uppercase; letter-spacing: .08em; font-size: .72rem; color: var(--gold); font-weight: 700; margin: 0 0 6px; }
+      .sacrament-slide h3 { font-family: "Literata", Georgia, serif; font-size: 1.5rem; margin: 0 0 8px; color: var(--ink); }
+      .sacrament-slide p { color: var(--muted); font-size: .98rem; line-height: 1.6; margin: 8px auto 0; max-width: 56ch; }
+      .sacrament-refs { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+      .sacrament-refs span { font-size: .8rem; border: 1px solid var(--line-strong); border-radius: 999px; padding: 4px 12px; color: var(--muted); }
+      .sacrament-defenses { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); }
+      .sacrament-defenses p { font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; margin: 0 0 8px; }
+      .sacrament-defenses button { font: inherit; font-size: .88rem; color: var(--wine); background: none; border: none; padding: 4px 6px; cursor: pointer; }
+      .sacrament-defenses button:hover, .sacrament-defenses button:focus-visible { text-decoration: underline; }
       .reference span { color: var(--muted); font-size: .92rem; }
 
       .roadmap-section { background: var(--paper-deep); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -723,6 +744,31 @@
             <input id="pocketSearch" type="search" placeholder="Search one-liners&hellip;" autocomplete="off" aria-label="Search one-liners" />
           </div>
           <div class="pocket-list" id="pocketList"></div>
+        </div>
+      </section>
+
+      <section class="section sacraments-section" id="sacraments" aria-label="The seven sacraments">
+        <div class="page">
+          <div class="section-head">
+            <div class="section-no">Seven gifts</div>
+            <div>
+              <h2>Seven sacraments every Catholic should know</h2>
+              <p>Seven sure encounters with Christ&rsquo;s grace, instituted by Him and entrusted to the Church. Swipe through them &mdash; each with its Scripture, and its defense in the armory.</p>
+            </div>
+          </div>
+          <div class="sacraments-carousel">
+            <div class="deck-controls" aria-label="Sacraments controls">
+              <button class="deck-arrow" id="sacramentsPrev" type="button" aria-label="Previous sacrament">&larr;</button>
+              <div class="deck-position">
+                <span id="sacramentsCounter" aria-live="polite">Sacrament 1 of 7</span>
+                <div class="deck-dots" id="sacramentsDots" aria-label="Choose a sacrament"></div>
+              </div>
+              <button class="deck-arrow" id="sacramentsNext" type="button" aria-label="Next sacrament">&rarr;</button>
+            </div>
+            <div class="sacraments-viewport" id="sacramentsViewport" role="region" tabindex="0" aria-roledescription="carousel" aria-label="The seven sacraments">
+              <div class="sacraments-track" id="sacramentsTrack"></div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -1179,43 +1225,62 @@ function initApp(defenses) {
             navigator.clipboard.writeText(text).then(done, done);
           } else { done(); }
         }
+        function pocketItem(card, index) {
+          var item = document.createElement("div");
+          item.className = "pocket-item";
+          var quote = document.createElement("p");
+          quote.className = "pocket-quote";
+          quote.textContent = card.oneLiner;
+          var meta = document.createElement("div");
+          meta.className = "pocket-meta";
+          var open = document.createElement("button");
+          open.type = "button";
+          open.className = "pocket-open";
+          open.textContent = card.title;
+          open.setAttribute("aria-label", "Open the full defense: " + card.title);
+          var copy = document.createElement("button");
+          copy.type = "button";
+          copy.className = "pocket-copy";
+          copy.textContent = "Copy";
+          copy.setAttribute("aria-label", "Copy one-liner for: " + card.title);
+          (function (idx, txt, btn) {
+            open.addEventListener("click", function () { showCard(idx, { scroll: true }); });
+            copy.addEventListener("click", function () { pocketCopy(txt, btn); });
+          })(index, card.oneLiner, copy);
+          meta.appendChild(open);
+          meta.appendChild(copy);
+          item.appendChild(quote);
+          item.appendChild(meta);
+          return item;
+        }
         function renderPocket() {
           if (!pocketList) return;
           var q = pocketSearch ? pocketSearch.value.trim().toLowerCase() : "";
           pocketList.innerHTML = "";
-          var shown = 0;
-          defenses.forEach(function (card, i) {
-            var hay = (card.oneLiner + " " + card.title + " " + card.jumpLabel).toLowerCase();
-            if (q && hay.indexOf(q) < 0) return;
-            shown++;
-            var item = document.createElement("div");
-            item.className = "pocket-item";
-            var quote = document.createElement("p");
-            quote.className = "pocket-quote";
-            quote.textContent = card.oneLiner;
-            var meta = document.createElement("div");
-            meta.className = "pocket-meta";
-            var open = document.createElement("button");
-            open.type = "button";
-            open.className = "pocket-open";
-            open.textContent = card.title;
-            open.setAttribute("aria-label", "Open the full defense: " + card.title);
-            var copy = document.createElement("button");
-            copy.type = "button";
-            copy.className = "pocket-copy";
-            copy.textContent = "Copy";
-            copy.setAttribute("aria-label", "Copy one-liner for: " + card.title);
-            (function (idx, txt, btn) {
-              open.addEventListener("click", function () { showCard(idx, { scroll: true }); });
-              copy.addEventListener("click", function () { pocketCopy(txt, btn); });
-            })(i, card.oneLiner, copy);
-            meta.appendChild(open);
-            meta.appendChild(copy);
-            item.appendChild(quote);
-            item.appendChild(meta);
-            pocketList.appendChild(item);
+          var anyShown = false;
+          TOPICS.forEach(function (t) {
+            var items = [];
+            defenses.forEach(function (card, i) {
+              if (card.topic !== t) return;
+              var hay = (card.oneLiner + " " + card.title + " " + card.jumpLabel).toLowerCase();
+              if (q && hay.indexOf(q) < 0) return;
+              items.push({ card: card, index: i });
+            });
+            if (!items.length) return;
+            anyShown = true;
+            var det = document.createElement("details");
+            det.className = "pocket-group";
+            if (q) det.setAttribute("open", "");
+            var sum = document.createElement("summary");
+            sum.className = "pocket-summary";
+            var st = document.createElement("span"); st.textContent = t;
+            var sc = document.createElement("span"); sc.className = "browse-count"; sc.textContent = String(items.length);
+            sum.appendChild(st); sum.appendChild(sc);
+            det.appendChild(sum);
+            items.forEach(function (it) { det.appendChild(pocketItem(it.card, it.index)); });
+            pocketList.appendChild(det);
           });
-          if (!shown) {
+          if (!anyShown) {
             var empty = document.createElement("p");
             empty.className = "pocket-empty";
             empty.textContent = "No one-liners match that search.";
@@ -1224,6 +1289,124 @@ function initApp(defenses) {
         }
         if (pocketSearch) pocketSearch.addEventListener("input", renderPocket);
         renderPocket();
+        /* Seven sacraments carousel */
+        var SACRAMENTS = [
+          { icon: "\uD83D\uDCA7", name: "Baptism", tag: "The door",
+            text: "The first sacrament: original sin washed away, rebirth as a child of God, entry into the Church. This is why Catholics baptize infants \u2014 grace comes before understanding.",
+            verse: "John 3:5", ccc: "CCC 1213", defenses: ["infant-baptism", "thief-on-the-cross"] },
+          { icon: "\uD83D\uDD4A\uFE0F", name: "Confirmation", tag: "The seal",
+            text: "The Holy Spirit's strengthening for witness \u2014 Pentecost made personal. Sealed with chrism, the confirmed are armed to profess the faith boldly, as the apostles did.",
+            verse: "Acts 2:38", ccc: "CCC 1285", defenses: [] },
+          { icon: "\uD83C\uDF5E", name: "Eucharist", tag: "The source and summit",
+            text: "Christ's Body and Blood under the signs of bread and wine \u2014 the one sacrifice of the cross made present, and food for the journey. The source and summit of the Christian life.",
+            verse: "John 6:56", ccc: "CCC 1324", defenses: ["eucharist", "mass-re-sacrifice"] },
+          { icon: "\uD83D\uDE4F", name: "Penance", tag: "The second plank",
+            text: "Confession to a priest: sins forgiven by Christ's own commission \u2014 \u2018whose sins you forgive are forgiven.\u2019 The second plank after the shipwreck of post-baptismal sin.",
+            verse: "John 20:23", ccc: "CCC 1422", defenses: ["confession"] },
+          { icon: "\uD83D\uDD6F\uFE0F", name: "Anointing of the Sick", tag: "Strength for the suffering",
+            text: "Oil and prayer for the seriously ill and the dying \u2014 grace for endurance, the forgiveness of sins, and, when God wills, healing of the body. Not \u2018last rites\u2019 only.",
+            verse: "James 5:14-15", ccc: "CCC 1511", defenses: [] },
+          { icon: "\uD83D\uDC92", name: "Matrimony", tag: "The covenant",
+            text: "A man and woman's lifelong covenant, imaging Christ's love for the Church \u2014 and the ordinary path by which most saints are made: the domestic church.",
+            verse: "Ephesians 5:31-32", ccc: "CCC 1601", defenses: ["annulments"] },
+          { icon: "\u271D\uFE0F", name: "Holy Orders", tag: "The servant priesthood",
+            text: "Bishops, priests, and deacons configured to Christ the Head \u2014 to preach, sanctify, and govern. The sacrament standing behind every Mass and every absolution.",
+            verse: "2 Timothy 1:6", ccc: "CCC 1536", defenses: ["apostolic-succession", "priestly-celibacy"] }
+        ];
+        (function () {
+          var track = document.getElementById("sacramentsTrack");
+          var dotsWrap = document.getElementById("sacramentsDots");
+          var counter = document.getElementById("sacramentsCounter");
+          var prev = document.getElementById("sacramentsPrev");
+          var next = document.getElementById("sacramentsNext");
+          var viewport = document.getElementById("sacramentsViewport");
+          if (!track) return;
+          SACRAMENTS.forEach(function (s, i) {
+            var slide = document.createElement("article");
+            slide.className = "sacrament-slide";
+            slide.setAttribute("aria-hidden", i === 0 ? "false" : "true");
+            if (i !== 0) slide.setAttribute("inert", "");
+            var icon = document.createElement("div"); icon.className = "sacrament-icon"; icon.textContent = s.icon; icon.setAttribute("aria-hidden", "true");
+            var tag = document.createElement("p"); tag.className = "sacrament-tag"; tag.textContent = s.tag;
+            var h = document.createElement("h3"); h.textContent = s.name;
+            var p = document.createElement("p"); p.textContent = s.text;
+            var refs = document.createElement("div"); refs.className = "sacrament-refs";
+            var v = document.createElement("span"); v.textContent = s.verse;
+            var c = document.createElement("span"); c.textContent = s.ccc;
+            refs.appendChild(v); refs.appendChild(c);
+            slide.appendChild(icon); slide.appendChild(tag); slide.appendChild(h); slide.appendChild(p); slide.appendChild(refs);
+            if (s.defenses && s.defenses.length) {
+              var links = document.createElement("div"); links.className = "sacrament-defenses";
+              var lab = document.createElement("p"); lab.textContent = "Defended in the armory";
+              links.appendChild(lab);
+              s.defenses.forEach(function (slug) {
+                var idx = defenses.findIndex(function (d) { return d.slug === slug; });
+                if (idx < 0) return;
+                var b = document.createElement("button");
+                b.type = "button";
+                b.textContent = defenses[idx].title + " \u2192";
+                b.setAttribute("aria-label", "Open the defense: " + defenses[idx].title);
+                b.addEventListener("click", function () { showCard(idx, { scroll: true }); });
+                links.appendChild(b);
+              });
+              slide.appendChild(links);
+            }
+            track.appendChild(slide);
+          });
+          var slides = Array.prototype.slice.call(track.children);
+          var current = 0;
+          function showSacrament(index, scroll) {
+            current = Math.max(0, Math.min(slides.length - 1, index));
+            slides.forEach(function (slide, si) {
+              var active = si === current;
+              slide.setAttribute("aria-hidden", active ? "false" : "true");
+              if (active) slide.removeAttribute("inert"); else slide.setAttribute("inert", "");
+            });
+            if (dotsWrap) {
+              Array.prototype.slice.call(dotsWrap.children).forEach(function (dot, di) {
+                dot.setAttribute("aria-current", di === current ? "true" : "false");
+              });
+            }
+            if (prev) prev.disabled = current === 0;
+            if (next) next.disabled = current === slides.length - 1;
+            if (counter) counter.textContent = "Sacrament " + (current + 1) + " of " + slides.length;
+            if (scroll && viewport) viewport.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+          if (dotsWrap) {
+            slides.forEach(function (slide, i) {
+              var dot = document.createElement("button");
+              dot.type = "button";
+              dot.className = "deck-dot";
+              dot.setAttribute("aria-label", "Show sacrament " + (i + 1) + ": " + SACRAMENTS[i].name);
+              dot.setAttribute("aria-current", i === 0 ? "true" : "false");
+              dot.addEventListener("click", function () { showSacrament(i); });
+              dotsWrap.appendChild(dot);
+            });
+          }
+          if (prev) prev.addEventListener("click", function () { showSacrament(current - 1); });
+          if (next) next.addEventListener("click", function () { showSacrament(current + 1); });
+          if (viewport) {
+            viewport.addEventListener("keydown", function (event) {
+              if (event.target !== viewport) return;
+              if (event.key === "ArrowLeft") { event.preventDefault(); showSacrament(current - 1); }
+              if (event.key === "ArrowRight") { event.preventDefault(); showSacrament(current + 1); }
+            });
+            var sx = 0, sy = 0, strack = false;
+            viewport.addEventListener("touchstart", function (event) {
+              if (event.touches.length !== 1) return;
+              sx = event.touches[0].clientX; sy = event.touches[0].clientY; strack = true;
+            }, { passive: true });
+            viewport.addEventListener("touchend", function (event) {
+              if (!strack || !event.changedTouches.length) return;
+              strack = false;
+              var dx = event.changedTouches[0].clientX - sx;
+              var dy = event.changedTouches[0].clientY - sy;
+              if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) showSacrament(current + (dx < 0 ? 1 : -1));
+            }, { passive: true });
+          }
+          showSacrament(0);
+        })();
+
 
 var browseGroups = document.getElementById("browseGroups");
         var topicChips = document.getElementById("topicChips");

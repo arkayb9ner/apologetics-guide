@@ -44,7 +44,8 @@
         "description": ""
       }
     ],
-    "topic": "Sacraments & Worship"
+    "topic": "Sacraments & Worship",
+    "simple": "Jesus gave the apostles power to forgive sins — but how can they forgive what they never hear? Confession is hearing “you’re forgiven” out loud, from Christ’s own minister. It’s medicine, not humiliation."
   },
   {
     "slug": "infant-baptism",
@@ -91,7 +92,8 @@
         "description": ""
       }
     ],
-    "topic": "Sacraments & Worship"
+    "topic": "Sacraments & Worship",
+    "simple": "Jewish babies were circumcised at eight days old — baptism is the new circumcision. In Acts, whole households were baptized. Grace comes before understanding, like a vaccine before the disease."
   },
   {
     "slug": "purgatory",
@@ -138,7 +140,8 @@
         "description": ""
       }
     ],
-    "topic": "Sacraments & Worship"
+    "topic": "Sacraments & Worship",
+    "simple": "Nothing unclean enters heaven, but most of us die unfinished — purgatory is God’s mercy finishing the job. Think car wash, not torture chamber. It’s heaven’s porch, not hell’s basement."
   },
   {
     "slug": "indulgences",
@@ -185,7 +188,8 @@
         "description": ""
       }
     ],
-    "topic": "Sacraments & Worship"
+    "topic": "Sacraments & Worship",
+    "simple": "An indulgence isn’t buying forgiveness — it’s the Church applying Christ’s merits to shorten purification. The money abuses were real, and the Church condemned them. The doctrine is about mercy, not cash."
   },
   {
     "slug": "assumption",
@@ -232,7 +236,8 @@
         "description": ""
       }
     ],
-    "topic": "Mary & Saints"
+    "topic": "Mary & Saints",
+    "simple": "If God took Enoch and Elijah to heaven body and soul, He can do it for His own mother. Christians believed this from the earliest centuries. It’s Easter’s promise, previewed in Mary."
   },
   {
     "slug": "mother-of-god",
@@ -279,7 +284,8 @@
         "description": ""
       }
     ],
-    "topic": "Mary & Saints"
+    "topic": "Mary & Saints",
+    "simple": "“Mother of God” protects Jesus, not Mary — it means the baby in her womb was truly God. Deny it and you split Jesus in two. The title is really about Him."
   },
   {
     "slug": "rosary",
@@ -326,7 +332,8 @@
         "description": ""
       }
     ],
-    "topic": "Mary & Saints"
+    "topic": "Mary & Saints",
+    "simple": "The rosary is meditation on Jesus’s life, with Mary as the guide — the repeated prayers are background music for thinking through the Gospels. Every mystery is a Bible scene. It’s Scripture on beads."
   },
   {
     "slug": "sunday-worship",
@@ -373,7 +380,8 @@
         "description": ""
       }
     ],
-    "topic": "Sacraments & Worship"
+    "topic": "Sacraments & Worship",
+    "simple": "The apostles worshipped on Sunday — Resurrection day. The Sabbath pointed to rest; Christ’s resurrection IS the true rest. Christians didn’t ditch the Sabbath; they fulfilled it."
   },
   {
     "slug": "faith-alone",
@@ -420,7 +428,8 @@
         "description": ""
       }
     ],
-    "topic": "Moral Life"
+    "topic": "Moral Life",
+    "simple": "We’re saved by grace through faith — but faith that does nothing is dead, says James. Even demons believe. “Faith alone” was never the apostles’ teaching; it’s a 1,500-years-later invention."
   },
   {
     "slug": "priestly-celibacy",
@@ -467,7 +476,8 @@
         "description": ""
       }
     ],
-    "topic": "Moral Life"
+    "topic": "Moral Life",
+    "simple": "Celibacy is a discipline, not a doctrine — it can change, and Eastern Catholic priests marry. It’s about total availability to God and His people, following Jesus and Paul. A gift, not a punishment."
   },
   {
     "slug": "annulments",
@@ -514,7 +524,8 @@
         "description": ""
       }
     ],
-    "topic": "Sacraments & Worship"
+    "topic": "Sacraments & Worship",
+    "simple": "An annulment doesn’t end a marriage — it declares there never was one, because something essential was missing from the start. It’s a finding of fact, not Catholic divorce. Hard teaching, honestly applied."
   },
   {
     "slug": "women-ordination-contraception",
@@ -561,7 +572,8 @@
         "description": ""
       }
     ],
-    "topic": "Moral Life"
+    "topic": "Moral Life",
+    "simple": "The Church didn’t invent male priesthood — Jesus chose twelve men, and the Church can’t overrule Christ. On contraception: love says “I give you all of me”; contraception holds part back. Both are about receiving God’s design."
   },
   {
     "slug": "church-crimes",
@@ -608,7 +620,8 @@
         "description": ""
       }
     ],
-    "topic": "The Church"
+    "topic": "The Church",
+    "simple": "Church members have sinned terribly, and the Church admits it — popes have apologized by name. But criminals in a hospital don’t disprove medicine. Judge the teaching by Christ, not by Christians who ignored Him."
   },
   {
     "slug": "vatican-wealth",
@@ -655,7 +668,8 @@
         "description": ""
       }
     ],
-    "topic": "The Church"
+    "topic": "The Church",
+    "simple": "The Vatican’s “wealth” is mostly art it can’t sell — humanity’s heritage, open to everyone. Meanwhile the Church is the world’s largest charity. Beauty for God and bread for the poor aren’t enemies."
   },
   {
     "slug": "catholicism-paganism",
@@ -702,7 +716,8 @@
         "description": ""
       }
     ],
-    "topic": "The Church"
+    "topic": "The Church",
+    "simple": "Looking similar isn’t being the same — pagans had temples, that doesn’t make churches pagan. The early Christians deliberately transformed old symbols. That’s victory over paganism, not borrowing from it."
   },
   {
     "slug": "nicaea-councils",
@@ -753,7 +768,8 @@
         "description": ""
       }
     ],
-    "topic": "The Church"
+    "topic": "The Church",
+    "simple": "Nicaea didn’t invent Christ’s divinity — it defended what Christians already believed against a new heresy. The council’s words were new; the faith was old. You don’t invent something by defending it."
   },
   {
     "slug": "catholic-fragmentation",
@@ -800,7 +816,8 @@
         "description": ""
       }
     ],
-    "topic": "The Church"
+    "topic": "The Church",
+    "simple": "Twenty-four rites, one faith — like one family speaking different languages. Denominations disagree on what to believe; rites differ only in how they pray. Unity was never meant to mean uniformity."
   },
   {
     "slug": "orthodox-one-true-church",
@@ -847,7 +864,8 @@
         "description": ""
       }
     ],
-    "topic": "The Church"
+    "topic": "The Church",
+    "simple": "The split was real and tragic, but it’s about the pope’s role — both sides have valid sacraments. The dividing line is Matthew 16: the keys. And both sides pray for reunion."
   },
   {
     "slug": "trinity-contradiction",
@@ -908,7 +926,8 @@
         "description": ""
       }
     ],
-    "topic": "God & Reason"
+    "topic": "God & Reason",
+    "simple": "Three Persons, one nature — not three gods, not one person wearing three masks. The word “Trinity” came later, but all the data is first-century. It’s a mystery, not a math error."
   },
   {
     "slug": "god-exists-evidence",
@@ -959,7 +978,8 @@
         "description": ""
       }
     ],
-    "topic": "God & Reason"
+    "topic": "God & Reason",
+    "simple": "Everything that begins needs a cause — and the universe began. Nature looks designed, and our sense of right and wrong points beyond us. Three separate roads, all leading to the same God."
   },
   {
     "slug": "original-sin-unfair",
@@ -1006,7 +1026,8 @@
         "description": ""
       }
     ],
-    "topic": "Jesus Christ"
+    "topic": "Jesus Christ",
+    "simple": "We inherit the wound, not the guilt — like being born into a family with a broken legacy. Adam’s fall broke human nature; Christ’s cross repairs it. It’s not unfair — it’s the diagnosis that makes the cure make sense."
   },
   {
     "slug": "immaculate-conception",
@@ -1057,7 +1078,8 @@
         "description": ""
       }
     ],
-    "topic": "Mary & Saints"
+    "topic": "Mary & Saints",
+    "simple": "Mary was saved by Christ too — just in advance, like being stopped before falling into a pit instead of pulled out after. “Full of grace” means exactly that. The ark of the new covenant had to be pure."
   },
   {
     "slug": "doctrinal-development",
@@ -1108,7 +1130,8 @@
         "description": ""
       }
     ],
-    "topic": "The Church"
+    "topic": "The Church",
+    "simple": "Doctrines grow the way a seed becomes a tree — same life, fuller form. Nicaea defined against heresy; it didn’t invent. Growth isn’t corruption — it’s life."
   },
   {
     "slug": "bad-popes",
@@ -1159,7 +1182,8 @@
         "description": ""
       }
     ],
-    "topic": "The Church"
+    "topic": "The Church",
+    "simple": "Bad popes actually prove the Church is divine — no merely human institution survives leaders like that. Infallibility covers teaching, not behavior. God writes straight with crooked lines."
   },
   {
     "slug": "mary-perpetual-virginity",
@@ -1210,7 +1234,8 @@
         "description": ""
       }
     ],
-    "topic": "Mary & Saints"
+    "topic": "Mary & Saints",
+    "simple": "“Brothers” in the Bible means relatives — and none are ever called Mary’s children. At the cross Jesus entrusts Mary to John, unthinkable if she had other sons. Even Luther and Calvin believed this."
   },
   {
     "slug": "apostolic-succession",
@@ -1261,7 +1286,8 @@
         "description": ""
       }
     ],
-    "topic": "The Church"
+    "topic": "The Church",
+    "simple": "Around AD 180, Irenaeus published Rome’s bishop-list back to Peter — in public, daring anyone to correct him. You can’t fake a list your enemies can check. Authority was handed down, not made up."
   },
   {
     "slug": "failed-apocalyptic-prophet",
@@ -1312,6 +1338,7 @@
         "description": ""
       }
     ],
-    "topic": "Jesus Christ"
+    "topic": "Jesus Christ",
+    "simple": "“This generation” lived to see Jerusalem fall in AD 70 — exactly as Jesus said. And “some standing here” saw His glory at the Transfiguration days later. The prophecy came true; the skeptics misread it."
   }
 ]

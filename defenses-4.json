@@ -544,5 +544,55 @@
         "description": ""
       }
     ]
+  },
+  {
+    "slug": "im-a-good-person",
+    "jumpLabel": "I'm a good person — why Jesus?",
+    "title": "I’m a good person — why do I need Jesus to go to heaven?",
+    "objection": "I’m a good person — I don’t steal, I don’t hurt anyone, I give to charity. Why isn’t that enough? Why do I need to believe in Jesus to go to heaven? A loving God would judge me by how I lived, not by whether I signed up for the right religion.",
+    "summary": "‘I’m a good person’ makes your eternity depend on your performance review — the gospel lifts that burden. Goodness is real, but it was never the basis; and good deeds do not cancel bad ones.",
+    "response": [
+      {
+        "heading": "Concede what is true: goodness matters — and it is not nothing.",
+        "body": "<p>The Church does not say good deeds are worthless. Natural virtue is real, and the decent life is genuinely better than the cruel one. But ‘I’m a good person’ smuggles in a standard: good <i>compared to whom</i>? Compared to the neighbor, perhaps. Compared to the holiness heaven requires — ‘be perfect, as your heavenly Father is perfect’ (Matthew 5:48) — the math changes completely.</p>"
+      },
+      {
+        "heading": "The standard is not ‘decent’ — it is perfect.",
+        "body": "<p>Heaven is not a reward for clearing a bar of decency; it is union with a perfectly holy God, and ‘nothing unclean shall enter’ (Revelation 21:27). The question was never ‘are you better than most?’ but ‘are you fit for the presence of perfect holiness?’ Scripture’s answer is blunt: ‘whoever keeps the whole law but fails in one point has become guilty of all of it’ (James 2:10), and ‘all have sinned’ (Romans 3:23). The ‘good person’ defense requires a perfection none of us possesses.</p>"
+      },
+      {
+        "heading": "Good deeds do not cancel bad ones — that is not how justice works.",
+        "body": "<p>The charity gala does not acquit the embezzler; the judge does not tear up the speeding tickets because you volunteer on weekends. We all intuitively know that goodness does not <i>cancel</i> guilt — it coexists with it. Christianity simply applies our own moral logic consistently: the good you have done is real, and so is the evil, and both are on the ledger. ‘I’m mostly good’ is true of nearly everyone — and it has never acquitted anyone.</p>"
+      },
+      {
+        "heading": "You do not need Jesus because you are bad — you need Him because you are dead.",
+        "body": "<p>The deeper diagnosis is not that you are ‘not good enough’ (though that is true); it is that sin is a <i>rupture</i>, not a demerit. ‘You were dead in your trespasses and sins’ (Ephesians 2:1). A corpse cannot earn its way back to life by being a well-behaved corpse. Salvation is not a reward for performance — it is resurrection. That is why no amount of goodness substitutes for the Savior: you cannot self-improve your way out of death.</p>"
+      },
+      {
+        "heading": "Why it matters: the good news is better than the compliment.",
+        "body": "<p>‘I’m a good person’ is actually a <i>heavier</i> burden than the gospel — it makes your eternity hinge on your performance review, forever uncertain whether you were good <i>enough</i>. Christianity lifts it: ‘by grace you have been saved through faith… not of works, lest anyone should boast’ (Ephesians 2:8–9). Your goodness is real, but it was never the basis — Christ’s perfection is. And freed from earning, good works stop being leverage and become love.</p>"
+      }
+    ],
+    "verses": [
+      "Romans 3:23",
+      "Ephesians 2:8-9",
+      "James 2:10"
+    ],
+    "ccc": "CCC 1987",
+    "oneLiner": "“‘I’m a good person’ makes your eternity depend on your performance review — the gospel lifts that burden: your goodness is real, but it was never the basis.”",
+    "related": [
+      {
+        "title": "Faith alone — Catholics teach salvation by works",
+        "description": ""
+      },
+      {
+        "title": "“Jesus is the only way” is arrogant and exclusionary",
+        "description": ""
+      },
+      {
+        "title": "You don't need God to be moral — atheists can be good people",
+        "description": ""
+      }
+    ]
   }
 ]

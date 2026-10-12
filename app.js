@@ -1237,3 +1237,10 @@ fetch("apostles.json?v=" + ASSET_V)
       });
   });
 })();
+
+/* Installable app: register the service worker (https only; skipped in tests). */
+if ("serviceWorker" in navigator && /^https:$/.test(window.location.protocol)) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("sw.js").catch(function () {});
+  });
+}

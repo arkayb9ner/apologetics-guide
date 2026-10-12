@@ -106,8 +106,13 @@
       .hero-copy { max-width: 680px; font-size: clamp(1rem, 1.8vw, 1.25rem); color: var(--muted); margin: 0; }
       .hero-verse { max-width: 680px; font-size: 0.98rem; font-style: italic; color: var(--muted); margin: 14px 0 0; }
       .hero-verse span { font-style: normal; font-weight: 600; color: var(--wine); }
-      .hero-start { margin: 16px 0 0; font-size: 1rem; }
-      .hero-start a { color: var(--gold); font-weight: 700; text-decoration: none; border-bottom: 2px solid var(--gold); padding-bottom: 2px; }
+      .hero-choices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 24px 0 8px; }
+      .hero-choices a { display: flex; flex-direction: column; justify-content: center; min-height: 84px; padding: 14px 18px; background: var(--surface); border: 2px solid var(--gold); border-radius: 16px; text-decoration: none; color: var(--ink); box-shadow: var(--shadow); }
+      .hero-choices a b { font-size: 1.08rem; font-weight: 800; }
+      .hero-choices a span { font-size: 0.88rem; color: var(--muted); margin-top: 3px; }
+      .hero-choices a:hover, .hero-choices a:focus-visible { background: var(--gold); border-color: var(--gold); }
+      .hero-choices a:hover b, .hero-choices a:hover span, .hero-choices a:focus-visible b, .hero-choices a:focus-visible span { color: #1a1714; }
+      @media (max-width: 720px) { .hero-choices { grid-template-columns: 1fr; } }
       .hero-search { align-self: end; min-width: 0; }
       .hero-search-label {
         display: block;
@@ -659,7 +664,6 @@
             <h1>Know what you believe. Answer with charity.</h1>
             <p class="hero-copy">A Catholic field guide for meeting hard questions honestly—with Scripture, reason, history, and the teaching of the Church.</p>
             <p class="hero-verse">&ldquo;Put on the whole armour of God, that you may be able to stand against the wiles of the devil.&rdquo; <span>&mdash; Ephesians 6:11</span></p>
-            <p class="hero-start"><a href="#start-here">New here? Take the 8-defense guided path &rarr;</a></p>
           </div>
           <aside class="hero-search" aria-label="Find a defense">
             <label class="hero-search-label" for="heroSearch">Find the answer you need</label>
@@ -667,26 +671,14 @@
               <input id="heroSearch" type="search" placeholder="What objection did you hear?" autocomplete="off" aria-describedby="heroSearchHelp" aria-controls="heroSearchResults" aria-expanded="false" />
             </div>
             <p class="hero-search-help" id="heroSearchHelp">Search every defense, then press Enter to open the first match.</p>
-            <div class="topic-chips" aria-label="Quick topics">
-              <button class="topic-chip" type="button" data-hero-query="Jesus" aria-pressed="false">Jesus</button>
-              <button class="topic-chip" type="button" data-hero-query="Scripture" aria-pressed="false">Scripture</button>
-              <button class="topic-chip" type="button" data-hero-query="Mary" aria-pressed="false">Mary</button>
-              <button class="topic-chip" type="button" data-hero-query="Suffering" aria-pressed="false">Suffering</button>
-              <button class="topic-chip" type="button" data-hero-query="The Church" aria-pressed="false">The Church</button>
-              <button class="topic-chip" type="button" data-hero-query="Prayer" aria-pressed="false">Prayer</button>
-            </div>
             <div class="hero-search-results" id="heroSearchResults" role="listbox" aria-label="Matching defenses" data-open="false"></div>
           </aside>
         </header>
 
-        <nav class="journey" aria-label="Your path through the armory">
-          <div class="section-no">Your path</div>
-          <ol>
-            <li><a href="#featured-answer"><span class="journey-n">1</span><b>Hear the objection</b><span class="journey-d">Every defense states it at its strongest — no strawmen.</span></a></li>
-            <li><a href="#completed-index"><span class="journey-n">2</span><b>Find the defense</b><span class="journey-d">Search, browse by topic, or jump to a number.</span></a></li>
-            <li><a href="#featured-answer"><span class="journey-n">3</span><b>Understand the answer</b><span class="journey-d">The Catholic response, simply put, and a one-liner.</span></a></li>
-            <li><a href="#quiz"><span class="journey-n">4</span><b>Practice explaining it</b><span class="journey-d">Drill yourself until the answer is yours.</span></a></li>
-          </ol>
+        <nav class="hero-choices" aria-label="Choose where to begin">
+          <a href="#pocket"><b>Get a quick answer</b><span>One-line answers to the common objections</span></a>
+          <a href="#start-here"><b>Start the eight-defense path</b><span>New here? Take the guided tour</span></a>
+          <a href="#completed-index"><b>Browse by topic</b><span>Explore all 90 defenses by subject</span></a>
         </nav>
 
         <nav class="jump-index" id="completed-index" aria-label="Jump to a completed defense">
@@ -2123,7 +2115,7 @@ var topicCarousels = document.getElementById("topicCarousels");
         cccJumpInput.addEventListener("keydown", function (event) { if (event.key === "Enter") cccDoJump(); });
 }
 
-var ASSET_V = "20261012k"; /* bump on every content push: defeats CDN/browser cache */
+var ASSET_V = "20261012l"; /* bump on every content push: defeats CDN/browser cache */
 var DEFENSE_SHARDS = ["defenses-1.json", "defenses-2.json", "defenses-3.json", "defenses-4.json", "defenses-5.json"];
 Promise.all(DEFENSE_SHARDS.map(function (f) {
   return fetch(f + "?v=" + ASSET_V).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); });

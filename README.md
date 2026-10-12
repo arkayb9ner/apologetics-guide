@@ -1,6 +1,6 @@
-# Apologetics Guide — your own website
+# Christian Armory — your own website
 
-A mobile-friendly Catholic apologetics field guide: 50 swipeable defense cards,
+A mobile-friendly Catholic apologetics field guide (Christian Armory): 50 swipeable defense cards,
 each with a Catholic response, a one-liner, verses to remember, Catechism
 references, and related topics. Plus a search-first hero ("What objection did
 you hear?") and a "Jump to a defense" index.

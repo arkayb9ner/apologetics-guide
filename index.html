@@ -1122,6 +1122,7 @@ function renderStandardCard(card, n, total) {
     '<div class="entry-body">' +
     '<nav class="entry-nav" aria-label="' + card.title.replace(/"/g, "") + ' answer sections" role="tablist">' +
     '<button type="button" role="tab" aria-selected="true" aria-controls="' + card.slug + '-response" data-panel="response">Catholic response</button>' +
+    '<button type="button" role="tab" aria-selected="false" aria-controls="' + card.slug + '-simple" data-panel="simple">Simply put</button>' +
     '<button type="button" role="tab" aria-selected="false" aria-controls="' + card.slug + '-oneliner" data-panel="oneliner">One-liner</button>' +
     '<button type="button" role="tab" aria-selected="false" aria-controls="' + card.slug + '-related" data-panel="related">See also</button>' +
     "</nav><div>" +
@@ -1130,6 +1131,8 @@ function renderStandardCard(card, n, total) {
     '<aside class="quick-ref" aria-label="Quick references"><h4>Verses to remember</h4>' +
     '<div class="verse-list">' + verses + "</div>" +
     "<p><b>Catechism:</b> " + card.ccc + "</p></aside></section>" +
+    '<section class="panel" id="' + card.slug + '-simple" role="tabpanel"><h4>Simply put</h4>' +
+    '<p class="say-it simple-put">' + card.simple + "</p></section>" +
     '<section class="panel" id="' + card.slug + '-oneliner" role="tabpanel"><h4>The one-liner</h4>' +
     '<p class="say-it">' + card.oneLiner + "</p></section>" +
     '<section class="panel" id="' + card.slug + '-related" role="tabpanel"><h4>See also</h4>' +

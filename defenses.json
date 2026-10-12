@@ -2296,5 +2296,51 @@
         "description": ""
       }
     ]
+  },
+  {
+    "slug": "catholic-fragmentation",
+    "jumpLabel": "Catholic fragmentation",
+    "title": "Catholics are fragmented too — rites and Orthodox schisms",
+    "objection": "Catholic apologists frequently cite Protestant denominational fragmentation as evidence against Protestant ecclesiology. Yet the Catholic Church itself comprises twenty-four autonomous ritual churches with distinct liturgies, disciplines — including a married priesthood in the Eastern churches — and traditions. Moreover, the Orthodox communion, the other major apostolic body, is not fully united: the Patriarchate of Moscow broke communion with the Ecumenical Patriarchate in 2018. If visible disunity disqualifies Protestantism’s claim, it would seem to disqualify the apostolic churches’ claim to be the “one Church” as well.",
+    "summary": "The Church’s twenty-four rites express one faith in diverse forms; Protestant denominations profess different faiths. A wounded family is still a family.",
+    "response": [
+      {
+        "heading": "Liturgical rites are not denominations.",
+        "body": "<p>The twenty-four Catholic churches <i>sui iuris</i> — Latin, Maronite, Melkite, Ukrainian Greek Catholic, among others — profess one faith, recognize one supreme pontiff, submit to one magisterium, and share full sacramental communion: a Maronite Catholic may receive the Eucharist at any Latin Mass worldwide. Protestant denominations, by contrast, diverge on doctrine proper — the nature and efficacy of baptism, the Eucharist, the means of salvation, the extent of the biblical canon — and many do not recognize one another’s baptisms or ministries. Distinct rites express one Creed in diverse forms; distinct denominations profess different creeds.</p>"
+      },
+      {
+        "heading": "The Eastern married priesthood illustrates the Catholic principle.",
+        "body": "<p>Priestly celibacy in the Latin Church is a matter of ecclesiastical discipline, not doctrine — a distinction the Church has consistently maintained. The coexistence of married clergy in the East with celibate clergy in the West demonstrates precisely the Catholic model: unity in essentials, legitimate diversity in discipline. Protestant fragmentation inverts this: division over essentials, including the content of the Gospel itself, where contradiction cannot be mutual truth.</p>"
+      },
+      {
+        "heading": "The Orthodox rupture is acknowledged as a genuine wound.",
+        "body": "<p>The 2018 breach of communion between Moscow and Constantinople over the autocephaly of the Orthodox Church of Ukraine is a real schism, as is the fifth-century Chalcedonian division. Catholic teaching does not minimize this; the Second Vatican Council’s decree <i>Unitatis Redintegratio</i> identifies Christian division as a scandal and commits the Church to the work of reunion. The relevant distinction is categorical: these ruptures are jurisdictional rather than doctrinal — the separated parties continue to confess the same Creed and sacraments. Internal conflict within a communion does not dissolve the communion’s existence.</p>"
+      },
+      {
+        "heading": "The objection commits a category error.",
+        "body": "<p>Protestant fragmentation is doctrinal: thousands of ecclesial bodies advancing mutually exclusive accounts of salvation, such that the majority must be in error concerning the Gospel — a problem of truth. Catholic diversity is liturgical and cultural within doctrinal unity: 1.4 billion faithful, one Creed, one Eucharistic communion. The former contradicts the claim to teach the Gospel; the latter exemplifies catholicity, or universality.</p>"
+      },
+      {
+        "heading": "Apostolic unity never entailed the absence of dispute.",
+        "body": "<p>The New Testament portrays the one Church in sharp internal disagreement: Paul rebukes Peter at Antioch (Galatians 2:11), and the Council of Jerusalem (Acts 15) resolves a controversy described as “no little dissension.” Unity, biblically understood, is communion in one faith, one baptism, and one Eucharist (Ephesians 4:4-6) — not uniformity of custom nor immunity from conflict. The Catholic Church possesses this communion across all its rites; no Protestant communion possesses it across its denominations.</p>"
+      }
+    ],
+    "verses": [
+      "John 17:21",
+      "Ephesians 4:4-6",
+      "1 Corinthians 12:12-13"
+    ],
+    "ccc": "CCC 813, 817, 1202",
+    "oneLiner": "“Catholic rites differ in expression, not in faith; Protestant denominations differ in faith itself.”",
+    "related": [
+      {
+        "title": "Sola Scriptura — the Bible alone is the authority",
+        "description": ""
+      },
+      {
+        "title": "The papacy is unbiblical — Peter was never pope of Rome",
+        "description": ""
+      }
+    ]
   }
 ]

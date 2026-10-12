@@ -6,6 +6,11 @@
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" content="#f4f0e8" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#181614" media="(prefers-color-scheme: dark)" />
+    <meta name="description" content="Catholic answers to the toughest objections — the Trinity, the papacy, Mary, the Eucharist, Scripture, Church history, and more. Free for every parish." />
+    <meta property="og:title" content="Christian Armory" />
+    <meta property="og:description" content="Catholic answers to the toughest objections — the Trinity, the papacy, Mary, the Eucharist, Scripture, Church history, and more. Free for every parish." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://christianarmory.org/" />
     <link rel="icon" href="data:," />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -335,6 +340,8 @@
       .avoid-list li { margin-bottom: 13px; }
       .references { display: grid; gap: 12px; }
       .reference { padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+      button.reference { display: block; width: 100%; text-align: left; background: none; border: none; border-bottom: 1px solid var(--line); padding: 0 0 12px; font: inherit; color: inherit; cursor: pointer; }
+      button.reference:hover b, button.reference:focus-visible b { text-decoration: underline; }
       .reference b { display: block; color: var(--wine); }
       .reference span { color: var(--muted); font-size: .92rem; }
 
@@ -835,6 +842,7 @@
             <h2>Help keep the armory open</h2>
             <p>Christian Armory is free for everyone, always. If it has helped you or your parish, a small gift helps cover the cost of keeping it online and growing.</p>
             <a class="support-btn" href="https://ko-fi.com/christianarmory" target="_blank" rel="noopener">☕ Support on Ko-fi</a>
+            <p style="margin-top:14px;font-size:.92rem;">Heard an objection the armory doesn't answer yet? <a href="https://github.com/arkayb9ner/apologetics-guide/issues" target="_blank" rel="noopener">Suggest it here</a> — new defenses are added regularly.</p>
           </div>
         </section>
       </div>
@@ -1049,7 +1057,8 @@ function renderStandardCard(card, n, total) {
   var verses = card.verses.map(function (v) { return "<span>" + v + "</span>"; }).join("");
   var related = card.related.map(function (r) {
     var b = document.createElement("b"); b.textContent = r.title;
-    var d = document.createElement("div"); d.className = "reference";
+    var d = document.createElement("button"); d.type = "button"; d.className = "reference";
+    d.setAttribute("data-related-title", r.title);
     d.appendChild(b);
     if (r.description) { var s = document.createElement("span"); s.textContent = r.description; d.appendChild(s); }
     return d.outerHTML;
@@ -1349,6 +1358,13 @@ function initApp(defenses) {
 
         track.addEventListener("click", function (event) {
           var target = event.target;
+          var rel = target && target.closest ? target.closest("[data-related-title]") : null;
+          if (rel) {
+            var title = rel.getAttribute("data-related-title");
+            var idx = defenses.findIndex(function (d) { return d.title === title; });
+            if (idx >= 0) showCard(idx, { scroll: true });
+            return;
+          }
           var btn = target && target.closest ? target.closest("[data-share]") : null;
           if (!btn) return;
           var cardEl = btn.closest(".entry");

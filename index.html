@@ -593,6 +593,18 @@
       }
       .ccc-reader input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
       .ccc-note { font-size: 0.85rem; color: var(--muted); margin-top: 12px; }
+      .section-jump {
+        display: flex; gap: 8px; align-items: center; overflow-x: auto;
+        padding: 12px 4px 4px; margin: 0; scrollbar-width: none;
+      }
+      .section-jump::-webkit-scrollbar { display: none; }
+      .section-jump-label { font-size: 0.85rem; color: var(--muted); white-space: nowrap; font-weight: 600; }
+      .section-jump a {
+        white-space: nowrap; font-size: 0.88rem; font-weight: 600; color: var(--wine);
+        background: var(--surface); border: 1px solid var(--line-strong); border-radius: 999px;
+        padding: 7px 14px; text-decoration: none; flex: 0 0 auto;
+      }
+      .section-jump a:hover, .section-jump a:focus-visible { background: var(--wine); color: #fff; border-color: var(--wine); }
     </style>
   </head>
   <body>
@@ -639,6 +651,18 @@
             <li><b>Invite dialogue</b><span>Defend the faith without treating people as enemies.</span></li>
           </ol>
         </section>
+
+        <nav class="section-jump" aria-label="Jump to a section">
+          <span class="section-jump-label">Jump to:</span>
+          <a href="#start-here">Start here</a>
+          <a href="#featured-answer">Defenses</a>
+          <a href="#completed-index">Browse</a>
+          <a href="#pocket">Pocket</a>
+          <a href="#sacraments">Sacraments</a>
+          <a href="#catechism">Catechism</a>
+          <a href="#quiz">Quiz</a>
+          <a href="#glossary">Glossary</a>
+        </nav>
 
         <section class="section start-section" id="start-here" aria-label="Where to start">
           <div class="section-head">

@@ -2079,7 +2079,7 @@ var topicCarousels = document.getElementById("topicCarousels");
         cccJumpInput.addEventListener("keydown", function (event) { if (event.key === "Enter") cccDoJump(); });
 }
 
-var ASSET_V = "20261012d"; /* bump on every content push: defeats CDN/browser cache */
+var ASSET_V = "20261012e"; /* bump on every content push: defeats CDN/browser cache */
 var DEFENSE_SHARDS = ["defenses-1.json", "defenses-2.json", "defenses-3.json", "defenses-4.json"];
 Promise.all(DEFENSE_SHARDS.map(function (f) {
   return fetch(f + "?v=" + ASSET_V).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); });

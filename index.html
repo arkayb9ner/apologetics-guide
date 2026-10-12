@@ -1,0 +1,1055 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f4f0e8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#181614" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="data:," />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600;7..72,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <title>Apologetics Guide</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --paper: #f4f0e8;
+        --paper-deep: #e8e0d2;
+        --surface: #fffdf8;
+        --ink: #211d19;
+        --muted: #625a51;
+        --line: #cfc3b2;
+        --line-strong: #a99983;
+        --wine: #701f2a;
+        --wine-strong: #50141d;
+        --gold: #a77d28;
+        --gold-soft: #e9d8ae;
+        --success: #286644;
+        --focus: #0b65c2;
+        --shadow: 0 16px 44px rgba(49, 35, 24, 0.1);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --paper: #181614;
+          --paper-deep: #211d1a;
+          --surface: #25211d;
+          --ink: #f3ede3;
+          --muted: #c5bbad;
+          --line: #4c4339;
+          --line-strong: #6c5f50;
+          --wine: #d0737e;
+          --wine-strong: #f09aa4;
+          --gold: #d3ad5d;
+          --gold-soft: #514327;
+          --success: #74c795;
+          --focus: #77b9ff;
+          --shadow: 0 16px 44px rgba(0, 0, 0, 0.3);
+        }
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background:
+          linear-gradient(90deg, transparent 0, transparent calc(50% - 1px), color-mix(in srgb, var(--line) 18%, transparent) 50%, transparent calc(50% + 1px)) top center / min(100%, 1180px) 100% no-repeat,
+          var(--paper);
+        color: var(--ink);
+        font-family: "Public Sans", sans-serif;
+        line-height: 1.6;
+      }
+      button, input { font: inherit; }
+      button { color: inherit; }
+      a { color: var(--wine); text-underline-offset: 3px; }
+      :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+      .page { width: min(1120px, calc(100% - 36px)); margin: 0 auto; }
+
+      .hero {
+        padding: clamp(52px, 9vw, 112px) 0 50px;
+        display: grid;
+        grid-template-columns: minmax(0, 1.18fr) minmax(320px, .82fr);
+        gap: clamp(32px, 7vw, 88px);
+        align-items: end;
+        border-bottom: 1px solid var(--line-strong);
+      }
+      .edition {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--wine);
+        font-weight: 700;
+        font-size: 0.76rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .edition::before { content: ""; width: 30px; height: 2px; background: var(--gold); }
+      h1, h2, h3, blockquote { font-family: "Literata", serif; }
+      h1 {
+        font-size: clamp(2.65rem, 7vw, 5.8rem);
+        line-height: 0.98;
+        letter-spacing: -0.055em;
+        max-width: 850px;
+        margin: 22px 0 24px;
+        font-weight: 600;
+      }
+      .hero-copy { max-width: 680px; font-size: clamp(1rem, 1.8vw, 1.25rem); color: var(--muted); margin: 0; }
+      .hero-search { align-self: end; min-width: 0; }
+      .hero-search-label {
+        display: block;
+        margin-bottom: 9px;
+        color: var(--wine);
+        font-weight: 700;
+        font-size: .78rem;
+        letter-spacing: .055em;
+      }
+      .hero-search-box { position: relative; }
+      .hero-search-box::before {
+        content: "";
+        position: absolute;
+        left: 18px;
+        top: 50%;
+        width: 13px;
+        height: 13px;
+        border: 2px solid var(--wine);
+        border-radius: 50%;
+        transform: translateY(-58%);
+        pointer-events: none;
+      }
+      .hero-search-box::after {
+        content: "";
+        position: absolute;
+        left: 31px;
+        top: calc(50% + 7px);
+        width: 7px;
+        height: 2px;
+        background: var(--wine);
+        transform: rotate(45deg);
+        transform-origin: left center;
+        pointer-events: none;
+      }
+      #heroSearch {
+        width: 100%;
+        min-height: 62px;
+        border: 2px solid var(--wine);
+        border-radius: 0;
+        background: var(--surface);
+        color: var(--ink);
+        padding: 14px 16px 14px 51px;
+        font-size: 1.03rem;
+        box-shadow: var(--shadow);
+        appearance: none;
+      }
+      #heroSearch::placeholder { color: var(--muted); opacity: 1; }
+      #heroSearch::-webkit-search-cancel-button { cursor: pointer; }
+      .hero-search-help { margin: 9px 0 11px; color: var(--muted); font-size: .78rem; }
+      .topic-chips { display: flex; flex-wrap: wrap; gap: 7px; }
+      .topic-chip {
+        min-height: 40px;
+        border: 1px solid var(--line-strong);
+        border-radius: 999px;
+        background: transparent;
+        padding: 7px 12px;
+        color: var(--ink);
+        cursor: pointer;
+        font-size: .82rem;
+        font-weight: 600;
+      }
+      .topic-chip:hover, .topic-chip[aria-pressed="true"] { background: var(--wine); border-color: var(--wine); color: #fff; }
+      .hero-search-results {
+        display: none;
+        margin-top: 10px;
+        border: 1px solid var(--line-strong);
+        background: var(--surface);
+        box-shadow: var(--shadow);
+      }
+      .hero-search-results[data-open="true"] { display: block; }
+      .hero-result {
+        display: grid;
+        grid-template-columns: 30px minmax(0, 1fr);
+        gap: 10px;
+        width: 100%;
+        min-height: 44px;
+        padding: 9px 12px;
+        border: 0;
+        border-bottom: 1px solid var(--line);
+        background: transparent;
+        color: var(--ink);
+        cursor: pointer;
+        text-align: left;
+        line-height: 1.3;
+      }
+      .hero-result:last-child { border-bottom: 0; }
+      .hero-result:hover, .hero-result:focus-visible { background: var(--paper-deep); }
+      .hero-result-num { color: var(--gold); font-family: "Literata", serif; font-size: .78rem; padding-top: 2px; }
+      .hero-result-title { font-weight: 700; }
+      .hero-no-results { margin: 0; padding: 12px 14px; color: var(--muted); font-size: .86rem; }
+      .mobile-nav-note { display: none; }
+
+      .jump-index { padding: 28px 0 30px; border-bottom: 1px solid var(--line-strong); }
+      .jump-index-head { display: flex; align-items: baseline; justify-content: space-between; gap: 18px; margin-bottom: 16px; }
+      .jump-index h2 { font-size: clamp(1.25rem, 2.2vw, 1.65rem); margin: 0; letter-spacing: -.015em; }
+      .jump-index p { color: var(--muted); font-size: .86rem; margin: 0; }
+      .jump-carousel { min-width: 0; }
+      .jump-links {
+        display: flex;
+        gap: 12px;
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        scrollbar-width: none;
+        overscroll-behavior-inline: contain;
+        touch-action: pan-x pan-y;
+        padding: 2px 0 14px;
+      }
+      .jump-links::-webkit-scrollbar { display: none; }
+      .jump-links::after { content: ""; flex: 0 0 calc(100% - clamp(250px, 32%, 340px)); }
+      .jump-links a {
+        display: grid;
+        grid-template-rows: auto 1fr;
+        gap: 12px;
+        align-content: start;
+        flex: 0 0 clamp(250px, 32%, 340px);
+        min-height: 116px;
+        padding: 17px 18px 18px;
+        border: 1px solid var(--line);
+        border-top: 3px solid var(--wine);
+        color: var(--ink);
+        text-decoration: none;
+        font-size: .98rem;
+        font-weight: 700;
+        line-height: 1.35;
+        background: color-mix(in srgb, var(--surface) 78%, transparent);
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+      }
+      .jump-links a:hover, .jump-links a:focus-visible { color: var(--wine); background: var(--surface); }
+      .jump-links a[aria-current="true"] { background: var(--surface); border-top-color: var(--gold); }
+      .jump-num { color: var(--gold); font-family: "Literata", serif; font-size: .78rem; line-height: 1; }
+      .jump-dots { display: flex; justify-content: center; flex-wrap: wrap; gap: 2px; margin-top: 2px; }
+      .jump-dot { width: 24px; height: 24px; padding: 7px; border: 0; background: transparent; cursor: pointer; }
+      .jump-dot::before { content: ""; display: block; width: 10px; height: 10px; border: 1px solid var(--line-strong); border-radius: 50%; background: transparent; }
+      .jump-dot[aria-current="true"]::before { background: var(--wine); border-color: var(--wine); }
+
+      .method { padding: 34px 0; border-bottom: 1px solid var(--line); }
+      .method ol { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; padding: 0; margin: 0; counter-reset: steps; }
+      .method li { counter-increment: steps; padding: 6px 22px; border-left: 1px solid var(--line); }
+      .method li:first-child { border-left: 0; padding-left: 0; }
+      .method li::before { content: "0" counter(steps); display: block; color: var(--gold); font-weight: 700; font-size: .75rem; letter-spacing: .08em; margin-bottom: 4px; }
+      .method b { display: block; font-family: "Literata", serif; font-size: 1.06rem; }
+      .method span { color: var(--muted); font-size: .87rem; line-height: 1.45; display: block; margin-top: 3px; }
+
+      .section { padding: clamp(58px, 8vw, 96px) 0; }
+      .section-head { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 30px; margin-bottom: 36px; align-items: start; }
+      .section-no { color: var(--gold); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; font-size: .78rem; padding-top: 10px; }
+      h2 { font-size: clamp(2rem, 4.4vw, 3.65rem); line-height: 1.08; letter-spacing: -.035em; margin: 0 0 12px; }
+      .section-head p { color: var(--muted); font-size: 1.05rem; max-width: 720px; margin: 0; }
+
+      .deck-shell { min-width: 0; }
+      .deck-controls {
+        display: grid;
+        grid-template-columns: 50px minmax(0, 1fr) 50px;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 18px;
+      }
+      .deck-arrow {
+        width: 50px;
+        height: 46px;
+        border: 1px solid var(--line-strong);
+        background: var(--surface);
+        color: var(--wine);
+        cursor: pointer;
+        font-size: 1.25rem;
+        line-height: 1;
+      }
+      .deck-arrow:hover:not(:disabled) { background: var(--paper-deep); }
+      .deck-arrow:disabled { color: var(--muted); opacity: .42; cursor: not-allowed; }
+      .deck-position { display: grid; justify-items: center; gap: 8px; min-width: 0; }
+      #deckCounter { color: var(--muted); font-size: .82rem; font-weight: 700; letter-spacing: .04em; }
+      .deck-dots { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; }
+      .deck-dot {
+        width: 10px;
+        height: 10px;
+        padding: 0;
+        border: 1px solid var(--line-strong);
+        border-radius: 50%;
+        background: transparent;
+        cursor: pointer;
+      }
+      .deck-dot[aria-current="true"] { background: var(--wine); border-color: var(--wine); }
+      .deck-viewport {
+        width: 100%;
+        overflow: hidden;
+        touch-action: pan-y;
+        transition: height 220ms ease;
+        scroll-margin-top: 18px;
+      }
+      .deck-track {
+        display: block;
+        width: 100%;
+        transform: none !important;
+      }
+      .deck-track > .entry {
+        width: 100%;
+        min-width: 0;
+      }
+      .deck-track > .entry[aria-hidden="true"] { display: none; }
+      .entry {
+        background: var(--surface);
+        box-shadow: var(--shadow);
+        border-top: 5px solid var(--wine);
+        scroll-margin-top: 24px;
+      }
+      .deck .entry + .entry, .deck-track .entry + .entry { margin-top: 0; }
+      .entry-top { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr); gap: 38px; padding: clamp(28px, 5vw, 54px); border-bottom: 1px solid var(--line); }
+      .status { display: inline-flex; align-items: center; gap: 8px; font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--success); }
+      .status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--success); }
+      .entry h3 { font-size: clamp(1.9rem, 4vw, 3.1rem); line-height: 1.08; letter-spacing: -.03em; margin: 14px 0 18px; }
+      .entry-lede { margin: 0; color: var(--muted); font-size: 1.04rem; }
+      blockquote { margin: 0; padding: 0; font-size: clamp(1.25rem, 2.4vw, 1.7rem); line-height: 1.45; color: var(--wine); }
+      blockquote::before { content: "“"; display: block; color: var(--gold); font-size: 3rem; line-height: .65; margin-bottom: 12px; }
+      .entry-body { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 30px; padding: clamp(28px, 5vw, 54px); }
+      .entry-nav { display: flex; flex-direction: column; align-items: flex-start; gap: 9px; position: sticky; top: 22px; align-self: start; }
+      .entry-nav button { border: 0; border-bottom: 1px solid transparent; background: transparent; padding: 4px 0; cursor: pointer; color: var(--muted); font-size: .87rem; text-align: left; }
+      .entry-nav button[aria-selected="true"] { color: var(--wine); border-color: var(--wine); font-weight: 700; }
+      .panel { display: none; }
+      .panel.active { display: block; }
+      .panel > :first-child { margin-top: 0; }
+      .panel h4 { font-family: "Literata", serif; font-size: 1.28rem; margin: 30px 0 8px; }
+      .panel p { max-width: 750px; }
+      .answer-pillars { list-style: none; padding: 0; margin: 24px 0 0; border-top: 1px solid var(--line); }
+      .answer-pillars li { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 18px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+      .answer-pillars .num { font-family: "Literata", serif; color: var(--gold); font-weight: 700; font-size: 1.15rem; }
+      .answer-pillars b { color: var(--wine); }
+      .answer-pillars p { margin: 3px 0 0; color: var(--muted); }
+      .say-it { background: var(--paper-deep); padding: 24px; border-left: 3px solid var(--gold); font-family: "Literata", serif; font-size: 1.1rem; line-height: 1.55; }
+      .quick-ref { margin-top: 30px; padding: 21px 22px; background: var(--paper-deep); border-top: 2px solid var(--gold); }
+      .quick-ref h4 { margin: 0 0 10px; font-size: 1.08rem; }
+      .quick-ref p { margin: 5px 0; color: var(--muted); font-size: .92rem; }
+      .quick-ref b { color: var(--ink); }
+      .verse-list { display: flex; flex-wrap: wrap; gap: 7px; margin: 0 0 12px; }
+      .verse-list span { display: inline-block; padding: 4px 8px; background: var(--surface); border: 1px solid var(--line); color: var(--wine); font-size: .82rem; font-weight: 600; line-height: 1.35; }
+      .avoid-list { padding-left: 1.2rem; }
+      .avoid-list li { margin-bottom: 13px; }
+      .references { display: grid; gap: 12px; }
+      .reference { padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+      .reference b { display: block; color: var(--wine); }
+      .reference span { color: var(--muted); font-size: .92rem; }
+
+      .roadmap-section { background: var(--paper-deep); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+      .tools { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px; margin: 0 0 26px 210px; }
+      .search-wrap { position: relative; }
+      .search-wrap label { position: absolute; width: 1px; height: 1px; clip: rect(0 0 0 0); overflow: hidden; }
+      .search-wrap::before { content: "⌕"; position: absolute; left: 16px; top: 10px; color: var(--muted); font-size: 1.25rem; }
+      #search { width: 100%; min-height: 48px; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); padding: 11px 15px 11px 44px; border-radius: 0; }
+      .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+      .filter { min-height: 48px; border: 1px solid var(--line-strong); background: transparent; padding: 9px 14px; cursor: pointer; }
+      .filter[aria-pressed="true"] { background: var(--wine); color: white; border-color: var(--wine); }
+      .roadmap-grid { margin-left: 210px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--line-strong); }
+      .topic { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 12px; align-items: start; padding: 18px 18px 18px 0; border-bottom: 1px solid var(--line); }
+      .topic:nth-child(odd) { padding-right: 24px; border-right: 1px solid var(--line); }
+      .topic:nth-child(even) { padding-left: 24px; }
+      .topic-title { font-weight: 600; line-height: 1.4; }
+      .topic-cat { display: block; margin-top: 4px; color: var(--muted); font-size: .74rem; }
+      .topic-state { font-size: .68rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); padding-top: 3px; white-space: nowrap; }
+      .empty { margin-left: 210px; padding: 30px 0; color: var(--muted); display: none; }
+
+      .closing { padding: clamp(54px, 8vw, 88px) 0 calc(72px + env(safe-area-inset-bottom)); display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 30px; }
+      .closing p { margin: 0; max-width: 730px; color: var(--muted); font-size: 1.08rem; }
+      .closing strong { color: var(--ink); }
+
+      @media (max-width: 780px) {
+        .page { width: min(100% - 28px, 650px); }
+        .hero, .entry-top { grid-template-columns: 1fr; }
+        .hero { padding-top: 48px; gap: 28px; }
+        .hero-search { width: 100%; max-width: 560px; }
+        .jump-index-head { display: block; }
+        .jump-index-head p { margin-top: 4px; }
+        .jump-links a { flex-basis: calc(100% - 44px); }
+        .jump-links::after { flex-basis: 44px; }
+        .method ol { grid-template-columns: 1fr 1fr; gap: 20px 0; }
+        .method li:nth-child(3) { border-left: 0; padding-left: 0; }
+        .section-head, .entry-body, .closing { grid-template-columns: 1fr; gap: 14px; }
+        .section-no { padding-top: 0; }
+        .entry-nav { position: static; flex-direction: row; flex-wrap: wrap; gap: 6px 14px; border-bottom: 1px solid var(--line); padding-bottom: 16px; margin-bottom: 8px; }
+        .deck-controls { grid-template-columns: 44px minmax(0, 1fr) 44px; gap: 10px; }
+        .deck-arrow { width: 44px; height: 42px; }
+        .tools, .roadmap-grid, .empty { margin-left: 0; }
+        .tools { grid-template-columns: 1fr; }
+        .roadmap-grid { grid-template-columns: 1fr; }
+        .topic:nth-child(odd), .topic:nth-child(even) { padding: 17px 0; border-right: 0; }
+        .closing { gap: 10px; }
+      }
+      @media (max-width: 480px) {
+        h1 { font-size: 2.75rem; }
+        .method ol { grid-template-columns: 1fr; }
+        .method li, .method li:first-child, .method li:nth-child(3) { border-left: 0; padding: 0 0 0 46px; position: relative; }
+        .method li::before { position: absolute; left: 0; top: 2px; }
+        .entry-top, .entry-body { padding: 25px 20px; }
+        .jump-links a { min-height: 112px; }
+        .quick-ref { padding: 18px; }
+        .deck-controls { grid-template-columns: 1fr; }
+        .deck-arrow { display: none; }
+        .deck-position { gap: 7px; }
+        .desktop-nav-note { display: none; }
+        .mobile-nav-note { display: inline; }
+        .topic { grid-template-columns: minmax(0,1fr); }
+        .topic-state { grid-column: 1; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .deck-track, .deck-viewport { transition: none; }
+      }
+      @media print {
+        body { background: white; color: black; }
+        .tools, .entry-nav, .deck-controls { display: none; }
+        .panel { display: block !important; margin-bottom: 28px; }
+        .deck-viewport { height: auto !important; overflow: visible; }
+        .deck-track { display: block; transform: none !important; }
+        .deck-track .entry + .entry { margin-top: 36px; }
+        .roadmap-grid, .empty { margin-left: 0; }
+        .entry, #heroSearch, .hero-search-results { box-shadow: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="page">
+        <header class="hero">
+          <div>
+            <span class="edition">Working draft · October 2026</span>
+            <h1>Know what you believe. Answer with charity.</h1>
+            <p class="hero-copy">A Catholic field guide for meeting hard questions honestly—with Scripture, reason, history, and the teaching of the Church.</p>
+          </div>
+          <aside class="hero-search" aria-label="Find a defense">
+            <label class="hero-search-label" for="heroSearch">Find the answer you need</label>
+            <div class="hero-search-box">
+              <input id="heroSearch" type="search" placeholder="What objection did you hear?" autocomplete="off" aria-describedby="heroSearchHelp" aria-controls="heroSearchResults" aria-expanded="false" />
+            </div>
+            <p class="hero-search-help" id="heroSearchHelp">Search all fifty defenses, then press Enter to open the first match.</p>
+            <div class="topic-chips" aria-label="Quick topics">
+              <button class="topic-chip" type="button" data-hero-query="Jesus" aria-pressed="false">Jesus</button>
+              <button class="topic-chip" type="button" data-hero-query="Scripture" aria-pressed="false">Scripture</button>
+              <button class="topic-chip" type="button" data-hero-query="Mary" aria-pressed="false">Mary</button>
+              <button class="topic-chip" type="button" data-hero-query="Suffering" aria-pressed="false">Suffering</button>
+              <button class="topic-chip" type="button" data-hero-query="The Church" aria-pressed="false">The Church</button>
+              <button class="topic-chip" type="button" data-hero-query="Prayer" aria-pressed="false">Prayer</button>
+            </div>
+            <div class="hero-search-results" id="heroSearchResults" role="listbox" aria-label="Matching defenses" data-open="false"></div>
+          </aside>
+        </header>
+
+        <nav class="jump-index" id="completed-index" aria-label="Jump to a completed defense">
+          <div class="jump-index-head">
+            <h2>Jump to a defense</h2>
+            <p>Fifty completed answers, ready to open.</p>
+          </div>
+          <div class="jump-carousel">
+            <div class="jump-links" id="jumpCards" role="region" aria-roledescription="carousel" aria-label="Completed defense cards" tabindex="0">
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+            </div>
+            <div class="jump-dots" id="jumpDots" aria-label="Choose a defense card"></div>
+          </div>
+        </nav>
+
+        <section class="method" aria-label="How to use the guide">
+          <ol>
+            <li><b>Hear it fairly</b><span>State the objection in its strongest form.</span></li>
+            <li><b>Make distinctions</b><span>Clarify what the Church actually claims.</span></li>
+            <li><b>Give reasons</b><span>Use evidence without hiding the difficulty.</span></li>
+            <li><b>Invite dialogue</b><span>Defend the faith without treating people as enemies.</span></li>
+          </ol>
+        </section>
+
+        <section class="section" id="featured-answer">
+          <div class="section-head">
+            <div class="section-no">Swipeable defenses</div>
+            <div>
+              <h2>Answers ready for review</h2>
+              <p>Fifty completed entries now model the guide’s full format: the objection in its strongest form, a Catholic response, a practical one-liner, and connected topics.</p>
+            </div>
+          </div>
+
+          <div class="deck-shell">
+            <div class="deck-controls" aria-label="Defense card controls">
+              <button class="deck-arrow" id="deckPrev" type="button" aria-label="Previous defense">←</button>
+              <div class="deck-position">
+                <span id="deckCounter" aria-live="polite">Defense 1 of 50</span>
+                <div class="deck-dots" id="deckDots" aria-label="Choose a defense"></div>
+              </div>
+              <button class="deck-arrow" id="deckNext" type="button" aria-label="Next defense">→</button>
+            </div>
+            <div class="deck-viewport" id="defenseDeck" role="region" tabindex="0" aria-roledescription="carousel" aria-label="Completed defenses">
+              <div class="deck-track" id="deckTrack">
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <section class="section roadmap-section" id="roadmap">
+        <div class="page">
+          <div class="section-head">
+            <div class="section-no">Complete set</div>
+            <div>
+              <h2>All planned questions are now answered</h2>
+              <p>Fifty completed defenses cover the original general and Catholic objection list, plus this newly raised challenge. New questions can still be added whenever they arise.</p>
+            </div>
+          </div>
+
+          <div class="tools" hidden>
+            <div class="search-wrap">
+              <label for="search">Search objections</label>
+              <input id="search" type="search" placeholder="Search evil, Mary, science…" autocomplete="off" />
+            </div>
+            <div class="filters" aria-label="Filter topics">
+              <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
+              <button class="filter" type="button" data-filter="Christianity" aria-pressed="false">Christianity</button>
+              <button class="filter" type="button" data-filter="Catholicism" aria-pressed="false">Catholicism</button>
+            </div>
+          </div>
+
+          <div class="roadmap-grid" id="topicGrid" aria-live="polite"></div>
+          <p class="empty" id="emptyState">No unfinished topics remain — all fifty defenses are complete.</p>
+        </div>
+      </section>
+
+      <div class="page">
+        <footer class="closing">
+          <div class="section-no">Guiding rule</div>
+          <p><strong>“Always be ready to give an explanation… but do it with gentleness and reverence.”</strong><br />The aim is not to win an exchange. It is to tell the truth clearly, listen carefully, and leave the door open for grace. <span aria-label="First Peter chapter 3 verses 15 to 16">— 1 Peter 3:15–16</span></p>
+        </footer>
+      </div>
+    </main>
+
+    <script>
+/* Boot: render the 50 defenses from defenses.json, then start the app.
+   To update content, edit defenses.json — no code changes needed. */
+function pad2(n) { return String(n).padStart(2, "0"); }
+
+function renderStandardCard(card, n, total) {
+  var points = card.response.map(function (p, k) {
+    return '<li><span class="num">' + pad2(k + 1) + '</span> <div><b>' + p.heading + '</b> ' + p.body + '</div></li>';
+  }).join("");
+  var verses = card.verses.map(function (v) { return "<span>" + v + "</span>"; }).join("");
+  var related = card.related.map(function (r) {
+    var b = document.createElement("b"); b.textContent = r.title;
+    var d = document.createElement("div"); d.className = "reference";
+    d.appendChild(b);
+    if (r.description) { var s = document.createElement("span"); s.textContent = r.description; d.appendChild(s); }
+    return d.outerHTML;
+  }).join("");
+  return (
+    '<div class="entry-top"><div>' +
+    '<span class="status">Defense ' + n + " of " + total + " \u00b7 Ready for review</span>" +
+    "<h3>" + card.title + "</h3>" +
+    '<p class="entry-lede">' + card.objection + "</p>" +
+    "</div><blockquote>" + card.summary + "</blockquote></div>" +
+    '<div class="entry-body">' +
+    '<nav class="entry-nav" aria-label="' + card.title.replace(/"/g, "") + ' answer sections" role="tablist">' +
+    '<button type="button" role="tab" aria-selected="true" aria-controls="' + card.slug + '-response" data-panel="response">Catholic response</button>' +
+    '<button type="button" role="tab" aria-selected="false" aria-controls="' + card.slug + '-oneliner" data-panel="oneliner">One-liner</button>' +
+    '<button type="button" role="tab" aria-selected="false" aria-controls="' + card.slug + '-related" data-panel="related">See also</button>' +
+    "</nav><div>" +
+    '<section class="panel active" id="' + card.slug + '-response" role="tabpanel">' +
+    '<ol class="answer-pillars">' + points + "</ol>" +
+    '<aside class="quick-ref" aria-label="Quick references"><h4>Verses to remember</h4>' +
+    '<div class="verse-list">' + verses + "</div>" +
+    "<p><b>Catechism:</b> " + card.ccc + "</p></aside></section>" +
+    '<section class="panel" id="' + card.slug + '-oneliner" role="tabpanel"><h4>The one-liner</h4>' +
+    '<p class="say-it">' + card.oneLiner + "</p></section>" +
+    '<section class="panel" id="' + card.slug + '-related" role="tabpanel"><h4>See also</h4>' +
+    '<div class="references">' + related + "</div></section>" +
+    "</div></div>"
+  );
+}
+
+function renderSite(defenses) {
+  var total = defenses.length;
+  var track = document.getElementById("deckTrack");
+  var jumpCards = document.getElementById("jumpCards");
+  defenses.forEach(function (card, i) {
+    var n = i + 1;
+    var article = document.createElement("article");
+    article.className = "entry";
+    article.id = "answer-" + card.slug;
+    article.setAttribute("data-entry", card.slug);
+    article.setAttribute("data-card-index", String(i));
+    article.setAttribute("aria-roledescription", "slide");
+    article.setAttribute("aria-label", "Defense " + n + " of " + total);
+    if (card.customBody) {
+      article.innerHTML = card.customBody.split(" of 50").join(" of " + total);
+    } else {
+      article.innerHTML = renderStandardCard(card, n, total);
+    }
+    track.appendChild(article);
+    var link = document.createElement("a");
+    link.href = "#answer-" + card.slug;
+    link.setAttribute("data-card-target", String(i));
+    var num = document.createElement("span"); num.className = "jump-num"; num.textContent = pad2(n);
+    var label = document.createElement("span"); label.textContent = card.jumpLabel;
+    link.appendChild(num); link.appendChild(label);
+    jumpCards.appendChild(link);
+  });
+}
+
+function initApp() {
+
+        var topics = [];
+
+        var activeFilter = "all";
+        var grid = document.getElementById("topicGrid");
+        var search = document.getElementById("search");
+        var empty = document.getElementById("emptyState");
+        var viewport = document.getElementById("defenseDeck");
+        var track = document.getElementById("deckTrack");
+        var cards = Array.prototype.slice.call(track.querySelectorAll(".entry"));
+        var prevButton = document.getElementById("deckPrev");
+        var nextButton = document.getElementById("deckNext");
+        var dotsWrap = document.getElementById("deckDots");
+        var deckCounter = document.getElementById("deckCounter");
+        var currentCard = 0;
+        var heroSearch = document.getElementById("heroSearch");
+        var heroSearchResults = document.getElementById("heroSearchResults");
+        var heroTopicChips = Array.prototype.slice.call(document.querySelectorAll(".topic-chip"));
+        var heroMatches = [];
+        var jumpCards = document.getElementById("jumpCards");
+        var jumpCardLinks = Array.prototype.slice.call(jumpCards.querySelectorAll("a[data-card-target]"));
+        var jumpDots = document.getElementById("jumpDots");
+        var jumpScrollFrame = 0;
+
+        function jumpCardLeft(index) {
+          if (!jumpCardLinks[index]) return 0;
+          return jumpCardLinks[index].offsetLeft - jumpCardLinks[0].offsetLeft;
+        }
+
+        function updateJumpPosition(index) {
+          jumpCardLinks.forEach(function (link, linkIndex) {
+            link.setAttribute("aria-current", linkIndex === index ? "true" : "false");
+          });
+          Array.prototype.slice.call(jumpDots.children).forEach(function (dot, dotIndex) {
+            dot.setAttribute("aria-current", dotIndex === index ? "true" : "false");
+          });
+        }
+
+        function nearestJumpCard() {
+          var nearestIndex = 0;
+          var nearestDistance = Infinity;
+          jumpCardLinks.forEach(function (link, index) {
+            var distance = Math.abs(jumpCardLeft(index) - jumpCards.scrollLeft);
+            if (distance < nearestDistance) {
+              nearestDistance = distance;
+              nearestIndex = index;
+            }
+          });
+          updateJumpPosition(nearestIndex);
+          return nearestIndex;
+        }
+
+        jumpCardLinks.forEach(function (link, index) {
+          var dot = document.createElement("button");
+          dot.type = "button";
+          dot.className = "jump-dot";
+          dot.setAttribute("aria-label", "Show defense card " + (index + 1) + ": " + link.textContent.trim());
+          dot.addEventListener("click", function () {
+            jumpCards.scrollTo({ left: jumpCardLeft(index), behavior: "smooth" });
+          });
+          jumpDots.appendChild(dot);
+        });
+        updateJumpPosition(0);
+
+        jumpCards.addEventListener("scroll", function () {
+          if (jumpScrollFrame) return;
+          jumpScrollFrame = window.requestAnimationFrame(function () {
+            jumpScrollFrame = 0;
+            nearestJumpCard();
+          });
+        }, { passive: true });
+        jumpCards.addEventListener("keydown", function (event) {
+          if (event.target !== jumpCards || (event.key !== "ArrowLeft" && event.key !== "ArrowRight")) return;
+          event.preventDefault();
+          var index = nearestJumpCard() + (event.key === "ArrowRight" ? 1 : -1);
+          index = Math.max(0, Math.min(jumpCardLinks.length - 1, index));
+          jumpCards.scrollTo({ left: jumpCardLeft(index), behavior: "smooth" });
+        });
+
+        cards.forEach(function (card, index) {
+          var dot = document.createElement("button");
+          dot.type = "button";
+          dot.className = "deck-dot";
+          dot.setAttribute("aria-label", "Open defense " + (index + 1) + ": " + card.querySelector("h3").textContent);
+          dot.addEventListener("click", function () { showCard(index); });
+          dotsWrap.appendChild(dot);
+        });
+
+        function updateDeckHeight() {
+          viewport.style.height = "auto";
+        }
+
+        function showCard(index, options) {
+          options = options || {};
+          currentCard = Math.max(0, Math.min(cards.length - 1, index));
+          track.style.transform = "translateX(-" + (currentCard * 100) + "%)";
+          cards.forEach(function (card, cardIndex) {
+            var isActive = cardIndex === currentCard;
+            card.setAttribute("aria-hidden", isActive ? "false" : "true");
+            if (isActive) card.removeAttribute("inert");
+            else card.setAttribute("inert", "");
+          });
+          Array.prototype.slice.call(dotsWrap.children).forEach(function (dot, dotIndex) {
+            dot.setAttribute("aria-current", dotIndex === currentCard ? "true" : "false");
+          });
+          prevButton.disabled = currentCard === 0;
+          nextButton.disabled = currentCard === cards.length - 1;
+          deckCounter.textContent = "Defense " + (currentCard + 1) + " of " + cards.length;
+          window.requestAnimationFrame(updateDeckHeight);
+          if (options.updateHash !== false && window.history && window.history.replaceState) {
+            window.history.replaceState(null, "", "#" + cards[currentCard].id);
+          }
+          if (options.scroll) viewport.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+
+        function normalizeSearchText(value) {
+          return value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[’‘]/g, "'");
+        }
+
+        function findHeroMatches(query) {
+          var normalizedQuery = normalizeSearchText(query.trim());
+          if (!normalizedQuery) return [];
+          var words = normalizedQuery.split(/\s+/).filter(Boolean);
+          return cards.map(function (card, index) {
+            var title = card.querySelector("h3").textContent.trim();
+            var normalizedTitle = normalizeSearchText(title);
+            var normalizedCard = normalizeSearchText(card.textContent);
+            var matches = words.every(function (word) { return normalizedCard.indexOf(word) !== -1; });
+            var score = normalizedTitle === normalizedQuery ? 0 : normalizedTitle.indexOf(normalizedQuery) === 0 ? 1 : normalizedTitle.indexOf(normalizedQuery) !== -1 ? 2 : 3;
+            return matches ? { index: index, title: title, score: score } : null;
+          }).filter(Boolean).sort(function (a, b) { return a.score - b.score || a.index - b.index; });
+        }
+
+        function closeHeroResults() {
+          heroSearchResults.setAttribute("data-open", "false");
+          heroSearch.setAttribute("aria-expanded", "false");
+        }
+
+        function openHeroMatch(match) {
+          if (!match) return;
+          closeHeroResults();
+          showCard(match.index, { scroll: true });
+        }
+
+        function renderHeroMatches() {
+          var query = heroSearch.value.trim();
+          heroMatches = findHeroMatches(query);
+          heroSearchResults.innerHTML = "";
+          heroTopicChips.forEach(function (chip) {
+            chip.setAttribute("aria-pressed", normalizeSearchText(chip.getAttribute("data-hero-query")) === normalizeSearchText(query) ? "true" : "false");
+          });
+          if (!query) {
+            closeHeroResults();
+            return;
+          }
+          if (!heroMatches.length) {
+            var emptyResult = document.createElement("p");
+            emptyResult.className = "hero-no-results";
+            emptyResult.textContent = "No defense matches that search yet.";
+            heroSearchResults.appendChild(emptyResult);
+          } else {
+            heroMatches.slice(0, 6).forEach(function (match) {
+              var button = document.createElement("button");
+              button.type = "button";
+              button.className = "hero-result";
+              button.setAttribute("role", "option");
+              button.setAttribute("aria-label", "Open defense " + (match.index + 1) + ": " + match.title);
+              button.innerHTML = '<span class="hero-result-num"></span><span class="hero-result-title"></span>';
+              button.querySelector(".hero-result-num").textContent = String(match.index + 1).padStart(2, "0");
+              button.querySelector(".hero-result-title").textContent = match.title;
+              button.addEventListener("click", function () { openHeroMatch(match); });
+              heroSearchResults.appendChild(button);
+            });
+          }
+          heroSearchResults.setAttribute("data-open", "true");
+          heroSearch.setAttribute("aria-expanded", "true");
+        }
+
+        heroSearch.addEventListener("input", renderHeroMatches);
+        heroSearch.addEventListener("focus", function () {
+          if (heroSearch.value.trim()) renderHeroMatches();
+        });
+        heroSearch.addEventListener("keydown", function (event) {
+          if (event.key === "Enter" && heroMatches.length) {
+            event.preventDefault();
+            openHeroMatch(heroMatches[0]);
+          } else if (event.key === "ArrowDown") {
+            var firstResult = heroSearchResults.querySelector(".hero-result");
+            if (firstResult) { event.preventDefault(); firstResult.focus(); }
+          } else if (event.key === "Escape") {
+            closeHeroResults();
+          }
+        });
+        heroTopicChips.forEach(function (chip) {
+          chip.addEventListener("click", function () {
+            heroSearch.value = chip.getAttribute("data-hero-query");
+            renderHeroMatches();
+            heroSearch.focus();
+          });
+        });
+
+        prevButton.addEventListener("click", function () { showCard(currentCard - 1); });
+        nextButton.addEventListener("click", function () { showCard(currentCard + 1); });
+        viewport.addEventListener("keydown", function (event) {
+          if (event.target !== viewport) return;
+          if (event.key === "ArrowLeft") { event.preventDefault(); showCard(currentCard - 1); }
+          if (event.key === "ArrowRight") { event.preventDefault(); showCard(currentCard + 1); }
+        });
+
+        var touchStartX = 0;
+        var touchStartY = 0;
+        var touchTracking = false;
+        viewport.addEventListener("touchstart", function (event) {
+          if (event.touches.length !== 1) return;
+          touchStartX = event.touches[0].clientX;
+          touchStartY = event.touches[0].clientY;
+          touchTracking = true;
+        }, { passive: true });
+        viewport.addEventListener("touchend", function (event) {
+          if (!touchTracking || !event.changedTouches.length) return;
+          touchTracking = false;
+          var dx = event.changedTouches[0].clientX - touchStartX;
+          var dy = event.changedTouches[0].clientY - touchStartY;
+          if (Math.abs(dx) < 52 || Math.abs(dx) <= Math.abs(dy) * 1.2) return;
+          showCard(dx < 0 ? currentCard + 1 : currentCard - 1);
+        }, { passive: true });
+        viewport.addEventListener("touchcancel", function () { touchTracking = false; }, { passive: true });
+
+        document.querySelectorAll(".jump-links a[data-card-target]").forEach(function (link) {
+          link.addEventListener("click", function (event) {
+            event.preventDefault();
+            showCard(Number(link.getAttribute("data-card-target")), { scroll: true });
+          });
+        });
+
+        if (window.ResizeObserver) {
+          var deckObserver = new ResizeObserver(function () { updateDeckHeight(); });
+          cards.forEach(function (card) { deckObserver.observe(card); });
+        }
+        window.addEventListener("resize", updateDeckHeight);
+
+        function renderTopics() {
+          var query = search.value.trim().toLowerCase();
+          var filtered = topics.filter(function (topic) {
+            var matchesCategory = activeFilter === "all" || topic[1] === activeFilter;
+            var matchesQuery = !query || (topic[0] + " " + topic[1]).toLowerCase().indexOf(query) !== -1;
+            return matchesCategory && matchesQuery;
+          });
+          grid.innerHTML = "";
+          filtered.forEach(function (topic) {
+            var item = document.createElement("article");
+            item.className = "topic";
+            item.innerHTML = '<div><span class="topic-title"></span><span class="topic-cat"></span></div><span class="topic-state">Coming soon</span>';
+            item.querySelector(".topic-title").textContent = topic[0];
+            item.querySelector(".topic-cat").textContent = topic[1];
+            grid.appendChild(item);
+          });
+          empty.style.display = filtered.length ? "none" : "block";
+        }
+
+        search.addEventListener("input", renderTopics);
+        document.querySelectorAll(".filter").forEach(function (button) {
+          button.addEventListener("click", function () {
+            activeFilter = button.getAttribute("data-filter");
+            document.querySelectorAll(".filter").forEach(function (other) {
+              other.setAttribute("aria-pressed", other === button ? "true" : "false");
+            });
+            renderTopics();
+          });
+        });
+
+        document.querySelectorAll(".entry").forEach(function (entry) {
+          var tabs = Array.prototype.slice.call(entry.querySelectorAll(".entry-nav button"));
+          var panels = Array.prototype.slice.call(entry.querySelectorAll(".panel"));
+          tabs.forEach(function (tab, index) {
+            tab.addEventListener("click", function () {
+              var targetId = tab.getAttribute("aria-controls");
+              tabs.forEach(function (other) { other.setAttribute("aria-selected", other === tab ? "true" : "false"); });
+              panels.forEach(function (panel) { panel.classList.toggle("active", panel.id === targetId); });
+              window.requestAnimationFrame(updateDeckHeight);
+            });
+            tab.addEventListener("keydown", function (event) {
+              var nextIndex = index;
+              if (event.key === "ArrowRight" || event.key === "ArrowDown") nextIndex = (index + 1) % tabs.length;
+              if (event.key === "ArrowLeft" || event.key === "ArrowUp") nextIndex = (index - 1 + tabs.length) % tabs.length;
+              if (nextIndex !== index) { event.preventDefault(); tabs[nextIndex].focus(); tabs[nextIndex].click(); }
+            });
+          });
+        });
+
+        var hashId = window.location.hash ? window.location.hash.slice(1) : "";
+        var hashIndex = cards.findIndex(function (card) { return card.id === hashId; });
+        showCard(hashIndex >= 0 ? hashIndex : 0, { updateHash: false });
+        if (hashIndex >= 0) window.setTimeout(function () { viewport.scrollIntoView({ block: "start" }); }, 0);
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(updateDeckHeight);
+        renderTopics();
+      
+}
+
+fetch("defenses.json")
+  .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+  .then(function (defenses) { renderSite(defenses); initApp(); })
+  .catch(function () {
+    var track = document.getElementById("deckTrack");
+    if (track) track.innerHTML = '<p class="load-error" style="padding:2rem;text-align:center">Could not load the defenses. Check your connection and reload.</p>';
+  });
+</script>
+  </body>
+</html>

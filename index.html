@@ -545,6 +545,54 @@
         .roadmap-grid, .empty { margin-left: 0; }
         .entry, #heroSearch, .hero-search-results { box-shadow: none; }
       }
+      .ccc-ref {
+        display: inline-block; font: inherit; font-weight: 700; color: var(--wine);
+        background: var(--gold-soft); border: 1px solid var(--gold); border-radius: 999px;
+        padding: 1px 10px; margin: 1px 2px; cursor: pointer; white-space: nowrap;
+      }
+      .ccc-ref:hover, .ccc-ref:focus-visible { background: var(--gold); color: #fff; }
+      .ccc-modal-backdrop {
+        position: fixed; inset: 0; z-index: 90; background: rgba(20, 14, 10, 0.62);
+        display: flex; align-items: center; justify-content: center; padding: 18px;
+      }
+      .ccc-modal-backdrop[hidden] { display: none; }
+      .ccc-modal {
+        background: var(--surface); color: var(--ink); border-radius: 16px; max-width: 620px;
+        width: 100%; max-height: 82vh; display: flex; flex-direction: column;
+        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35); border: 1px solid var(--line-strong);
+      }
+      .ccc-modal-head {
+        display: flex; align-items: center; justify-content: space-between; gap: 12px;
+        padding: 14px 18px; border-bottom: 1px solid var(--line);
+      }
+      .ccc-modal-head strong { font-size: 1.05rem; }
+      .ccc-modal-close {
+        font: inherit; font-size: 1.4rem; line-height: 1; background: none; border: 0;
+        cursor: pointer; color: var(--muted); padding: 4px 10px; border-radius: 8px;
+      }
+      .ccc-modal-close:hover { color: var(--ink); background: var(--paper-deep); }
+      .ccc-modal-body { padding: 18px; overflow-y: auto; font-size: 1.02rem; line-height: 1.65; }
+      .ccc-modal-body p { margin: 0 0 12px; }
+      .ccc-modal-body p:last-child { margin-bottom: 0; }
+      .ccc-modal-foot {
+        display: flex; align-items: center; justify-content: space-between; gap: 10px;
+        padding: 12px 18px; border-top: 1px solid var(--line); flex-wrap: wrap;
+      }
+      .ccc-modal-foot .ccc-attr { font-size: 0.8rem; color: var(--muted); text-align: center; flex: 1 1 100%; order: 3; }
+      .ccc-modal-foot .ccc-attr a { color: var(--wine); }
+      .ccc-nav {
+        font: inherit; font-weight: 600; background: var(--paper-deep); color: var(--ink);
+        border: 1px solid var(--line-strong); border-radius: 999px; padding: 8px 16px; cursor: pointer;
+      }
+      .ccc-nav:hover:not(:disabled), .ccc-nav:focus-visible:not(:disabled) { background: var(--gold-soft); }
+      .ccc-nav:disabled { opacity: 0.4; cursor: default; }
+      .ccc-reader { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 14px; }
+      .ccc-reader input {
+        font: inherit; padding: 12px 16px; border-radius: 12px; border: 1px solid var(--line-strong);
+        background: var(--surface); color: var(--ink); width: 170px;
+      }
+      .ccc-reader input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+      .ccc-note { font-size: 0.85rem; color: var(--muted); margin-top: 12px; }
     </style>
   </head>
   <body>
@@ -769,6 +817,24 @@
               <div class="sacraments-track" id="sacramentsTrack"></div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section class="section" id="catechism" aria-label="The Catechism of the Catholic Church">
+        <div class="page">
+          <div class="section-head">
+            <div class="section-no">Source</div>
+            <div>
+              <h2>The Catechism, on hand</h2>
+              <p>Every &ldquo;CCC&rdquo; reference on a defense card opens the real paragraph &mdash; tap one and see for yourself. Or look up any of the 2,865 paragraphs below.</p>
+            </div>
+          </div>
+          <div class="ccc-reader">
+            <label class="visually-hidden" for="cccJump">Paragraph number</label>
+            <input id="cccJump" type="number" min="1" max="2865" placeholder="Paragraph # (1&ndash;2865)" inputmode="numeric" />
+            <button type="button" class="support-btn" id="cccJumpBtn" style="border:0;cursor:pointer;">Read it</button>
+          </div>
+          <p class="ccc-note">Catechism text &copy; Libreria Editrice Vaticana. Official text at <a href="https://www.vatican.va/archive/ENG0015/_INDEX.HTM">vatican.va</a>.</p>
         </div>
       </section>
 
@@ -1141,6 +1207,86 @@ function renderStandardCard(card, n, total) {
   );
 }
 
+var CCC_INDEX = [
+  [1, 234, "ccc/ccc-01.json"], [235, 440, "ccc/ccc-02.json"], [441, 630, "ccc/ccc-03.json"],
+  [631, 813, "ccc/ccc-04.json"], [814, 1012, "ccc/ccc-05.json"], [1013, 1209, "ccc/ccc-06.json"],
+  [1210, 1408, "ccc/ccc-07.json"], [1409, 1605, "ccc/ccc-08.json"], [1606, 1829, "ccc/ccc-09.json"],
+  [1830, 2069, "ccc/ccc-10.json"], [2070, 2297, "ccc/ccc-11.json"], [2298, 2521, "ccc/ccc-12.json"],
+  [2522, 2732, "ccc/ccc-13.json"], [2733, 2865, "ccc/ccc-14.json"]
+];
+var cccCache = {};
+var cccCurrent = 0;
+
+function cccShardFor(n) {
+  for (var i = 0; i < CCC_INDEX.length; i++) {
+    if (n >= CCC_INDEX[i][0] && n <= CCC_INDEX[i][1]) return CCC_INDEX[i][2];
+  }
+  return null;
+}
+
+function cccParagraph(n, cb) {
+  n = Math.max(1, Math.min(2865, n));
+  var file = cccShardFor(n);
+  if (cccCache[file]) { cb(n, cccCache[file].paragraphs[String(n)]); return; }
+  fetch(file).then(function (r) { return r.json(); }).then(function (data) {
+    cccCache[file] = data;
+    cb(n, data.paragraphs[String(n)]);
+  }).catch(function () { cb(n, null); });
+}
+
+function renderCccModal(n) {
+  cccCurrent = Math.max(1, Math.min(2865, n));
+  var body = document.getElementById("cccModalBody");
+  document.getElementById("cccModalTitle").textContent = "Catechism \u00b6 " + cccCurrent;
+  body.innerHTML = "<p>Loading\u2026</p>";
+  document.getElementById("cccModalPrev").disabled = (cccCurrent <= 1);
+  document.getElementById("cccModalNext").disabled = (cccCurrent >= 2865);
+  cccParagraph(cccCurrent, function (num, html) {
+    if (num !== cccCurrent) return;
+    body.innerHTML = html || "<p>Could not load this paragraph. Check your connection and try again.</p>";
+    body.scrollTop = 0;
+  });
+}
+
+function openCccModal(n) {
+  renderCccModal(n);
+  document.getElementById("cccModalBackdrop").hidden = false;
+  document.getElementById("cccModalClose").focus();
+}
+
+function closeCccModal() {
+  document.getElementById("cccModalBackdrop").hidden = true;
+}
+
+function linkCccRefs(root) {
+  var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode: function (node) {
+      if (node.parentElement && node.parentElement.closest(".ccc-ref")) return NodeFilter.FILTER_REJECT;
+      return (/CCC\s+\d/.test(node.nodeValue)) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+    }
+  });
+  var nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach(function (node) {
+    var re = /CCC\s+(\d+)((?:\s*[-\u2013\u2014,;]\s*(?:cf\.\s*)?\d+)*)/g;
+    var frag = document.createDocumentFragment();
+    var last = 0, m;
+    while ((m = re.exec(node.nodeValue))) {
+      frag.appendChild(document.createTextNode(node.nodeValue.slice(last, m.index)));
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "ccc-ref";
+      btn.setAttribute("data-ccc", m[1]);
+      btn.setAttribute("aria-label", "Read Catechism paragraph " + m[1]);
+      btn.textContent = m[0];
+      frag.appendChild(btn);
+      last = m.index + m[0].length;
+    }
+    frag.appendChild(document.createTextNode(node.nodeValue.slice(last)));
+    node.parentNode.replaceChild(frag, node);
+  });
+}
+
 function renderSite(defenses) {
   var total = defenses.length;
   var track = document.getElementById("deckTrack");
@@ -1158,6 +1304,7 @@ function renderSite(defenses) {
     } else {
       article.innerHTML = renderStandardCard(card, n, total);
     }
+    linkCccRefs(article);
     track.appendChild(article);
   });
 }
@@ -1336,7 +1483,10 @@ function initApp(defenses) {
             var p = document.createElement("p"); p.textContent = s.text;
             var refs = document.createElement("div"); refs.className = "sacrament-refs";
             var v = document.createElement("span"); v.textContent = s.verse;
-            var c = document.createElement("span"); c.textContent = s.ccc;
+            var cccNum = s.ccc.replace(/\D/g, "");
+            var c = document.createElement("button"); c.type = "button"; c.className = "ccc-ref";
+            c.textContent = s.ccc; c.setAttribute("data-ccc", cccNum);
+            c.setAttribute("aria-label", "Read Catechism paragraph " + cccNum);
             refs.appendChild(v); refs.appendChild(c);
             slide.appendChild(icon); slide.appendChild(tag); slide.appendChild(h); slide.appendChild(p); slide.appendChild(refs);
             if (s.defenses && s.defenses.length) {
@@ -1817,7 +1967,30 @@ var browseGroups = document.getElementById("browseGroups");
         if (hashIndex >= 0) window.setTimeout(function () { viewport.scrollIntoView({ block: "start" }); }, 0);
         if (document.fonts && document.fonts.ready) document.fonts.ready.then(updateDeckHeight);
         renderTopics();
-      
+
+        /* Catechism reader: tappable references, modal, paragraph jumper */
+        document.addEventListener("click", function (event) {
+          var b = event.target.closest ? event.target.closest(".ccc-ref") : null;
+          if (b) openCccModal(parseInt(b.getAttribute("data-ccc"), 10));
+        });
+        document.getElementById("cccModalClose").addEventListener("click", closeCccModal);
+        document.getElementById("cccModalPrev").addEventListener("click", function () { renderCccModal(cccCurrent - 1); });
+        document.getElementById("cccModalNext").addEventListener("click", function () { renderCccModal(cccCurrent + 1); });
+        document.getElementById("cccModalBackdrop").addEventListener("click", function (event) {
+          if (event.target === this) closeCccModal();
+        });
+        document.addEventListener("keydown", function (event) {
+          if (event.key === "Escape" && !document.getElementById("cccModalBackdrop").hidden) closeCccModal();
+        });
+        var cccJumpInput = document.getElementById("cccJump");
+        var cccJumpBtn = document.getElementById("cccJumpBtn");
+        function cccDoJump() {
+          var n = parseInt(cccJumpInput.value, 10);
+          if (n >= 1 && n <= 2865) { openCccModal(n); }
+          else { cccJumpInput.focus(); }
+        }
+        cccJumpBtn.addEventListener("click", cccDoJump);
+        cccJumpInput.addEventListener("keydown", function (event) { if (event.key === "Enter") cccDoJump(); });
 }
 
 var DEFENSE_SHARDS = ["defenses-1.json", "defenses-2.json", "defenses-3.json", "defenses-4.json"];
@@ -1888,5 +2061,19 @@ fetch("apostles.json")
   });
 })();
 </script>
+    <div class="ccc-modal-backdrop" id="cccModalBackdrop" hidden>
+      <div class="ccc-modal" role="dialog" aria-modal="true" aria-labelledby="cccModalTitle">
+        <div class="ccc-modal-head">
+          <strong id="cccModalTitle">Catechism</strong>
+          <button type="button" class="ccc-modal-close" id="cccModalClose" aria-label="Close">&times;</button>
+        </div>
+        <div class="ccc-modal-body" id="cccModalBody"></div>
+        <div class="ccc-modal-foot">
+          <button type="button" class="ccc-nav" id="cccModalPrev">&larr; Previous</button>
+          <button type="button" class="ccc-nav" id="cccModalNext">Next &rarr;</button>
+          <span class="ccc-attr">Catechism of the Catholic Church &copy; Libreria Editrice Vaticana &middot; <a href="https://www.vatican.va/archive/ENG0015/_INDEX.HTM">vatican.va</a></span>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

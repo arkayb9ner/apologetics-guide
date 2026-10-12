@@ -313,8 +313,6 @@
       }
       .deck .entry + .entry, .deck-track .entry + .entry { margin-top: 0; }
       .entry-top { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr); gap: 38px; padding: clamp(28px, 5vw, 54px); border-bottom: 1px solid var(--line); }
-      .status { display: inline-flex; align-items: center; gap: 8px; font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--success); }
-      .status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--success); }
       .entry h3 { font-size: clamp(1.9rem, 4vw, 3.1rem); line-height: 1.08; letter-spacing: -.03em; margin: 14px 0 18px; }
       .entry-lede { margin: 0; color: var(--muted); font-size: 1.04rem; }
       blockquote { margin: 0; padding: 0; font-size: clamp(1.25rem, 2.4vw, 1.7rem); line-height: 1.45; color: var(--wine); }
@@ -701,7 +699,7 @@
           <div class="section-head">
             <div class="section-no">Swipeable defenses</div>
             <div>
-              <h2>Answers ready for review</h2>
+              <h2>Answers ready when you are</h2>
               <p>Every defense is numbered in order — swipe or arrow through them all, or jump straight to one from Browse above. Each entry states the objection in its strongest form, then answers with a Catholic response, a practical one-liner, and connected topics.</p>
             </div>
           </div>
@@ -1239,7 +1237,6 @@ function renderStandardCard(card, n, total) {
   }).join("");
   return (
     '<div class="entry-top"><div>' +
-    '<span class="status">Defense ' + n + " of " + total + " \u00b7 Ready for review</span>" +
     (card.topic ? '<span class="entry-topic">' + card.topic + "</span>" : "") +
     "<h3>" + card.title + "</h3>" +
     '<p class="entry-lede">' + card.objection + "</p>" +
@@ -1850,6 +1847,7 @@ var topicCarousels = document.getElementById("topicCarousels");
         var deckJumpInput = document.getElementById("deckJumpInput");
         if (deckJumpForm && deckJumpInput) {
           deckJumpInput.setAttribute("max", String(cards.length));
+          deckJumpInput.setAttribute("placeholder", "1\u2013" + cards.length);
           deckJumpForm.addEventListener("submit", function (event) {
             event.preventDefault();
             var n = parseInt(deckJumpInput.value, 10);

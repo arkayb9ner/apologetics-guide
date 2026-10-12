@@ -349,12 +349,16 @@
       .reference b { display: block; color: var(--wine); }
       .entry-topic { display: inline-block; margin-left: 10px; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--wine); border: 1px solid var(--line-strong); padding: 2px 8px; border-radius: 999px; vertical-align: middle; }
       .browse-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
-      .browse-selects { display: grid; gap: 14px; }
-      @media (min-width: 720px) { .browse-selects { grid-template-columns: 1fr 1fr; } }
-      .browse-select-wrap { display: flex; flex-direction: column; gap: 6px; }
-      .browse-select-label { font-weight: 700; font-size: 0.95rem; }
-      .browse-select { font: inherit; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); max-width: 100%; cursor: pointer; }
-      .browse-select:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+      .topic-carousels { display: grid; gap: 30px; }
+      .topic-carousel-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+      .topic-carousel-head h3 { margin: 0; font-size: 1.12rem; }
+      .topic-carousel-head .tcount { color: var(--muted); font-size: 0.88rem; white-space: nowrap; }
+      .topic-viewport { touch-action: pan-y; }
+      .topic-track > .topic-slide[aria-hidden="true"] { display: none; }
+      .topic-slide { display: block; width: 100%; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; cursor: pointer; font: inherit; color: var(--ink); text-align: left; box-shadow: var(--shadow); }
+      .topic-slide:hover, .topic-slide:focus-visible { border-color: var(--gold); }
+      .topic-num { display: inline-block; font-weight: 800; color: var(--wine); background: var(--gold-soft); border: 1px solid var(--gold); border-radius: 999px; padding: 2px 12px; font-size: 0.85rem; margin-bottom: 8px; }
+      .topic-title { display: block; font-weight: 600; font-size: 1.05rem; line-height: 1.4; }
       .browse-chip { font: inherit; font-size: .85rem; padding: 8px 14px; border: 1px solid var(--line-strong); border-radius: 999px; background: transparent; color: inherit; cursor: pointer; }
       .browse-chip:hover, .browse-chip:focus-visible { border-color: var(--wine); color: var(--wine); }
       .browse-chip[aria-pressed="true"] { background: var(--wine); border-color: var(--wine); color: #fff; }
@@ -650,9 +654,9 @@
         <nav class="jump-index" id="completed-index" aria-label="Jump to a completed defense">
           <div class="jump-index-head">
             <h2>Browse the defenses</h2>
-            <p>Pick a topic, then choose a defense — every defense is numbered in order.</p>
+            <p>Pick a topic and swipe through its defenses — every defense is numbered in order. Tap one to open it.</p>
           </div>
-          <div class="browse-selects" id="browseSelects"></div>
+          <div class="topic-carousels" id="topicCarousels"></div>
         </nav>
 
         <section class="method" aria-label="How to use the guide">
@@ -1608,48 +1612,103 @@ function initApp(defenses) {
         })();
 
 
-var browseSelects = document.getElementById("browseSelects");
+var topicCarousels = document.getElementById("topicCarousels");
 
-        function renderBrowseSelects() {
-          browseSelects.innerHTML = "";
-          TOPICS.forEach(function (t) {
-            var items = [];
-            defenses.forEach(function (card, i) {
-              if (card.topic === t) items.push({ card: card, index: i });
-            });
-            if (!items.length) return;
-            var wrap = document.createElement("div");
-            wrap.className = "browse-select-wrap";
-            var selId = "browse-" + t.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-            var label = document.createElement("label");
-            label.className = "browse-select-label";
-            label.setAttribute("for", selId);
-            label.textContent = t + " (" + items.length + ")";
-            var sel = document.createElement("select");
-            sel.className = "browse-select";
-            sel.id = selId;
-            var ph = document.createElement("option");
-            ph.value = "";
-            ph.textContent = "Choose a defense\u2026";
-            sel.appendChild(ph);
-            items.forEach(function (it) {
-              var o = document.createElement("option");
-              o.value = String(it.index);
-              o.textContent = pad2(it.index + 1) + " \u00b7 " + it.card.jumpLabel;
-              sel.appendChild(o);
-            });
-            sel.addEventListener("change", function () {
-              if (sel.value === "") return;
-              showCard(Number(sel.value), { scroll: true });
-              sel.value = "";
-            });
-            wrap.appendChild(label);
-            wrap.appendChild(sel);
-            browseSelects.appendChild(wrap);
+        function buildTopicCarousel(topic, items) {
+          var wrap = document.createElement("section");
+          wrap.className = "topic-carousel";
+          wrap.setAttribute("aria-label", topic + " defenses");
+          var head = document.createElement("div");
+          head.className = "topic-carousel-head";
+          var h = document.createElement("h3"); h.textContent = topic;
+          var count = document.createElement("span"); count.className = "tcount";
+          count.textContent = items.length + " defenses";
+          head.appendChild(h); head.appendChild(count);
+          var controls = document.createElement("div");
+          controls.className = "deck-controls";
+          controls.setAttribute("aria-label", topic + " carousel controls");
+          var prev = document.createElement("button");
+          prev.type = "button"; prev.className = "deck-arrow"; prev.innerHTML = "&larr;";
+          prev.setAttribute("aria-label", "Previous defense in " + topic);
+          var pos = document.createElement("div"); pos.className = "deck-position";
+          var counter = document.createElement("span"); counter.setAttribute("aria-live", "polite");
+          var dots = document.createElement("div"); dots.className = "deck-dots";
+          pos.appendChild(counter); pos.appendChild(dots);
+          var next = document.createElement("button");
+          next.type = "button"; next.className = "deck-arrow"; next.innerHTML = "&rarr;";
+          next.setAttribute("aria-label", "Next defense in " + topic);
+          controls.appendChild(prev); controls.appendChild(pos); controls.appendChild(next);
+          var viewport = document.createElement("div");
+          viewport.className = "topic-viewport";
+          viewport.setAttribute("role", "region");
+          viewport.setAttribute("tabindex", "0");
+          viewport.setAttribute("aria-roledescription", "carousel");
+          viewport.setAttribute("aria-label", topic);
+          var track = document.createElement("div");
+          track.className = "topic-track";
+          items.forEach(function (it) {
+            var b = document.createElement("button");
+            b.type = "button"; b.className = "topic-slide";
+            b.setAttribute("aria-hidden", "true"); b.setAttribute("inert", "");
+            var num = document.createElement("span"); num.className = "topic-num"; num.textContent = pad2(it.index + 1);
+            var title = document.createElement("span"); title.className = "topic-title"; title.textContent = it.card.jumpLabel;
+            b.appendChild(num); b.appendChild(title);
+            b.setAttribute("aria-label", "Open defense " + (it.index + 1) + ": " + it.card.jumpLabel);
+            b.addEventListener("click", function () { showCard(it.index, { scroll: true }); });
+            track.appendChild(b);
           });
+          viewport.appendChild(track);
+          wrap.appendChild(head); wrap.appendChild(controls); wrap.appendChild(viewport);
+          topicCarousels.appendChild(wrap);
+          var slides = Array.prototype.slice.call(track.children);
+          var current = 0;
+          slides.forEach(function (s, i) {
+            var d = document.createElement("button");
+            d.type = "button"; d.className = "deck-dot";
+            d.setAttribute("aria-label", "Show defense " + (i + 1) + " of " + slides.length + " in " + topic);
+            d.addEventListener("click", function () { show(i); });
+            dots.appendChild(d);
+          });
+          var dotEls = Array.prototype.slice.call(dots.children);
+          function show(i) {
+            current = Math.max(0, Math.min(slides.length - 1, i));
+            slides.forEach(function (s, si) {
+              var active = si === current;
+              s.setAttribute("aria-hidden", active ? "false" : "true");
+              if (active) s.removeAttribute("inert"); else s.setAttribute("inert", "");
+            });
+            dotEls.forEach(function (d, di) { d.setAttribute("aria-current", di === current ? "true" : "false"); });
+            prev.disabled = current === 0;
+            next.disabled = current === slides.length - 1;
+            counter.textContent = (current + 1) + " of " + slides.length;
+          }
+          prev.addEventListener("click", function () { show(current - 1); });
+          next.addEventListener("click", function () { show(current + 1); });
+          viewport.addEventListener("keydown", function (e) {
+            if (e.target !== viewport) return;
+            if (e.key === "ArrowLeft") { e.preventDefault(); show(current - 1); }
+            if (e.key === "ArrowRight") { e.preventDefault(); show(current + 1); }
+          });
+          var sx = 0, sy = 0, st = false;
+          viewport.addEventListener("touchstart", function (e) {
+            if (e.touches.length !== 1) return;
+            sx = e.touches[0].clientX; sy = e.touches[0].clientY; st = true;
+          }, { passive: true });
+          viewport.addEventListener("touchend", function (e) {
+            if (!st || !e.changedTouches.length) return;
+            st = false;
+            var dx = e.changedTouches[0].clientX - sx;
+            var dy = e.changedTouches[0].clientY - sy;
+            if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) show(current + (dx < 0 ? 1 : -1));
+          }, { passive: true });
+          show(0);
         }
 
-        renderBrowseSelects();
+        TOPICS.forEach(function (t) {
+          var items = [];
+          defenses.forEach(function (card, i) { if (card.topic === t) items.push({ card: card, index: i }); });
+          if (items.length) buildTopicCarousel(t, items);
+        });
 
         if (deckProgress) deckProgress.setAttribute("aria-valuemax", String(cards.length));
 

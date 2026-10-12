@@ -865,6 +865,14 @@
         "body": "<p>Tertullian coined <i>trinitas</i> around 200 AD, but the New Testament already hands us all three data points: one God (‘the Lord our God, the Lord is one,’ Deuteronomy 6:4, affirmed by Christ in Mark 12:29); the Son called God (John 1:1; Thomas’s ‘My Lord and my God,’ John 20:28); the Spirit called God (Ananias lies to the Holy Spirit, and Peter says he has lied to God, Acts 5:3–4). And all three are named together under one singular ‘name’ in the baptismal formula (Matthew 28:19). Nicaea defined the grammar; it did not invent the data. As the Catechism puts it: ‘We do not confess three Gods, but one God in three persons’ (CCC 253).</p>"
       },
       {
+        "heading": "The Father hands the Son Yahweh’s own résumé.",
+        "body": "<p>In Hebrews 1:10–12, the Father applies Psalm 102 — a hymn to Yahweh — directly to the Son: ‘You, Lord, laid the foundation of the earth in the beginning, and the heavens are the work of your hands… you remain the same, and your years will never end.’ Two categories emerge: the Creator, who does not change, and the creation, which wears out like a garment. The Son is placed squarely in the first. And Hebrews 3:4 had already said ‘he who constructs all things is God’ — so if the Son is the constructor, the Son is God, not one of the constructed.</p>"
+      },
+      {
+        "heading": "What ‘begotten, not made’ actually means.",
+        "body": "<p>Hebrews 1:3 calls the Son ‘the radiance of [God’s] glory and the exact imprint of his being’ — language the Church read alongside Wisdom 7:26, where Wisdom is ‘the brightness of eternal light.’ Think about it: as long as there has been light, there has been brightness. The brightness is <i>generated</i> by the light, yet it coexists with it — never after it. That is what ‘eternally begotten’ means: from the Father, but never after Him; God from God, Light from Light, as the Creed sings.</p><p>Honesty requires a concession here: the technical vocabulary — ‘eternally begotten,’ ‘consubstantial’ — is hard to extract from Scripture alone. The apostles supplied the data; the Church, guided by the Spirit, supplied the precision. Even committed Trinitarians feel the difficulty — the philosopher William Lane Craig has said publicly that eternal generation cannot be clearly established from the biblical text alone. That is not a weakness in the doctrine. It is an argument for the Church: <i>sola scriptura</i> leaves the Trinity underdetermined, which is exactly why Christ left a teaching Church and not merely a book.</p>"
+      },
+      {
         "heading": "‘Mystery’ means beyond comprehension, not against reason.",
         "body": "<p>In Catholic theology <i>mysterium</i> means a truth too deep to exhaust, not a contradiction to swallow. We cannot fully picture <i>how</i> three Persons are one essence — but inability to picture is not incoherence. The Church has always condemned actual contradictions; the Trinity is defined precisely to avoid them: ‘God is one but not solitary’ (CCC 254). A contradiction would be ‘three Gods in one God.’ Nobody confesses that.</p>"
       },
@@ -880,7 +888,9 @@
     "verses": [
       "Matthew 28:19",
       "John 1:1",
-      "2 Corinthians 13:14"
+      "2 Corinthians 13:14",
+      "Hebrews 1:10-12",
+      "Wisdom 7:26"
     ],
     "ccc": "CCC 253-254",
     "oneLiner": "“Three Persons, one nature — never three Gods, never one actor in three masks; get the categories right and the ‘contradiction’ disappears.”",
@@ -891,6 +901,10 @@
       },
       {
         "title": "Christianity was invented at Nicaea — councils made it man-made",
+        "description": ""
+      },
+      {
+        "title": "Hebrews 3:2 says God “made” Jesus — so He was created",
         "description": ""
       }
     ],

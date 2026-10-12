@@ -350,6 +350,21 @@
       .gloss-modal-close:hover { color: var(--ink); }
       .gloss-modal-body { padding: 18px; font-size: 1rem; line-height: 1.6; }
       .gloss-pron { color: var(--muted); font-style: italic; margin: 0 0 8px; }
+      /* Three churches, one ancient faith */
+      .apostolic-frame { border: 3px double var(--gold); border-radius: 20px; padding: clamp(24px, 4vw, 44px); background: color-mix(in srgb, var(--gold) 6%, transparent); }
+      .church-chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0 28px; }
+      .church-chips span { font-weight: 700; font-size: .82rem; letter-spacing: .06em; text-transform: uppercase; color: var(--gold); border: 2px solid var(--gold); border-radius: 999px; padding: 6px 16px; }
+      .pillars { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+      .pillars li { display: grid; grid-template-columns: 54px minmax(0, 1fr); gap: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 22px; box-shadow: var(--shadow); }
+      .pillar-n { font-family: "Literata", serif; font-size: 2.1rem; font-weight: 700; color: var(--gold); line-height: 1; }
+      .pillars h3 { margin: 2px 0 8px; font-size: 1.15rem; }
+      .pillars p { margin: 0 0 10px; color: var(--muted); }
+      .pillars p:last-child { margin-bottom: 0; }
+      .pillars .diff { padding-left: 12px; border-left: 3px solid var(--wine); font-style: italic; }
+      .pillars .diff b { font-style: normal; color: var(--wine); }
+      .pillars-close { margin: 26px 0 0; font-size: 1.03rem; }
+      .pillars-close a { color: var(--gold); font-weight: 700; }
+      @media (max-width: 720px) { .pillars { grid-template-columns: 1fr; } }
       .journey { margin: 30px 0 8px; }
       .journey ol { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; list-style: none; margin: 12px 0 0; padding: 0; }
       .journey a { display: block; height: 100%; box-sizing: border-box; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 14px 16px; text-decoration: none; color: var(--ink); box-shadow: var(--shadow); }

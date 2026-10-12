@@ -413,6 +413,28 @@
       .glossary-pron { font-weight: 400; color: var(--muted); font-size: .88rem; font-style: italic; }
       .glossary-entry dd { margin: 2px 0 0; color: var(--muted); font-size: .98rem; line-height: 1.55; }
 
+      .apostles-section { border-top: 1px solid var(--line); }
+      .apostles-legend { margin-left: 210px; display: flex; flex-wrap: wrap; gap: 8px 22px; margin-bottom: 24px; color: var(--muted); font-size: .9rem; }
+      .rel { display: inline-block; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; padding: 3px 10px; border-radius: 999px; }
+      .apostles-legend .rel { margin-right: 6px; }
+      .rel-high { background: #e3efe6; color: #286644; }
+      .rel-mid { background: #f3e8cf; color: #8a6414; }
+      .rel-late { background: #ece7df; color: #6b6259; }
+      .apostles-grid { margin-left: 210px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; max-width: 1020px; }
+      .apostle { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: clamp(20px, 3vw, 30px); box-shadow: var(--shadow); }
+      .apostle-epithet { text-transform: uppercase; letter-spacing: .08em; font-size: .72rem; color: var(--gold); font-weight: 700; margin: 0 0 6px; }
+      .apostle h3 { font-family: "Literata", Georgia, serif; font-size: 1.4rem; margin: 0 0 4px; color: var(--ink); }
+      .apostle-meta { color: var(--muted); font-size: .85rem; margin: 0 0 6px; }
+      .apostle h4 { font-size: .95rem; color: var(--ink); margin: 16px 0 6px; display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+      .apostle p { color: var(--muted); font-size: .96rem; line-height: 1.6; margin: 0 0 8px; }
+      .apostle-refs { font-size: .85rem !important; color: var(--gold) !important; font-weight: 600; }
+      .apostle-note { font-size: .82rem !important; font-style: italic; }
+      @media (prefers-color-scheme: dark) {
+        .rel-high { background: #23402e; color: #9fd3ae; }
+        .rel-mid { background: #4a3d22; color: #e3c878; }
+        .rel-late { background: #3a352e; color: #b8ad9f; }
+      }
+
       @media (max-width: 780px) {
         .page { width: min(100% - 28px, 650px); }
         .hero, .entry-top { grid-template-columns: 1fr; }
@@ -429,7 +451,8 @@
         .entry-nav { position: static; flex-direction: row; flex-wrap: wrap; gap: 6px 14px; border-bottom: 1px solid var(--line); padding-bottom: 16px; margin-bottom: 8px; }
         .deck-controls { grid-template-columns: 44px minmax(0, 1fr) 44px; gap: 10px; }
         .deck-arrow { width: 44px; height: 42px; }
-        .tools, .roadmap-grid, .empty, .suggest-form, .quiz-card, .glossary-az, .glossary-list { margin-left: 0; }
+        .tools, .roadmap-grid, .empty, .suggest-form, .quiz-card, .glossary-az, .glossary-list, .apostles-legend, .apostles-grid { margin-left: 0; }
+        .apostles-grid { grid-template-columns: 1fr; }
         .tools { grid-template-columns: 1fr; }
         .roadmap-grid { grid-template-columns: 1fr; }
         .topic:nth-child(odd), .topic:nth-child(even) { padding: 17px 0; border-right: 0; }
@@ -738,6 +761,24 @@
         </div>
       </section>
 
+      <section class="section apostles-section" id="apostles">
+        <div class="page">
+          <div class="section-head">
+            <div class="section-no">Witnesses</div>
+            <div>
+              <h2>Meet the Apostles</h2>
+              <p>The men behind the mission — what Scripture says, what tradition hands down, and an honest label for how certain each part is.</p>
+            </div>
+          </div>
+          <div class="apostles-legend" aria-label="How to read the tradition labels">
+            <span><b class="rel rel-high">Well attested</b> early, multiple sources</span>
+            <span><b class="rel rel-mid">Early tradition</b> ancient but thinner</span>
+            <span><b class="rel rel-late">Later accounts</b> medieval, sometimes conflicting</span>
+          </div>
+          <div class="apostles-grid" id="apostlesGrid" aria-live="polite"></div>
+        </div>
+      </section>
+
       <section class="section suggest-section" id="suggest">
         <div class="page">
           <div class="section-head">
@@ -813,6 +854,33 @@ function renderGlossary(items) {
   if (currentLetter) listHtml += "</div>";
   az.innerHTML = azHtml;
   list.innerHTML = listHtml;
+}
+
+function renderApostles(items) {
+  var grid = document.getElementById("apostlesGrid");
+  if (!grid || !items || !items.length) return;
+  var relClass = {
+    "Well attested": "rel-high",
+    "Early tradition": "rel-mid",
+    "Later accounts": "rel-late",
+    "Scripture": "rel-high"
+  };
+  grid.innerHTML = items.map(function (a) {
+    var meta = [];
+    if (a.alsoKnownAs) meta.push("Also known as " + a.alsoKnownAs);
+    meta.push("Feast: " + a.feast);
+    return '<article class="apostle">' +
+      '<p class="apostle-epithet">' + escapeHtml(a.epithet) + "</p>" +
+      "<h3>" + escapeHtml(a.name) + "</h3>" +
+      '<p class="apostle-meta">' + escapeHtml(meta.join(" · ")) + "</p>" +
+      "<h4>In Scripture</h4><p>" + escapeHtml(a.scripture) + "</p>" +
+      '<p class="apostle-refs">' + escapeHtml(a.scriptureRefs) + "</p>" +
+      '<h4>In Tradition <span class="rel ' + (relClass[a.reliability] || "rel-late") + '">' +
+      escapeHtml(a.reliability) + "</span></h4>" +
+      "<p>" + escapeHtml(a.tradition) + "</p>" +
+      '<p class="apostle-note">' + escapeHtml(a.reliabilityNote) + "</p>" +
+      "</article>";
+  }).join("");
 }
 
 function renderStandardCard(card, n, total) {
@@ -1302,6 +1370,14 @@ fetch("glossary.json")
   .catch(function () {
     var list = document.getElementById("glossaryList");
     if (list) list.innerHTML = '<p class="load-error" style="padding:1rem">Could not load the glossary. Check your connection and reload.</p>';
+  });
+
+fetch("apostles.json")
+  .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+  .then(renderApostles)
+  .catch(function () {
+    var grid = document.getElementById("apostlesGrid");
+    if (grid) grid.innerHTML = '<p class="load-error" style="padding:1rem">Could not load the apostles. Check your connection and reload.</p>';
   });
 </script>
 

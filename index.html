@@ -401,6 +401,18 @@
       .quiz-next:hover { border-color: var(--wine); color: var(--wine); }
       .quiz-score { margin: 14px 0 0; color: var(--muted); font-size: .92rem; }
 
+      .glossary-section { border-top: 1px solid var(--line); }
+      .glossary-az { margin-left: 210px; display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; }
+      .glossary-az a { min-width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--line-strong); border-radius: 8px; color: var(--wine); text-decoration: none; font-weight: 700; font-size: .9rem; }
+      .glossary-az a:hover { background: var(--surface); border-color: var(--wine); }
+      .glossary-list { margin-left: 210px; max-width: 720px; }
+      .glossary-group h3 { font-family: "Literata", Georgia, serif; color: var(--gold); font-size: 1.35rem; margin: 28px 0 10px; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
+      .glossary-group:first-child h3 { margin-top: 0; }
+      .glossary-entry { margin: 0 0 14px; }
+      .glossary-entry dt { font-weight: 700; color: var(--ink); font-size: 1.02rem; }
+      .glossary-pron { font-weight: 400; color: var(--muted); font-size: .88rem; font-style: italic; }
+      .glossary-entry dd { margin: 2px 0 0; color: var(--muted); font-size: .98rem; line-height: 1.55; }
+
       @media (max-width: 780px) {
         .page { width: min(100% - 28px, 650px); }
         .hero, .entry-top { grid-template-columns: 1fr; }
@@ -417,7 +429,7 @@
         .entry-nav { position: static; flex-direction: row; flex-wrap: wrap; gap: 6px 14px; border-bottom: 1px solid var(--line); padding-bottom: 16px; margin-bottom: 8px; }
         .deck-controls { grid-template-columns: 44px minmax(0, 1fr) 44px; gap: 10px; }
         .deck-arrow { width: 44px; height: 42px; }
-        .tools, .roadmap-grid, .empty, .suggest-form, .quiz-card { margin-left: 0; }
+        .tools, .roadmap-grid, .empty, .suggest-form, .quiz-card, .glossary-az, .glossary-list { margin-left: 0; }
         .tools { grid-template-columns: 1fr; }
         .roadmap-grid { grid-template-columns: 1fr; }
         .topic:nth-child(odd), .topic:nth-child(even) { padding: 17px 0; border-right: 0; }
@@ -712,6 +724,20 @@
         </div>
       </section>
 
+      <section class="section glossary-section" id="glossary">
+        <div class="page">
+          <div class="section-head">
+            <div class="section-no">Reference</div>
+            <div>
+              <h2>Glossary</h2>
+              <p>Thirty words the cards use and the objections assume. Know them, and no one will ever talk past you again.</p>
+            </div>
+          </div>
+          <nav class="glossary-az" id="glossaryAz" aria-label="Jump to a letter"></nav>
+          <div class="glossary-list" id="glossaryList" aria-live="polite"></div>
+        </div>
+      </section>
+
       <section class="section suggest-section" id="suggest">
         <div class="page">
           <div class="section-head">
@@ -753,6 +779,41 @@
 /* Boot: render the 50 defenses from defenses.json, then start the app.
    To update content, edit defenses.json — no code changes needed. */
 function pad2(n) { return String(n).padStart(2, "0"); }
+
+function escapeHtml(s) {
+  return String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function renderGlossary(items) {
+  var az = document.getElementById("glossaryAz");
+  var list = document.getElementById("glossaryList");
+  if (!az || !list || !items || !items.length) return;
+  var sorted = items.slice().sort(function (a, b) {
+    return a.term.toLowerCase().localeCompare(b.term.toLowerCase());
+  });
+  var azHtml = "";
+  var listHtml = "";
+  var currentLetter = "";
+  sorted.forEach(function (item) {
+    var letter = item.term.charAt(0).toUpperCase();
+    if (letter !== currentLetter) {
+      if (currentLetter) listHtml += "</div>";
+      currentLetter = letter;
+      azHtml += '<a href="#glossary-' + letter + '">' + letter + "</a>";
+      listHtml += '<div class="glossary-group"><h3 id="glossary-' + letter + '">' + letter + "</h3>";
+    }
+    listHtml += '<dl class="glossary-entry"><dt>' + escapeHtml(item.term) +
+      ' <span class="glossary-pron">(' + escapeHtml(item.pronunciation) + ")</span></dt>" +
+      "<dd>" + escapeHtml(item.definition) + "</dd></dl>";
+  });
+  if (currentLetter) listHtml += "</div>";
+  az.innerHTML = azHtml;
+  list.innerHTML = listHtml;
+}
 
 function renderStandardCard(card, n, total) {
   var points = card.response.map(function (p, k) {
@@ -1233,6 +1294,14 @@ fetch("defenses.json")
   .catch(function () {
     var track = document.getElementById("deckTrack");
     if (track) track.innerHTML = '<p class="load-error" style="padding:2rem;text-align:center">Could not load the defenses. Check your connection and reload.</p>';
+  });
+
+fetch("glossary.json")
+  .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+  .then(renderGlossary)
+  .catch(function () {
+    var list = document.getElementById("glossaryList");
+    if (list) list.innerHTML = '<p class="load-error" style="padding:1rem">Could not load the glossary. Check your connection and reload.</p>';
   });
 </script>
 

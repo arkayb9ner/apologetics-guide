@@ -47,7 +47,8 @@
     "topic": "Salvation & Last Things",
     "simple": "Religions contradict each other on the biggest questions — who God is, who Jesus is, how we’re saved. They can’t all be true at once. Loving our neighbors doesn’t require pretending the differences aren’t real.",
     "level": "beginner",
-    "basis": "theology"
+    "basis": "theology",
+    "audience": "g"
   },
   {
     "slug": "jesus-only-way",
@@ -97,7 +98,8 @@
     "topic": "Jesus Christ",
     "simple": "Jesus said it Himself: “I am the way.” If He’s God, He’s allowed to say that — and if He’s not, nothing else He said matters. Truth is specific the way 2+2=4 is specific; it excludes 5 by nature.",
     "level": "beginner",
-    "basis": "doctrine"
+    "basis": "doctrine",
+    "audience": "g"
   },
   {
     "slug": "natural-evil",
@@ -146,7 +148,8 @@
     "topic": "God & Reason",
     "simple": "Earthquakes aren’t moral choices — they’re the price of a real physical world that runs by laws. Laws allow both beauty and breakage. And God’s answer to suffering wasn’t an explanation; it was the cross — He suffers with us.",
     "level": "advanced",
-    "basis": "theology"
+    "basis": "theology",
+    "audience": "g"
   },
   {
     "slug": "slavery-women",
@@ -196,7 +199,8 @@
     "topic": "Moral Life",
     "simple": "The Bible regulated slavery in a world where it was everywhere, then planted the seeds that destroyed it: “neither slave nor free.” Christianity didn’t bless slavery — it outgrew it, and then abolished it.",
     "level": "intermediate",
-    "basis": "theology"
+    "basis": "theology",
+    "audience": "g"
   },
   {
     "slug": "morality-without-god",
@@ -245,7 +249,8 @@
     "topic": "God & Reason",
     "simple": "You can behave well without believing in God — the question is what “good” even means without Him. If we’re just atoms, “good” is just preference. Objective morality needs an objective source.",
     "level": "advanced",
-    "basis": "theology"
+    "basis": "theology",
+    "audience": "g"
   },
   {
     "slug": "who-created-god",
@@ -295,7 +300,8 @@
     "topic": "God & Reason",
     "simple": "God never began, so He never needed a cause — only things that begin need makers. Asking “who made God?” is like asking “what’s north of the North Pole?” It sounds deep until you think about it.",
     "level": "intermediate",
-    "basis": "theology"
+    "basis": "theology",
+    "audience": "g"
   },
   {
     "slug": "omnipotence-paradox",
@@ -345,7 +351,8 @@
     "topic": "God & Reason",
     "simple": "“Can God make a rock He can’t lift?” isn’t a task — it’s nonsense words strung together. Omnipotence means the power to do all that can actually be done. God can’t contradict Himself, and that’s strength, not weakness.",
     "level": "intermediate",
-    "basis": "theology"
+    "basis": "theology",
+    "audience": "g"
   },
   {
     "slug": "never-heard-gospel",
@@ -395,7 +402,8 @@
     "topic": "Salvation & Last Things",
     "simple": "God judges people by the light they actually had, not the gospel they never heard. No one is condemned for an address they couldn’t know. And God wants everyone saved — that’s exactly why He sends missionaries.",
     "level": "intermediate",
-    "basis": "doctrine"
+    "basis": "doctrine",
+    "audience": "g"
   },
   {
     "slug": "catholics-worship-mary",
@@ -445,7 +453,8 @@
     "topic": "Mary & Saints",
     "simple": "Catholics don’t worship Mary — worship belongs to God alone. We honor her the way you’d honor a great king’s mother. And everything about Mary points straight to Jesus.",
     "level": "beginner",
-    "basis": "doctrine"
+    "basis": "doctrine",
+    "audience": "c"
   },
   {
     "slug": "saints-necromancy",
@@ -495,7 +504,8 @@
     "topic": "Mary & Saints",
     "simple": "Asking saints to pray for you isn’t necromancy — it’s asking friends in heaven to pray, the way you’d ask friends on earth. The dead in Christ are alive. The difference is prayer versus occult power-seeking.",
     "level": "beginner",
-    "basis": "theology"
+    "basis": "theology",
+    "audience": "c"
   },
   {
     "slug": "statues-icons-relics",
@@ -545,7 +555,8 @@
     "topic": "Mary & Saints",
     "simple": "A photo of your mother isn’t your mother — it reminds you of her, and that’s what statues do. God Himself commanded religious images: the cherubim on the Ark. Honor given to the image passes to the person.",
     "level": "beginner",
-    "basis": "doctrine"
+    "basis": "doctrine",
+    "audience": "c"
   },
   {
     "slug": "papacy-unbiblical",
@@ -595,7 +606,8 @@
     "topic": "The Church",
     "simple": "Jesus gave Peter the keys — a prime minister’s office, straight out of Isaiah 22. The early Church always treated Rome as the final court of appeal. Two thousand years of popes is a very long conspiracy to fake.",
     "level": "intermediate",
-    "basis": "theology"
+    "basis": "theology",
+    "audience": "c"
   },
   {
     "slug": "papal-infallibility",
@@ -645,7 +657,8 @@
     "topic": "The Church",
     "simple": "Infallibility doesn’t mean the pope is perfect — it means God protects him from teaching error in rare, specific cases. It’s happened a handful of times in 2,000 years. Think guardrails, not superpowers.",
     "level": "intermediate",
-    "basis": "doctrine"
+    "basis": "doctrine",
+    "audience": "c"
   },
   {
     "slug": "sola-scriptura",
@@ -699,7 +712,8 @@
     "topic": "Scripture",
     "simple": "“Bible alone” isn’t in the Bible — the slogan refutes itself. The first Christians had no New Testament for decades; they had the apostles’ living teaching. Scripture plus Tradition is how it always worked.",
     "level": "intermediate",
-    "basis": "theology"
+    "basis": "theology",
+    "audience": "c"
   },
   {
     "slug": "deuterocanonical-books",
@@ -748,7 +762,8 @@
     "topic": "Scripture",
     "simple": "Catholics didn’t add books — Protestants removed them. Those books stood in every Christian Bible for 1,100 years, in the Greek Old Testament the apostles themselves quoted. The burden is on the subtractors.",
     "level": "intermediate",
-    "basis": "history"
+    "basis": "history",
+    "audience": "c"
   },
   {
     "slug": "call-no-man-father",
@@ -798,7 +813,8 @@
     "topic": "Sacraments & Worship",
     "simple": "Jesus was using strong language to condemn pride, not banning a word — Paul calls himself a father (1 Cor 4:15). Take it literally and you’d have to rename your own dad. Context is everything.",
     "level": "beginner",
-    "basis": "theology"
+    "basis": "theology",
+    "audience": "c"
   },
   {
     "slug": "eucharist",
@@ -848,6 +864,7 @@
     "topic": "Sacraments & Worship",
     "simple": "Jesus said “This is my body” — and when followers walked away over it, He didn’t chase them saying “it’s just a symbol.” Christians believed this for 1,500 years before anyone denied it. Same teaching, unbroken.",
     "level": "intermediate",
-    "basis": "doctrine"
+    "basis": "doctrine",
+    "audience": "c"
   }
 ]

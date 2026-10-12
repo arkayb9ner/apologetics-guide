@@ -377,6 +377,30 @@
       .suggest-form .support-btn { justify-self: start; border: 0; cursor: pointer; font: inherit; margin-top: 6px; }
       .suggest-note { min-height: 1.4em; color: var(--muted); font-size: .95rem; margin: 4px 0 0; }
 
+      .deck-shuffle-row { display: flex; justify-content: center; margin: 2px 0 20px; }
+      .shuffle-btn { background: transparent; border: 1px solid var(--line-strong); color: var(--wine); border-radius: 999px; padding: 9px 22px; font: inherit; font-size: .95rem; font-weight: 600; cursor: pointer; }
+      .shuffle-btn:hover { background: var(--surface); border-color: var(--wine); }
+
+      .share-btn { background: none; border: 0; padding: 0; margin-top: 10px; color: var(--muted); font: inherit; font-size: .85rem; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+      .share-btn:hover { color: var(--wine); }
+
+      .quiz-section { border-top: 1px solid var(--line); }
+      .quiz-card { margin-left: 210px; max-width: 700px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: clamp(24px, 4vw, 40px); box-shadow: var(--shadow); }
+      .quiz-kicker { text-transform: uppercase; letter-spacing: .08em; font-size: .75rem; color: var(--gold); font-weight: 700; margin: 0 0 8px; }
+      .quiz-objection { font-family: "Literata", Georgia, serif; font-size: clamp(1.15rem, 2.6vw, 1.5rem); color: var(--ink); margin: 0 0 20px; line-height: 1.45; }
+      .quiz-answer { border-top: 1px solid var(--line); padding-top: 18px; margin-bottom: 6px; }
+      .quiz-answer-label { text-transform: uppercase; letter-spacing: .08em; font-size: .75rem; color: var(--gold); font-weight: 700; margin: 0 0 8px; }
+      .quiz-card .say-it { margin: 0 0 16px; }
+      .quiz-selfscore { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin: 0 0 14px; color: var(--muted); font-size: .95rem; }
+      .quiz-verdict { border: 1px solid var(--line-strong); background: transparent; color: var(--ink); border-radius: 999px; padding: 8px 18px; font: inherit; font-size: .92rem; cursor: pointer; }
+      .quiz-verdict:hover { border-color: var(--wine); color: var(--wine); }
+      .quiz-link { background: none; border: 0; padding: 0; color: var(--wine); font: inherit; font-size: .95rem; font-weight: 600; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+      .quiz-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+      .quiz-actions .support-btn { border: 0; cursor: pointer; font: inherit; }
+      .quiz-next { background: transparent; border: 1px solid var(--line-strong); color: var(--ink); border-radius: 999px; padding: 13px 26px; font: inherit; font-size: 1.02rem; font-weight: 600; cursor: pointer; }
+      .quiz-next:hover { border-color: var(--wine); color: var(--wine); }
+      .quiz-score { margin: 14px 0 0; color: var(--muted); font-size: .92rem; }
+
       @media (max-width: 780px) {
         .page { width: min(100% - 28px, 650px); }
         .hero, .entry-top { grid-template-columns: 1fr; }
@@ -393,7 +417,7 @@
         .entry-nav { position: static; flex-direction: row; flex-wrap: wrap; gap: 6px 14px; border-bottom: 1px solid var(--line); padding-bottom: 16px; margin-bottom: 8px; }
         .deck-controls { grid-template-columns: 44px minmax(0, 1fr) 44px; gap: 10px; }
         .deck-arrow { width: 44px; height: 42px; }
-        .tools, .roadmap-grid, .empty, .suggest-form { margin-left: 0; }
+        .tools, .roadmap-grid, .empty, .suggest-form, .quiz-card { margin-left: 0; }
         .tools { grid-template-columns: 1fr; }
         .roadmap-grid { grid-template-columns: 1fr; }
         .topic:nth-child(odd), .topic:nth-child(even) { padding: 17px 0; border-right: 0; }
@@ -547,6 +571,9 @@
               </div>
               <button class="deck-arrow" id="deckNext" type="button" aria-label="Next defense">→</button>
             </div>
+            <div class="deck-shuffle-row">
+              <button class="shuffle-btn" id="deckShuffle" type="button">🔀 Surprise me</button>
+            </div>
             <div class="deck-viewport" id="defenseDeck" role="region" tabindex="0" aria-roledescription="carousel" aria-label="Completed defenses">
               <div class="deck-track" id="deckTrack">
           
@@ -654,6 +681,37 @@
         </section>
       </div>
 
+      <section class="section quiz-section" id="quiz">
+        <div class="page">
+          <div class="section-head">
+            <div class="section-no">Drill</div>
+            <div>
+              <h2>Test yourself</h2>
+              <p>Read the objection, answer it in your own words &mdash; then flip for the one-liner. Keep score honestly. The armory trains, not just informs.</p>
+            </div>
+          </div>
+          <div class="quiz-card" id="quizCard">
+            <p class="quiz-kicker">Objection</p>
+            <p class="quiz-objection" id="quizObjection"></p>
+            <div class="quiz-answer" id="quizAnswer" hidden>
+              <p class="quiz-answer-label">The one-liner</p>
+              <p class="say-it" id="quizOneLiner"></p>
+              <div class="quiz-selfscore">
+                <span>Did you get it?</span>
+                <button type="button" id="quizKnew" class="quiz-verdict">✓ Nailed it</button>
+                <button type="button" id="quizMissed" class="quiz-verdict">✗ Missed it</button>
+              </div>
+              <button type="button" class="quiz-link" id="quizFull">Read the full defense →</button>
+            </div>
+            <div class="quiz-actions">
+              <button type="button" class="support-btn" id="quizReveal">Reveal the answer</button>
+              <button type="button" class="quiz-next" id="quizNext" hidden>Next objection →</button>
+            </div>
+            <p class="quiz-score" id="quizScore" aria-live="polite"></p>
+          </div>
+        </div>
+      </section>
+
       <section class="section suggest-section" id="suggest">
         <div class="page">
           <div class="section-head">
@@ -713,6 +771,7 @@ function renderStandardCard(card, n, total) {
     '<span class="status">Defense ' + n + " of " + total + " \u00b7 Ready for review</span>" +
     "<h3>" + card.title + "</h3>" +
     '<p class="entry-lede">' + card.objection + "</p>" +
+    '<button type="button" class="share-btn" data-share>⧉ Copy link to this defense</button>' +
     "</div><blockquote>" + card.summary + "</blockquote></div>" +
     '<div class="entry-body">' +
     '<nav class="entry-nav" aria-label="' + card.title.replace(/"/g, "") + ' answer sections" role="tablist">' +
@@ -762,7 +821,7 @@ function renderSite(defenses) {
   });
 }
 
-function initApp() {
+function initApp(defenses) {
 
         var topics = [];
 
@@ -966,6 +1025,15 @@ function initApp() {
 
         prevButton.addEventListener("click", function () { showCard(currentCard - 1); });
         nextButton.addEventListener("click", function () { showCard(currentCard + 1); });
+        var shuffleButton = document.getElementById("deckShuffle");
+        if (shuffleButton) {
+          shuffleButton.addEventListener("click", function () {
+            if (cards.length < 2) return;
+            var next = currentCard;
+            while (next === currentCard) next = Math.floor(Math.random() * cards.length);
+            showCard(next, { scroll: true });
+          });
+        }
         viewport.addEventListener("keydown", function (event) {
           if (event.target !== viewport) return;
           if (event.key === "ArrowLeft") { event.preventDefault(); showCard(currentCard - 1); }
@@ -991,12 +1059,108 @@ function initApp() {
         }, { passive: true });
         viewport.addEventListener("touchcancel", function () { touchTracking = false; }, { passive: true });
 
+        track.addEventListener("click", function (event) {
+          var target = event.target;
+          var btn = target && target.closest ? target.closest("[data-share]") : null;
+          if (!btn) return;
+          var cardEl = btn.closest(".entry");
+          if (!cardEl || !cardEl.id) return;
+          var url = window.location.origin + window.location.pathname + "#" + cardEl.id;
+          var original = btn.textContent;
+          function done() {
+            btn.textContent = "✓ Copied!";
+            window.setTimeout(function () { btn.textContent = original; }, 1600);
+          }
+          function fallbackCopy(text) {
+            var ta = document.createElement("textarea");
+            ta.value = text;
+            ta.style.position = "fixed";
+            ta.style.opacity = "0";
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand("copy"); } catch (e) {}
+            document.body.removeChild(ta);
+          }
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(url).then(done, function () { fallbackCopy(url); done(); });
+          } else {
+            fallbackCopy(url);
+            done();
+          }
+        });
+
         document.querySelectorAll(".jump-links a[data-card-target]").forEach(function (link) {
           link.addEventListener("click", function (event) {
             event.preventDefault();
             showCard(Number(link.getAttribute("data-card-target")), { scroll: true });
           });
         });
+
+        var quizCard = document.getElementById("quizCard");
+        if (quizCard && defenses && defenses.length) {
+          var quizObjection = document.getElementById("quizObjection");
+          var quizAnswer = document.getElementById("quizAnswer");
+          var quizOneLiner = document.getElementById("quizOneLiner");
+          var quizReveal = document.getElementById("quizReveal");
+          var quizNext = document.getElementById("quizNext");
+          var quizKnew = document.getElementById("quizKnew");
+          var quizMissed = document.getElementById("quizMissed");
+          var quizFull = document.getElementById("quizFull");
+          var quizScore = document.getElementById("quizScore");
+          var quizOrder = [];
+          var quizPos = -1;
+          var quizIndex = 0;
+          var quizRight = 0;
+          var quizAnswered = 0;
+          var quizScored = false;
+
+          function quizShuffleOrder() {
+            quizOrder = defenses.map(function (card, i) { return i; });
+            for (var i = quizOrder.length - 1; i > 0; i--) {
+              var j = Math.floor(Math.random() * (i + 1));
+              var tmp = quizOrder[i];
+              quizOrder[i] = quizOrder[j];
+              quizOrder[j] = tmp;
+            }
+          }
+          function quizShow() {
+            if (quizPos + 1 >= quizOrder.length) {
+              quizShuffleOrder();
+              quizPos = -1;
+            }
+            quizPos++;
+            quizIndex = quizOrder[quizPos];
+            quizScored = false;
+            var d = defenses[quizIndex];
+            quizObjection.textContent = d.objection;
+            quizOneLiner.textContent = d.oneLiner;
+            quizAnswer.hidden = true;
+            quizReveal.hidden = false;
+            quizNext.hidden = true;
+            quizScore.textContent = quizAnswered
+              ? "Score: " + quizRight + " of " + quizAnswered + " — be honest, it only helps you."
+              : "No score yet — be honest with yourself.";
+          }
+          function quizVerdict(knew) {
+            if (quizScored) return;
+            quizScored = true;
+            quizAnswered++;
+            if (knew) quizRight++;
+            quizScore.textContent = "Score: " + quizRight + " of " + quizAnswered + " — be honest, it only helps you.";
+          }
+          quizReveal.addEventListener("click", function () {
+            quizAnswer.hidden = false;
+            quizReveal.hidden = true;
+            quizNext.hidden = false;
+          });
+          quizKnew.addEventListener("click", function () { quizVerdict(true); });
+          quizMissed.addEventListener("click", function () { quizVerdict(false); });
+          quizNext.addEventListener("click", quizShow);
+          quizFull.addEventListener("click", function () {
+            showCard(quizIndex, { scroll: true });
+          });
+          quizShow();
+        }
 
         if (window.ResizeObserver) {
           var deckObserver = new ResizeObserver(function () { updateDeckHeight(); });
@@ -1065,7 +1229,7 @@ function initApp() {
 
 fetch("defenses.json")
   .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
-  .then(function (defenses) { renderSite(defenses); initApp(); })
+  .then(function (defenses) { renderSite(defenses); initApp(defenses); })
   .catch(function () {
     var track = document.getElementById("deckTrack");
     if (track) track.innerHTML = '<p class="load-error" style="padding:2rem;text-align:center">Could not load the defenses. Check your connection and reload.</p>';

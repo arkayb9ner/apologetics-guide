@@ -1132,8 +1132,8 @@ function initApp(defenses) {
             quizIndex = quizOrder[quizPos];
             quizScored = false;
             var d = defenses[quizIndex];
-            quizObjection.textContent = d.objection;
-            quizOneLiner.textContent = d.oneLiner;
+            quizObjection.innerHTML = d.objection;
+            quizOneLiner.innerHTML = d.oneLiner;
             quizAnswer.hidden = true;
             quizReveal.hidden = false;
             quizNext.hidden = true;

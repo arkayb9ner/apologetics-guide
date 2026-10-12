@@ -366,6 +366,17 @@
       .support-btn { display: inline-block; background: var(--wine); color: #fff; font-weight: 600; text-decoration: none; padding: 13px 30px; border-radius: 999px; font-size: 1.02rem; }
       .support-btn:hover, .support-btn:focus-visible { background: var(--wine-strong); color: #fff; }
 
+      .suggest-section { background: var(--paper-deep); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+      .suggest-form { margin-left: 210px; max-width: 660px; display: grid; gap: 10px; padding: 4px 0 6px; }
+      .suggest-form label { font-weight: 600; color: var(--ink); font-size: .95rem; }
+      .suggest-form .opt, .suggest-form .req { font-weight: 400; color: var(--muted); font-size: .85rem; }
+      .suggest-form input[type="text"], .suggest-form textarea { font: inherit; padding: 12px 14px; border: 1px solid var(--line-strong); border-radius: 10px; background: var(--surface); color: var(--ink); width: 100%; box-sizing: border-box; }
+      .suggest-form input:focus-visible, .suggest-form textarea:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; border-color: var(--focus); }
+      .suggest-form textarea { resize: vertical; min-height: 110px; }
+      .suggest-form .honey { display: none; }
+      .suggest-form .support-btn { justify-self: start; border: 0; cursor: pointer; font: inherit; margin-top: 6px; }
+      .suggest-note { min-height: 1.4em; color: var(--muted); font-size: .95rem; margin: 4px 0 0; }
+
       @media (max-width: 780px) {
         .page { width: min(100% - 28px, 650px); }
         .hero, .entry-top { grid-template-columns: 1fr; }
@@ -382,7 +393,7 @@
         .entry-nav { position: static; flex-direction: row; flex-wrap: wrap; gap: 6px 14px; border-bottom: 1px solid var(--line); padding-bottom: 16px; margin-bottom: 8px; }
         .deck-controls { grid-template-columns: 44px minmax(0, 1fr) 44px; gap: 10px; }
         .deck-arrow { width: 44px; height: 42px; }
-        .tools, .roadmap-grid, .empty { margin-left: 0; }
+        .tools, .roadmap-grid, .empty, .suggest-form { margin-left: 0; }
         .tools { grid-template-columns: 1fr; }
         .roadmap-grid { grid-template-columns: 1fr; }
         .topic:nth-child(odd), .topic:nth-child(even) { padding: 17px 0; border-right: 0; }
@@ -643,30 +654,24 @@
         </section>
       </div>
 
-      <section class="section roadmap-section" id="roadmap">
+      <section class="section suggest-section" id="suggest">
         <div class="page">
           <div class="section-head">
-            <div class="section-no">Complete set</div>
+            <div class="section-no">Your turn</div>
             <div>
-              <h2>All planned questions are now answered</h2>
-              <p>Fifty completed defenses cover the original general and Catholic objection list, plus this newly raised challenge. New questions can still be added whenever they arise.</p>
+              <h2>Heard an objection we haven&rsquo;t answered?</h2>
+              <p>Send it in. Submissions come straight to the keeper of this armory &mdash; nothing is published without review. The strongest ones become new defenses.</p>
             </div>
           </div>
-
-          <div class="tools" hidden>
-            <div class="search-wrap">
-              <label for="search">Search objections</label>
-              <input id="search" type="search" placeholder="Search evil, Mary, science…" autocomplete="off" />
-            </div>
-            <div class="filters" aria-label="Filter topics">
-              <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
-              <button class="filter" type="button" data-filter="Christianity" aria-pressed="false">Christianity</button>
-              <button class="filter" type="button" data-filter="Catholicism" aria-pressed="false">Catholicism</button>
-            </div>
-          </div>
-
-          <div class="roadmap-grid" id="topicGrid" aria-live="polite"></div>
-          <p class="empty" id="emptyState">No unfinished topics remain — all fifty defenses are complete.</p>
+          <form class="suggest-form" id="suggestForm" novalidate>
+            <label for="suggestName">Your name <span class="opt">(optional)</span></label>
+            <input id="suggestName" name="name" type="text" maxlength="80" autocomplete="name" />
+            <label for="suggestObjection">The objection you heard <span class="req">(required)</span></label>
+            <textarea id="suggestObjection" name="objection" rows="4" maxlength="2000" required placeholder="e.g. My coworker said the Church invented purgatory in the Middle Ages&hellip;"></textarea>
+            <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <button type="submit" class="support-btn">Send it in</button>
+            <p class="suggest-note" id="suggestNote" role="status" aria-live="polite"></p>
+          </form>
         </div>
       </section>
 
@@ -1000,6 +1005,7 @@ function initApp() {
         window.addEventListener("resize", updateDeckHeight);
 
         function renderTopics() {
+          if (!grid || !search || !empty) return;
           var query = search.value.trim().toLowerCase();
           var filtered = topics.filter(function (topic) {
             var matchesCategory = activeFilter === "all" || topic[1] === activeFilter;
@@ -1018,7 +1024,7 @@ function initApp() {
           empty.style.display = filtered.length ? "none" : "block";
         }
 
-        search.addEventListener("input", renderTopics);
+        if (search) search.addEventListener("input", renderTopics);
         document.querySelectorAll(".filter").forEach(function (button) {
           button.addEventListener("click", function () {
             activeFilter = button.getAttribute("data-filter");
@@ -1064,6 +1070,47 @@ fetch("defenses.json")
     var track = document.getElementById("deckTrack");
     if (track) track.innerHTML = '<p class="load-error" style="padding:2rem;text-align:center">Could not load the defenses. Check your connection and reload.</p>';
   });
+</script>
+
+    <script>
+/* Objection suggestion form: sends to the keeper's inbox via FormSubmit (AJAX).
+   First-ever submission triggers a one-time activation email to the inbox. */
+(function () {
+  var form = document.getElementById("suggestForm");
+  if (!form) return;
+  var nameField = document.getElementById("suggestName");
+  var objectionField = document.getElementById("suggestObjection");
+  var note = document.getElementById("suggestNote");
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    var objection = objectionField.value.trim();
+    if (!objection) {
+      note.textContent = "Please write the objection first.";
+      objectionField.focus();
+      return;
+    }
+    note.textContent = "Sending…";
+    fetch("https://formsubmit.co/ajax/e36522@gmail.com", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({
+        name: nameField.value.trim(),
+        objection: objection,
+        _subject: "New objection submitted — Christian Armory",
+        _honey: form.querySelector('[name="_honey"]').value,
+        _captcha: "true"
+      })
+    })
+      .then(function (response) { return response.json(); })
+      .then(function () {
+        note.textContent = "Received — thank you. If it becomes a defense, you'll see it here.";
+        form.reset();
+      })
+      .catch(function () {
+        note.textContent = "Something went wrong sending that. Please try again.";
+      });
+  });
+})();
 </script>
   </body>
 </html>

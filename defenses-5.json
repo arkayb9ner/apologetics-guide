@@ -1,153 +1,306 @@
 [
-  {
-    "title": "The Church’s history of antisemitism",
-    "slug": "church-antisemitism",
-    "jumpLabel": "Antisemitism?",
-    "topic": "The Church",
-    "objection": "Forced baptisms, expulsions, ghettos, the Jewish badge of Lateran IV, blood libels the Church tolerated — centuries of Christian antisemitism that fertilized the soil for the Holocaust. A holy Church doesn’t do that.",
-    "summary": "The record contains real sins, and the Church has named them as sins — John Paul II repented of them publicly in 2000. The same Church that failed also produced the teaching that condemns the failure. Judge the teaching by the teaching, and the sinners by the mercy they refused.",
-    "response": [
-      {
-        "heading": "No whitewash: the sins are real",
-        "body": "Say it plainly, because anything less is dishonest. Across the centuries, Christians — including bishops and popes — expelled Jewish communities, confined them to ghettos, staged forced disputations and sometimes forced baptisms, and tolerated slanders like the blood libel. Lateran IV (1215) imposed the Jewish badge. These were sins, full stop — and the Church has said so: John Paul II’s Day of Pardon (2000) explicitly repented of ‘sins committed against the people of Israel.’"
-      },
-      {
-        "heading": "The Church’s own teaching condemns what her members did",
-        "body": "Here is the crucial distinction: the teaching vs. the sinners. Vatican II’s Nostra Aetate §4 teaches that the Jews ‘should not be presented as rejected or accursed by God’ and deplores ‘hatred, persecutions, displays of anti-Semitism, directed against Jews at any time and by anyone.’ The Catechism (CCC 839) calls the Jewish people’s faith ‘already a response to God’s revelation.’ The members failed the teaching; the teaching never authorized the failure."
-      },
-      {
-        "heading": "The counter-history is real too",
-        "body": "The same centuries hold another record: Gregory the Great’s Sicut Judaeis (598) forbidding forced baptism and protecting synagogues — renewed by some twenty popes. Bishops sheltering Jews during expulsions. And in living memory, Pius XII’s wartime rescue networks, which Rome’s chief rabbi publicly acknowledged. The wheat and the weeds grew together (Matt 13:24-30), exactly as Christ said they would."
-      },
-      {
-        "heading": "Sinful members don’t falsify a divine institution — they show why it’s needed",
-        "body": "Judas was one of the Twelve, chosen by Christ himself. If sinners in the Church disproved her claims, Christianity would have been disproved on day one. The Church never claimed her members would be sinless — she claimed to be the hospital Christ founded for sinners, with the medicine of grace. The antisemitic sins argue for the hospital, not against it."
-      }
-    ],
-    "verses": [
-      "Romans 11:1",
-      "Matthew 13:24-30"
-    ],
-    "ccc": "CCC 839",
-    "simple": "The Church doesn’t deny this history — John Paul II publicly repented of it in 2000. But the teaching always condemned what the sinners did: Vatican II says Jews must never be presented as rejected or cursed by God. Sinful members don’t disprove the Church; Judas was hand-picked by Jesus.",
-    "oneLiner": "The Church repented of it publicly in 2000 — and her own teaching, from Nostra Aetate onward, condemns what her sinners did.",
-    "related": [
-      {
-        "title": "Pius XII was ‘Hitler’s Pope’ — silent during the Holocaust",
-        "description": "The wartime record, examined"
-      },
-      {
-        "title": "Why Christianity instead of Judaism — didn’t the Jews reject Jesus?",
-        "description": "What the Church actually teaches about Israel"
-      },
-      {
-        "title": "Some popes were corrupt — so much for a Spirit-guided Church",
-        "description": "Sinners in the Church, from the start"
-      }
-    ],
-    "level": "intermediate",
-    "basis": "history",
-    "audience": "c"
-  },
-  {
+ {
+  "title": "The Church’s history of antisemitism",
+  "slug": "church-antisemitism",
+  "jumpLabel": "Antisemitism?",
+  "topic": "The Church",
+  "objection": "Forced baptisms, expulsions, ghettos, the Jewish badge of Lateran IV, blood libels the Church tolerated — centuries of Christian antisemitism that fertilized the soil for the Holocaust. A holy Church doesn’t do that.",
+  "summary": "The record contains real sins, and the Church has named them as sins — John Paul II repented of them publicly in 2000. The same Church that failed also produced the teaching that condemns the failure. Judge the teaching by the teaching, and the sinners by the mercy they refused.",
+  "response": [
+   {
+    "heading": "No whitewash: the sins are real",
+    "body": "Say it plainly, because anything less is dishonest. Across the centuries, Christians — including bishops and popes — expelled Jewish communities, confined them to ghettos, staged forced disputations and sometimes forced baptisms, and tolerated slanders like the blood libel. Lateran IV (1215) imposed the Jewish badge. These were sins, full stop — and the Church has said so: John Paul II’s Day of Pardon (2000) explicitly repented of ‘sins committed against the people of Israel.’"
+   },
+   {
+    "heading": "The Church’s own teaching condemns what her members did",
+    "body": "Here is the crucial distinction: the teaching vs. the sinners. Vatican II’s Nostra Aetate §4 teaches that the Jews ‘should not be presented as rejected or accursed by God’ and deplores ‘hatred, persecutions, displays of anti-Semitism, directed against Jews at any time and by anyone.’ The Catechism (CCC 839) calls the Jewish people’s faith ‘already a response to God’s revelation.’ The members failed the teaching; the teaching never authorized the failure."
+   },
+   {
+    "heading": "The counter-history is real too",
+    "body": "The same centuries hold another record: Gregory the Great’s Sicut Judaeis (598) forbidding forced baptism and protecting synagogues — renewed by some twenty popes. Bishops sheltering Jews during expulsions. And in living memory, Pius XII’s wartime rescue networks, which Rome’s chief rabbi publicly acknowledged. The wheat and the weeds grew together (Matt 13:24-30), exactly as Christ said they would."
+   },
+   {
+    "heading": "Sinful members don’t falsify a divine institution — they show why it’s needed",
+    "body": "Judas was one of the Twelve, chosen by Christ himself. If sinners in the Church disproved her claims, Christianity would have been disproved on day one. The Church never claimed her members would be sinless — she claimed to be the hospital Christ founded for sinners, with the medicine of grace. The antisemitic sins argue for the hospital, not against it."
+   }
+  ],
+  "verses": [
+   "Romans 11:1",
+   "Matthew 13:24-30"
+  ],
+  "ccc": "CCC 839",
+  "simple": "The Church doesn’t deny this history — John Paul II publicly repented of it in 2000. But the teaching always condemned what the sinners did: Vatican II says Jews must never be presented as rejected or cursed by God. Sinful members don’t disprove the Church; Judas was hand-picked by Jesus.",
+  "oneLiner": "The Church repented of it publicly in 2000 — and her own teaching, from Nostra Aetate onward, condemns what her sinners did.",
+  "related": [
+   {
+    "title": "Pius XII was ‘Hitler’s Pope’ — silent during the Holocaust",
+    "description": "The wartime record, examined"
+   },
+   {
+    "title": "Why Christianity instead of Judaism — didn’t the Jews reject Jesus?",
+    "description": "What the Church actually teaches about Israel"
+   },
+   {
+    "title": "Some popes were corrupt — so much for a Spirit-guided Church",
+    "description": "Sinners in the Church, from the start"
+   }
+  ],
+  "level": "intermediate",
+  "basis": "history",
+  "audience": "c"
+ },
+ {
+  "title": "Why does the Church oppose abortion?",
+  "slug": "church-opposes-abortion",
+  "jumpLabel": "Abortion?",
+  "topic": "Moral Life",
+  "objection": "‘My body, my choice.’ A fetus isn’t a person — personhood begins at birth, or viability, or consciousness. The Church is imposing its religion on a pluralistic society and controlling women’s bodies.",
+  "summary": "Biology settles the first question: from conception, a distinct living organism of the human species with its own DNA. Every proposed cutoff for personhood — birth, viability, consciousness — is arbitrary, and each has been used before to exclude other groups of humans.",
+  "response": [
+   {
+    "heading": "The science isn’t in dispute — only what we owe the small human",
+    "body": "From conception there exists a living organism with complete, distinct human DNA, directing its own development. That is biology, not theology. The abortion debate is therefore not about whether the unborn is human life — it is — but about whether all living members of the human species deserve protection. The Church’s answer is the same one behind every human rights movement: yes."
+   },
+   {
+    "heading": "Every cutoff for personhood is arbitrary — and dangerous",
+    "body": "Birth? A baby is no more conscious the day after birth than the day before. Viability? It moves with hospital technology — personhood can’t depend on the NICU down the street. Consciousness? Newborns, the sleeping, and the comatose fail that test. Every one of these lines has been drawn before, against other groups, to declare some humans non-persons. The only non-arbitrary line is conception: the point where a new human life begins."
+   },
+   {
+    "heading": "‘My body, my choice’ stops at someone else’s body",
+    "body": "Bodily autonomy is real — and it has never included the right to kill another human being. We don’t permit it for toddlers, however dependent. Pregnancy involves two bodies, two heartbeats, two sets of DNA; the child’s location inside the mother doesn’t make her a part of the mother, any more than a tenant is part of the landlord. Autonomy argues for not conceiving; it cannot argue for killing once another life exists."
+   },
+   {
+    "heading": "The Church’s teaching — and her practice",
+    "body": "This isn’t new or political: the Didache (c. AD 70) commands ‘you shall not murder a child by abortion.’ The Catechism teaches that direct abortion is ‘gravely contrary to the moral law’ (CCC 2270-2271) — declared with the full weight of the ordinary universal magisterium (Evangelium Vitae 62). And the Church puts her money where her mouth is: the world’s largest network of pregnancy support, and ministries like Project Rachel that accompany women after abortion with mercy, not condemnation. The teaching defends the child; the practice embraces the mother."
+   }
+  ],
+  "verses": [
+   "Psalm 139:13-16",
+   "Jeremiah 1:5",
+   "Luke 1:41-44"
+  ],
+  "ccc": "CCC 2270",
+  "simple": "Science says a new, distinct human life begins at conception — that’s biology. Every other cutoff (birth, viability, consciousness) is arbitrary and would exclude newborns too. The Church has opposed abortion since the Didache around AD 70, and she backs it up with the world’s largest pregnancy-support network.",
+  "oneLiner": "Biology: a distinct human life begins at conception. Every other ‘personhood’ cutoff is arbitrary — and history shows where arbitrary cutoffs lead.",
+  "related": [
+   {
+    "title": "Women’s ordination and contraception — the Church oppresses women",
+    "description": "The Church’s teaching on women, honestly stated"
+   },
+   {
+    "title": "The Catholic Church’s teaching on homosexuality is bigoted and harmful",
+    "description": "Moral teaching vs. bigotry: the distinction"
+   },
+   {
+    "title": "The Bible endorses slavery and oppresses women",
+    "description": "Human dignity in Scripture"
+   }
+  ],
+  "level": "beginner",
+  "basis": "doctrine",
+  "audience": "g"
+ },
+ {
+  "title": "Why does the Church teach that euthanasia is wrong?",
+  "slug": "church-euthanasia",
+  "jumpLabel": "Euthanasia?",
+  "topic": "Moral Life",
+  "objection": "Compassion demands ending unbearable suffering. Forcing someone to endure agony is cruel, and it’s their life — their choice. A loving God wouldn’t want His children tortured by pain when a peaceful exit exists.",
+  "summary": "Compassion means ‘suffer with’ — not ‘kill to end the suffering.’ The Church champions palliative care and never demands endless intervention; what she forbids is intending death as the cure. And ‘my choice’ collapses the moment the suffering, the depressed, and the elderly hear that their lives are optional.",
+  "response": [
+   {
+    "heading": "True compassion accompanies — it doesn’t eliminate the sufferer",
+    "body": "Compassion literally means ‘to suffer with.’ Killing the patient ends the suffering by ending the sufferer — that’s not compassion, it’s abandonment with better lighting. The Church is the world’s largest provider of palliative care precisely because she takes suffering seriously: the answer to pain is presence, relief, and love — hospice, not hemlock."
+   },
+   {
+    "heading": "‘It’s my choice’ proves far too much",
+    "body": "If autonomy justifies killing at personal request, no principled line remains: the same logic covers the depressed 25-year-old, not just the terminally ill — and every jurisdiction that legalized ‘strictly limited’ euthanasia has watched the limits expand. Worse, choices made under crushing pain, depression, or the feeling of being a burden aren’t free choices. And once the option exists, the elderly and disabled hear a new message: your life is now optional, and continuing it is selfish."
+   },
+   {
+    "heading": "It corrupts medicine itself",
+    "body": "The physician’s role has been ‘do no harm’ since Hippocrates. Introduce killing as a treatment option and every prescription pad becomes ambiguous: is the doctor healing me or managing me out of existence? Trust — the foundation of care for the vulnerable — collapses. Societies that cross this line don’t become more compassionate; they become more efficient at disposing of the inconvenient."
+   },
+   {
+    "heading": "The Church does not demand endless intervention",
+    "body": "This is the distinction the objection misses: Catholic teaching forbids intending death — as end or means (CCC 2277) — but it does not require ‘over-zealous’ treatment. Discontinuing burdensome, disproportionate interventions is permitted (CCC 2278); refusing a ventilator is not suicide. And suffering, while never good in itself, is not meaningless: ‘in my flesh I complete what is lacking in Christ’s afflictions’ (Col 1:24) — love can inhabit suffering and make it redemptive, which is why the saints’ hospices smell of hope, not despair."
+   }
+  ],
+  "verses": [
+   "Exodus 20:13",
+   "Colossians 1:24"
+  ],
+  "ccc": "CCC 2277",
+  "simple": "The Church runs the world’s palliative care because she takes suffering seriously — the answer is presence and pain relief, not killing the patient. And she doesn’t demand endless machines: refusing burdensome treatment is allowed. What’s forbidden is intending death as the cure.",
+  "oneLiner": "Compassion means ‘suffer with’ — hospice, not hemlock. And the Church never demands endless intervention, only that we never intend death.",
+  "related": [
+   {
     "title": "Why does the Church oppose abortion?",
-    "slug": "church-opposes-abortion",
-    "jumpLabel": "Abortion?",
-    "topic": "Moral Life",
-    "objection": "‘My body, my choice.’ A fetus isn’t a person — personhood begins at birth, or viability, or consciousness. The Church is imposing its religion on a pluralistic society and controlling women’s bodies.",
-    "summary": "Biology settles the first question: from conception, a distinct living organism of the human species with its own DNA. Every proposed cutoff for personhood — birth, viability, consciousness — is arbitrary, and each has been used before to exclude other groups of humans.",
-    "response": [
-      {
-        "heading": "The science isn’t in dispute — only what we owe the small human",
-        "body": "From conception there exists a living organism with complete, distinct human DNA, directing its own development. That is biology, not theology. The abortion debate is therefore not about whether the unborn is human life — it is — but about whether all living members of the human species deserve protection. The Church’s answer is the same one behind every human rights movement: yes."
-      },
-      {
-        "heading": "Every cutoff for personhood is arbitrary — and dangerous",
-        "body": "Birth? A baby is no more conscious the day after birth than the day before. Viability? It moves with hospital technology — personhood can’t depend on the NICU down the street. Consciousness? Newborns, the sleeping, and the comatose fail that test. Every one of these lines has been drawn before, against other groups, to declare some humans non-persons. The only non-arbitrary line is conception: the point where a new human life begins."
-      },
-      {
-        "heading": "‘My body, my choice’ stops at someone else’s body",
-        "body": "Bodily autonomy is real — and it has never included the right to kill another human being. We don’t permit it for toddlers, however dependent. Pregnancy involves two bodies, two heartbeats, two sets of DNA; the child’s location inside the mother doesn’t make her a part of the mother, any more than a tenant is part of the landlord. Autonomy argues for not conceiving; it cannot argue for killing once another life exists."
-      },
-      {
-        "heading": "The Church’s teaching — and her practice",
-        "body": "This isn’t new or political: the Didache (c. AD 70) commands ‘you shall not murder a child by abortion.’ The Catechism teaches that direct abortion is ‘gravely contrary to the moral law’ (CCC 2270-2271) — declared with the full weight of the ordinary universal magisterium (Evangelium Vitae 62). And the Church puts her money where her mouth is: the world’s largest network of pregnancy support, and ministries like Project Rachel that accompany women after abortion with mercy, not condemnation. The teaching defends the child; the practice embraces the mother."
-      }
-    ],
-    "verses": [
-      "Psalm 139:13-16",
-      "Jeremiah 1:5",
-      "Luke 1:41-44"
-    ],
-    "ccc": "CCC 2270",
-    "simple": "Science says a new, distinct human life begins at conception — that’s biology. Every other cutoff (birth, viability, consciousness) is arbitrary and would exclude newborns too. The Church has opposed abortion since the Didache around AD 70, and she backs it up with the world’s largest pregnancy-support network.",
-    "oneLiner": "Biology: a distinct human life begins at conception. Every other ‘personhood’ cutoff is arbitrary — and history shows where arbitrary cutoffs lead.",
-    "related": [
-      {
-        "title": "Women’s ordination and contraception — the Church oppresses women",
-        "description": "The Church’s teaching on women, honestly stated"
-      },
-      {
-        "title": "The Catholic Church’s teaching on homosexuality is bigoted and harmful",
-        "description": "Moral teaching vs. bigotry: the distinction"
-      },
-      {
-        "title": "The Bible endorses slavery and oppresses women",
-        "description": "Human dignity in Scripture"
-      }
-    ],
-    "level": "beginner",
-    "basis": "doctrine",
-    "audience": "g"
-  },
-  {
-    "title": "Why does the Church teach that euthanasia is wrong?",
-    "slug": "church-euthanasia",
-    "jumpLabel": "Euthanasia?",
-    "topic": "Moral Life",
-    "objection": "Compassion demands ending unbearable suffering. Forcing someone to endure agony is cruel, and it’s their life — their choice. A loving God wouldn’t want His children tortured by pain when a peaceful exit exists.",
-    "summary": "Compassion means ‘suffer with’ — not ‘kill to end the suffering.’ The Church champions palliative care and never demands endless intervention; what she forbids is intending death as the cure. And ‘my choice’ collapses the moment the suffering, the depressed, and the elderly hear that their lives are optional.",
-    "response": [
-      {
-        "heading": "True compassion accompanies — it doesn’t eliminate the sufferer",
-        "body": "Compassion literally means ‘to suffer with.’ Killing the patient ends the suffering by ending the sufferer — that’s not compassion, it’s abandonment with better lighting. The Church is the world’s largest provider of palliative care precisely because she takes suffering seriously: the answer to pain is presence, relief, and love — hospice, not hemlock."
-      },
-      {
-        "heading": "‘It’s my choice’ proves far too much",
-        "body": "If autonomy justifies killing at personal request, no principled line remains: the same logic covers the depressed 25-year-old, not just the terminally ill — and every jurisdiction that legalized ‘strictly limited’ euthanasia has watched the limits expand. Worse, choices made under crushing pain, depression, or the feeling of being a burden aren’t free choices. And once the option exists, the elderly and disabled hear a new message: your life is now optional, and continuing it is selfish."
-      },
-      {
-        "heading": "It corrupts medicine itself",
-        "body": "The physician’s role has been ‘do no harm’ since Hippocrates. Introduce killing as a treatment option and every prescription pad becomes ambiguous: is the doctor healing me or managing me out of existence? Trust — the foundation of care for the vulnerable — collapses. Societies that cross this line don’t become more compassionate; they become more efficient at disposing of the inconvenient."
-      },
-      {
-        "heading": "The Church does not demand endless intervention",
-        "body": "This is the distinction the objection misses: Catholic teaching forbids intending death — as end or means (CCC 2277) — but it does not require ‘over-zealous’ treatment. Discontinuing burdensome, disproportionate interventions is permitted (CCC 2278); refusing a ventilator is not suicide. And suffering, while never good in itself, is not meaningless: ‘in my flesh I complete what is lacking in Christ’s afflictions’ (Col 1:24) — love can inhabit suffering and make it redemptive, which is why the saints’ hospices smell of hope, not despair."
-      }
-    ],
-    "verses": [
-      "Exodus 20:13",
-      "Colossians 1:24"
-    ],
-    "ccc": "CCC 2277",
-    "simple": "The Church runs the world’s palliative care because she takes suffering seriously — the answer is presence and pain relief, not killing the patient. And she doesn’t demand endless machines: refusing burdensome treatment is allowed. What’s forbidden is intending death as the cure.",
-    "oneLiner": "Compassion means ‘suffer with’ — hospice, not hemlock. And the Church never demands endless intervention, only that we never intend death.",
-    "related": [
-      {
-        "title": "Why does the Church oppose abortion?",
-        "description": "The consistent life ethic"
-      },
-      {
-        "title": "The Catholic Church’s teaching on homosexuality is bigoted and harmful",
-        "description": "Moral teaching vs. bigotry"
-      },
-      {
-        "title": "The problem of evil",
-        "description": "Suffering and the God who entered it"
-      }
-    ],
-    "level": "intermediate",
-    "basis": "doctrine",
-    "audience": "g"
-  }
+    "description": "The consistent life ethic"
+   },
+   {
+    "title": "The Catholic Church’s teaching on homosexuality is bigoted and harmful",
+    "description": "Moral teaching vs. bigotry"
+   },
+   {
+    "title": "The problem of evil",
+    "description": "Suffering and the God who entered it"
+   }
+  ],
+  "level": "intermediate",
+  "basis": "doctrine",
+  "audience": "g"
+ },
+ {
+  "audience": "g",
+  "basis": "history",
+  "ccc": "CCC 105",
+  "jumpLabel": "Qur'an affirms Bible?",
+  "level": "intermediate",
+  "objection": "The Qur'an itself says the Jews and Christians corrupted their scriptures — tahrif, right there in 2:75, 2:79, 3:78. Your Bible is an edited, mistranslated mess, so quoting it at me proves nothing. The Qur'an is the final, preserved revelation, and it corrects your corrupted book.",
+  "oneLiner": "The Qur'an commands judgment by the Gospel — the wholesale corruption doctrine came four centuries later, and our manuscripts predate Muhammad.",
+  "related": [
+   {
+    "description": "Textual reliability, manuscript by manuscript",
+    "title": "The Bible was corrupted by centuries of copying"
+   },
+   {
+    "description": "How the canon was recognized",
+    "title": "Who decided which books count as Scripture — and by what authority?"
+   },
+   {
+    "description": "The overview case",
+    "title": "Why Christianity and not Islam?"
+   }
+  ],
+  "response": [
+   {
+    "body": "<p>“Let the People of the Gospel judge by what Allah has revealed therein” (5:47) — present tense, a command, in the seventh century. And when Muhammad doubts: “ask those who have been reading the Scripture before you” (10:94). If the Gospel text were corrupted beyond recognition, God would be commanding judgment by a ruined book and sending His prophet to consult corrupted custodians. These commands presuppose a usable, authoritative text <i>in the seventh century</i> — which is exactly what the later corruption doctrine denies.</p>",
+    "heading": "The Qur'an commands what the corruption doctrine forbids"
+   },
+   {
+    "body": "<p>2:75 speaks of men who “hear the words of Allah and then distort them <i>after they had understood</i>” — distortion after understanding is misinterpretation, not rewriting. 2:79 condemns specific forgers who “write the Book with their own hands” in Medina's polemical context — a charge against counterfeiters, not a claim that the whole Torah vanished. 3:78 accuses men who “twist their tongues with the Book” — oral misrepresentation. Not one of these verses teaches that the entire text was rewritten or lost. Even al-Ghazali (d. 1111) held <i>tahrif al-ma'na</i>: the meaning corrupted, the text intact.</p>",
+    "heading": "Read the tahrif verses — they don't say what the slogan says"
+   },
+   {
+    "body": "<p>The earliest commentators — Mujahid, al-Tabari (d. 923) — read <i>tahrif</i> as distortion of meaning. The wholesale textual-corruption doctrine, <i>tahrif al-nass</i>, was systematized by Ibn Hazm of Cordoba (d. 1064) in his <i>Kitab al-Fisal</i>: a polemical necessity once the flat contradictions between the Qur'an and the Bible on Jesus could no longer be finessed as “misinterpretation.” Four hundred years after Muhammad, the tradition reversed the book's own position — commanding Christians to judge by a Gospel it now declared unreadable.</p>",
+    "heading": "The doctrine is 11th century, not 7th"
+   },
+   {
+    "body": "<p>We possess New Testament manuscripts centuries older than Muhammad — the P52 fragment (~AD 125), the great fourth-century codices Vaticanus and Sinaiticus. The Bible read in seventh-century Arabia is, textually, the Bible we have; over 5,800 Greek manuscripts let scholars check the copying at every step. If corruption happened, it had to happen <i>before</i> the seventh century — but the seventh-century Qur'an affirms the seventh-century scriptures. There is no room left on the timeline for the text to have been lost in between.</p>",
+    "heading": "The manuscripts close the timeline"
+   }
+  ],
+  "simple": "The Qur'an tells Christians to judge by their Gospel and tells Muhammad to ask the people of the Book — strange commands if the book were ruined. The “the whole Bible was rewritten” claim was systematized 400 years later by Ibn Hazm; the Qur'an's own verses speak of misinterpretation, not a lost text. And our manuscripts predate Muhammad by centuries.",
+  "slug": "quran-affirms-scripture",
+  "summary": "The Qur'an commands Christians to judge by their Gospel and tells Muhammad to consult the people of the Book — commands that make no sense if the text were ruined. The wholesale “the Bible was rewritten” doctrine was systematized four centuries later by Ibn Hazm; the Qur'an's own tahrif verses speak of distortion in handling, not the loss of the text.",
+  "title": "The Qur'an affirms the Scriptures it supposedly replaces",
+  "topic": "Scripture",
+  "verses": [
+   "Isaiah 40:8",
+   "Matthew 24:35",
+   "1 Peter 1:24-25"
+  ]
+ },
+ {
+  "audience": "c",
+  "basis": "doctrine",
+  "ccc": "CCC 841",
+  "jumpLabel": "Same God?",
+  "level": "intermediate",
+  "objection": "Allah has no son and no partners — “He neither begets nor is born” (Surah 112). Your Trinity is three gods, and your God died on a cross. We worship the one true God; you worship a man. These are not the same God — stop pretending our religions agree.",
+  "oneLiner": "Same God, known incompletely — the Church says so (CCC 841); the Trinity and the Incarnation are where the honest disagreement lives.",
+  "related": [
+   {
+    "description": "The overview case",
+    "title": "Why Christianity and not Islam?"
+   },
+   {
+    "description": "Why this isn't indifferentism",
+    "title": "All religions are basically the same"
+   },
+   {
+    "description": "The doctrine Muslims reject — stated correctly",
+    "title": "The Trinity is a logical contradiction — and it’s not even in the Bible"
+   }
+  ],
+  "response": [
+   {
+    "body": "<p>Vatican II is explicit: Muslims “profess to hold the faith of Abraham, and together with us they adore the one, merciful God” (<i>Lumen Gentium</i> 16; CCC 841). <i>Nostra Aetate</i> §3 adds that they “adore the one God, living and subsisting in Himself.” Not a different deity. Not an identical understanding either — the same God, known incompletely. This is defined teaching, not interfaith politeness invented for dialogue brochures.</p>",
+    "heading": "What the Church actually teaches"
+   },
+   {
+    "body": "<p>If there is one Creator of heaven and earth, then sincere worship directed at that Creator reaches Him even through imperfect understanding. Two men can speak of the same king while disagreeing about him — their disagreement doesn't conjure a second king into existence. The alternative is worse: it would make God's identity depend on the accuracy of our theology rather than on His reality, as if sincere monotheists were worshipping a fiction of their own devising.</p>",
+    "heading": "The philosophical reason it must be so"
+   },
+   {
+    "body": "<p>Affirming the same God flattens nothing. The Trinity and Christ's divinity are non-negotiable revealed truth — “no one who denies the Son has the Father” (1 John 2:23), and <i>Dominus Iesus</i> reaffirms Christ as the unique mediator: no other name, no parallel path. <i>Nostra Aetate</i> urges dialogue precisely so the differences are faced honestly, not dissolved. Vatican II changed the Church's <i>posture</i> toward Muslims — esteem, dialogue, joint work for justice — without changing one article of the <i>doctrine</i>.</p>",
+    "heading": "Where the line holds — this is not indifferentism"
+   },
+   {
+    "body": "<p>“We worship the same God” opens the door that “your god is false” slams shut — and it happens to be true. From that common ground the real question sharpens rather than softens: <i>who is this God we both adore?</i> One in nature, three in Persons, who entered His own creation and died for it — that is the Catholic answer, and it is worth arguing about precisely because the God in question is the same. Start with what is shared; press where it divides; never pretend the division isn't real.</p>",
+    "heading": "Why it matters for the conversation"
+   }
+  ],
+  "simple": "The Church teaches that Muslims adore the one, merciful God — the same God, known incompletely (CCC 841, Vatican II). That flattens nothing: the Trinity and Jesus' divinity are non-negotiable, and denying the Son means not having the Father. Same God; real, honest disagreement about who He is.",
+  "slug": "same-god-muslims",
+  "summary": "The Church's answer is precise, not diplomatic: Muslims “adore the one, merciful God” (CCC 841) — the same God, known incompletely. The differences on the Trinity and the Incarnation are non-negotiable, but they don't make it a different God.",
+  "title": "Do Christians and Muslims worship the same God?",
+  "topic": "God & Reason",
+  "verses": [
+   "Deuteronomy 6:4",
+   "1 Timothy 2:5",
+   "1 John 2:23"
+  ]
+ },
+ {
+  "audience": "g",
+  "basis": "history",
+  "ccc": "CCC 619",
+  "jumpLabel": "Died on the cross?",
+  "level": "intermediate",
+  "objection": "The Qur'an is explicit: “they did not kill him, nor crucify him, but it was made to appear so to them” (4:157). God would never abandon His prophet to a criminal's death. The crucifixion is a Christian invention built on late, biased Gospels — even your own skeptical scholars admit the miracle stories are legends.",
+  "oneLiner": "Four Gospels, Tacitus, Josephus, and the skeptics all agree — against one seventh-century denial that names no substitute.",
+  "related": [
+   {
+    "description": "The overview case",
+    "title": "Why Christianity and not Islam?"
+   },
+   {
+    "description": "What happened three days later",
+    "title": "The resurrection has natural explanations"
+   },
+   {
+    "description": "How early the sources are",
+    "title": "The Gospels were written too late to be reliable"
+   }
+  ],
+  "response": [
+   {
+    "body": "<p>All four Gospels report it, drawing on multiple independent traditions. Paul's creed — “Christ died for our sins” (1 Cor 15:3) — dates within years of the event. Then the outsiders: Tacitus, the hostile Roman historian (<i>Annals</i> 15.44), records that “Christus… suffered the extreme penalty during the reign of Tiberius at the hands of… Pontius Pilatus.” Josephus, the Jewish historian (<i>Antiquities</i> 18.3), confirms Pilate condemned him to the cross. Friendly and hostile sources, Roman and Jewish, converge on the same fact.</p>",
+    "heading": "The evidence, layer by layer"
+   },
+   {
+    "body": "<p>Bart Ehrman, no friend of orthodoxy: “One of the most certain facts of history is that Jesus was crucified on orders of the Roman prefect of Judea, Pontius Pilate.” Gerd Lüdemann: “indisputable.” John Dominic Crossan: “as sure as anything historical can ever be.” Men who deny the Resurrection grant the cross — they have no motive to give it away. And the criterion of embarrassment seals it: crucifixion was the most shameful death in the ancient world, a curse (Deut 21:23), “a stumbling block” (1 Cor 1:23). Nobody invents a crucified God. The shame of the claim is evidence for it.</p>",
+    "heading": "The skeptics concede it — and the shame proves it"
+   },
+   {
+    "body": "<p>4:157 comes from seventh-century Arabia — some six hundred years after the events — with no access to Jerusalem's records, no living witnesses, no chain of transmission to the first century. And notice what it doesn't do: it names no substitute and no mechanism. Later tradition filled the silence with contradictory legends — Judas? Simon of Cyrene? a willing volunteer? — which refute each other. A bare denial, six centuries out, cannot overturn contemporary evidence attested by friends, enemies, and skeptics alike.</p>",
+    "heading": "The denial: six centuries, no details"
+   },
+   {
+    "body": "<p>The objection smuggles in a theology — God must vindicate His prophets with worldly triumph — and then uses it as history to rule out the evidence. But Christianity's entire claim is that the vindication came differently: not rescue from the cross, but resurrection through it. You cannot refute the evidence with the very theology the evidence is meant to test. Judge the history by the history — and the history says He died, and the tomb did not hold Him.</p>",
+    "heading": "“God would never allow it” begs the question"
+   }
+  ],
+  "simple": "Every layer of evidence — four Gospels, Paul's creed from within years, the hostile Roman Tacitus, the Jewish Josephus — says Jesus was crucified under Pilate. Even skeptical scholars call it one of history's surest facts. Against that: one verse, 600 years later, naming no substitute. And nobody invents a crucified God — it was the most shameful death imaginable.",
+  "slug": "jesus-died-cross",
+  "summary": "The crucifixion is one of the best-attested facts of ancient history — four Gospels, Paul's early creed, Tacitus, Josephus, and the concession of skeptical scholars. Against it stands one denial, six centuries later, that names no substitute and explains nothing. And no inventor invents a crucified Messiah.",
+  "title": "Did Jesus really die on the cross?",
+  "topic": "Jesus Christ",
+  "verses": [
+   "1 Corinthians 15:3-4",
+   "Mark 15:24-39",
+   "1 Corinthians 1:23"
+  ]
+ }
 ]

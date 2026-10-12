@@ -1244,3 +1244,28 @@ if ("serviceWorker" in navigator && /^https:$/.test(window.location.protocol)) {
     navigator.serviceWorker.register("sw.js").catch(function () {});
   });
 }
+
+/* Scrollspy: highlight the jump-nav chip for the section currently in view. */
+(function () {
+  var nav = document.querySelector(".section-jump");
+  if (!nav || !("IntersectionObserver" in window)) return;
+  var links = Array.prototype.slice.call(nav.querySelectorAll('a[href^="#"]'));
+  var targets = [];
+  links.forEach(function (a) {
+    var el = document.getElementById(a.getAttribute("href").slice(1));
+    if (el) targets.push({ id: el.id, link: a, el: el });
+  });
+  if (!targets.length) return;
+  function setActive(id) {
+    targets.forEach(function (t) {
+      if (t.id === id) t.link.setAttribute("aria-current", "true");
+      else t.link.removeAttribute("aria-current");
+    });
+  }
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) setActive(e.target.id);
+    });
+  }, { rootMargin: "-40% 0px -55% 0px" });
+  targets.forEach(function (t) { obs.observe(t.el); });
+})();

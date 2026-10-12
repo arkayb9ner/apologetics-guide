@@ -830,5 +830,51 @@
         "description": ""
       }
     ]
+  },
+  {
+    "slug": "trinity-contradiction",
+    "jumpLabel": "The Trinity is a contradiction?",
+    "title": "The Trinity is a logical contradiction — and it’s not even in the Bible",
+    "objection": "The Trinity is straightforwardly incoherent — three persons in one God is a flat contradiction, 1+1+1=1. The word ‘Trinity’ appears nowhere in the Bible; it was invented centuries later, by Tertullian and then Nicaea, to dress up the fact that the New Testament never teaches it. ‘Mystery’ is just the word theologians use when they have been caught in a contradiction — a thought-stopper, not an answer.",
+    "summary": "The doctrine never claims three Gods in one God — it claims three Persons in one nature, which is not a contradiction; and the New Testament supplies the data centuries before the word.",
+    "response": [
+      {
+        "heading": "The ‘contradiction’ misstates the claim.",
+        "body": "<p>A contradiction affirms and denies the same thing in the same sense. The Trinity does not say ‘three Gods and one God,’ or ‘three persons and one person.’ It says three <i>Persons</i> in one <i>nature</i> — different categories. 1+1+1=1 was never the math; it is one divine nature possessed wholly by three who are really distinct. State the claim rightly and the contradiction vanishes. Note the tell: every popular analogy heresies — water, ice, and steam is modalism (one God in three masks); the shamrock is partialism (three parts of God). The tradition itself warns against the analogies. The precision <i>is</i> the point.</p>"
+      },
+      {
+        "heading": "The data is first-century; only the word is later.",
+        "body": "<p>Tertullian coined <i>trinitas</i> around 200 AD, but the New Testament already hands us all three data points: one God (‘the Lord our God, the Lord is one,’ Deuteronomy 6:4, affirmed by Christ in Mark 12:29); the Son called God (John 1:1; Thomas’s ‘My Lord and my God,’ John 20:28); the Spirit called God (Ananias lies to the Holy Spirit, and Peter says he has lied to God, Acts 5:3–4). And all three are named together under one singular ‘name’ in the baptismal formula (Matthew 28:19). Nicaea defined the grammar; it did not invent the data. As the Catechism puts it: ‘We do not confess three Gods, but one God in three persons’ (CCC 253).</p>"
+      },
+      {
+        "heading": "‘Mystery’ means beyond comprehension, not against reason.",
+        "body": "<p>In Catholic theology <i>mysterium</i> means a truth too deep to exhaust, not a contradiction to swallow. We cannot fully picture <i>how</i> three Persons are one essence — but inability to picture is not incoherence. The Church has always condemned actual contradictions; the Trinity is defined precisely to avoid them: ‘God is one but not solitary’ (CCC 254). A contradiction would be ‘three Gods in one God.’ Nobody confesses that.</p>"
+      },
+      {
+        "heading": "Every alternative breaks on the biblical data.",
+        "body": "<p>Modalism — one God wearing three masks — cannot survive the Son praying to the Father. Arianism — Christ as exalted creature — cannot survive the worship He accepts or Thomas’s confession. Tritheism abandons ‘the Lord is one’ altogether. Each rival keeps some texts by sacrificing others. The Trinity is the only reading that keeps every text on the table at once.</p>"
+      },
+      {
+        "heading": "Why it matters: God is love — eternally.",
+        "body": "<p>‘God is love’ (1 John 4:8). But love requires a beloved; a solitary, single-person God could not <i>be</i> love from eternity — at best He could become loving once creatures existed. The Trinity means love, not loneliness, stands at the heart of reality: the Father loving the Son in the Spirit from before time began (Augustine’s lover, beloved, and love). The doctrine is not a puzzle to defend. It is the shape of the God who is love.</p>"
+      }
+    ],
+    "verses": [
+      "Matthew 28:19",
+      "John 1:1",
+      "2 Corinthians 13:14"
+    ],
+    "ccc": "CCC 253-254",
+    "oneLiner": "“Three Persons, one nature — never three Gods, never one actor in three masks; get the categories right and the ‘contradiction’ disappears.”",
+    "related": [
+      {
+        "title": "Jesus is not God",
+        "description": ""
+      },
+      {
+        "title": "Christianity was invented at Nicaea — councils made it man-made",
+        "description": ""
+      }
+    ]
   }
 ]

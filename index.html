@@ -343,6 +343,34 @@
       button.reference { display: block; width: 100%; text-align: left; background: none; border: none; border-bottom: 1px solid var(--line); padding: 0 0 12px; font: inherit; color: inherit; cursor: pointer; }
       button.reference:hover b, button.reference:focus-visible b { text-decoration: underline; }
       .reference b { display: block; color: var(--wine); }
+      .entry-topic { display: inline-block; margin-left: 10px; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--wine); border: 1px solid var(--line-strong); padding: 2px 8px; border-radius: 999px; vertical-align: middle; }
+      .browse-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+      .browse-chip { font: inherit; font-size: .85rem; padding: 8px 14px; border: 1px solid var(--line-strong); border-radius: 999px; background: transparent; color: inherit; cursor: pointer; }
+      .browse-chip:hover, .browse-chip:focus-visible { border-color: var(--wine); color: var(--wine); }
+      .browse-chip[aria-pressed="true"] { background: var(--wine); border-color: var(--wine); color: #fff; }
+      .browse-groups { display: grid; gap: 26px; }
+      .browse-group-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 0 0 12px; font-size: 1.05rem; }
+      .browse-count { font-size: .8rem; color: var(--muted); font-weight: 400; }
+      .browse-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
+      .browse-card { display: grid; grid-template-columns: auto 1fr; gap: 4px 10px; align-items: start; text-align: left; font: inherit; padding: 12px 14px; border: 1px solid var(--line); background: var(--surface); cursor: pointer; border-radius: 4px; color: inherit; }
+      .browse-card:hover, .browse-card:focus-visible { border-color: var(--wine); }
+      .browse-card .jump-num { padding-top: 2px; }
+      .start-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+      .start-step { display: flex; align-items: center; gap: 12px; width: 100%; font: inherit; text-align: left; padding: 12px 14px; border: 1px solid var(--line); background: var(--surface); cursor: pointer; border-radius: 4px; color: inherit; }
+      .start-step:hover, .start-step:focus-visible { border-color: var(--wine); }
+      .start-num { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--wine); color: #fff; font-size: .85rem; flex: 0 0 auto; }
+      .start-label { font-weight: 600; }
+      .pocket-search-wrap { margin-bottom: 18px; }
+      #pocketSearch { width: 100%; min-height: 48px; border: 1px solid var(--line-strong); background: var(--surface); color: inherit; padding: 11px 15px; font: inherit; border-radius: 0; }
+      .pocket-list { display: grid; gap: 14px; }
+      .pocket-item { border: 1px solid var(--line); background: var(--surface); padding: 16px 18px; border-radius: 4px; }
+      .pocket-quote { font-family: "Literata", Georgia, serif; font-size: 1.05rem; line-height: 1.5; margin: 0 0 10px; }
+      .pocket-meta { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+      .pocket-open { font: inherit; font-size: .85rem; color: var(--wine); background: none; border: none; padding: 0; cursor: pointer; text-align: left; }
+      .pocket-open:hover, .pocket-open:focus-visible { text-decoration: underline; }
+      .pocket-copy { font: inherit; font-size: .8rem; padding: 6px 14px; border: 1px solid var(--line-strong); background: transparent; color: inherit; cursor: pointer; border-radius: 999px; }
+      .pocket-copy:hover, .pocket-copy:focus-visible { border-color: var(--wine); color: var(--wine); }
+      .pocket-empty { color: var(--muted); }
       .reference span { color: var(--muted); font-size: .92rem; }
 
       .roadmap-section { background: var(--paper-deep); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -527,64 +555,11 @@
 
         <nav class="jump-index" id="completed-index" aria-label="Jump to a completed defense">
           <div class="jump-index-head">
-            <h2>Jump to a defense</h2>
-            <p>Completed answers, ready to open.</p>
+            <h2>Browse the defenses</h2>
+            <p>Pick a topic, then a defense — tap to open it.</p>
           </div>
-          <div class="jump-carousel">
-            <div class="jump-links" id="jumpCards" role="region" aria-roledescription="carousel" aria-label="Completed defense cards" tabindex="0">
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-            </div>
-            <div class="jump-dots" id="jumpDots" aria-label="Choose a defense card"></div>
-          </div>
+          <div class="browse-chips" id="topicChips" role="group" aria-label="Filter defenses by topic"></div>
+          <div class="browse-groups" id="browseGroups"></div>
         </nav>
 
         <section class="method" aria-label="How to use the guide">
@@ -594,6 +569,17 @@
             <li><b>Give reasons</b><span>Use evidence without hiding the difficulty.</span></li>
             <li><b>Invite dialogue</b><span>Defend the faith without treating people as enemies.</span></li>
           </ol>
+        </section>
+
+        <section class="section start-section" id="start-here" aria-label="Where to start">
+          <div class="section-head">
+            <div class="section-no">Begin</div>
+            <div>
+              <h2>New to the armory? Start here</h2>
+              <p>Eight defenses, in order &mdash; from &ldquo;Does God exist?&rdquo; to the Eucharist. About twenty minutes, and you&rsquo;ll hold the skeleton key.</p>
+            </div>
+          </div>
+          <ol class="start-steps" id="startSteps"></ol>
         </section>
 
         <section class="section" id="featured-answer">
@@ -723,6 +709,22 @@
           </div>
         </section>
       </div>
+
+      <section class="section pocket-section" id="pocket" aria-label="Pocket armory">
+        <div class="page">
+          <div class="section-head">
+            <div class="section-no">Quick draw</div>
+            <div>
+              <h2>Pocket armory</h2>
+              <p>Every one-liner in one place. Search it, copy it, and open the full defense when you need more than a sentence.</p>
+            </div>
+          </div>
+          <div class="pocket-search-wrap">
+            <input id="pocketSearch" type="search" placeholder="Search one-liners&hellip;" autocomplete="off" aria-label="Search one-liners" />
+          </div>
+          <div class="pocket-list" id="pocketList"></div>
+        </div>
+      </section>
 
       <section class="section quiz-section" id="quiz">
         <div class="page">
@@ -1066,6 +1068,7 @@ function renderStandardCard(card, n, total) {
   return (
     '<div class="entry-top"><div>' +
     '<span class="status">Defense ' + n + " of " + total + " \u00b7 Ready for review</span>" +
+    (card.topic ? '<span class="entry-topic">' + card.topic + "</span>" : "") +
     "<h3>" + card.title + "</h3>" +
     '<p class="entry-lede">' + card.objection + "</p>" +
     '<button type="button" class="share-btn" data-share>⧉ Copy link to this defense</button>' +
@@ -1092,7 +1095,6 @@ function renderStandardCard(card, n, total) {
 function renderSite(defenses) {
   var total = defenses.length;
   var track = document.getElementById("deckTrack");
-  var jumpCards = document.getElementById("jumpCards");
   defenses.forEach(function (card, i) {
     var n = i + 1;
     var article = document.createElement("article");
@@ -1108,13 +1110,6 @@ function renderSite(defenses) {
       article.innerHTML = renderStandardCard(card, n, total);
     }
     track.appendChild(article);
-    var link = document.createElement("a");
-    link.href = "#answer-" + card.slug;
-    link.setAttribute("data-card-target", String(i));
-    var num = document.createElement("span"); num.className = "jump-num"; num.textContent = pad2(n);
-    var label = document.createElement("span"); label.textContent = card.jumpLabel;
-    link.appendChild(num); link.appendChild(label);
-    jumpCards.appendChild(link);
   });
 }
 
@@ -1138,65 +1133,178 @@ function initApp(defenses) {
         var heroSearchResults = document.getElementById("heroSearchResults");
         var heroTopicChips = Array.prototype.slice.call(document.querySelectorAll(".topic-chip"));
         var heroMatches = [];
-        var jumpCards = document.getElementById("jumpCards");
-        var jumpCardLinks = Array.prototype.slice.call(jumpCards.querySelectorAll("a[data-card-target]"));
-        var jumpDots = document.getElementById("jumpDots");
-        var jumpScrollFrame = 0;
-
-        function jumpCardLeft(index) {
-          if (!jumpCardLinks[index]) return 0;
-          return jumpCardLinks[index].offsetLeft - jumpCardLinks[0].offsetLeft;
+        /* Start-here path */
+        var startSteps = document.getElementById("startSteps");
+        var START_HERE = [
+          { slug: "god-exists-evidence", label: "Does God exist?" },
+          { slug: "jesus-divinity", label: "Is Jesus God?" },
+          { slug: "resurrection-natural-explanations", label: "Did He really rise?" },
+          { slug: "problem-of-evil", label: "Why does God allow suffering?" },
+          { slug: "bible-contradictions", label: "Can I trust the Bible?" },
+          { slug: "im-a-good-person", label: "Why do I need Jesus?" },
+          { slug: "faith-alone", label: "Faith, works, and grace" },
+          { slug: "eucharist", label: "The Eucharist" }
+        ];
+        if (startSteps) {
+          START_HERE.forEach(function (step, k) {
+            var li = document.createElement("li");
+            var b = document.createElement("button");
+            b.type = "button";
+            b.className = "start-step";
+            var n = document.createElement("span"); n.className = "start-num"; n.textContent = String(k + 1);
+            var t = document.createElement("span"); t.className = "start-label"; t.textContent = step.label;
+            b.appendChild(n); b.appendChild(t);
+            b.setAttribute("aria-label", "Start here step " + (k + 1) + ": " + step.label);
+            (function (slug) {
+              b.addEventListener("click", function () {
+                var idx = defenses.findIndex(function (d) { return d.slug === slug; });
+                if (idx >= 0) showCard(idx, { scroll: true });
+              });
+            })(step.slug);
+            li.appendChild(b);
+            startSteps.appendChild(li);
+          });
         }
 
-        function updateJumpPosition(index) {
-          jumpCardLinks.forEach(function (link, linkIndex) {
-            link.setAttribute("aria-current", linkIndex === index ? "true" : "false");
+        /* Pocket armory */
+        var pocketList = document.getElementById("pocketList");
+        var pocketSearch = document.getElementById("pocketSearch");
+        function pocketCopy(text, btn) {
+          var original = btn.textContent;
+          function done() {
+            btn.textContent = "\u2713 Copied!";
+            window.setTimeout(function () { btn.textContent = original; }, 1600);
+          }
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(done, done);
+          } else { done(); }
+        }
+        function renderPocket() {
+          if (!pocketList) return;
+          var q = pocketSearch ? pocketSearch.value.trim().toLowerCase() : "";
+          pocketList.innerHTML = "";
+          var shown = 0;
+          defenses.forEach(function (card, i) {
+            var hay = (card.oneLiner + " " + card.title + " " + card.jumpLabel).toLowerCase();
+            if (q && hay.indexOf(q) < 0) return;
+            shown++;
+            var item = document.createElement("div");
+            item.className = "pocket-item";
+            var quote = document.createElement("p");
+            quote.className = "pocket-quote";
+            quote.textContent = card.oneLiner;
+            var meta = document.createElement("div");
+            meta.className = "pocket-meta";
+            var open = document.createElement("button");
+            open.type = "button";
+            open.className = "pocket-open";
+            open.textContent = card.title;
+            open.setAttribute("aria-label", "Open the full defense: " + card.title);
+            var copy = document.createElement("button");
+            copy.type = "button";
+            copy.className = "pocket-copy";
+            copy.textContent = "Copy";
+            copy.setAttribute("aria-label", "Copy one-liner for: " + card.title);
+            (function (idx, txt, btn) {
+              open.addEventListener("click", function () { showCard(idx, { scroll: true }); });
+              copy.addEventListener("click", function () { pocketCopy(txt, btn); });
+            })(i, card.oneLiner, copy);
+            meta.appendChild(open);
+            meta.appendChild(copy);
+            item.appendChild(quote);
+            item.appendChild(meta);
+            pocketList.appendChild(item);
           });
-          Array.prototype.slice.call(jumpDots.children).forEach(function (dot, dotIndex) {
-            dot.setAttribute("aria-current", dotIndex === index ? "true" : "false");
-          });
+          if (!shown) {
+            var empty = document.createElement("p");
+            empty.className = "pocket-empty";
+            empty.textContent = "No one-liners match that search.";
+            pocketList.appendChild(empty);
+          }
+        }
+        if (pocketSearch) pocketSearch.addEventListener("input", renderPocket);
+        renderPocket();
+
+var browseGroups = document.getElementById("browseGroups");
+        var topicChips = document.getElementById("topicChips");
+        var TOPICS = ["God & Reason", "Scripture", "Jesus Christ", "The Church", "Mary & Saints", "Sacraments & Worship", "Moral Life", "Salvation & Last Things"];
+        var activeTopic = "All";
+
+        function topicCount(t) {
+          return defenses.filter(function (d) { return d.topic === t; }).length;
         }
 
-        function nearestJumpCard() {
-          var nearestIndex = 0;
-          var nearestDistance = Infinity;
-          jumpCardLinks.forEach(function (link, index) {
-            var distance = Math.abs(jumpCardLeft(index) - jumpCards.scrollLeft);
-            if (distance < nearestDistance) {
-              nearestDistance = distance;
-              nearestIndex = index;
-            }
-          });
-          updateJumpPosition(nearestIndex);
-          return nearestIndex;
-        }
-
-        jumpCardLinks.forEach(function (link, index) {
-          var dot = document.createElement("button");
-          dot.type = "button";
-          dot.className = "jump-dot";
-          dot.setAttribute("aria-label", "Show defense card " + (index + 1) + ": " + link.textContent.trim());
-          dot.addEventListener("click", function () {
-            jumpCards.scrollTo({ left: jumpCardLeft(index), behavior: "smooth" });
-          });
-          jumpDots.appendChild(dot);
+        TOPICS.forEach(function (t) {
+          var chip = document.createElement("button");
+          chip.type = "button";
+          chip.className = "browse-chip";
+          chip.textContent = t + " (" + topicCount(t) + ")";
+          chip.setAttribute("data-topic", t);
+          chip.setAttribute("aria-pressed", "false");
+          chip.addEventListener("click", function () { setTopic(t); });
+          topicChips.appendChild(chip);
         });
-        updateJumpPosition(0);
+        var allChip = document.createElement("button");
+        allChip.type = "button";
+        allChip.className = "browse-chip browse-chip-all";
+        allChip.textContent = "All (" + defenses.length + ")";
+        allChip.setAttribute("data-topic", "All");
+        allChip.setAttribute("aria-pressed", "true");
+        allChip.addEventListener("click", function () { setTopic("All"); });
+        topicChips.insertBefore(allChip, topicChips.firstChild);
 
-        jumpCards.addEventListener("scroll", function () {
-          if (jumpScrollFrame) return;
-          jumpScrollFrame = window.requestAnimationFrame(function () {
-            jumpScrollFrame = 0;
-            nearestJumpCard();
+        function setTopic(t) {
+          activeTopic = t;
+          Array.prototype.slice.call(topicChips.children).forEach(function (chip) {
+            chip.setAttribute("aria-pressed", chip.getAttribute("data-topic") === t ? "true" : "false");
           });
-        }, { passive: true });
-        jumpCards.addEventListener("keydown", function (event) {
-          if (event.target !== jumpCards || (event.key !== "ArrowLeft" && event.key !== "ArrowRight")) return;
-          event.preventDefault();
-          var index = nearestJumpCard() + (event.key === "ArrowRight" ? 1 : -1);
-          index = Math.max(0, Math.min(jumpCardLinks.length - 1, index));
-          jumpCards.scrollTo({ left: jumpCardLeft(index), behavior: "smooth" });
+          renderBrowse();
+        }
+
+        function renderBrowse() {
+          browseGroups.innerHTML = "";
+          TOPICS.forEach(function (t) {
+            if (activeTopic !== "All" && activeTopic !== t) return;
+            var items = [];
+            defenses.forEach(function (card, i) {
+              if (card.topic === t) items.push({ card: card, index: i });
+            });
+            if (!items.length) return;
+            var group = document.createElement("section");
+            group.className = "browse-group";
+            var head = document.createElement("h3");
+            head.className = "browse-group-head";
+            var headTitle = document.createElement("span"); headTitle.textContent = t;
+            var headCount = document.createElement("span"); headCount.className = "browse-count"; headCount.textContent = items.length;
+            head.appendChild(headTitle); head.appendChild(headCount);
+            group.appendChild(head);
+            var list = document.createElement("div");
+            list.className = "browse-cards";
+            items.forEach(function (it) {
+              var b = document.createElement("button");
+              b.type = "button";
+              b.className = "browse-card";
+              b.setAttribute("data-browse-target", String(it.index));
+              var num = document.createElement("span"); num.className = "jump-num"; num.textContent = pad2(it.index + 1);
+              var label = document.createElement("span"); label.textContent = it.card.jumpLabel;
+              var topic = document.createElement("span"); topic.className = "browse-card-topic"; topic.textContent = t;
+              b.appendChild(num); b.appendChild(label);
+              b.setAttribute("aria-label", "Open defense " + (it.index + 1) + ": " + it.card.jumpLabel);
+              list.appendChild(b);
+            });
+            group.appendChild(list);
+            browseGroups.appendChild(group);
+          });
+        }
+
+        browseGroups.addEventListener("click", function (event) {
+          var target = event.target;
+          var b = target && target.closest ? target.closest("[data-browse-target]") : null;
+          if (!b) return;
+          showCard(Number(b.getAttribute("data-browse-target")), { scroll: true });
         });
+
+        renderBrowse();
 
         cards.forEach(function (card, index) {
           var dot = document.createElement("button");
@@ -1393,12 +1501,7 @@ function initApp(defenses) {
           }
         });
 
-        document.querySelectorAll(".jump-links a[data-card-target]").forEach(function (link) {
-          link.addEventListener("click", function (event) {
-            event.preventDefault();
-            showCard(Number(link.getAttribute("data-card-target")), { scroll: true });
-          });
-        });
+        
 
         var quizCard = document.getElementById("quizCard");
         if (quizCard && defenses && defenses.length) {

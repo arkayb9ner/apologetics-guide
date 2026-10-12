@@ -79,6 +79,7 @@
       .hero-copy { max-width: 680px; font-size: clamp(1rem, 1.8vw, 1.25rem); color: var(--muted); margin: 0; }
       .hero-verse { max-width: 680px; font-size: 0.98rem; font-style: italic; color: var(--muted); margin: 14px 0 0; }
       .hero-verse span { font-style: normal; font-weight: 600; color: var(--wine); }
+      .hero-note { text-align: center; color: var(--muted); font-size: 0.9rem; max-width: 640px; margin: 20px auto 0; }
       .hero-choices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 24px 0 8px; }
       .hero-choices a { display: flex; flex-direction: column; justify-content: center; min-height: 84px; padding: 14px 18px; background: var(--surface); border: 2px solid var(--gold); border-radius: 16px; text-decoration: none; color: var(--ink); box-shadow: var(--shadow); }
       .hero-choices a b { font-size: 1.08rem; font-weight: 800; }

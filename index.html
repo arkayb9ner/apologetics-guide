@@ -26,7 +26,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600;7..72,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <title>Christian Armory</title>
-    <link rel="stylesheet" href="styles.css?v=20261013c">
+    <link rel="stylesheet" href="styles.css?v=20261012ag">
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to main content</a>
@@ -37,15 +37,15 @@
             <span class="edition">Christian Armory</span>
             <h1>Know what you believe. Answer with charity.</h1>
             <p class="hero-copy">A Catholic field guide for meeting hard questions honestly—with Scripture, reason, history, and the teaching of the Church.</p>
-            <p class="hero-motto" lang="la">Induite vos armaturam Dei</p>
             <p class="hero-verse">&ldquo;Put on the whole armour of God, that you may be able to stand against the wiles of the devil.&rdquo; <span>&mdash; Ephesians 6:11</span></p>
           </div>
           <aside class="hero-search" aria-label="Find a defense">
             <label class="hero-search-label" for="heroSearch">Ask the Armory</label>
             <div class="hero-search-box">
               <input id="heroSearch" type="search" placeholder="Ask in your own words…" autocomplete="off" aria-describedby="heroSearchHelp" aria-controls="heroSearchResults" aria-expanded="false" />
+              <button type="button" class="hero-search-btn" id="heroSearchBtn">Search</button>
             </div>
-            <p class="hero-search-help" id="heroSearchHelp">Ask a question in plain words, then press Enter to open the best match.</p>
+            <p class="hero-search-help" id="heroSearchHelp">Ask a question in plain words, then press Enter or tap Search to open the best match.</p>
             <div class="hero-suggest" aria-label="Suggested searches">
               <span class="hero-suggest-label">Try:</span>
               <div class="topic-chips">
@@ -71,6 +71,8 @@
         </button>
 
         <p class="hero-note">Christian Armory is a field guide, not the final word. It&rsquo;s here to point you in the right direction and help you defend the faith with clarity and charity &mdash; but no website finishes the journey. Growing in faith takes a lifetime; for deeper questions, please speak with your parish priest.</p>
+
+        <p class="whats-new"><b>What&rsquo;s new:</b> 12 defenses added &mdash; private interpretation, the Ethiopian Bible, <i>Fiducia Supplicans</i>, Cain&rsquo;s wife, Mormonism, and more. <a href="#completed-index">Browse them</a></p>
 
         <nav class="jump-index" id="completed-index" aria-label="Jump to a completed defense">
           <div class="jump-index-head">
@@ -138,6 +140,7 @@
           </div>
 
           <div class="deck-shell">
+            <div class="path-banner" id="pathBanner" hidden></div>
             <div class="deck-controls" aria-label="Defense card controls">
               <button class="deck-arrow" id="deckPrev" type="button" aria-label="Previous defense">←</button>
               <div class="deck-position">
@@ -150,12 +153,11 @@
             </div>
             <div class="deck-shuffle-row">
               <button class="shuffle-btn" id="deckShuffle" type="button">🔀 Surprise me</button>
-              <form class="deck-jump" id="deckJumpForm" aria-label="Jump to a defense by number" novalidate>
+              <form class="deck-jump" id="deckJumpForm" aria-label="Jump to a defense by number">
                 <label for="deckJumpInput">Go to defense</label>
                 <input id="deckJumpInput" type="number" min="1" placeholder="#" inputmode="numeric" aria-label="Defense number" />
                 <button type="submit" class="deck-jump-go">Go</button>
               </form>
-              <p class="jump-error" id="deckJumpError" role="status" aria-live="polite"></p>
             </div>
             <div class="deck-viewport" id="defenseDeck" role="region" tabindex="0" aria-roledescription="carousel" aria-label="Completed defenses">
               <div class="deck-track" id="deckTrack">
@@ -280,6 +282,24 @@
         </div>
       </section>
 
+      <section class="section handout-section" id="handout" aria-label="Study-group handout">
+        <div class="page">
+          <div class="section-head">
+            <div class="section-no">For study groups</div>
+            <div>
+              <h2>Print a study-group handout</h2>
+              <p>One-liners for one topic, on one sheet — for RCIA, youth ministry, or small groups. Pick a topic, print it, hand it out. The sheet is generated from the live defenses, so it always matches the site.</p>
+            </div>
+          </div>
+          <div class="handout-controls">
+            <label for="handoutTopic">Topic</label>
+            <select id="handoutTopic"></select>
+            <button type="button" class="support-btn" id="handoutPrint">Print handout</button>
+          </div>
+          <div class="handout-doc" id="handoutDoc"></div>
+        </div>
+      </section>
+
       <section class="section sacraments-section" id="sacraments" aria-label="The seven sacraments">
         <div class="page">
           <div class="section-head">
@@ -319,7 +339,6 @@
             <input id="cccJump" type="number" min="1" max="2865" placeholder="Paragraph # (1&ndash;2865)" inputmode="numeric" />
             <button type="button" class="support-btn" id="cccJumpBtn" style="border:0;cursor:pointer;">Read it</button>
           </div>
-          <p class="jump-error" id="cccJumpError" role="status" aria-live="polite"></p>
           <p class="ccc-note">Catechism text &copy; Libreria Editrice Vaticana. Official text at <a href="https://www.vatican.va/archive/ENG0015/_INDEX.HTM">vatican.va</a>.</p>
         </div>
       </section>
@@ -513,7 +532,7 @@
             <div class="section-no">Your turn</div>
             <div>
               <h2>Heard an objection we haven&rsquo;t answered?</h2>
-              <p>Send it in. Submissions come straight to the keeper of this armory &mdash; nothing is published without review. The strongest ones become new defenses.</p>
+              <p>Send it in. Submissions come straight to the keeper of this armory &mdash; nothing is published without review. The strongest ones become new defenses. Spot an error in a defense? Use this form to report a correction. Your message goes only to the keeper&rsquo;s inbox; nothing you send is published or shared.</p>
             </div>
           </div>
           <form class="suggest-form" id="suggestForm" novalidate>
@@ -539,7 +558,7 @@
             <h2>Help keep the armory open</h2>
             <p>Christian Armory is free for everyone, always. If it has helped you or your parish, a small gift helps cover the cost of keeping it online and growing.</p>
             <a class="support-btn" href="https://ko-fi.com/christianarmory" target="_blank" rel="noopener">☕ Support on Ko-fi</a>
-            <p style="margin-top:14px;font-size:.92rem;">Heard an objection the armory doesn't answer yet? <a href="#suggest">Suggest it here</a> — new defenses are added regularly.</p>
+            <p style="margin-top:14px;font-size:.92rem;">Heard an objection the armory doesn't answer yet? <a href="https://github.com/arkayb9ner/apologetics-guide/issues" target="_blank" rel="noopener">Suggest it here</a> — new defenses are added regularly.</p>
           </div>
         </section>
       </div>
@@ -547,16 +566,14 @@
       <div class="page">
         <footer class="site-footer">
           <p><strong>Christian Armory</strong> — a Catholic field guide for meeting hard questions honestly.</p>
-          <p>Catechism text © Libreria Editrice Vaticana · Verse epigraph from the Douay-Rheims Bible · © 2026 · Free for everyone, always.</p>
+          <p>Every defense is written to accord with the Catechism of the Catholic Church, Scripture, and the teaching of the Church. Where an answer rests on theological reasoning or the historical record rather than defined doctrine, the card says so.</p>
+          <p>Ko-fi gifts cover the domain and upkeep of this site. Catechism text © Libreria Editrice Vaticana · Verse epigraph from the Douay-Rheims Bible · © 2026 · Free for everyone, always.</p>
         </footer>
       </div>
     </main>
 
-    <!-- Back-to-top must sit BEFORE the app.js script tag: the setup code runs
-         at parse time and looks the button up immediately. -->
-    <button type="button" class="back-to-top" id="backToTop" aria-label="Back to top">&uarr; Top</button>
-    <script>window.ASSET_V = "20261013c";</script>
-    <script src="app.js?v=20261013c"></script>
+    <script>window.ASSET_V = "20261012ag";</script>
+    <script src="app.js?v=20261012ag"></script>
     <div class="ccc-modal-backdrop" id="cccModalBackdrop" hidden>
       <div class="ccc-modal" role="dialog" aria-modal="true" aria-labelledby="cccModalTitle">
         <div class="ccc-modal-head">

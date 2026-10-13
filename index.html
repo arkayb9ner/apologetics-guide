@@ -551,9 +551,11 @@
       </div>
     </main>
 
+    <!-- Back-to-top must sit BEFORE the app.js script tag: the setup code runs
+         at parse time and looks the button up immediately. -->
+    <button type="button" class="back-to-top" id="backToTop" aria-label="Back to top">&uarr; Top</button>
     <script>window.ASSET_V = "20261013a";</script>
     <script src="app.js?v=20261013a"></script>
-    <button type="button" class="back-to-top" id="backToTop" aria-label="Back to top">&uarr; Top</button>
     <div class="ccc-modal-backdrop" id="cccModalBackdrop" hidden>
       <div class="ccc-modal" role="dialog" aria-modal="true" aria-labelledby="cccModalTitle">
         <div class="ccc-modal-head">

@@ -275,6 +275,7 @@ function renderApostles(items) {
   showApostle(0);
 }
 
+var CAN_READ_ALOUD = typeof window !== "undefined" && "speechSynthesis" in window;
 function renderStandardCard(card, n, total) {
   var points = linkGlossaryTerms(card.response.map(function (p, k) {
     return '<li><span class="num">' + pad2(k + 1) + '</span> <div><b>' + p.heading + '</b> ' + p.body + '</div></li>';
@@ -297,6 +298,7 @@ function renderStandardCard(card, n, total) {
     "<h3>" + card.title + "</h3>" +
     '<p class="entry-lede">' + linkGlossaryTerms(card.objection) + "</p>" +
     '<button type="button" class="share-btn" data-share>⧉ Copy link to this defense</button>' +
+    (CAN_READ_ALOUD ? '<button type="button" class="share-btn" data-read>🔊 Listen</button>' : "") +
     "</div><blockquote>" + card.summary + "</blockquote></div>" +
     '<div class="entry-body">' +
     '<nav class="entry-nav" aria-label="' + card.title.replace(/"/g, "") + ' answer sections" role="tablist">' +
@@ -785,8 +787,38 @@ var topicCarousels = document.getElementById("topicCarousels");
           viewport.style.height = "auto";
         }
 
+        var readingBtn = null;
+        function stripTagsForSpeech(html) {
+          var d = document.createElement("div");
+          d.innerHTML = html;
+          return d.textContent || "";
+        }
+        function setReadingBtn(btn) {
+          if (readingBtn && readingBtn !== btn) readingBtn.textContent = "🔊 Listen";
+          readingBtn = btn;
+        }
+        function stopReading() {
+          if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+          setReadingBtn(null);
+        }
+        function toggleReadAloud(card, btn) {
+          if (!("speechSynthesis" in window)) return;
+          var synth = window.speechSynthesis;
+          if (readingBtn === btn && synth.speaking) { stopReading(); return; }
+          stopReading();
+          var text = card.title + ". " + card.oneLiner + " " +
+            stripTagsForSpeech(card.summary) + " " +
+            card.response.map(function (p) { return p.heading + ". " + stripTagsForSpeech(p.body); }).join(" ");
+          var u = new SpeechSynthesisUtterance(text);
+          u.onend = function () { setReadingBtn(null); };
+          u.onerror = function () { setReadingBtn(null); };
+          btn.textContent = "\u23F9 Stop";
+          setReadingBtn(btn);
+          synth.speak(u);
+        }
         function showCard(index, options) {
           options = options || {};
+          stopReading();
           currentCard = Math.max(0, Math.min(cards.length - 1, index));
           track.style.transform = "translateX(-" + (currentCard * 100) + "%)";
           cards.forEach(function (card, cardIndex) {
@@ -900,6 +932,14 @@ var topicCarousels = document.getElementById("topicCarousels");
           heroSearch.setAttribute("aria-expanded", "true");
         }
 
+        var dailyStrip = document.getElementById("dailyStrip");
+        if (dailyStrip && defenses && defenses.length) {
+          var dayIdx = Math.floor(Date.now() / 86400000) % defenses.length;
+          var dayTitle = document.getElementById("dailyTitle");
+          if (dayTitle) dayTitle.textContent = "#" + (dayIdx + 1) + " \u2014 " + defenses[dayIdx].title;
+          dailyStrip.hidden = false;
+          dailyStrip.addEventListener("click", function () { showCard(dayIdx, { scroll: true }); });
+        }
         heroSearch.addEventListener("input", renderHeroMatches);
         heroSearch.addEventListener("focus", function () {
           if (heroSearch.value.trim()) renderHeroMatches();
@@ -986,6 +1026,13 @@ var topicCarousels = document.getElementById("topicCarousels");
             if (idx >= 0) showCard(idx, { scroll: true });
             return;
           }
+          var readBtn = target && target.closest ? target.closest("[data-read]") : null;
+          if (readBtn) {
+            var rCardEl = readBtn.closest(".entry");
+            var rIdx = rCardEl ? cards.indexOf(rCardEl) : -1;
+            if (rIdx >= 0) toggleReadAloud(defenses[rIdx], readBtn);
+            return;
+          }
           var btn = target && target.closest ? target.closest("[data-share]") : null;
           if (!btn) return;
           var cardEl = btn.closest(".entry");
@@ -1027,23 +1074,74 @@ var topicCarousels = document.getElementById("topicCarousels");
           var quizMissed = document.getElementById("quizMissed");
           var quizFull = document.getElementById("quizFull");
           var quizScore = document.getElementById("quizScore");
+          var quizReset = document.getElementById("quizReset");
+          var modeFlash = document.getElementById("modeFlash");
+          var modeExplain = document.getElementById("modeExplain");
+          var explainCard = document.getElementById("explainCard");
+          var explainObjection = document.getElementById("explainObjection");
+          var explainText = document.getElementById("explainText");
+          var explainAnswer = document.getElementById("explainAnswer");
+          var explainOneLiner = document.getElementById("explainOneLiner");
+          var explainSummary = document.getElementById("explainSummary");
+          var explainCompare = document.getElementById("explainCompare");
+          var explainNext = document.getElementById("explainNext");
+          var explainKnew = document.getElementById("explainKnew");
+          var explainMissed = document.getElementById("explainMissed");
+          var explainFull = document.getElementById("explainFull");
+          var explainScore = document.getElementById("explainScore");
           var quizOrder = [];
           var quizPos = -1;
           var quizIndex = 0;
           var quizRight = 0;
           var quizAnswered = 0;
           var quizScored = false;
+          var drillMode = "flash";
+          var MASTER_KEY = "ca_mastered_v1";
+          function loadMastered() {
+            try { return JSON.parse(localStorage.getItem(MASTER_KEY)) || []; } catch (e) { return []; }
+          }
+          function saveMastered(list) {
+            try { localStorage.setItem(MASTER_KEY, JSON.stringify(list)); } catch (e) {}
+          }
+          var mastered = loadMastered();
+          function markMastered(slug, known) {
+            var i = mastered.indexOf(slug);
+            if (known && i === -1) mastered.push(slug);
+            if (!known && i !== -1) mastered.splice(i, 1);
+            saveMastered(mastered);
+          }
+          function updateDrillScore() {
+            var txt = "Mastered " + mastered.length + " of " + defenses.length +
+              (quizAnswered ? " \u00b7 Score: " + quizRight + " of " + quizAnswered + " \u2014 be honest, it only helps you." : " \u2014 be honest with yourself.");
+            quizScore.textContent = txt;
+            if (explainScore) explainScore.textContent = txt;
+          }
 
-          function quizShuffleOrder() {
-            quizOrder = defenses.map(function (card, i) { return i; });
-            for (var i = quizOrder.length - 1; i > 0; i--) {
+          function shuffleArr(a) {
+            for (var i = a.length - 1; i > 0; i--) {
               var j = Math.floor(Math.random() * (i + 1));
-              var tmp = quizOrder[i];
-              quizOrder[i] = quizOrder[j];
-              quizOrder[j] = tmp;
+              var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
             }
+            return a;
+          }
+          function quizShuffleOrder() {
+            var un = [], ma = [];
+            defenses.forEach(function (card, i) { (mastered.indexOf(card.slug) === -1 ? un : ma).push(i); });
+            quizOrder = shuffleArr(un).concat(shuffleArr(ma));
           }
           function quizShow() {
+            drillAdvance();
+            updateDrillScore();
+          }
+          function quizVerdict(knew) {
+            if (quizScored) return;
+            quizScored = true;
+            quizAnswered++;
+            if (knew) quizRight++;
+            markMastered(defenses[quizIndex].slug, knew);
+            updateDrillScore();
+          }
+          function drillAdvance() {
             if (quizPos + 1 >= quizOrder.length) {
               quizShuffleOrder();
               quizPos = -1;
@@ -1051,22 +1149,35 @@ var topicCarousels = document.getElementById("topicCarousels");
             quizPos++;
             quizIndex = quizOrder[quizPos];
             quizScored = false;
+            if (drillMode === "flash") quizShowCard(); else explainShowCard();
+          }
+          function quizShowCard() {
             var d = defenses[quizIndex];
             quizObjection.innerHTML = d.objection;
             quizOneLiner.innerHTML = d.oneLiner;
             quizAnswer.hidden = true;
             quizReveal.hidden = false;
             quizNext.hidden = true;
-            quizScore.textContent = quizAnswered
-              ? "Score: " + quizRight + " of " + quizAnswered + " — be honest, it only helps you."
-              : "No score yet — be honest with yourself.";
           }
-          function quizVerdict(knew) {
-            if (quizScored) return;
-            quizScored = true;
-            quizAnswered++;
-            if (knew) quizRight++;
-            quizScore.textContent = "Score: " + quizRight + " of " + quizAnswered + " — be honest, it only helps you.";
+          function explainShowCard() {
+            var d = defenses[quizIndex];
+            explainObjection.innerHTML = d.objection;
+            explainText.value = "";
+            explainOneLiner.innerHTML = d.oneLiner;
+            explainSummary.innerHTML = d.summary;
+            explainAnswer.hidden = true;
+            explainCompare.hidden = false;
+            explainNext.hidden = true;
+          }
+          function setDrillMode(mode) {
+            drillMode = mode;
+            var flash = mode === "flash";
+            quizCard.hidden = !flash;
+            if (explainCard) explainCard.hidden = flash;
+            if (modeFlash) modeFlash.setAttribute("aria-selected", flash ? "true" : "false");
+            if (modeExplain) modeExplain.setAttribute("aria-selected", flash ? "false" : "true");
+            quizScored = false;
+            if (flash) quizShowCard(); else explainShowCard();
           }
           quizReveal.addEventListener("click", function () {
             quizAnswer.hidden = false;
@@ -1075,8 +1186,26 @@ var topicCarousels = document.getElementById("topicCarousels");
           });
           quizKnew.addEventListener("click", function () { quizVerdict(true); });
           quizMissed.addEventListener("click", function () { quizVerdict(false); });
-          quizNext.addEventListener("click", quizShow);
+          quizNext.addEventListener("click", function () { drillAdvance(); updateDrillScore(); });
           quizFull.addEventListener("click", function () {
+            showCard(quizIndex, { scroll: true });
+          });
+          if (quizReset) quizReset.addEventListener("click", function () {
+            mastered = [];
+            saveMastered(mastered);
+            updateDrillScore();
+          });
+          if (modeFlash) modeFlash.addEventListener("click", function () { setDrillMode("flash"); });
+          if (modeExplain) modeExplain.addEventListener("click", function () { setDrillMode("explain"); });
+          if (explainCompare) explainCompare.addEventListener("click", function () {
+            explainAnswer.hidden = false;
+            explainCompare.hidden = true;
+            explainNext.hidden = false;
+          });
+          if (explainKnew) explainKnew.addEventListener("click", function () { quizVerdict(true); });
+          if (explainMissed) explainMissed.addEventListener("click", function () { quizVerdict(false); });
+          if (explainNext) explainNext.addEventListener("click", function () { drillAdvance(); updateDrillScore(); });
+          if (explainFull) explainFull.addEventListener("click", function () {
             showCard(quizIndex, { scroll: true });
           });
           quizShow();

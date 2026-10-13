@@ -807,22 +807,42 @@ var topicCarousels = document.getElementById("topicCarousels");
           if (options.scroll) viewport.scrollIntoView({ behavior: "smooth", block: "start" });
         }
 
+        var ASK_CONTRACTIONS = {
+          "isn't": "is not", "aren't": "are not", "wasn't": "was not", "weren't": "were not",
+          "don't": "do not", "doesn't": "does not", "didn't": "did not",
+          "can't": "cannot", "couldn't": "could not", "won't": "will not", "wouldn't": "would not",
+          "shouldn't": "should not", "hasn't": "has not", "haven't": "have not", "hadn't": "had not",
+          "what's": "what is", "it's": "it is", "that's": "that is", "there's": "there is",
+          "i'm": "i am", "you're": "you are", "we're": "we are", "they're": "they are",
+          "who's": "who is", "where's": "where is", "let's": "let us"
+        };
+        var ASK_STOPWORDS = { "is": 1, "are": 1, "was": 1, "were": 1, "be": 1, "been": 1, "being": 1, "the": 1, "a": 1, "an": 1, "of": 1, "to": 1, "in": 1, "on": 1, "and": 1, "or": 1, "for": 1, "with": 1, "how": 1, "what": 1, "why": 1, "when": 1, "where": 1, "who": 1, "whom": 1, "whose": 1, "which": 1, "do": 1, "does": 1, "did": 1, "can": 1, "could": 1, "should": 1, "would": 1, "will": 1, "shall": 1, "may": 1, "might": 1, "must": 1, "i": 1, "you": 1, "he": 1, "she": 1, "it": 1, "they": 1, "we": 1, "me": 1, "him": 1, "them": 1, "us": 1, "my": 1, "your": 1, "his": 1, "its": 1, "their": 1, "our": 1, "this": 1, "that": 1, "these": 1, "those": 1, "as": 1, "at": 1, "by": 1, "from": 1, "about": 1, "into": 1, "over": 1, "after": 1, "before": 1, "if": 1, "then": 1, "than": 1, "so": 1, "such": 1, "just": 1, "really": 1, "very": 1, "much": 1, "more": 1, "most": 1, "some": 1, "any": 1, "there": 1, "here": 1 };
+
+        function expandAskContractions(text) {
+          return text.split(/\s+/).map(function (w) { return ASK_CONTRACTIONS[w] || w; }).join(" ");
+        }
+
         function normalizeSearchText(value) {
           return value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[’‘]/g, "'");
         }
 
         function findHeroMatches(query) {
-          var normalizedQuery = normalizeSearchText(query.trim());
+          var normalizedQuery = expandAskContractions(normalizeSearchText(query.trim()));
           if (!normalizedQuery) return [];
-          var words = normalizedQuery.split(/\s+/).filter(Boolean);
+          var words = normalizedQuery.split(/\s+/).filter(function (w) { return w && !ASK_STOPWORDS[w]; });
+          if (!words.length) return [];
           return cards.map(function (card, index) {
             var title = card.querySelector("h3").textContent.trim();
             var normalizedTitle = normalizeSearchText(title);
             var normalizedCard = normalizeSearchText(card.textContent);
-            var matches = words.every(function (word) { return normalizedCard.indexOf(word) !== -1; });
-            var score = normalizedTitle === normalizedQuery ? 0 : normalizedTitle.indexOf(normalizedQuery) === 0 ? 1 : normalizedTitle.indexOf(normalizedQuery) !== -1 ? 2 : 3;
-            return matches ? { index: index, title: title, score: score } : null;
-          }).filter(Boolean).sort(function (a, b) { return a.score - b.score || a.index - b.index; });
+            var titleHits = 0, bodyHits = 0;
+            words.forEach(function (word) {
+              if (normalizedTitle.indexOf(word) !== -1) titleHits++;
+              else if (normalizedCard.indexOf(word) !== -1) bodyHits++;
+            });
+            var score = titleHits * 3 + bodyHits;
+            return score > 0 ? { index: index, title: title, score: score } : null;
+          }).filter(Boolean).sort(function (a, b) { return b.score - a.score || a.index - b.index; });
         }
 
         function closeHeroResults() {
@@ -848,9 +868,19 @@ var topicCarousels = document.getElementById("topicCarousels");
             return;
           }
           if (!heroMatches.length) {
-            var emptyResult = document.createElement("p");
+            var emptyResult = document.createElement("div");
             emptyResult.className = "hero-no-results";
-            emptyResult.textContent = "No defense matches that search yet.";
+            var emptyP1 = document.createElement("p");
+            emptyP1.textContent = "I don't have a defense for that yet.";
+            var emptyP2 = document.createElement("p");
+            var suggestLink = document.createElement("a");
+            suggestLink.href = "#suggest";
+            suggestLink.textContent = "Suggest it as a new defense";
+            suggestLink.addEventListener("click", closeHeroResults);
+            emptyP2.appendChild(suggestLink);
+            emptyP2.appendChild(document.createTextNode(" \u2014 the strongest submissions become new cards."));
+            emptyResult.appendChild(emptyP1);
+            emptyResult.appendChild(emptyP2);
             heroSearchResults.appendChild(emptyResult);
           } else {
             heroMatches.slice(0, 6).forEach(function (match) {

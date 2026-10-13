@@ -144,7 +144,7 @@ function renderGlossary(items) {
     if (prev) prev.disabled = current === 0;
     if (next) next.disabled = current === slides.length - 1;
     if (counter) counter.textContent = "Term " + (current + 1) + " of " + slides.length;
-    if (scroll && viewport) viewport.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (scroll && viewport) scrollToEl(viewport);
   }
 
   if (prev) prev.addEventListener("click", function () { showTerm(current - 1); });
@@ -241,7 +241,7 @@ function renderApostles(items) {
     if (prev) prev.disabled = current === 0;
     if (next) next.disabled = current === slides.length - 1;
     if (counter) counter.textContent = "Apostle " + (current + 1) + " of " + slides.length;
-    if (scroll && viewport) viewport.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (scroll && viewport) scrollToEl(viewport);
   }
 
   if (prev) prev.addEventListener("click", function () { showApostle(current - 1); });
@@ -276,6 +276,11 @@ function renderApostles(items) {
 }
 
 var CAN_READ_ALOUD = typeof window !== "undefined" && "speechSynthesis" in window;
+var REDUCE_MOTION = typeof window !== "undefined" && window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function scrollToEl(el) {
+  if (!el) return;
+  el.scrollIntoView({ behavior: REDUCE_MOTION ? "auto" : "smooth", block: "start" });
+}
 function renderStandardCard(card, n, total) {
   var points = linkGlossaryTerms(card.response.map(function (p, k) {
     return '<li><span class="num">' + pad2(k + 1) + '</span> <div><b>' + p.heading + '</b> ' + p.body + '</div></li>';
@@ -640,7 +645,7 @@ function initApp(defenses) {
             if (prev) prev.disabled = current === 0;
             if (next) next.disabled = current === slides.length - 1;
             if (counter) counter.textContent = "Sacrament " + (current + 1) + " of " + slides.length;
-            if (scroll && viewport) viewport.scrollIntoView({ behavior: "smooth", block: "start" });
+            if (scroll && viewport) scrollToEl(viewport);
           }
           if (dotsWrap) {
             slides.forEach(function (slide, i) {
@@ -836,7 +841,7 @@ var topicCarousels = document.getElementById("topicCarousels");
           if (options.updateHash !== false && window.history && window.history.replaceState) {
             window.history.replaceState(null, "", "#" + cards[currentCard].id);
           }
-          if (options.scroll) viewport.scrollIntoView({ behavior: "smooth", block: "start" });
+          if (options.scroll) scrollToEl(viewport);
         }
 
         var ASK_CONTRACTIONS = {

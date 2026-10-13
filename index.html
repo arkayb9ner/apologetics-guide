@@ -26,7 +26,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600;7..72,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <title>Christian Armory</title>
-    <link rel="stylesheet" href="styles.css?v=20261012aa">
+    <link rel="stylesheet" href="styles.css?v=20261012ab">
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to main content</a>
@@ -45,6 +45,14 @@
               <input id="heroSearch" type="search" placeholder="Ask in your own words…" autocomplete="off" aria-describedby="heroSearchHelp" aria-controls="heroSearchResults" aria-expanded="false" />
             </div>
             <p class="hero-search-help" id="heroSearchHelp">Ask a question in plain words, then press Enter to open the best match.</p>
+            <div class="hero-suggest" aria-label="Suggested searches">
+              <span class="hero-suggest-label">Try:</span>
+              <div class="topic-chips">
+                <button type="button" class="topic-chip" data-hero-query="Why confess to a priest?">Why confess to a priest?</button>
+                <button type="button" class="topic-chip" data-hero-query="Is praying to Mary biblical?">Is praying to Mary biblical?</button>
+                <button type="button" class="topic-chip" data-hero-query="Why believe in the Eucharist?">Why believe in the Eucharist?</button>
+              </div>
+            </div>
             <div class="hero-search-results" id="heroSearchResults" role="listbox" aria-label="Matching defenses" data-open="false"></div>
           </aside>
         </header>
@@ -121,7 +129,10 @@
             <div>
               <h2>Answers ready when you are</h2>
               <p>Every defense is numbered in order — swipe or arrow through them all, or jump straight to one from Browse above. Each entry states the objection in its strongest form, then answers with a Catholic response, a practical one-liner, and connected topics.</p>
-              <p class="label-legend"><b>Difficulty</b> tells you how much background an answer assumes. <b>Defined doctrine</b> means the Church has taught it definitively; <b>theological reasoning</b> argues from Scripture and tradition; <b>historical record</b> turns on the facts of history. Most defenses blend all three — the label names the main ground the answer stands on. <b>Catholic teaching</b> marks defenses of distinctively Catholic doctrine &mdash; handy if you&rsquo;re coming from a Protestant background; <b>common ground</b> marks answers most Christians share.</p>
+              <details class="how-to-guide">
+                <summary>How to use the defenses</summary>
+                <p class="label-legend"><b>Difficulty</b> tells you how much background an answer assumes. <b>Defined doctrine</b> means the Church has taught it definitively; <b>theological reasoning</b> argues from Scripture and tradition; <b>historical record</b> turns on the facts of history. Most defenses blend all three — the label names the main ground the answer stands on. <b>Catholic teaching</b> marks defenses of distinctively Catholic doctrine &mdash; handy if you&rsquo;re coming from a Protestant background; <b>common ground</b> marks answers most Christians share.</p>
+              </details>
             </div>
           </div>
 
@@ -538,8 +549,8 @@
       </div>
     </main>
 
-    <script>window.ASSET_V = "20261012aa";</script>
-    <script src="app.js?v=20261012aa"></script>
+    <script>window.ASSET_V = "20261012ab";</script>
+    <script src="app.js?v=20261012ab"></script>
     <div class="ccc-modal-backdrop" id="cccModalBackdrop" hidden>
       <div class="ccc-modal" role="dialog" aria-modal="true" aria-labelledby="cccModalTitle">
         <div class="ccc-modal-head">

@@ -924,6 +924,10 @@ function initApp(defenses) {
             handoutTopic.appendChild(opt);
           });
           handoutTopic.addEventListener("change", renderHandout);
+          /* Default to the first topic (God & Reason, 20 one-liners) so the
+             page doesn't render all 117 on every load. "All topics" stays
+             in the dropdown; a ?handout= param below still overrides this. */
+          handoutTopic.value = TOPICS[0];
           renderHandout();
           /* ?handout=<topic|all> deep link: show just the handout, ready to
              print — a shareable link for study-group leaders. */

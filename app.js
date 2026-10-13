@@ -2050,3 +2050,19 @@ if ("serviceWorker" in navigator && /^https:$/.test(window.location.protocol)) {
   }, { rootMargin: "-40% 0px -55% 0px" });
   targets.forEach(function (t) { obs.observe(t.el); });
 })();
+
+/* Collapsed reference sections: a jump link (or a section hash) opens the section first. */
+(function () {
+  function openDetailsForHash(hash) {
+    if (!hash || hash.charAt(0) !== "#") return;
+    var section = document.getElementById(hash.slice(1));
+    var det = section && section.querySelector("details.section-details");
+    if (det && !det.open) det.open = true;
+  }
+  document.addEventListener("click", function (event) {
+    var a = event.target && event.target.closest ? event.target.closest(".section-jump a") : null;
+    if (a) openDetailsForHash(a.getAttribute("href"));
+  });
+  window.addEventListener("hashchange", function () { openDetailsForHash(window.location.hash); });
+  openDetailsForHash(window.location.hash);
+})();

@@ -285,7 +285,10 @@ function renderStandardCard(card, n, total) {
   var points = linkGlossaryTerms(card.response.map(function (p, k) {
     return '<li><span class="num">' + pad2(k + 1) + '</span> <div><b>' + p.heading + '</b> ' + p.body + '</div></li>';
   }).join(""));
-  var verses = card.verses.map(function (v) { return "<span>" + v + "</span>"; }).join("");
+  var verses = card.verses.map(function (v) {
+    if (verseRefVerses(parseVerseRef(v))) return '<button type="button" class="verse-ref" data-verse="' + v.replace(/"/g, "") + '">' + v + "</button>";
+    return "<span>" + v + "</span>";
+  }).join("");
   var related = card.related.map(function (r) {
     var b = document.createElement("b"); b.textContent = r.title;
     var d = document.createElement("button"); d.type = "button"; d.className = "reference";
@@ -409,6 +412,182 @@ function linkCccRefs(root) {
   });
 }
 
+/* Scripture popups (CPDV): every cited verse opens the CPDV text in a modal.
+   verses.json is built by dev/build-verses.py from the CPDV JSON conversion of
+   sacredbible.org. Keys use the site's numbering; Psalm/Vulgate offsets are
+   resolved at build time, so the client looks up site numbering directly.
+   Bare "5:21" continuations and Qur'an refs never match: a Bible book name
+   is required. */
+var VERSE_ALIASES = {
+  Matt: "Matthew", Heb: "Hebrews", Eph: "Ephesians", Rev: "Revelation", Ps: "Psalm",
+  Phil: "Philippians", Rom: "Romans", Gal: "Galatians", Col: "Colossians", Deut: "Deuteronomy",
+  Jas: "James", Cor: "Corinthians", Tim: "Timothy", Thess: "Thessalonians", Pet: "Peter",
+  Sam: "Samuel", Macc: "Maccabees", Chron: "Chronicles"
+};
+var VERSE_BOOK_TOKENS = ["Song of Songs", "Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy",
+  "Joshua", "Judges", "Ruth", "Ezra", "Nehemiah", "Tobit", "Judith", "Esther", "Job", "Psalms?",
+  "Proverbs", "Ecclesiastes", "Wisdom", "Sirach", "Isaiah", "Jeremiah", "Lamentations", "Baruch",
+  "Ezekiel", "Daniel", "Hosea", "Joel", "Amos", "Obadiah", "Jonah", "Micah", "Nahum", "Habakkuk",
+  "Zephaniah", "Haggai", "Zechariah", "Malachi", "Matthew", "Mark", "Luke", "John", "Acts", "Romans",
+  "Galatians", "Ephesians", "Philippians", "Colossians", "Titus", "Philemon", "Hebrews", "James",
+  "Jude", "Revelation", "Corinthians", "Timothy", "Thessalonians", "Peter", "Kings", "Samuel",
+  "Maccabees", "Chronicles", "Matt", "Heb", "Eph", "Rev", "Ps", "Phil", "Rom", "Gal", "Col",
+  "Deut", "Jas", "Cor", "Tim", "Thess", "Pet", "Sam", "Macc", "Chron"];
+var VERSE_BOOK_ALT = VERSE_BOOK_TOKENS.slice().sort(function (a, b) { return b.length - a.length; }).join("|");
+
+function canonVerseBook(num, book) {
+  if (VERSE_ALIASES[book]) book = VERSE_ALIASES[book];
+  if (book === "Psalm") book = "Psalms";
+  if (num) {
+    if (["Corinthians", "Timothy", "Thessalonians", "Peter", "Kings", "Samuel", "Maccabees", "Chronicles", "John"].indexOf(book) !== -1) return num + " " + book;
+    return null;
+  }
+  return book;
+}
+
+function parseVerseRef(ref) {
+  ref = String(ref).trim();
+  var m;
+  if ((m = /^(Jude|Philemon|Obadiah)\s+(\d+)(?:\s*[-\u2013\u2014]\s*(\d+))?$/.exec(ref))) {
+    return { book: m[1], segments: [{ ch: 1, v1: +m[2], v2: m[3] ? +m[3] : +m[2] }] };
+  }
+  if ((m = /^([23])\s+John\s+(\d+)(?:\s*[-\u2013\u2014]\s*(\d+))?$/.exec(ref))) {
+    return { book: m[1] + " John", segments: [{ ch: 1, v1: +m[2], v2: m[3] ? +m[3] : +m[2] }] };
+  }
+  if (new RegExp("^(?:([123])\\s+)?(" + VERSE_BOOK_ALT + ")\\s+(\\d+)$").test(ref)) return null; // chapter-only
+  var headRe = new RegExp("^(?:([123])\\s+)?(" + VERSE_BOOK_ALT + ")\\s+(\\d+):(\\d+)");
+  m = headRe.exec(ref);
+  if (!m) return null;
+  var book = canonVerseBook(m[1], m[2]);
+  if (!book) return null;
+  var segments = [];
+  var cur = { ch: +m[3], v1: +m[4], v2: +m[4] };
+  var pos = m[0].length;
+  var tailSep = /\s*([,\u2013\u2014-])\s*/g;
+  var tailOp = /(?:(\d+):)?(\d+)(?:\s*[-\u2013\u2014]\s*(?:(\d+):)?(\d+))?/g;
+  while (pos < ref.length) {
+    tailSep.lastIndex = pos;
+    var sm = tailSep.exec(ref);
+    if (!sm || sm.index !== pos) return null;
+    var sep = sm[1];
+    pos = tailSep.lastIndex;
+    tailOp.lastIndex = pos;
+    var om = tailOp.exec(ref);
+    if (!om || om.index !== pos) return null;
+    pos = tailOp.lastIndex;
+    if (sep === ",") {
+      segments.push(cur);
+      cur = { ch: om[1] ? +om[1] : cur.ch, v1: +om[2], v2: om[4] ? +om[4] : +om[2] };
+    } else {
+      if (om[1]) {
+        cur.v2 = null;
+        segments.push(cur);
+        cur = { ch: +om[1], v1: +om[2], v2: om[4] ? +om[4] : +om[2] };
+      } else {
+        cur.v2 = om[4] ? +om[4] : +om[2];
+      }
+    }
+  }
+  segments.push(cur);
+  return { book: book, segments: segments };
+}
+
+function verseRefVerses(parsed) {
+  var verses = window.VERSES;
+  if (!verses || !parsed) return null;
+  var out = [];
+  for (var i = 0; i < parsed.segments.length; i++) {
+    var s = parsed.segments[i];
+    var v2 = s.v2;
+    if (v2 === null) {
+      var len = verses._xlengths && verses._xlengths[parsed.book] && verses._xlengths[parsed.book][s.ch];
+      if (!len) return null;
+      v2 = len;
+    }
+    for (var v = s.v1; v <= v2; v++) {
+      var text = verses[parsed.book] && verses[parsed.book][s.ch] && verses[parsed.book][s.ch][v];
+      if (text == null) return null;
+      out.push({ book: parsed.book, ch: s.ch, v: v, text: text });
+    }
+  }
+  return out.length ? out : null;
+}
+
+function linkVerseRefs(root) {
+  var testRe = new RegExp("(?:([123])\\s+)?(" + VERSE_BOOK_ALT + ")\\s+\\d+:\\d+");
+  var matchRe = new RegExp("\\b(?:([123])\\s+)?(" + VERSE_BOOK_ALT + ")\\s+\\d+:\\d+((?:\\s*[,\\u2013\\u2014-]\\s*(?:\\d+:)?\\d+(?:\\s*[-\\u2013\\u2014]\\s*(?:\\d+:)?\\d+)?)*)", "g");
+  linkVersePass(root, testRe, matchRe);
+  // Bare single-chapter refs: "Jude 7", "Philemon 10", "2 John 3" (no colon).
+  var bareTest = /\b(?:Jude|Philemon|Obadiah)\s+\d+(?:\s*[-\u2013\u2014]\s*\d+)?(?!:)|\b[23]\s+John\s+\d+(?:\s*[-\u2013\u2014]\s*\d+)?(?!:)/;
+  var bareMatch = /\b(?:(Jude|Philemon|Obadiah)\s+(\d+)(?:\s*[-\u2013\u2014]\s*(\d+))?|([23])\s+John\s+(\d+)(?:\s*[-\u2013\u2014]\s*(\d+))?)(?!:)/g;
+  linkVersePass(root, bareTest, bareMatch);
+}
+
+function linkVersePass(root, testRe, matchRe) {
+  var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode: function (node) {
+      if (node.parentElement && node.parentElement.closest(".verse-ref, .ccc-ref, .gloss-term, .verse-list")) return NodeFilter.FILTER_REJECT;
+      return testRe.test(node.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+    }
+  });
+  var nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach(function (node) {
+    matchRe.lastIndex = 0;
+    var frag = document.createDocumentFragment();
+    var last = 0, m;
+    var changed = false;
+    while ((m = matchRe.exec(node.nodeValue))) {
+      var parsed = parseVerseRef(m[0]);
+      if (!parsed || !verseRefVerses(parsed)) continue;
+      if (!changed) changed = true;
+      frag.appendChild(document.createTextNode(node.nodeValue.slice(last, m.index)));
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "verse-ref";
+      btn.setAttribute("data-verse", m[0]);
+      btn.setAttribute("aria-label", "Read " + m[0] + " (CPDV)");
+      btn.textContent = m[0];
+      frag.appendChild(btn);
+      last = m.index + m[0].length;
+    }
+    if (!changed) return;
+    frag.appendChild(document.createTextNode(node.nodeValue.slice(last)));
+    node.parentNode.replaceChild(frag, node);
+  });
+}
+
+function openVerseModal(refText) {
+  var parsed = parseVerseRef(refText);
+  var list = parsed && verseRefVerses(parsed);
+  var body = document.getElementById("verseModalBody");
+  document.getElementById("verseModalTitle").textContent = refText + " · CPDV";
+  body.innerHTML = "";
+  if (!list) {
+    var err = document.createElement("p");
+    err.textContent = "Could not load this passage. Check your connection and try again.";
+    body.appendChild(err);
+  } else {
+    list.forEach(function (it) {
+      var p = document.createElement("p");
+      if (list.length > 1) {
+        var b = document.createElement("b");
+        b.textContent = it.ch + ":" + it.v + " ";
+        p.appendChild(b);
+      }
+      p.appendChild(document.createTextNode(it.text));
+      body.appendChild(p);
+    });
+  }
+  body.scrollTop = 0;
+  document.getElementById("verseModalBackdrop").hidden = false;
+  document.getElementById("verseModalClose").focus();
+}
+
+function closeVerseModal() {
+  document.getElementById("verseModalBackdrop").hidden = true;
+}
+
 function renderSite(defenses) {
   var total = defenses.length;
   var track = document.getElementById("deckTrack");
@@ -427,6 +606,7 @@ function renderSite(defenses) {
       article.innerHTML = renderStandardCard(card, n, total);
     }
     linkCccRefs(article);
+    linkVerseRefs(article);
     track.appendChild(article);
   });
 }
@@ -605,7 +785,15 @@ function initApp(defenses) {
             var h = document.createElement("h3"); h.textContent = s.name;
             var p = document.createElement("p"); p.textContent = s.text;
             var refs = document.createElement("div"); refs.className = "sacrament-refs";
-            var v = document.createElement("span"); v.textContent = s.verse;
+            var v;
+            if (verseRefVerses(parseVerseRef(s.verse))) {
+              v = document.createElement("button"); v.type = "button"; v.className = "verse-ref";
+              v.setAttribute("data-verse", s.verse);
+              v.setAttribute("aria-label", "Read " + s.verse + " (CPDV)");
+              v.textContent = s.verse;
+            } else {
+              v = document.createElement("span"); v.textContent = s.verse;
+            }
             var cccNum = s.ccc.replace(/\D/g, "");
             var c = document.createElement("button"); c.type = "button"; c.className = "ccc-ref";
             c.textContent = s.ccc; c.setAttribute("data-ccc", cccNum);
@@ -1295,6 +1483,18 @@ var topicCarousels = document.getElementById("topicCarousels");
         document.addEventListener("keydown", function (event) {
           if (event.key === "Escape" && !document.getElementById("cccModalBackdrop").hidden) closeCccModal();
         });
+        /* Scripture popups: tappable verse references, CPDV text modal */
+        document.addEventListener("click", function (event) {
+          var b = event.target.closest ? event.target.closest(".verse-ref") : null;
+          if (b) openVerseModal(b.getAttribute("data-verse"));
+        });
+        document.getElementById("verseModalClose").addEventListener("click", closeVerseModal);
+        document.getElementById("verseModalBackdrop").addEventListener("click", function (event) {
+          if (event.target === this) closeVerseModal();
+        });
+        document.addEventListener("keydown", function (event) {
+          if (event.key === "Escape" && !document.getElementById("verseModalBackdrop").hidden) closeVerseModal();
+        });
         /* Glossary terms: tappable definitions inside card text */
         function closeGlossModal() { document.getElementById("glossModalBackdrop").hidden = true; }
         document.addEventListener("click", function (event) {
@@ -1339,10 +1539,14 @@ Promise.all([
   })).then(function (parts) { return [].concat.apply([], parts); }),
   fetch("glossary.json?v=" + ASSET_V)
     .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+    .catch(function () { return null; }),
+  fetch("verses.json?v=" + ASSET_V)
+    .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
     .catch(function () { return null; })
 ])
   .then(function (res) {
-    var defenses = res[0], glossary = res[1];
+    var defenses = res[0], glossary = res[1], verses = res[2];
+    window.VERSES = verses;
     window.GLOSSARY = glossary || [];
     if (glossary) {
       renderGlossary(glossary);

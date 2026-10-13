@@ -1469,6 +1469,19 @@ var topicCarousels = document.getElementById("topicCarousels");
         if (document.fonts && document.fonts.ready) document.fonts.ready.then(updateDeckHeight);
         renderTopics();
 
+        /* In-page links to a defense (e.g. "See defense #52"): the deck is a
+           carousel, so a native anchor jump can't surface a hidden card.
+           Drive the deck to the card instead. */
+        document.addEventListener("click", function (event) {
+          var a = event.target.closest ? event.target.closest('a[href^="#answer-"]') : null;
+          if (!a) return;
+          var slug = a.getAttribute("href").slice("#answer-".length);
+          var idx = defenses.findIndex(function (d) { return d.slug === slug; });
+          if (idx < 0) return;
+          event.preventDefault();
+          showCard(idx, { scroll: true });
+        });
+
         /* Catechism reader: tappable references, modal, paragraph jumper */
         document.addEventListener("click", function (event) {
           var b = event.target.closest ? event.target.closest(".ccc-ref") : null;

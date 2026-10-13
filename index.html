@@ -26,7 +26,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600;7..72,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <title>Christian Armory</title>
-    <link rel="stylesheet" href="styles.css?v=20261012y">
+    <link rel="stylesheet" href="styles.css?v=20261012z">
   </head>
   <body>
     <main>
@@ -53,6 +53,12 @@
           <a href="#start-here"><b>Start the eight-defense path</b><span>New here? Take the guided tour</span></a>
           <a href="#completed-index"><b>Browse by topic</b><span>Explore every defense by subject</span></a>
         </nav>
+
+        <button type="button" class="daily-strip" id="dailyStrip" hidden>
+          <span class="daily-kicker">Today&rsquo;s defense</span>
+          <span class="daily-title" id="dailyTitle"></span>
+          <span class="daily-open" aria-hidden="true">Open &rarr;</span>
+        </button>
 
         <p class="hero-note">Christian Armory is a field guide, not the final word. It&rsquo;s here to point you in the right direction and help you defend the faith with clarity and charity &mdash; but no website finishes the journey. Growing in faith takes a lifetime; for deeper questions, please speak with your parish priest.</p>
 
@@ -312,6 +318,10 @@
               <p>Read the objection, answer it in your own words &mdash; then flip for the one-liner. Keep score honestly. The armory trains, not just informs.</p>
             </div>
           </div>
+          <div class="quiz-modes" role="tablist" aria-label="Drill mode">
+            <button type="button" role="tab" aria-selected="true" id="modeFlash">Flashcards</button>
+            <button type="button" role="tab" aria-selected="false" id="modeExplain">Explain it back</button>
+          </div>
           <div class="quiz-card" id="quizCard">
             <p class="quiz-kicker">Objection</p>
             <p class="quiz-objection" id="quizObjection"></p>
@@ -330,6 +340,29 @@
               <button type="button" class="quiz-next" id="quizNext" hidden>Next objection →</button>
             </div>
             <p class="quiz-score" id="quizScore" aria-live="polite"></p>
+            <button type="button" class="quiz-reset" id="quizReset">Reset drill progress</button>
+          </div>
+          <div class="quiz-card" id="explainCard" hidden>
+            <p class="quiz-kicker">Objection</p>
+            <p class="quiz-objection" id="explainObjection"></p>
+            <label class="explain-label" for="explainText">Explain it in your own words &mdash; then compare with the Armory.</label>
+            <textarea id="explainText" rows="4" placeholder="Say it the way you'd say it to a friend…"></textarea>
+            <div class="quiz-answer" id="explainAnswer" hidden>
+              <p class="quiz-answer-label">The Armory&rsquo;s answer</p>
+              <p class="say-it" id="explainOneLiner"></p>
+              <p class="explain-summary" id="explainSummary"></p>
+              <div class="quiz-selfscore">
+                <span>How close were you?</span>
+                <button type="button" id="explainKnew" class="quiz-verdict">✓ Nailed it</button>
+                <button type="button" id="explainMissed" class="quiz-verdict">✗ Missed it</button>
+              </div>
+              <button type="button" class="quiz-link" id="explainFull">Read the full defense →</button>
+            </div>
+            <div class="quiz-actions">
+              <button type="button" class="support-btn" id="explainCompare">Compare with the Armory</button>
+              <button type="button" class="quiz-next" id="explainNext" hidden>Next objection →</button>
+            </div>
+            <p class="quiz-score" id="explainScore" aria-live="polite"></p>
           </div>
         </div>
       </section>
@@ -504,8 +537,8 @@
       </div>
     </main>
 
-    <script>window.ASSET_V = "20261012y";</script>
-    <script src="app.js?v=20261012y"></script>
+    <script>window.ASSET_V = "20261012z";</script>
+    <script src="app.js?v=20261012z"></script>
     <div class="ccc-modal-backdrop" id="cccModalBackdrop" hidden>
       <div class="ccc-modal" role="dialog" aria-modal="true" aria-labelledby="cccModalTitle">
         <div class="ccc-modal-head">

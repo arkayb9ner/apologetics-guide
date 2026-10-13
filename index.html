@@ -26,7 +26,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600;7..72,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <title>Christian Armory</title>
-    <link rel="stylesheet" href="styles.css?v=20261012ak">
+    <link rel="stylesheet" href="styles.css?v=20261012al">
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to main content</a>
@@ -316,13 +316,13 @@
 
       <section class="section sacraments-section" id="sacraments" aria-label="The seven sacraments">
         <div class="page">
-          <div class="section-head">
+          <details class="section-details"><summary class="section-head">
             <div class="section-no">Seven gifts</div>
             <div>
               <h2>Seven sacraments every Catholic should know</h2>
               <p>Seven sure encounters with Christ&rsquo;s grace, instituted by Him and entrusted to the Church. Swipe through them &mdash; each with its Scripture, and its defense in the armory.</p>
             </div>
-          </div>
+          </summary>
           <div class="sacraments-carousel">
             <div class="deck-controls" aria-label="Sacraments controls">
               <button class="deck-arrow" id="sacramentsPrev" type="button" aria-label="Previous sacrament">&larr;</button>
@@ -336,24 +336,26 @@
               <div class="sacraments-track" id="sacramentsTrack"></div>
             </div>
           </div>
+          </details>
         </div>
       </section>
 
       <section class="section" id="catechism" aria-label="The Catechism of the Catholic Church">
         <div class="page">
-          <div class="section-head">
+          <details class="section-details"><summary class="section-head">
             <div class="section-no">Source</div>
             <div>
               <h2>The Catechism, on hand</h2>
               <p>Every &ldquo;CCC&rdquo; reference on a defense card opens the real paragraph &mdash; tap one and see for yourself. Or look up any of the 2,865 paragraphs below.</p>
             </div>
-          </div>
+          </summary>
           <div class="ccc-reader">
             <label class="visually-hidden" for="cccJump">Paragraph number</label>
             <input id="cccJump" type="number" min="1" max="2865" placeholder="Paragraph # (1&ndash;2865)" inputmode="numeric" />
             <button type="button" class="support-btn" id="cccJumpBtn" style="border:0;cursor:pointer;">Read it</button>
           </div>
           <p class="ccc-note">Catechism text &copy; Libreria Editrice Vaticana. Official text at <a href="https://www.vatican.va/archive/ENG0015/_INDEX.HTM">vatican.va</a>.</p>
+          </details>
         </div>
       </section>
 
@@ -417,13 +419,13 @@
 
       <section class="section glossary-section" id="glossary">
         <div class="page">
-          <div class="section-head">
+          <details class="section-details"><summary class="section-head">
             <div class="section-no">Reference</div>
             <div>
               <h2>Glossary</h2>
               <p>The words the cards use and the objections assume. Know them, and you&rsquo;ll follow the argument wherever it goes.</p>
             </div>
-          </div>
+          </summary>
           <div class="glossary-carousel">
             <div class="deck-controls" aria-label="Glossary controls">
               <button class="deck-arrow" id="glossaryPrev" type="button" aria-label="Previous term">←</button>
@@ -437,18 +439,19 @@
               <div class="glossary-track" id="glossaryTrack"></div>
             </div>
           </div>
+          </details>
         </div>
       </section>
 
       <section class="section apostles-section" id="apostles">
         <div class="page">
-          <div class="section-head">
+          <details class="section-details"><summary class="section-head">
             <div class="section-no">Witnesses</div>
             <div>
               <h2>Meet the Apostles</h2>
               <p>The men behind the mission &mdash; what Scripture says, what tradition hands down, and an honest label for how certain each part is. Fourteen entries, not twelve: the Twelve as restored with Matthias, plus Paul the apostle to the Gentiles &mdash; and Judas Iscariot, whose betrayal belongs to the story too.</p>
             </div>
-          </div>
+          </summary>
           <div class="apostles-legend" aria-label="How to read the tradition labels">
             <span><b class="rel rel-high">Well attested</b> early, multiple sources</span>
             <span><b class="rel rel-mid">Early tradition</b> ancient but thinner</span>
@@ -467,19 +470,20 @@
               <div class="apostles-track" id="apostlesTrack"></div>
             </div>
           </div>
+          </details>
         </div>
       </section>
 
       <section class="section apostolic-section" id="apostolic-churches" aria-label="What the apostolic churches share">
         <div class="page">
           <div class="apostolic-frame">
-            <div class="section-head">
+            <details class="section-details"><summary class="section-head">
               <div class="section-no">Common ground</div>
               <div>
                 <h2>Three churches, one ancient faith</h2>
                 <p>The Catholic Church, the Eastern Orthodox churches, and the Oriental Orthodox churches all trace their bishops back to the apostles &mdash; and the Catholic Church recognizes their sacraments as valid. They are not in full communion with one another, and the differences are real. But the faith they share is older than every division between them.</p>
               </div>
-            </div>
+            </summary>
             <div class="church-chips" aria-label="The three churches">
               <span>Catholic</span>
               <span>Eastern Orthodox</span>
@@ -536,6 +540,7 @@
               </li>
             </ol>
             <p class="pillars-close">This shared faith is why the remaining differences deserve your hardest thinking &mdash; above all the papacy. <a href="#answer-orthodox-one-true-church">See defense #52</a>.</p>
+            </details>
           </div>
         </div>
       </section>
@@ -586,8 +591,8 @@
       </div>
     </main>
 
-    <script>window.ASSET_V = "20261012ak";</script>
-    <script src="app.js?v=20261012ak"></script>
+    <script>window.ASSET_V = "20261012al";</script>
+    <script src="app.js?v=20261012al"></script>
     <div class="ccc-modal-backdrop" id="cccModalBackdrop" hidden>
       <div class="ccc-modal" role="dialog" aria-modal="true" aria-labelledby="cccModalTitle">
         <div class="ccc-modal-head">

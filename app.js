@@ -382,13 +382,15 @@ function linkCccRefs(root) {
   var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
     acceptNode: function (node) {
       if (node.parentElement && node.parentElement.closest(".ccc-ref")) return NodeFilter.FILTER_REJECT;
-      return (/CCC\s+\d/.test(node.nodeValue)) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+      return (/CCC\s+\d/.test(node.nodeValue) || /Catechism\s*(?:[(:¶,]\s*)?\d/.test(node.nodeValue)) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
     }
   });
   var nodes = [];
   while (walker.nextNode()) nodes.push(walker.currentNode);
   nodes.forEach(function (node) {
-    var re = /CCC\s+(\d+)((?:\s*[-\u2013\u2014,;]\s*(?:cf\.\s*)?\d+)*)/g;
+    // Matches "CCC 2358" (with optional ranges) and "Catechism (2358)" / "Catechism ¶ 2358" /
+    // "Catechism 2358", so a future card written in the Catechism-first form still links.
+    var re = /(CCC\s+(\d+)|Catechism\s*(?:[(:¶,]\s*)?(\d+))((?:\s*[-\u2013\u2014,;]\s*(?:cf\.\s*)?\d+)*)/g;
     var frag = document.createDocumentFragment();
     var last = 0, m;
     while ((m = re.exec(node.nodeValue))) {
@@ -396,8 +398,8 @@ function linkCccRefs(root) {
       var btn = document.createElement("button");
       btn.type = "button";
       btn.className = "ccc-ref";
-      btn.setAttribute("data-ccc", m[1]);
-      btn.setAttribute("aria-label", "Read Catechism paragraph " + m[1]);
+      btn.setAttribute("data-ccc", m[2] || m[3]);
+      btn.setAttribute("aria-label", "Read Catechism paragraph " + (m[2] || m[3]));
       btn.textContent = m[0];
       frag.appendChild(btn);
       last = m.index + m[0].length;

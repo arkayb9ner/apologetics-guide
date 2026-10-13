@@ -177,6 +177,9 @@
       .hero-result-num { color: var(--gold); font-family: "Literata", serif; font-size: .78rem; padding-top: 2px; }
       .hero-result-title { font-weight: 700; }
       .hero-no-results { margin: 0; padding: 12px 14px; color: var(--muted); font-size: .86rem; }
+      .hero-no-results p { margin: 0 0 6px; }
+      .hero-no-results p:last-child { margin-bottom: 0; }
+      .hero-no-results a { color: var(--wine); font-weight: 600; }
       .mobile-nav-note { display: none; }
 
       .jump-index { padding: 28px 0 30px; border-bottom: 1px solid var(--line-strong); }

@@ -225,7 +225,7 @@
   ],
   "response": [
    {
-    "body": "<p>Vatican II is explicit: Muslims “profess to hold the faith of Abraham, and together with us they adore the one, merciful God” (<i>Lumen Gentium</i> 16; CCC 841). <i>Nostra Aetate</i> §3 adds that they “adore the one God, living and subsisting in Himself.” Not a different deity. Not an identical understanding either — the same God, known incompletely. This is defined teaching, not interfaith politeness invented for dialogue brochures.</p>",
+    "body": "<p>Vatican II is explicit: Muslims “profess to hold the faith of Abraham, and together with us they adore the one, merciful God” (<i>Lumen Gentium</i> 16; CCC 841). <i>Nostra Aetate</i> §3 adds that they “adore the one God, living and subsisting in Himself.” Not a different deity. Not an identical understanding either — the same God, known incompletely. This is authoritative teaching, not interfaith politeness invented for dialogue brochures.</p>",
     "heading": "What the Church actually teaches"
    },
    {
@@ -410,6 +410,62 @@
    }
   ],
   "level": "advanced",
+  "basis": "doctrine",
+  "audience": "g"
+ },
+ {
+  "title": "The Holy Spirit isn’t a person — He’s just God’s active force",
+  "slug": "holy-spirit-person",
+  "jumpLabel": "Holy Spirit?",
+  "topic": "God & Reason",
+  "objection": "Your own Bible calls the holy spirit an “it” — the Greek word pneuma is neuter. It’s described as being “poured out” (Acts 2), as wind, fire, water. You don’t pour out a person. The holy spirit is God’s active force, His power in action — like electricity from a generator. Calling it a “person” and worshipping it as God is a later invention, read back into the text by the councils.",
+  "summary": "The Spirit teaches, speaks, testifies, guides, intercedes, wills, forbids, can be lied to and grieved — things no mere force does. John deliberately uses the masculine “he” for the Paraclete, and Acts 5:3-4 calls the Spirit God in the same breath it calls Him lied-to. The councils defined what Scripture already shows.",
+  "response": [
+   {
+    "heading": "The Spirit does things only a person does",
+    "body": "<p>He teaches (John 14:26), testifies (John 15:26), speaks (Acts 13:2), guides into all truth (John 16:13), intercedes (Romans 8:26–27), distributes gifts “just as he wills” (1 Corinthians 12:11), forbids and permits (Acts 16:6–7). He can be lied to (Acts 5:3), grieved (Ephesians 4:30), and blasphemed — and blasphemy against Him is the one sin that will not be forgiven (Matthew 12:31–32). Run the test honestly: can electricity grieve? Can a force be lied to? Can power be blasphemed? Persons do these things; forces don’t.</p>"
+   },
+   {
+    "heading": "The New Testament deliberately says “he,” not “it”",
+    "body": "<p>The objection leans on Greek grammar: <i>pneuma</i> (spirit) is neuter, so “it” is natural. But John’s Gospel, in the Paraclete passages, repeatedly breaks the grammatical expectation and uses the masculine <i>ekeinos</i> — “when <i>he</i>, the Spirit of truth, comes” (John 16:13). Greek didn’t require that; John chose it. When a writer overrides his own language’s grammar to say “he,” he’s telling you something about the subject. Persons get “he”; forces get “it.”</p>"
+   },
+   {
+    "heading": "Acts 5 settles personhood and divinity in two verses",
+    "body": "<p>Peter confronts Ananias: “why has Satan filled your heart to lie to the Holy Spirit?” (Acts 5:3) — and then, one verse later: “you have not lied to men but to God” (Acts 5:4). Follow the logic: you cannot lie to an impersonal force, and the Spirit who was lied to is identified, in the same breath, as God. Personhood and divinity, asserted together, in the earliest Christian preaching — not smuggled in by a fourth-century council.</p>"
+   },
+   {
+    "heading": "Metaphors don’t determine ontology",
+    "body": "<p>Yes, the Spirit is pictured as wind, fire, water, oil, a dove — and “poured out” at Pentecost. But the Father is pictured as fire (Deuteronomy 4:24), a rock, a shepherd; Jesus as a lamb, a door, a vine. Nobody concludes the Father is literally combustion or that Christ is carpentry. Biblical imagery describes <i>how</i> God acts and is experienced, not <i>what</i> He is. And “poured out” describes the <i>gift</i> given, not the nature of the Giver.</p>"
+   },
+   {
+    "heading": "The councils defined what Scripture already shows",
+    "body": "<p>Constantinople (381) confesses the Spirit as “the Lord, the giver of life, who proceeds from the Father, who with the Father and the Son is adored and glorified.” That wasn’t invention — it was definition of what Matthew 28:19 had already placed side by side: baptize “in the <i>name</i> [singular] of the Father and of the Son and of the Holy Spirit.” One divine name, three who bear it. The Church didn’t vote a force into personhood; she recognized the Person the apostles had been talking to all along.</p>"
+   }
+  ],
+  "verses": [
+   "Acts 5:3-4",
+   "John 16:13",
+   "Ephesians 4:30",
+   "Matthew 28:19"
+  ],
+  "ccc": "CCC 243-245",
+  "simple": "The Bible shows the Spirit teaching, speaking, deciding, being lied to and grieved — persons do that, forces don’t. John even breaks Greek grammar to call Him “he.” And Acts 5 calls the lied-to Spirit “God” in the same breath. The councils didn’t invent His personhood; they defined what was already there.",
+  "oneLiner": "You can’t lie to electricity or grieve a power current — but Scripture says the Spirit is lied to, grieved, and called God.",
+  "related": [
+   {
+    "title": "The Trinity is a logical contradiction — and it’s not even in the Bible",
+    "description": "Three Persons, one God"
+   },
+   {
+    "title": "Jesus is not God",
+    "description": "The same JW playbook, answered on Christ"
+   },
+   {
+    "title": "Christianity was invented at Nicaea — councils made it man-made",
+    "description": "Defined, not invented"
+   }
+  ],
+  "level": "intermediate",
   "basis": "doctrine",
   "audience": "g"
  }

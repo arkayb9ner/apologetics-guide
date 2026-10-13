@@ -281,6 +281,26 @@ function scrollToEl(el) {
   if (!el || !el.scrollIntoView) return;
   el.scrollIntoView({ behavior: REDUCE_MOTION ? "auto" : "smooth", block: "start" });
 }
+
+/* Bookmarks ("My Armory"): saved defense slugs, persisted per device. */
+var BOOKMARK_KEY = "ca_bookmarks_v1";
+function loadBookmarks() {
+  try {
+    var v = JSON.parse(localStorage.getItem(BOOKMARK_KEY));
+    return Array.isArray(v) ? v.filter(function (s) { return typeof s === "string"; }) : [];
+  } catch (e) { return []; }
+}
+function saveBookmarks(list) {
+  try { localStorage.setItem(BOOKMARK_KEY, JSON.stringify(list)); } catch (e) {}
+}
+function isBookmarked(slug) { return loadBookmarks().indexOf(slug) !== -1; }
+function toggleBookmark(slug) {
+  var list = loadBookmarks();
+  var i = list.indexOf(slug);
+  if (i !== -1) list.splice(i, 1); else list.push(slug);
+  saveBookmarks(list);
+  return i === -1;
+}
 function renderStandardCard(card, n, total) {
   var points = linkGlossaryTerms(card.response.map(function (p, k) {
     return '<li><span class="num">' + pad2(k + 1) + '</span> <div><b>' + p.heading + '</b> ' + p.body + '</div></li>';
@@ -307,6 +327,7 @@ function renderStandardCard(card, n, total) {
     '<p class="entry-lede">' + linkGlossaryTerms(card.objection) + "</p>" +
     '<button type="button" class="share-btn" data-share>⧉ Copy link to this defense</button>' +
     (CAN_READ_ALOUD ? '<button type="button" class="share-btn" data-read>🔊 Listen</button>' : "") +
+    '<button type="button" class="share-btn" data-bookmark aria-pressed="' + (isBookmarked(card.slug) ? "true" : "false") + '">' + (isBookmarked(card.slug) ? "★ Saved to My Armory" : "☆ Save to My Armory") + "</button>" +
     "</div><blockquote>" + card.summary + "</blockquote></div>" +
     '<div class="entry-body">' +
     '<nav class="entry-nav" aria-label="' + card.title.replace(/"/g, "") + ' answer sections" role="tablist">' +
@@ -852,6 +873,58 @@ function initApp(defenses) {
         if (pocketSearch) pocketSearch.addEventListener("input", renderPocket);
         renderPocket();
 
+        /* My Armory: saved defenses, persisted per device. */
+        var myArmoryList = document.getElementById("myArmoryList");
+        var myArmoryCount = document.getElementById("myArmoryCount");
+        function refreshBookmarkButton(slug) {
+          var btn = document.querySelector('.entry[data-entry="' + slug + '"] [data-bookmark]');
+          if (!btn) return;
+          var saved = isBookmarked(slug);
+          btn.setAttribute("aria-pressed", saved ? "true" : "false");
+          btn.textContent = saved ? "★ Saved to My Armory" : "☆ Save to My Armory";
+        }
+        function renderMyArmory() {
+          if (!myArmoryList) return;
+          var saved = loadBookmarks();
+          var entries = [];
+          saved.forEach(function (slug) {
+            var idx = defenses.findIndex(function (d) { return d.slug === slug; });
+            if (idx >= 0) entries.push({ card: defenses[idx], index: idx });
+          });
+          if (entries.length !== saved.length) saveBookmarks(entries.map(function (e) { return e.card.slug; }));
+          if (myArmoryCount) myArmoryCount.textContent = entries.length ? "(" + entries.length + ")" : "";
+          myArmoryList.innerHTML = "";
+          if (!entries.length) {
+            var empty = document.createElement("p");
+            empty.className = "my-armory-empty";
+            empty.textContent = "No saved defenses yet — tap ☆ Save to My Armory on any defense to keep it here.";
+            myArmoryList.appendChild(empty);
+            return;
+          }
+          entries.forEach(function (e) {
+            var row = document.createElement("div");
+            row.className = "my-armory-item";
+            var num = document.createElement("span"); num.className = "my-armory-num"; num.textContent = pad2(e.index + 1);
+            var title = document.createElement("button");
+            title.type = "button"; title.className = "my-armory-title";
+            title.textContent = e.card.title;
+            title.setAttribute("aria-label", "Open defense " + (e.index + 1) + ": " + e.card.title);
+            title.addEventListener("click", function () { showCard(e.index, { scroll: true }); });
+            var remove = document.createElement("button");
+            remove.type = "button"; remove.className = "my-armory-remove";
+            remove.textContent = "Remove";
+            remove.setAttribute("aria-label", "Remove from My Armory: " + e.card.title);
+            remove.addEventListener("click", function () {
+              toggleBookmark(e.card.slug);
+              refreshBookmarkButton(e.card.slug);
+              renderMyArmory();
+            });
+            row.appendChild(num); row.appendChild(title); row.appendChild(remove);
+            myArmoryList.appendChild(row);
+          });
+        }
+        renderMyArmory();
+
         /* Study-group handout: one-liners for one topic, generated from
            the same card data so it can never drift from the live deck. */
         var handoutTopic = document.getElementById("handoutTopic");
@@ -1094,7 +1167,13 @@ var topicCarousels = document.getElementById("topicCarousels");
           var h = document.createElement("h3"); h.textContent = topic;
           var count = document.createElement("span"); count.className = "tcount";
           count.textContent = items.length + " defenses";
-          head.appendChild(h); head.appendChild(count);
+          var headRight = document.createElement("span"); headRight.className = "topic-head-right";
+          var listToggle = document.createElement("button");
+          listToggle.type = "button"; listToggle.className = "topic-toggle";
+          listToggle.setAttribute("aria-expanded", "false");
+          listToggle.textContent = "Show all titles";
+          headRight.appendChild(count); headRight.appendChild(listToggle);
+          head.appendChild(h); head.appendChild(headRight);
           var controls = document.createElement("div");
           controls.className = "deck-controls";
           controls.setAttribute("aria-label", topic + " carousel controls");
@@ -1134,7 +1213,28 @@ var topicCarousels = document.getElementById("topicCarousels");
             track.appendChild(b);
           });
           viewport.appendChild(track);
-          wrap.appendChild(head); wrap.appendChild(controls); wrap.appendChild(viewport);
+          /* List view: every title in this topic, one tap to open. Toggling
+             swaps the carousel (viewport + controls) for the list. */
+          var allList = document.createElement("ul");
+          allList.className = "topic-all";
+          items.forEach(function (it) {
+            var li = document.createElement("li");
+            var tb = document.createElement("button");
+            tb.type = "button"; tb.className = "topic-all-title";
+            var tnum = document.createElement("span"); tnum.className = "topic-num"; tnum.textContent = pad2(it.index + 1);
+            var ttitle = document.createElement("span"); ttitle.className = "topic-title"; ttitle.textContent = it.card.jumpLabel;
+            tb.appendChild(tnum); tb.appendChild(ttitle);
+            tb.setAttribute("aria-label", "Open defense " + (it.index + 1) + ": " + it.card.jumpLabel);
+            tb.addEventListener("click", function () { showCard(it.index, { scroll: true }); });
+            li.appendChild(tb); allList.appendChild(li);
+          });
+          listToggle.addEventListener("click", function () {
+            var expanded = !wrap.classList.contains("is-list-view");
+            wrap.classList.toggle("is-list-view", expanded);
+            listToggle.setAttribute("aria-expanded", expanded ? "true" : "false");
+            listToggle.textContent = expanded ? "Show carousel" : "Show all titles";
+          });
+          wrap.appendChild(head); wrap.appendChild(controls); wrap.appendChild(viewport); wrap.appendChild(allList);
           topicCarousels.appendChild(wrap);
           var slides = Array.prototype.slice.call(track.children);
           var current = 0;
@@ -1264,6 +1364,34 @@ var topicCarousels = document.getElementById("topicCarousels");
           return value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[’‘]/g, "'");
         }
 
+        /* One-edit distance (insertion, deletion, substitution, or an adjacent
+           transposition) — typo tolerance for search. Short words are
+           excluded: one edit is too much of a 3-letter word. */
+        function withinOneEdit(a, b) {
+          if (a === b) return true;
+          var la = a.length, lb = b.length;
+          if (Math.abs(la - lb) > 1) return false;
+          if (Math.min(la, lb) < 4) return false;
+          if (la === lb) {
+            var diffs = 0, first = -1;
+            for (var i = 0; i < la; i++) {
+              if (a[i] !== b[i]) { diffs++; if (first === -1) first = i; }
+              if (diffs > 2) return false;
+            }
+            if (diffs === 1) return true;
+            if (diffs === 2 && first + 1 < la && a[first] === b[first + 1] && a[first + 1] === b[first]) return true;
+            return false;
+          }
+          var short = la < lb ? a : b, long = la < lb ? b : a;
+          var i = 0, j = 0, skipped = false;
+          while (i < short.length && j < long.length) {
+            if (short[i] === long[j]) { i++; j++; }
+            else if (!skipped) { skipped = true; j++; }
+            else return false;
+          }
+          return true;
+        }
+
         function findHeroMatches(query) {
           var normalizedQuery = expandAskContractions(normalizeSearchText(query.trim()));
           if (!normalizedQuery) return [];
@@ -1273,12 +1401,14 @@ var topicCarousels = document.getElementById("topicCarousels");
             var title = card.querySelector("h3").textContent.trim();
             var normalizedTitle = normalizeSearchText(title);
             var normalizedCard = normalizeSearchText(card.textContent);
-            var titleHits = 0, bodyHits = 0;
+            var titleWords = normalizedTitle.split(/[^a-z0-9']+/).filter(Boolean).map(function (w) { return w.replace(/^'+|'+$/g, ""); });
+            var titleHits = 0, fuzzyHits = 0, bodyHits = 0;
             words.forEach(function (word) {
               if (normalizedTitle.indexOf(word) !== -1) titleHits++;
+              else if (titleWords.some(function (tw) { return withinOneEdit(word, tw); })) fuzzyHits++;
               else if (normalizedCard.indexOf(word) !== -1) bodyHits++;
             });
-            var score = titleHits * 3 + bodyHits;
+            var score = titleHits * 3 + fuzzyHits * 2 + bodyHits;
             return score > 0 ? { index: index, title: title, score: score } : null;
           }).filter(Boolean).sort(function (a, b) { return b.score - a.score || a.index - b.index; });
         }
@@ -1372,6 +1502,22 @@ var topicCarousels = document.getElementById("topicCarousels");
             closeHeroResults();
           }
         });
+        /* ArrowUp/ArrowDown cycle focus through the result buttons, so the
+           search works fully from the keyboard. */
+        heroSearchResults.addEventListener("keydown", function (event) {
+          if (event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
+          var results = Array.prototype.slice.call(heroSearchResults.querySelectorAll(".hero-result"));
+          if (!results.length) return;
+          var idx = results.indexOf(document.activeElement);
+          event.preventDefault();
+          if (event.key === "ArrowDown") {
+            results[idx === -1 || idx === results.length - 1 ? 0 : idx + 1].focus();
+          } else if (idx <= 0) {
+            heroSearch.focus();
+          } else {
+            results[idx - 1].focus();
+          }
+        });
         var heroSearchBtn = document.getElementById("heroSearchBtn");
         if (heroSearchBtn) {
           heroSearchBtn.addEventListener("click", function () {
@@ -1443,6 +1589,18 @@ var topicCarousels = document.getElementById("topicCarousels");
 
         track.addEventListener("click", function (event) {
           var target = event.target;
+          var bmBtn = target && target.closest ? target.closest("[data-bookmark]") : null;
+          if (bmBtn) {
+            var entry = bmBtn.closest(".entry");
+            var slug = entry ? entry.getAttribute("data-entry") : null;
+            if (slug) {
+              var nowSaved = toggleBookmark(slug);
+              bmBtn.setAttribute("aria-pressed", nowSaved ? "true" : "false");
+              bmBtn.textContent = nowSaved ? "★ Saved to My Armory" : "☆ Save to My Armory";
+              renderMyArmory();
+            }
+            return;
+          }
           var rel = target && target.closest ? target.closest("[data-related-title]") : null;
           if (rel) {
             var title = rel.getAttribute("data-related-title");

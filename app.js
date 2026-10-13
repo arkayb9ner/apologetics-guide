@@ -278,7 +278,7 @@ function renderApostles(items) {
 var CAN_READ_ALOUD = typeof window !== "undefined" && "speechSynthesis" in window;
 var REDUCE_MOTION = typeof window !== "undefined" && window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 function scrollToEl(el) {
-  if (!el) return;
+  if (!el || !el.scrollIntoView) return;
   el.scrollIntoView({ behavior: REDUCE_MOTION ? "auto" : "smooth", block: "start" });
 }
 function renderStandardCard(card, n, total) {
@@ -357,46 +357,6 @@ function cccParagraph(n, cb) {
   }).catch(function () { cb(n, null); });
 }
 
-/* Modal focus trap (F1, UI audit): while any modal is open, Tab cycles inside
-   it; closing returns focus to the element that opened the modal, and <main>
-   is inert so keyboard/screen-reader users cannot wander into the page behind. */
-var modalTrigger = null;
-function modalOpened() {
-  modalTrigger = document.activeElement;
-  var main = document.getElementById("main");
-  if (main) main.setAttribute("inert", "");
-}
-function modalClosed() {
-  var main = document.getElementById("main");
-  if (main) main.removeAttribute("inert");
-  if (modalTrigger && modalTrigger.focus) {
-    try { modalTrigger.focus(); } catch (e) { /* trigger may be gone; ignore */ }
-  }
-  modalTrigger = null;
-}
-document.addEventListener("keydown", function (event) {
-  if (event.key !== "Tab") return;
-  var open = document.querySelector("#cccModalBackdrop:not([hidden]), #verseModalBackdrop:not([hidden]), #glossModalBackdrop:not([hidden])");
-  if (!open) return;
-  var focusables = Array.prototype.filter.call(
-    open.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'),
-    function (el) {
-      if (el.disabled) return false;
-      var cs = window.getComputedStyle(el);
-      return cs.display !== "none" && cs.visibility !== "hidden";
-    }
-  );
-  if (!focusables.length) return;
-  if (!open.contains(document.activeElement)) {
-    event.preventDefault();
-    focusables[0].focus();
-    return;
-  }
-  var first = focusables[0], last = focusables[focusables.length - 1];
-  if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
-  else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
-});
-
 function renderCccModal(n) {
   cccCurrent = Math.max(1, Math.min(2865, n));
   var body = document.getElementById("cccModalBody");
@@ -412,7 +372,6 @@ function renderCccModal(n) {
 }
 
 function openCccModal(n) {
-  modalOpened();
   renderCccModal(n);
   document.getElementById("cccModalBackdrop").hidden = false;
   document.getElementById("cccModalClose").focus();
@@ -420,7 +379,6 @@ function openCccModal(n) {
 
 function closeCccModal() {
   document.getElementById("cccModalBackdrop").hidden = true;
-  modalClosed();
 }
 
 function linkCccRefs(root) {
@@ -600,7 +558,6 @@ function linkVersePass(root, testRe, matchRe) {
 }
 
 function openVerseModal(refText) {
-  modalOpened();
   var parsed = parseVerseRef(refText);
   var list = parsed && verseRefVerses(parsed);
   var body = document.getElementById("verseModalBody");
@@ -629,7 +586,6 @@ function openVerseModal(refText) {
 
 function closeVerseModal() {
   document.getElementById("verseModalBackdrop").hidden = true;
-  modalClosed();
 }
 
 function renderSite(defenses) {
@@ -699,15 +655,76 @@ function initApp(defenses) {
             var t = document.createElement("span"); t.className = "start-label"; t.textContent = step.label;
             b.appendChild(n); b.appendChild(t);
             b.setAttribute("aria-label", "Start here step " + (k + 1) + ": " + step.label);
-            (function (slug) {
-              b.addEventListener("click", function () {
-                var idx = defenses.findIndex(function (d) { return d.slug === slug; });
-                if (idx >= 0) showCard(idx, { scroll: true });
-              });
-            })(step.slug);
+            (function (stepNum) {
+              b.addEventListener("click", function () { enterPathStep(stepNum); });
+            })(k);
             li.appendChild(b);
             startSteps.appendChild(li);
           });
+        }
+
+        /* Guided path continuity: Step N of 8 banner inside the deck, with
+           Next lesson / Back to the path, and Simply-put entry. Any other
+           deck navigation leaves the path (see showCard). */
+        var activePathStep = -1;
+        var pathBanner = document.getElementById("pathBanner");
+        function exitPath() {
+          activePathStep = -1;
+          if (pathBanner) pathBanner.hidden = true;
+        }
+        function renderPathBanner() {
+          if (!pathBanner || activePathStep < 0) return;
+          var step = START_HERE[activePathStep];
+          var last = activePathStep === START_HERE.length - 1;
+          pathBanner.innerHTML = "";
+          var head = document.createElement("div");
+          head.className = "path-banner-head";
+          var stepEl = document.createElement("span");
+          stepEl.className = "path-banner-step";
+          stepEl.textContent = "Guided path · Step " + (activePathStep + 1) + " of " + START_HERE.length;
+          var titleEl = document.createElement("span");
+          titleEl.className = "path-banner-title";
+          titleEl.textContent = step.label;
+          head.appendChild(stepEl);
+          head.appendChild(titleEl);
+          var actions = document.createElement("div");
+          actions.className = "path-banner-actions";
+          var back = document.createElement("button");
+          back.type = "button";
+          back.className = "path-banner-btn";
+          back.textContent = "← Back to the path";
+          back.addEventListener("click", function () {
+            exitPath();
+            var startHere = document.getElementById("start-here");
+            if (startHere) scrollToEl(startHere);
+          });
+          var next = document.createElement("button");
+          next.type = "button";
+          next.className = "path-banner-btn path-banner-next";
+          next.textContent = last ? "Finish the path →" : "Next lesson →";
+          next.addEventListener("click", function () {
+            if (last) {
+              exitPath();
+              var sh = document.getElementById("start-here");
+              if (sh) scrollToEl(sh);
+            } else enterPathStep(activePathStep + 1);
+          });
+          actions.appendChild(back);
+          actions.appendChild(next);
+          pathBanner.appendChild(head);
+          pathBanner.appendChild(actions);
+          pathBanner.hidden = false;
+        }
+        function enterPathStep(k) {
+          activePathStep = k;
+          var idx = defenses.findIndex(function (d) { return d.slug === START_HERE[k].slug; });
+          if (idx >= 0) {
+            showCard(idx, { scroll: true, pathStep: k });
+            var cardEl = cards[idx];
+            var simpleTab = cardEl ? cardEl.querySelector('[data-panel="simple"]') : null;
+            if (simpleTab) simpleTab.click();
+          }
+          renderPathBanner();
         }
 
         /* Pocket armory */
@@ -744,7 +761,7 @@ function initApp(defenses) {
           (function (idx, txt, btn) {
             open.addEventListener("click", function () { showCard(idx, { scroll: true }); });
             copy.addEventListener("click", function () { pocketCopy(txt, btn); });
-          })(index, card.oneLiner, copy);
+          })(index, card.oneLiner + "\n\n— Christian Armory: " + window.location.origin + window.location.pathname + "#answer-" + card.slug, copy);
           meta.appendChild(open);
           meta.appendChild(copy);
           item.appendChild(quote);
@@ -787,6 +804,78 @@ function initApp(defenses) {
         }
         if (pocketSearch) pocketSearch.addEventListener("input", renderPocket);
         renderPocket();
+
+        /* Study-group handout: one-liners for one topic, generated from
+           the same card data so it can never drift from the live deck. */
+        var handoutTopic = document.getElementById("handoutTopic");
+        var handoutDoc = document.getElementById("handoutDoc");
+        var handoutPrint = document.getElementById("handoutPrint");
+        function renderHandout() {
+          if (!handoutTopic || !handoutDoc) return;
+          var topic = handoutTopic.value;
+          var items = [];
+          defenses.forEach(function (d, i) {
+            if (topic === "all" || d.topic === topic) items.push({ card: d, index: i });
+          });
+          handoutDoc.innerHTML = "";
+          var hTitle = document.createElement("h3");
+          hTitle.className = "handout-doc-title";
+          hTitle.textContent = "Christian Armory — Pocket Handout";
+          var hTopic = document.createElement("p");
+          hTopic.className = "handout-doc-topic";
+          hTopic.textContent = topic === "all" ? "All topics · " + items.length + " one-liners" : topic + " · " + items.length + " one-liners";
+          var hNote = document.createElement("p");
+          hNote.className = "handout-doc-note";
+          hNote.textContent = "A field guide, not the final word. For deeper questions, speak with your parish priest.";
+          var list = document.createElement("ol");
+          list.className = "handout-doc-list";
+          items.forEach(function (it) {
+            var li = document.createElement("li");
+            var num = document.createElement("span");
+            num.className = "handout-doc-num";
+            num.textContent = "#" + (it.index + 1);
+            var title = document.createElement("strong");
+            title.textContent = it.card.title;
+            var quote = document.createElement("span");
+            quote.textContent = " — " + it.card.oneLiner;
+            li.appendChild(num);
+            li.appendChild(title);
+            li.appendChild(quote);
+            list.appendChild(li);
+          });
+          var foot = document.createElement("p");
+          foot.className = "handout-doc-foot";
+          foot.textContent = "christianarmory.org · Free for everyone, always.";
+          handoutDoc.appendChild(hTitle);
+          handoutDoc.appendChild(hTopic);
+          handoutDoc.appendChild(hNote);
+          handoutDoc.appendChild(list);
+          handoutDoc.appendChild(foot);
+        }
+        if (handoutTopic && handoutDoc) {
+          var allOpt = document.createElement("option");
+          allOpt.value = "all";
+          allOpt.textContent = "All topics";
+          handoutTopic.appendChild(allOpt);
+          TOPICS.forEach(function (t) {
+            var opt = document.createElement("option");
+            opt.value = t;
+            opt.textContent = t;
+            handoutTopic.appendChild(opt);
+          });
+          handoutTopic.addEventListener("change", renderHandout);
+          renderHandout();
+        }
+        if (handoutPrint) {
+          handoutPrint.addEventListener("click", function () {
+            document.body.classList.add("print-handout");
+            window.print();
+          });
+          window.addEventListener("afterprint", function () {
+            document.body.classList.remove("print-handout");
+          });
+        }
+
         /* Seven sacraments carousel */
         var SACRAMENTS = [
           { icon: "\uD83D\uDCA7", name: "Baptism", tag: "The door",
@@ -926,19 +1015,9 @@ var topicCarousels = document.getElementById("topicCarousels");
           var head = document.createElement("div");
           head.className = "topic-carousel-head";
           var h = document.createElement("h3"); h.textContent = topic;
-          var headRight = document.createElement("div");
-          headRight.className = "topic-head-right";
           var count = document.createElement("span"); count.className = "tcount";
           count.textContent = items.length + " defenses";
-          /* Show-all toggle (F2, UI audit): one click lists every defense in
-             the topic instead of paging through them one at a time. */
-          var showAllBtn = document.createElement("button");
-          showAllBtn.type = "button"; showAllBtn.className = "topic-show-all";
-          showAllBtn.textContent = "Show all";
-          showAllBtn.setAttribute("aria-expanded", "false");
-          showAllBtn.setAttribute("aria-label", "Show all defenses in " + topic);
-          headRight.appendChild(count); headRight.appendChild(showAllBtn);
-          head.appendChild(h); head.appendChild(headRight);
+          head.appendChild(h); head.appendChild(count);
           var controls = document.createElement("div");
           controls.className = "deck-controls";
           controls.setAttribute("aria-label", topic + " carousel controls");
@@ -1022,18 +1101,6 @@ var topicCarousels = document.getElementById("topicCarousels");
             if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) show(current + (dx < 0 ? 1 : -1));
           }, { passive: true });
           show(0);
-          var topicExpanded = false;
-          showAllBtn.addEventListener("click", function () {
-            topicExpanded = !topicExpanded;
-            wrap.classList.toggle("show-all", topicExpanded);
-            showAllBtn.textContent = topicExpanded ? "Show less" : "Show all";
-            showAllBtn.setAttribute("aria-expanded", String(topicExpanded));
-            if (topicExpanded) {
-              slides.forEach(function (s) { s.setAttribute("aria-hidden", "false"); s.removeAttribute("inert"); });
-            } else {
-              show(current);
-            }
-          });
         }
 
         TOPICS.forEach(function (t) {
@@ -1079,6 +1146,7 @@ var topicCarousels = document.getElementById("topicCarousels");
         }
         function showCard(index, options) {
           options = options || {};
+          if (options.pathStep === undefined && activePathStep >= 0) exitPath();
           stopReading();
           currentCard = Math.max(0, Math.min(cards.length - 1, index));
           track.style.transform = "translateX(-" + (currentCard * 100) + "%)";
@@ -1176,18 +1244,29 @@ var topicCarousels = document.getElementById("topicCarousels");
             emptyResult.appendChild(emptyP2);
             heroSearchResults.appendChild(emptyResult);
           } else {
-            heroMatches.slice(0, 6).forEach(function (match) {
-              var button = document.createElement("button");
-              button.type = "button";
-              button.className = "hero-result";
-              button.setAttribute("role", "option");
-              button.setAttribute("aria-label", "Open defense " + (match.index + 1) + ": " + match.title);
-              button.innerHTML = '<span class="hero-result-num"></span><span class="hero-result-title"></span>';
-              button.querySelector(".hero-result-num").textContent = String(match.index + 1).padStart(2, "0");
-              button.querySelector(".hero-result-title").textContent = match.title;
-              button.addEventListener("click", function () { openHeroMatch(match); });
-              heroSearchResults.appendChild(button);
-            });
+            var topMatches = heroMatches.slice(0, 3);
+            var relatedMatches = heroMatches.slice(3, 6);
+            function addResultGroup(label, list) {
+              if (!list.length) return;
+              var heading = document.createElement("div");
+              heading.className = "hero-result-group-label";
+              heading.textContent = label;
+              heroSearchResults.appendChild(heading);
+              list.forEach(function (match) {
+                var button = document.createElement("button");
+                button.type = "button";
+                button.className = "hero-result";
+                button.setAttribute("role", "option");
+                button.setAttribute("aria-label", "Open defense " + (match.index + 1) + ": " + match.title);
+                button.innerHTML = '<span class="hero-result-num"></span><span class="hero-result-title"></span>';
+                button.querySelector(".hero-result-num").textContent = String(match.index + 1).padStart(2, "0");
+                button.querySelector(".hero-result-title").textContent = match.title;
+                button.addEventListener("click", function () { openHeroMatch(match); });
+                heroSearchResults.appendChild(button);
+              });
+            }
+            addResultGroup("Best matches", topMatches);
+            addResultGroup("Related questions", relatedMatches);
           }
           heroSearchResults.setAttribute("data-open", "true");
           heroSearch.setAttribute("aria-expanded", "true");
@@ -1216,6 +1295,13 @@ var topicCarousels = document.getElementById("topicCarousels");
             closeHeroResults();
           }
         });
+        var heroSearchBtn = document.getElementById("heroSearchBtn");
+        if (heroSearchBtn) {
+          heroSearchBtn.addEventListener("click", function () {
+            renderHeroMatches();
+            if (heroMatches.length) openHeroMatch(heroMatches[0]);
+          });
+        }
         heroTopicChips.forEach(function (chip) {
           chip.addEventListener("click", function () {
             heroSearch.value = chip.getAttribute("data-hero-query");
@@ -1244,19 +1330,10 @@ var topicCarousels = document.getElementById("topicCarousels");
             event.preventDefault();
             var n = parseInt(deckJumpInput.value, 10);
             if (n >= 1 && n <= cards.length) {
-              /* Clear the error state before navigating, so a throw in
-                 showCard can never leave a stale error on screen. */
-              var deckJumpError = document.getElementById("deckJumpError");
-              if (deckJumpError) deckJumpError.textContent = "";
-              deckJumpInput.removeAttribute("aria-invalid");
+              showCard(n - 1, { scroll: true });
               deckJumpInput.value = "";
               deckJumpInput.blur();
-              showCard(n - 1, { scroll: true });
             } else {
-              /* F11, UI audit: announce the error instead of only refocusing. */
-              var deckJumpError2 = document.getElementById("deckJumpError");
-              if (deckJumpError2) deckJumpError2.textContent = "Enter a number from 1 to " + cards.length + ".";
-              deckJumpInput.setAttribute("aria-invalid", "true");
               deckJumpInput.focus();
               deckJumpInput.select();
             }
@@ -1461,8 +1538,6 @@ var topicCarousels = document.getElementById("topicCarousels");
             showCard(quizIndex, { scroll: true });
           });
           if (quizReset) quizReset.addEventListener("click", function () {
-            /* F9, UI audit: mastery is one click from total, silent loss. */
-            if (!window.confirm("Reset all drill progress? Your mastered cards will be forgotten.")) return;
             mastered = [];
             saveMastered(mastered);
             updateDrillScore();
@@ -1542,7 +1617,7 @@ var topicCarousels = document.getElementById("topicCarousels");
         var hashId = window.location.hash ? window.location.hash.slice(1) : "";
         var hashIndex = cards.findIndex(function (card) { return card.id === hashId; });
         showCard(hashIndex >= 0 ? hashIndex : 0, { updateHash: false });
-        if (hashIndex >= 0) window.setTimeout(function () { viewport.scrollIntoView({ block: "start" }); }, 0);
+        if (hashIndex >= 0 && viewport.scrollIntoView) window.setTimeout(function () { viewport.scrollIntoView({ block: "start" }); }, 0);
         if (document.fonts && document.fonts.ready) document.fonts.ready.then(updateDeckHeight);
         renderTopics();
 
@@ -1586,7 +1661,7 @@ var topicCarousels = document.getElementById("topicCarousels");
           if (event.key === "Escape" && !document.getElementById("verseModalBackdrop").hidden) closeVerseModal();
         });
         /* Glossary terms: tappable definitions inside card text */
-        function closeGlossModal() { document.getElementById("glossModalBackdrop").hidden = true; modalClosed(); }
+        function closeGlossModal() { document.getElementById("glossModalBackdrop").hidden = true; }
         document.addEventListener("click", function (event) {
           var b = event.target.closest ? event.target.closest(".gloss-term") : null;
           if (!b) return;
@@ -1600,7 +1675,6 @@ var topicCarousels = document.getElementById("topicCarousels");
           document.getElementById("glossModalBody").innerHTML =
             (g.pronunciation ? '<p class="gloss-pron">(' + escapeHtml(g.pronunciation) + ")</p>" : "") +
             "<p>" + escapeHtml(g.definition) + "</p>";
-          modalOpened();
           document.getElementById("glossModalBackdrop").hidden = false;
         });
         document.getElementById("glossModalClose").addEventListener("click", closeGlossModal);
@@ -1614,19 +1688,8 @@ var topicCarousels = document.getElementById("topicCarousels");
         var cccJumpBtn = document.getElementById("cccJumpBtn");
         function cccDoJump() {
           var n = parseInt(cccJumpInput.value, 10);
-          if (n >= 1 && n <= 2865) {
-            var cccJumpError = document.getElementById("cccJumpError");
-            if (cccJumpError) cccJumpError.textContent = "";
-            cccJumpInput.removeAttribute("aria-invalid");
-            openCccModal(n);
-          }
-          else {
-            /* F11, UI audit: announce the error instead of only refocusing. */
-            var cccJumpError2 = document.getElementById("cccJumpError");
-            if (cccJumpError2) cccJumpError2.textContent = "Enter a paragraph number from 1 to 2865.";
-            cccJumpInput.setAttribute("aria-invalid", "true");
-            cccJumpInput.focus();
-          }
+          if (n >= 1 && n <= 2865) { openCccModal(n); }
+          else { cccJumpInput.focus(); }
         }
         cccJumpBtn.addEventListener("click", cccDoJump);
         cccJumpInput.addEventListener("keydown", function (event) { if (event.key === "Enter") cccDoJump(); });
@@ -1740,19 +1803,4 @@ if ("serviceWorker" in navigator && /^https:$/.test(window.location.protocol)) {
     });
   }, { rootMargin: "-40% 0px -55% 0px" });
   targets.forEach(function (t) { obs.observe(t.el); });
-})();
-
-/* Back to top (F8, UI audit): floating button on a very long page. */
-(function () {
-  var btn = document.getElementById("backToTop");
-  if (!btn) return;
-  function onScroll() {
-    if (window.scrollY > 1200) btn.classList.add("visible");
-    else btn.classList.remove("visible");
-  }
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
-  btn.addEventListener("click", function () {
-    window.scrollTo({ top: 0, behavior: REDUCE_MOTION ? "auto" : "smooth" });
-  });
 })();

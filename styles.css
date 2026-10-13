@@ -143,6 +143,8 @@
       #heroSearch::placeholder { color: var(--muted); opacity: 1; }
       #heroSearch::-webkit-search-cancel-button { cursor: pointer; }
       .hero-search-help { margin: 9px 0 11px; color: var(--muted); font-size: .78rem; }
+      .hero-suggest { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+      .hero-suggest-label { font-size: .78rem; color: var(--muted); font-weight: 600; }
       .topic-chips { display: flex; flex-wrap: wrap; gap: 7px; }
       .topic-chip {
         min-height: 40px;
@@ -385,6 +387,9 @@
       .journey-d { display: block; font-size: .82rem; color: var(--muted); line-height: 1.45; }
       @media (max-width: 720px) { .journey ol { grid-template-columns: 1fr 1fr; } }
       .label-legend { font-size: .85rem; color: var(--muted); max-width: 70ch; margin: 10px 0 0; line-height: 1.55; }
+      .how-to-guide { margin-top: 12px; max-width: 70ch; }
+      .how-to-guide summary { cursor: pointer; font-weight: 700; font-size: .92rem; color: var(--wine); }
+      .how-to-guide summary::marker { color: var(--wine); }
       .browse-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
       .topic-carousels { display: grid; gap: 30px; }
       .topic-carousel-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 10px; }

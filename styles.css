@@ -89,10 +89,10 @@
          grouped tight to the English verse beneath it. */
       .hero-motto {
         font-family: "Literata", Georgia, serif;
-        font-size: 1.25rem;
-        font-weight: 600;
+        font-size: 1.65rem;
+        font-weight: 700;
         font-variant: small-caps;
-        letter-spacing: 0.1em;
+        letter-spacing: 0.08em;
         color: var(--wine);
         margin: 18px 0 0;
       }

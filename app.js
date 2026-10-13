@@ -667,13 +667,56 @@ function initApp(defenses) {
            Next lesson / Back to the path, and Simply-put entry. Any other
            deck navigation leaves the path (see showCard). */
         var activePathStep = -1;
+        var pathComplete = false;
         var pathBanner = document.getElementById("pathBanner");
         function exitPath() {
           activePathStep = -1;
+          pathComplete = false;
           if (pathBanner) pathBanner.hidden = true;
         }
+        function finishPath() {
+          pathComplete = true;
+          renderPathBanner();
+          var feat = document.getElementById("featured-answer");
+          if (feat) scrollToEl(feat);
+        }
         function renderPathBanner() {
-          if (!pathBanner || activePathStep < 0) return;
+          if (!pathBanner) return;
+          if (pathComplete) {
+            pathBanner.innerHTML = "";
+            var doneHead = document.createElement("div");
+            doneHead.className = "path-banner-head";
+            var doneStep = document.createElement("span");
+            doneStep.className = "path-banner-step";
+            doneStep.textContent = "Guided path · Complete";
+            var doneTitle = document.createElement("span");
+            doneTitle.className = "path-banner-title";
+            doneTitle.textContent = "You've finished the path — eight defenses, done. Where next?";
+            doneHead.appendChild(doneStep);
+            doneHead.appendChild(doneTitle);
+            var doneActions = document.createElement("div");
+            doneActions.className = "path-banner-actions";
+            function doneButton(label, targetId, cls) {
+              var b = document.createElement("button");
+              b.type = "button";
+              b.className = "path-banner-btn " + (cls || "");
+              b.textContent = label;
+              b.addEventListener("click", function () {
+                exitPath();
+                var t = document.getElementById(targetId);
+                if (t) scrollToEl(t);
+              });
+              return b;
+            }
+            doneActions.appendChild(doneButton("Browse by topic", "completed-index", "path-complete-browse"));
+            doneActions.appendChild(doneButton("Pocket Armory", "pocket", "path-complete-pocket"));
+            doneActions.appendChild(doneButton("Back to the path", "start-here", "path-complete-back"));
+            pathBanner.appendChild(doneHead);
+            pathBanner.appendChild(doneActions);
+            pathBanner.hidden = false;
+            return;
+          }
+          if (activePathStep < 0) return;
           var step = START_HERE[activePathStep];
           var last = activePathStep === START_HERE.length - 1;
           pathBanner.innerHTML = "";
@@ -694,7 +737,6 @@ function initApp(defenses) {
           back.className = "path-banner-btn";
           back.textContent = "← Back to the path";
           back.addEventListener("click", function () {
-            exitPath();
             var startHere = document.getElementById("start-here");
             if (startHere) scrollToEl(startHere);
           });
@@ -703,20 +745,25 @@ function initApp(defenses) {
           next.className = "path-banner-btn path-banner-next";
           next.textContent = last ? "Finish the path →" : "Next lesson →";
           next.addEventListener("click", function () {
-            if (last) {
-              exitPath();
-              var sh = document.getElementById("start-here");
-              if (sh) scrollToEl(sh);
-            } else enterPathStep(activePathStep + 1);
+            if (last) finishPath();
+            else enterPathStep(activePathStep + 1);
           });
+          var leave = document.createElement("button");
+          leave.type = "button";
+          leave.className = "path-banner-btn path-banner-leave";
+          leave.textContent = "✕ Leave the path";
+          leave.setAttribute("aria-label", "Leave the guided path");
+          leave.addEventListener("click", exitPath);
           actions.appendChild(back);
           actions.appendChild(next);
+          actions.appendChild(leave);
           pathBanner.appendChild(head);
           pathBanner.appendChild(actions);
           pathBanner.hidden = false;
         }
         function enterPathStep(k) {
           activePathStep = k;
+          pathComplete = false;
           var idx = defenses.findIndex(function (d) { return d.slug === START_HERE[k].slug; });
           if (idx >= 0) {
             showCard(idx, { scroll: true, pathStep: k });
@@ -810,6 +857,7 @@ function initApp(defenses) {
         var handoutTopic = document.getElementById("handoutTopic");
         var handoutDoc = document.getElementById("handoutDoc");
         var handoutPrint = document.getElementById("handoutPrint");
+        var handoutParamMode = false;
         function renderHandout() {
           if (!handoutTopic || !handoutDoc) return;
           var topic = handoutTopic.value;
@@ -851,6 +899,18 @@ function initApp(defenses) {
           handoutDoc.appendChild(hNote);
           handoutDoc.appendChild(list);
           handoutDoc.appendChild(foot);
+          if (handoutParamMode) {
+            var exitBtn = document.createElement("button");
+            exitBtn.type = "button";
+            exitBtn.className = "support-btn handout-exit";
+            exitBtn.textContent = "← Back to the full site";
+            exitBtn.addEventListener("click", function () {
+              handoutParamMode = false;
+              document.body.classList.remove("print-handout");
+              renderHandout();
+            });
+            handoutDoc.insertBefore(exitBtn, handoutDoc.firstChild);
+          }
         }
         if (handoutTopic && handoutDoc) {
           var allOpt = document.createElement("option");
@@ -865,6 +925,18 @@ function initApp(defenses) {
           });
           handoutTopic.addEventListener("change", renderHandout);
           renderHandout();
+          /* ?handout=<topic|all> deep link: show just the handout, ready to
+             print — a shareable link for study-group leaders. */
+          var handoutParam = null;
+          try { handoutParam = new URLSearchParams(window.location.search).get("handout"); } catch (e) {}
+          if (handoutParam && (handoutParam === "all" || TOPICS.indexOf(handoutParam) !== -1)) {
+            handoutParamMode = true;
+            handoutTopic.value = handoutParam;
+            renderHandout();
+            document.body.classList.add("print-handout");
+            var handoutSection = document.getElementById("handout");
+            if (handoutSection) scrollToEl(handoutSection);
+          }
         }
         if (handoutPrint) {
           handoutPrint.addEventListener("click", function () {
@@ -872,6 +944,7 @@ function initApp(defenses) {
             window.print();
           });
           window.addEventListener("afterprint", function () {
+            handoutParamMode = false;
             document.body.classList.remove("print-handout");
           });
         }
@@ -1617,6 +1690,17 @@ var topicCarousels = document.getElementById("topicCarousels");
         var hashId = window.location.hash ? window.location.hash.slice(1) : "";
         var hashIndex = cards.findIndex(function (card) { return card.id === hashId; });
         showCard(hashIndex >= 0 ? hashIndex : 0, { updateHash: false });
+        /* Deep link into a path lesson re-enters the path at that step. */
+        var hashSlug = hashId.indexOf("answer-") === 0 ? hashId.slice("answer-".length) : "";
+        var hashStep = START_HERE.findIndex(function (s) { return s.slug === hashSlug; });
+        if (hashStep >= 0) {
+          activePathStep = hashStep;
+          pathComplete = false;
+          renderPathBanner();
+          var hashCard = cards[hashIndex];
+          var hashSimple = hashCard && hashCard.querySelector('[data-panel="simple"]');
+          if (hashSimple) hashSimple.click();
+        }
         if (hashIndex >= 0 && viewport.scrollIntoView) window.setTimeout(function () { viewport.scrollIntoView({ block: "start" }); }, 0);
         if (document.fonts && document.fonts.ready) document.fonts.ready.then(updateDeckHeight);
         renderTopics();

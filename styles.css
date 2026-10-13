@@ -275,6 +275,11 @@
       .section-no { color: var(--gold-deep); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; font-size: .78rem; padding-top: 10px; }
       h2 { font-size: clamp(2rem, 4.4vw, 3.65rem); line-height: 1.08; letter-spacing: -.035em; margin: 0 0 12px; }
       .section-head p { color: var(--muted); font-size: 1.05rem; max-width: 720px; margin: 0; }
+      /* Collapsible reference sections: the section head is the disclosure summary. */
+      .section-details > summary { list-style: none; cursor: pointer; position: relative; }
+      .section-details > summary::-webkit-details-marker { display: none; }
+      .section-details > summary::after { content: "Show section \25B8"; position: absolute; right: 0; top: 0; font-size: .78rem; font-weight: 700; letter-spacing: .05em; color: var(--gold-deep); border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; background: var(--paper); }
+      .section-details[open] > summary::after { content: "Hide section \25BE"; }
 
       .deck-shell { min-width: 0; }
       .deck-controls {
@@ -711,6 +716,8 @@
         body.print-handout #handout .handout-controls { display: none !important; }
         body.print-handout .handout-exit { display: none !important; }
         body.print-handout #handoutDoc { box-shadow: none; border: 0; padding: 0; max-width: none; }
+        /* Full-page print opens every collapsed reference section. */
+        details.section-details > :not(summary) { display: block !important; content-visibility: visible !important; }
       }
       .ccc-ref {
         display: inline-block; font: inherit; font-weight: 700; color: var(--wine);

@@ -2010,7 +2010,7 @@ var topicCarousels = document.getElementById("topicCarousels");
 }
 
 var ASSET_V = window.ASSET_V || "dev";
-var DEFENSE_SHARDS = ["defenses-1.json", "defenses-2.json", "defenses-3.json", "defenses-7.json", "defenses-4.json", "defenses-5.json", "defenses-6.json"];
+var DEFENSE_SHARDS = ["defenses-1.json", "defenses-2.json", "defenses-3.json", "defenses-7.json", "defenses-4.json", "defenses-5.json", "defenses-6.json", "defenses-8.json"];
 /* Glossary loads alongside the defenses so card text can link its terms. */
 Promise.all([
   Promise.all(DEFENSE_SHARDS.map(function (f) {

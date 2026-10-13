@@ -26,7 +26,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600;7..72,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <title>Christian Armory</title>
-    <link rel="stylesheet" href="styles.css?v=20261012af">
+    <link rel="stylesheet" href="styles.css?v=20261013a">
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to main content</a>
@@ -154,6 +154,7 @@
                 <input id="deckJumpInput" type="number" min="1" placeholder="#" inputmode="numeric" aria-label="Defense number" />
                 <button type="submit" class="deck-jump-go">Go</button>
               </form>
+              <p class="jump-error" id="deckJumpError" role="status" aria-live="polite"></p>
             </div>
             <div class="deck-viewport" id="defenseDeck" role="region" tabindex="0" aria-roledescription="carousel" aria-label="Completed defenses">
               <div class="deck-track" id="deckTrack">
@@ -317,6 +318,7 @@
             <input id="cccJump" type="number" min="1" max="2865" placeholder="Paragraph # (1&ndash;2865)" inputmode="numeric" />
             <button type="button" class="support-btn" id="cccJumpBtn" style="border:0;cursor:pointer;">Read it</button>
           </div>
+          <p class="jump-error" id="cccJumpError" role="status" aria-live="polite"></p>
           <p class="ccc-note">Catechism text &copy; Libreria Editrice Vaticana. Official text at <a href="https://www.vatican.va/archive/ENG0015/_INDEX.HTM">vatican.va</a>.</p>
         </div>
       </section>
@@ -536,7 +538,7 @@
             <h2>Help keep the armory open</h2>
             <p>Christian Armory is free for everyone, always. If it has helped you or your parish, a small gift helps cover the cost of keeping it online and growing.</p>
             <a class="support-btn" href="https://ko-fi.com/christianarmory" target="_blank" rel="noopener">☕ Support on Ko-fi</a>
-            <p style="margin-top:14px;font-size:.92rem;">Heard an objection the armory doesn't answer yet? <a href="https://github.com/arkayb9ner/apologetics-guide/issues" target="_blank" rel="noopener">Suggest it here</a> — new defenses are added regularly.</p>
+            <p style="margin-top:14px;font-size:.92rem;">Heard an objection the armory doesn't answer yet? <a href="#suggest">Suggest it here</a> — new defenses are added regularly.</p>
           </div>
         </section>
       </div>
@@ -549,8 +551,9 @@
       </div>
     </main>
 
-    <script>window.ASSET_V = "20261012af";</script>
-    <script src="app.js?v=20261012af"></script>
+    <script>window.ASSET_V = "20261013a";</script>
+    <script src="app.js?v=20261013a"></script>
+    <button type="button" class="back-to-top" id="backToTop" aria-label="Back to top">&uarr; Top</button>
     <div class="ccc-modal-backdrop" id="cccModalBackdrop" hidden>
       <div class="ccc-modal" role="dialog" aria-modal="true" aria-labelledby="cccModalTitle">
         <div class="ccc-modal-head">

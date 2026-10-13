@@ -278,15 +278,52 @@
       .deck-progress { height: 8px; border-radius: 999px; background: var(--paper-deep); border: 1px solid var(--line); overflow: hidden; min-width: 140px; }
       .deck-progress-fill { height: 100%; width: 0; border-radius: 999px; background: linear-gradient(90deg, var(--gold), var(--wine)); transition: width 0.3s ease; }
       .deck-dot {
-        width: 10px;
-        height: 10px;
+        /* 24×24 hit area (WCAG 2.2 target size) with the same 10px visible dot. */
+        position: relative;
+        width: 24px;
+        height: 24px;
         padding: 0;
-        border: 1px solid var(--line-strong);
+        border: 0;
         border-radius: 50%;
         background: transparent;
         cursor: pointer;
       }
-      .deck-dot[aria-current="true"] { background: var(--wine); border-color: var(--wine); }
+      .deck-dot::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 10px;
+        height: 10px;
+        transform: translate(-50%, -50%);
+        border: 1px solid var(--line-strong);
+        border-radius: 50%;
+        background: transparent;
+      }
+      .deck-dot[aria-current="true"]::after { background: var(--wine); border-color: var(--wine); }
+      /* F8, UI audit: back-to-top button on a very long page. */
+      .back-to-top {
+        position: fixed;
+        right: 18px;
+        bottom: 18px;
+        z-index: 60;
+        padding: 10px 16px;
+        border: 1px solid var(--line-strong);
+        border-radius: 999px;
+        background: var(--surface);
+        color: var(--ink);
+        font: inherit;
+        font-size: .9rem;
+        box-shadow: var(--shadow);
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity .2s ease, visibility .2s ease;
+      }
+      .back-to-top.visible { opacity: 1; visibility: visible; }
+      .back-to-top:hover, .back-to-top:focus-visible { border-color: var(--wine); }
+      /* F11, UI audit: announced error text for the number-jump inputs. */
+      .jump-error { min-height: 1.2em; margin: 4px 0 0; font-size: .82rem; color: var(--wine); }
       .deck-viewport {
         width: 100%;
         overflow: hidden;
@@ -352,7 +389,7 @@
       .basis-pill { color: var(--muted); border-color: var(--line-strong); }
       .audience-catholic { background: var(--gold); border-color: var(--gold); color: #1a1714; }
       .audience-common { color: var(--muted); border-color: var(--line-strong); }
-      .gloss-term { background: none; border: 0; padding: 0; font: inherit; color: var(--gold); border-bottom: 1px dotted var(--gold); cursor: pointer; }
+      .gloss-term { background: none; border: 0; padding: 0; font: inherit; color: var(--gold-deep); border-bottom: 1px dotted var(--gold-deep); cursor: pointer; }
       .gloss-term:hover, .gloss-term:focus-visible { color: var(--wine); border-bottom-color: var(--wine); }
       .gloss-modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.55); display: flex; align-items: center; justify-content: center; z-index: 70; padding: 20px; }
       .gloss-modal-backdrop[hidden] { display: none; }
@@ -366,7 +403,7 @@
       /* Three churches, one ancient faith */
       .apostolic-frame { border: 3px double var(--gold); border-radius: 20px; padding: clamp(24px, 4vw, 44px); background: color-mix(in srgb, var(--gold) 6%, transparent); }
       .church-chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0 28px; }
-      .church-chips span { font-weight: 700; font-size: .82rem; letter-spacing: .06em; text-transform: uppercase; color: var(--gold); border: 2px solid var(--gold); border-radius: 999px; padding: 6px 16px; }
+      .church-chips span { font-weight: 700; font-size: .82rem; letter-spacing: .06em; text-transform: uppercase; color: var(--gold-deep); border: 2px solid var(--gold-deep); border-radius: 999px; padding: 6px 16px; }
       .pillars { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
       .pillars li { display: grid; grid-template-columns: 54px minmax(0, 1fr); gap: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 22px; box-shadow: var(--shadow); }
       .pillar-n { font-family: "Literata", serif; font-size: 2.1rem; font-weight: 700; color: var(--gold); line-height: 1; }
@@ -399,6 +436,13 @@
       .topic-track > .topic-slide[aria-hidden="true"] { display: none; }
       .topic-slide { display: block; width: 100%; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; cursor: pointer; font: inherit; color: var(--ink); text-align: left; box-shadow: var(--shadow); }
       .topic-slide:hover, .topic-slide:focus-visible { border-color: var(--gold); }
+      /* F2, UI audit: "Show all" lists every defense in the topic at once. */
+      .topic-head-right { display: flex; align-items: baseline; gap: 12px; }
+      .topic-show-all { background: none; border: 0; padding: 2px 0; font: inherit; font-size: .85rem; color: var(--wine); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
+      .topic-show-all:hover { color: var(--wine-strong); }
+      .topic-carousel.show-all .deck-controls { display: none; }
+      .topic-carousel.show-all .topic-track > .topic-slide[aria-hidden="true"] { display: block; }
+      .topic-carousel.show-all .topic-track { display: grid; gap: 10px; }
       .topic-num { display: inline-block; font-weight: 800; color: var(--wine); background: var(--gold-soft); border: 1px solid var(--gold); border-radius: 999px; padding: 2px 12px; font-size: 0.85rem; margin-bottom: 8px; }
       .topic-level { display: inline-block; margin-left: 8px; font-size: 0.72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 2px 10px; border-radius: 999px; border: 1px solid; vertical-align: 2px; }
       .topic-title { display: block; font-weight: 600; font-size: 1.05rem; line-height: 1.4; }
@@ -440,7 +484,7 @@
       .sacraments-track > .sacrament-slide[aria-hidden="true"] { display: none; }
       .sacrament-slide { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: clamp(22px, 3vw, 32px); box-shadow: var(--shadow); text-align: center; }
       .sacrament-icon { font-size: 3rem; line-height: 1; margin-bottom: 10px; }
-      .sacrament-tag { text-transform: uppercase; letter-spacing: .08em; font-size: .72rem; color: var(--gold); font-weight: 700; margin: 0 0 6px; }
+      .sacrament-tag { text-transform: uppercase; letter-spacing: .08em; font-size: .72rem; color: var(--gold-deep); font-weight: 700; margin: 0 0 6px; }
       .sacrament-slide h3 { font-family: "Literata", Georgia, serif; font-size: 1.5rem; margin: 0 0 8px; color: var(--ink); }
       .sacrament-slide p { color: var(--muted); font-size: .98rem; line-height: 1.6; margin: 8px auto 0; max-width: 56ch; }
       .sacrament-refs { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 14px; }

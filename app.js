@@ -1354,7 +1354,7 @@ var topicCarousels = document.getElementById("topicCarousels");
           "i'm": "i am", "you're": "you are", "we're": "we are", "they're": "they are",
           "who's": "who is", "where's": "where is", "let's": "let us"
         };
-        var ASK_STOPWORDS = { "is": 1, "are": 1, "was": 1, "were": 1, "be": 1, "been": 1, "being": 1, "the": 1, "a": 1, "an": 1, "of": 1, "to": 1, "in": 1, "on": 1, "and": 1, "or": 1, "for": 1, "with": 1, "how": 1, "what": 1, "why": 1, "when": 1, "where": 1, "who": 1, "whom": 1, "whose": 1, "which": 1, "do": 1, "does": 1, "did": 1, "can": 1, "could": 1, "should": 1, "would": 1, "will": 1, "shall": 1, "may": 1, "might": 1, "must": 1, "i": 1, "you": 1, "he": 1, "she": 1, "it": 1, "they": 1, "we": 1, "me": 1, "him": 1, "them": 1, "us": 1, "my": 1, "your": 1, "his": 1, "its": 1, "their": 1, "our": 1, "this": 1, "that": 1, "these": 1, "those": 1, "as": 1, "at": 1, "by": 1, "from": 1, "about": 1, "into": 1, "over": 1, "after": 1, "before": 1, "if": 1, "then": 1, "than": 1, "so": 1, "such": 1, "just": 1, "really": 1, "very": 1, "much": 1, "more": 1, "most": 1, "some": 1, "any": 1, "there": 1, "here": 1 };
+        var ASK_STOPWORDS = { "is": 1, "are": 1, "am": 1, "was": 1, "were": 1, "be": 1, "been": 1, "being": 1, "the": 1, "a": 1, "an": 1, "of": 1, "to": 1, "in": 1, "on": 1, "and": 1, "or": 1, "for": 1, "with": 1, "how": 1, "what": 1, "why": 1, "when": 1, "where": 1, "who": 1, "whom": 1, "whose": 1, "which": 1, "do": 1, "does": 1, "did": 1, "can": 1, "could": 1, "should": 1, "would": 1, "will": 1, "shall": 1, "may": 1, "might": 1, "must": 1, "i": 1, "you": 1, "he": 1, "she": 1, "it": 1, "they": 1, "we": 1, "me": 1, "him": 1, "them": 1, "us": 1, "my": 1, "your": 1, "his": 1, "its": 1, "their": 1, "our": 1, "this": 1, "that": 1, "these": 1, "those": 1, "as": 1, "at": 1, "by": 1, "from": 1, "about": 1, "into": 1, "over": 1, "after": 1, "before": 1, "if": 1, "then": 1, "than": 1, "so": 1, "such": 1, "just": 1, "really": 1, "very": 1, "much": 1, "more": 1, "most": 1, "some": 1, "any": 1, "there": 1, "here": 1, "but": 1, "go": 1, "going": 1, "get": 1, "got": 1, "like": 1, "know": 1, "think": 1, "feel": 1, "want": 1, "need": 1, "see": 1, "say": 1, "told": 1, "common": 1, "objection": 1 };
 
         function expandAskContractions(text) {
           return text.split(/\s+/).map(function (w) { return ASK_CONTRACTIONS[w] || w; }).join(" ");
@@ -1392,23 +1392,91 @@ var topicCarousels = document.getElementById("topicCarousels");
           return true;
         }
 
+        /* Synonyms: everyday words people type -> the vocabulary the cards use.
+           Expanded words are ADDED to the query (the original word still scores),
+           so "gay" also matches "homosexuality" and "same-sex". */
+        var ASK_SYNONYMS = {
+          "gay": ["homosexuality", "same-sex"], "lesbian": ["homosexuality", "same-sex"],
+          "bisexual": ["homosexuality", "same-sex"], "lgbt": ["homosexuality", "same-sex"],
+          "lgbtq": ["homosexuality", "same-sex"], "queer": ["homosexuality", "same-sex"],
+          "homosexual": ["homosexuality", "same-sex"],
+          "saved": ["salvation"], "salvation": ["saved"],
+          "communion": ["eucharist"], "host": ["eucharist"], "wafer": ["eucharist"],
+          "pope": ["papacy"], "papacy": ["pope"],
+          "bible": ["scripture"], "scripture": ["bible"],
+          "confess": ["confession"], "confession": ["confess"],
+          "baptism": ["baptized"], "baptized": ["baptism"],
+          "cross": ["crucifixion"], "crucifixion": ["cross"],
+          "resurrection": ["risen"], "risen": ["resurrection"],
+          "witness": ["jehovah"], "witnesses": ["jehovah"], "jehovah": ["witness"],
+          "jw": ["jehovah", "witness"],
+          "muslim": ["islam"], "islam": ["muslim"], "quran": ["islam"],
+          "atheist": ["atheism"], "atheism": ["atheist"],
+          "porn": ["pornography"], "pornography": ["porn"],
+          "heaven": ["paradise"], "paradise": ["heaven"],
+          "soul": ["immortal"], "immortal": ["soul"],
+          "priest": ["priesthood"], "priesthood": ["priest"],
+          "celibacy": ["celibate"], "celibate": ["celibacy"],
+          "saints": ["intercession"], "intercession": ["saints"],
+          "trinity": ["triune"], "triune": ["trinity"]
+        };
+
+        /* Phrases: an exact phrase is a strong intent signal — it outranks a lone
+           title word. Each phrase maps to exactly one card (+4). Deliberately NOT
+           included: "am i saved" — it is ambiguous, and the words must decide. */
+        var ASK_PHRASES = [
+          { phrase: "body of christ", slug: "eucharist" },
+          { phrase: "bread and wine", slug: "eucharist" },
+          { phrase: "real presence", slug: "eucharist" },
+          { phrase: "blood of christ", slug: "eucharist" },
+          { phrase: "i am gay", slug: "church-homosexuality" },
+          { phrase: "i am lesbian", slug: "church-homosexuality" },
+          { phrase: "i am bisexual", slug: "church-homosexuality" },
+          { phrase: "going to hell", slug: "hell-unjust" },
+          { phrase: "go to hell", slug: "hell-unjust" },
+          { phrase: "once saved always saved", slug: "once-saved-always-saved" },
+          { phrase: "call no man father", slug: "call-no-man-father" },
+          { phrase: "144,000", slug: "only-144000-heaven" },
+          { phrase: "144000", slug: "only-144000-heaven" },
+          { phrase: "soul sleep", slug: "soul-sleep" },
+          { phrase: "great apostasy", slug: "great-apostasy-babylon" },
+          { phrase: "pray to saints", slug: "saints-necromancy" },
+          { phrase: "praying to saints", slug: "saints-necromancy" },
+          { phrase: "worship mary", slug: "catholics-worship-mary" },
+          { phrase: "book of mormon", slug: "mormonism" },
+          { phrase: "only catholics", slug: "only-catholics-heaven" },
+          { phrase: "dead are unconscious", slug: "soul-sleep" }
+        ];
+
         function findHeroMatches(query) {
           var normalizedQuery = expandAskContractions(normalizeSearchText(query.trim()));
           if (!normalizedQuery) return [];
-          var words = normalizedQuery.split(/\s+/).filter(function (w) { return w && !ASK_STOPWORDS[w]; });
+          var words = normalizedQuery.split(/\s+/).map(function (w) { return w.replace(/^[^a-z0-9']+|[^a-z0-9']+$/g, ""); }).filter(function (w) { return w && !ASK_STOPWORDS[w]; });
           if (!words.length) return [];
+          /* Synonym expansion: add the cards' vocabulary alongside the user's words. */
+          var expanded = words.slice();
+          words.forEach(function (word) {
+            (ASK_SYNONYMS[word] || []).forEach(function (syn) {
+              if (expanded.indexOf(syn) === -1) expanded.push(syn);
+            });
+          });
+          words = expanded;
           return cards.map(function (card, index) {
             var title = card.querySelector("h3").textContent.trim();
             var normalizedTitle = normalizeSearchText(title);
             var normalizedCard = normalizeSearchText(card.textContent);
             var titleWords = normalizedTitle.split(/[^a-z0-9']+/).filter(Boolean).map(function (w) { return w.replace(/^'+|'+$/g, ""); });
-            var titleHits = 0, fuzzyHits = 0, bodyHits = 0;
+            var titleHits = 0, fuzzyHits = 0, bodyHits = 0, phraseHits = 0;
             words.forEach(function (word) {
               if (normalizedTitle.indexOf(word) !== -1) titleHits++;
               else if (titleWords.some(function (tw) { return withinOneEdit(word, tw); })) fuzzyHits++;
               else if (normalizedCard.indexOf(word) !== -1) bodyHits++;
             });
-            var score = titleHits * 3 + fuzzyHits * 2 + bodyHits;
+            var slug = (card.id || "").replace(/^answer-/, "");
+            ASK_PHRASES.forEach(function (entry) {
+              if (entry.slug === slug && normalizedQuery.indexOf(entry.phrase) !== -1) phraseHits++;
+            });
+            var score = titleHits * 3 + fuzzyHits * 2 + bodyHits + phraseHits * 4;
             return score > 0 ? { index: index, title: title, score: score } : null;
           }).filter(Boolean).sort(function (a, b) { return b.score - a.score || a.index - b.index; });
         }

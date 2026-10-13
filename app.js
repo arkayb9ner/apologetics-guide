@@ -998,7 +998,7 @@ function initApp(defenses) {
           });
           handoutTopic.addEventListener("change", renderHandout);
           /* Default to the first topic (God & Reason, 20 one-liners) so the
-             page doesn't render all 117 on every load. "All topics" stays
+             page doesn't render all 125 on every load. "All topics" stays
              in the dropdown; a ?handout= param below still overrides this. */
           handoutTopic.value = TOPICS[0];
           renderHandout();
@@ -1942,7 +1942,7 @@ var topicCarousels = document.getElementById("topicCarousels");
 }
 
 var ASSET_V = window.ASSET_V || "dev";
-var DEFENSE_SHARDS = ["defenses-1.json", "defenses-2.json", "defenses-3.json", "defenses-4.json", "defenses-5.json", "defenses-6.json"];
+var DEFENSE_SHARDS = ["defenses-1.json", "defenses-2.json", "defenses-3.json", "defenses-7.json", "defenses-4.json", "defenses-5.json", "defenses-6.json"];
 /* Glossary loads alongside the defenses so card text can link its terms. */
 Promise.all([
   Promise.all(DEFENSE_SHARDS.map(function (f) {

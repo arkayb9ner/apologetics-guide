@@ -1,6 +1,6 @@
 /* Christian Armory service worker: offline-first app shell.
    Bump CACHE whenever ASSET_V changes so updates reach installed apps. */
-var CACHE = "christian-armory-20261012ao";
+var CACHE = "christian-armory-20261012ap";
 var CORE = [
   "/",
   "/index.html",
@@ -14,6 +14,7 @@ var CORE = [
   "/defenses-5.json",
   "/defenses-6.json",
   "/defenses-7.json",
+  "/defenses-8.json",
   "/glossary.json",
   "/apostles.json",
   "/verses.json",

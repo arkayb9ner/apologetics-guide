@@ -357,6 +357,46 @@ function cccParagraph(n, cb) {
   }).catch(function () { cb(n, null); });
 }
 
+/* Modal focus trap (F1, UI audit): while any modal is open, Tab cycles inside
+   it; closing returns focus to the element that opened the modal, and <main>
+   is inert so keyboard/screen-reader users cannot wander into the page behind. */
+var modalTrigger = null;
+function modalOpened() {
+  modalTrigger = document.activeElement;
+  var main = document.getElementById("main");
+  if (main) main.setAttribute("inert", "");
+}
+function modalClosed() {
+  var main = document.getElementById("main");
+  if (main) main.removeAttribute("inert");
+  if (modalTrigger && modalTrigger.focus) {
+    try { modalTrigger.focus(); } catch (e) { /* trigger may be gone; ignore */ }
+  }
+  modalTrigger = null;
+}
+document.addEventListener("keydown", function (event) {
+  if (event.key !== "Tab") return;
+  var open = document.querySelector("#cccModalBackdrop:not([hidden]), #verseModalBackdrop:not([hidden]), #glossModalBackdrop:not([hidden])");
+  if (!open) return;
+  var focusables = Array.prototype.filter.call(
+    open.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'),
+    function (el) {
+      if (el.disabled) return false;
+      var cs = window.getComputedStyle(el);
+      return cs.display !== "none" && cs.visibility !== "hidden";
+    }
+  );
+  if (!focusables.length) return;
+  if (!open.contains(document.activeElement)) {
+    event.preventDefault();
+    focusables[0].focus();
+    return;
+  }
+  var first = focusables[0], last = focusables[focusables.length - 1];
+  if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+  else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+});
+
 function renderCccModal(n) {
   cccCurrent = Math.max(1, Math.min(2865, n));
   var body = document.getElementById("cccModalBody");
@@ -372,6 +412,7 @@ function renderCccModal(n) {
 }
 
 function openCccModal(n) {
+  modalOpened();
   renderCccModal(n);
   document.getElementById("cccModalBackdrop").hidden = false;
   document.getElementById("cccModalClose").focus();
@@ -379,6 +420,7 @@ function openCccModal(n) {
 
 function closeCccModal() {
   document.getElementById("cccModalBackdrop").hidden = true;
+  modalClosed();
 }
 
 function linkCccRefs(root) {
@@ -558,6 +600,7 @@ function linkVersePass(root, testRe, matchRe) {
 }
 
 function openVerseModal(refText) {
+  modalOpened();
   var parsed = parseVerseRef(refText);
   var list = parsed && verseRefVerses(parsed);
   var body = document.getElementById("verseModalBody");
@@ -586,6 +629,7 @@ function openVerseModal(refText) {
 
 function closeVerseModal() {
   document.getElementById("verseModalBackdrop").hidden = true;
+  modalClosed();
 }
 
 function renderSite(defenses) {
@@ -882,9 +926,19 @@ var topicCarousels = document.getElementById("topicCarousels");
           var head = document.createElement("div");
           head.className = "topic-carousel-head";
           var h = document.createElement("h3"); h.textContent = topic;
+          var headRight = document.createElement("div");
+          headRight.className = "topic-head-right";
           var count = document.createElement("span"); count.className = "tcount";
           count.textContent = items.length + " defenses";
-          head.appendChild(h); head.appendChild(count);
+          /* Show-all toggle (F2, UI audit): one click lists every defense in
+             the topic instead of paging through them one at a time. */
+          var showAllBtn = document.createElement("button");
+          showAllBtn.type = "button"; showAllBtn.className = "topic-show-all";
+          showAllBtn.textContent = "Show all";
+          showAllBtn.setAttribute("aria-expanded", "false");
+          showAllBtn.setAttribute("aria-label", "Show all defenses in " + topic);
+          headRight.appendChild(count); headRight.appendChild(showAllBtn);
+          head.appendChild(h); head.appendChild(headRight);
           var controls = document.createElement("div");
           controls.className = "deck-controls";
           controls.setAttribute("aria-label", topic + " carousel controls");
@@ -968,6 +1022,18 @@ var topicCarousels = document.getElementById("topicCarousels");
             if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) show(current + (dx < 0 ? 1 : -1));
           }, { passive: true });
           show(0);
+          var topicExpanded = false;
+          showAllBtn.addEventListener("click", function () {
+            topicExpanded = !topicExpanded;
+            wrap.classList.toggle("show-all", topicExpanded);
+            showAllBtn.textContent = topicExpanded ? "Show less" : "Show all";
+            showAllBtn.setAttribute("aria-expanded", String(topicExpanded));
+            if (topicExpanded) {
+              slides.forEach(function (s) { s.setAttribute("aria-hidden", "false"); s.removeAttribute("inert"); });
+            } else {
+              show(current);
+            }
+          });
         }
 
         TOPICS.forEach(function (t) {
@@ -1178,10 +1244,19 @@ var topicCarousels = document.getElementById("topicCarousels");
             event.preventDefault();
             var n = parseInt(deckJumpInput.value, 10);
             if (n >= 1 && n <= cards.length) {
-              showCard(n - 1, { scroll: true });
+              /* Clear the error state before navigating, so a throw in
+                 showCard can never leave a stale error on screen. */
+              var deckJumpError = document.getElementById("deckJumpError");
+              if (deckJumpError) deckJumpError.textContent = "";
+              deckJumpInput.removeAttribute("aria-invalid");
               deckJumpInput.value = "";
               deckJumpInput.blur();
+              showCard(n - 1, { scroll: true });
             } else {
+              /* F11, UI audit: announce the error instead of only refocusing. */
+              var deckJumpError2 = document.getElementById("deckJumpError");
+              if (deckJumpError2) deckJumpError2.textContent = "Enter a number from 1 to " + cards.length + ".";
+              deckJumpInput.setAttribute("aria-invalid", "true");
               deckJumpInput.focus();
               deckJumpInput.select();
             }
@@ -1386,6 +1461,8 @@ var topicCarousels = document.getElementById("topicCarousels");
             showCard(quizIndex, { scroll: true });
           });
           if (quizReset) quizReset.addEventListener("click", function () {
+            /* F9, UI audit: mastery is one click from total, silent loss. */
+            if (!window.confirm("Reset all drill progress? Your mastered cards will be forgotten.")) return;
             mastered = [];
             saveMastered(mastered);
             updateDrillScore();
@@ -1509,7 +1586,7 @@ var topicCarousels = document.getElementById("topicCarousels");
           if (event.key === "Escape" && !document.getElementById("verseModalBackdrop").hidden) closeVerseModal();
         });
         /* Glossary terms: tappable definitions inside card text */
-        function closeGlossModal() { document.getElementById("glossModalBackdrop").hidden = true; }
+        function closeGlossModal() { document.getElementById("glossModalBackdrop").hidden = true; modalClosed(); }
         document.addEventListener("click", function (event) {
           var b = event.target.closest ? event.target.closest(".gloss-term") : null;
           if (!b) return;
@@ -1523,6 +1600,7 @@ var topicCarousels = document.getElementById("topicCarousels");
           document.getElementById("glossModalBody").innerHTML =
             (g.pronunciation ? '<p class="gloss-pron">(' + escapeHtml(g.pronunciation) + ")</p>" : "") +
             "<p>" + escapeHtml(g.definition) + "</p>";
+          modalOpened();
           document.getElementById("glossModalBackdrop").hidden = false;
         });
         document.getElementById("glossModalClose").addEventListener("click", closeGlossModal);
@@ -1536,8 +1614,19 @@ var topicCarousels = document.getElementById("topicCarousels");
         var cccJumpBtn = document.getElementById("cccJumpBtn");
         function cccDoJump() {
           var n = parseInt(cccJumpInput.value, 10);
-          if (n >= 1 && n <= 2865) { openCccModal(n); }
-          else { cccJumpInput.focus(); }
+          if (n >= 1 && n <= 2865) {
+            var cccJumpError = document.getElementById("cccJumpError");
+            if (cccJumpError) cccJumpError.textContent = "";
+            cccJumpInput.removeAttribute("aria-invalid");
+            openCccModal(n);
+          }
+          else {
+            /* F11, UI audit: announce the error instead of only refocusing. */
+            var cccJumpError2 = document.getElementById("cccJumpError");
+            if (cccJumpError2) cccJumpError2.textContent = "Enter a paragraph number from 1 to 2865.";
+            cccJumpInput.setAttribute("aria-invalid", "true");
+            cccJumpInput.focus();
+          }
         }
         cccJumpBtn.addEventListener("click", cccDoJump);
         cccJumpInput.addEventListener("keydown", function (event) { if (event.key === "Enter") cccDoJump(); });
@@ -1651,4 +1740,19 @@ if ("serviceWorker" in navigator && /^https:$/.test(window.location.protocol)) {
     });
   }, { rootMargin: "-40% 0px -55% 0px" });
   targets.forEach(function (t) { obs.observe(t.el); });
+})();
+
+/* Back to top (F8, UI audit): floating button on a very long page. */
+(function () {
+  var btn = document.getElementById("backToTop");
+  if (!btn) return;
+  function onScroll() {
+    if (window.scrollY > 1200) btn.classList.add("visible");
+    else btn.classList.remove("visible");
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+  btn.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: REDUCE_MOTION ? "auto" : "smooth" });
+  });
 })();

@@ -84,7 +84,8 @@
         font-weight: 600;
       }
       .hero-copy { max-width: 680px; font-size: clamp(1rem, 1.8vw, 1.25rem); color: var(--muted); margin: 0; }
-      .hero-verse { max-width: 680px; font-size: 0.98rem; font-style: italic; color: var(--muted); margin: 14px 0 0; }
+      .hero-latin { font-family: "Literata", serif; font-weight: 700; font-size: clamp(1.4rem, 3.2vw, 2rem); font-variant-caps: small-caps; letter-spacing: 0.1em; color: var(--wine); max-width: 680px; margin: 18px 0 0; }
+      .hero-verse { max-width: 680px; font-size: 0.98rem; font-style: italic; color: var(--muted); margin: 6px 0 0; }
       .hero-verse span { font-style: normal; font-weight: 600; color: var(--wine); }
       .hero-note { text-align: center; color: var(--muted); font-size: 0.9rem; max-width: 640px; margin: 20px auto 0; }
       .whats-new { text-align: center; color: var(--ink); font-size: 0.92rem; max-width: 720px; margin: 14px auto 0; background: var(--gold-soft); border: 1px solid var(--gold); border-radius: 12px; padding: 10px 16px; }

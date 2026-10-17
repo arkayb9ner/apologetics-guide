@@ -462,5 +462,60 @@
       "John 6:60-66",
       "1 Corinthians 11:28"
     ]
+  },
+  {
+    "audience": "c",
+    "basis": "doctrine",
+    "ccc": "CCC 1996",
+    "jumpLabel": "Paul vs Jesus?",
+    "level": "intermediate",
+    "objection": "Jesus preached the Kingdom, repentance, and obedience to God’s commandments. Paul shifted the focus to justification by faith and freedom from the Law. Christianity became Pauline — a different gospel from the one Jesus preached.",
+    "oneLiner": "“Paul preached the Kingdom (Acts 20:25), and Jesus preached ‘your faith has saved you’ (Luke 7:50). The dichotomy collapses from both ends.”",
+    "related": [
+      {
+        "description": "",
+        "title": "Paul invented Christianity — he hijacked Jesus' simple moral message"
+      }
+    ],
+    "response": [
+      {
+        "body": "<p>The surface tension is real and worth stating plainly. Jesus: “if you would enter life, keep the commandments” (Matt 19:17); “not every one who says to me, ‘Lord, Lord,’ shall enter the kingdom of heaven” (Matt 7:21). Paul: “a man is justified by faith apart from works of law” (Rom 3:28). Jesus lived as a faithful Jew; Paul told Gentiles they need not be circumcised. Put that way, it looks like two religions: the Kingdom versus justification, obedience versus faith.</p>",
+        "heading": "The objection at its strongest"
+      },
+      {
+        "body": "<p>Start with the half the objection hides. Paul preached the Kingdom constantly — “preaching the kingdom” is how Luke summarizes his whole ministry (Acts 20:25), and Acts closes with him “preaching the kingdom of God” in Rome (28:31). His letters warn repeatedly about who “will not inherit the kingdom of God” (1 Cor 6:9-10; Gal 5:21; Eph 5:5). A man supposedly replacing the Kingdom with justification talks about the Kingdom on nearly every page.</p>",
+        "heading": "Paul preached the Kingdom too"
+      },
+      {
+        "body": "<p>Now the other half. Jesus preached grace as insistently as any of Paul’s letters: “your faith has saved you; go in peace” (Luke 7:50) — to a sinful woman, with no works cited. The prodigal is restored by the father’s running embrace before he finishes his rehearsed confession (Luke 15). “Apart from me you can do nothing” (John 15:5). The Jesus of the Gospels is not a Pelagian moralist; the Paul of the epistles is not an antinomian. Each preaches what the other is accused of dropping.</p>",
+        "heading": "Jesus preached grace too"
+      },
+      {
+        "body": "<p>The key is what Paul means by “works of law.” He is not condemning obedience — he commands it everywhere: “the doers of the law will be justified” (Rom 2:13); “faith working through love” (Gal 5:6); “work out your own salvation with fear and trembling” (Phil 2:12). “Works of law” means the Mosaic covenant’s boundary markers — circumcision, food laws, Sabbath — treated as the <i>basis</i> of membership in God’s people. That was the exact question settled at the Council of Jerusalem (Acts 15) — with Peter presiding and James concurring. Paul’s gospel of Gentile freedom wasn’t his private innovation; it was the apostles’ public decision.</p>",
+        "heading": "“Works of the law” doesn’t mean obedience"
+      },
+      {
+        "body": "<p>And the New Testament itself refuses the dichotomy. “You see that a man is justified by works and not by faith alone” (James 2:24) — the only place the phrase “faith alone” occurs in all of Scripture, and it occurs to <i>deny</i> it. Paul and James are not rivals; they are two apostles describing one gospel from two angles, against two opposite errors. Tellingly, it was Luther — not Paul — who wanted the epistle of James thrown out of the canon. If anyone tried to make Christianity “faith alone” against Jesus’ call to obedience, it wasn’t Paul.</p>",
+        "heading": "James settles it: the New Testament holds both"
+      }
+    ],
+    "simple": "It looks like Jesus preached “obey” and Paul preached “just believe” — but both preached both. Paul talks about God’s Kingdom all the time, and Jesus told a sinful woman “your faith has saved you.” When Paul says we’re not saved by “works of the law,” he means the old Jewish boundary markers like circumcision — not obedience itself, which he commands everywhere. And James 2:24 says we’re justified by works and not by faith alone — the only place the Bible ever uses the phrase “faith alone,” and it’s to say no to it.",
+    "slug": "paul-vs-jesus-faith-obedience",
+    "summary": "Paul preached the Kingdom too, and Jesus preached grace too. “Works of the law” means the Mosaic boundary markers, not obedience — and James 2:24 shows the New Testament holding faith and works together.",
+    "title": "Jesus preached obedience, Paul preached faith alone — different gospels?",
+    "topic": "Scripture",
+    "verses": [
+      "Romans 3:28",
+      "Matthew 19:17",
+      "Matthew 7:21",
+      "Romans 2:13",
+      "Galatians 5:6",
+      "Philippians 2:12",
+      "James 2:24",
+      "Luke 7:50",
+      "John 15:5",
+      "Acts 20:25",
+      "1 Corinthians 6:9-10"
+    ]
   }
 ]

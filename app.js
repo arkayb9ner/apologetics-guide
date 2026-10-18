@@ -328,6 +328,7 @@ function renderStandardCard(card, n, total) {
     '<button type="button" class="share-btn" data-share>⧉ Copy link to this defense</button>' +
     (CAN_READ_ALOUD ? '<button type="button" class="share-btn" data-read>🔊 Listen</button>' : "") +
     '<button type="button" class="share-btn" data-bookmark aria-pressed="' + (isBookmarked(card.slug) ? "true" : "false") + '">' + (isBookmarked(card.slug) ? "★ Saved to My Armory" : "☆ Save to My Armory") + "</button>" +
+    '<a class="share-btn" href="https://github.com/arkayb9ner/apologetics-guide/issues/new?title=' + encodeURIComponent("Correction for defense #" + n + ": " + card.title) + "&body=" + encodeURIComponent("**Defense:** #" + n + " — " + card.title + "\n**Link:** https://christianarmory.org/#answer-" + card.slug + "\n\n**What looks wrong or unclear:**\n\n\n**Suggested wording (optional):\n") + '" target="_blank" rel="noopener">✎ Found an error? Let us know</a>' +
     "</div><blockquote>" + card.summary + "</blockquote></div>" +
     '<div class="entry-body">' +
     '<nav class="entry-nav" aria-label="' + card.title.replace(/"/g, "") + ' answer sections" role="tablist">' +

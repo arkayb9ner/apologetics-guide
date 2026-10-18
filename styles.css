@@ -550,7 +550,7 @@
       .answer-pillars li { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 18px; padding: 22px 0; border-bottom: 1px solid var(--line); }
       .answer-pillars .num { font-family: "Cormorant Garamond", "Literata", Georgia, serif; color: var(--gold-deep); font-weight: 700; font-size: 1.15rem; }
       .answer-pillars b { color: var(--gold-deep); }
-      .answer-pillars p { margin: 3px 0 0; color: var(--muted); }
+      .answer-pillars p { margin: 3px 0 0; color: var(--ink); font-size: 1.04rem; line-height: 1.78; }
       .panel .say-it {
         background: none;
         border: 0;

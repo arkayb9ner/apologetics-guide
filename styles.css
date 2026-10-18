@@ -338,6 +338,8 @@
       .method li::before { content: "0" counter(steps); display: block; color: var(--gold-deep); font-weight: 700; font-size: .75rem; letter-spacing: .08em; margin-bottom: 4px; }
       .method b { display: block; font-family: "Cormorant Garamond", "Literata", Georgia, serif; font-size: 1.06rem; }
       .method span { color: var(--muted); font-size: .87rem; line-height: 1.45; display: block; margin-top: 3px; }
+      .method.how-it-works { padding-top: 0; }
+      .section-kicker { font-family: "Cormorant Garamond", "Literata", Georgia, serif; font-size: 1.3rem; font-style: italic; color: var(--ink); margin: 0 0 20px; max-width: 40ch; }
 
       .section { padding: clamp(58px, 8vw, 96px) 0; }
       .section-head { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 30px; margin-bottom: 36px; align-items: start; }

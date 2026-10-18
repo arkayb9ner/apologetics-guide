@@ -440,7 +440,8 @@ function linkCccRefs(root) {
    Bare "5:21" continuations and Qur'an refs never match: a Bible book name
    is required. */
 var VERSE_ALIASES = {
-  Matt: "Matthew", Heb: "Hebrews", Eph: "Ephesians", Rev: "Revelation", Ps: "Psalm",
+  Matt: "Matthew", Mt: "Matthew", Mk: "Mark", Lk: "Luke", Jn: "John", Gen: "Genesis",
+  Heb: "Hebrews", Eph: "Ephesians", Rev: "Revelation", Ps: "Psalm",
   Phil: "Philippians", Rom: "Romans", Gal: "Galatians", Col: "Colossians", Deut: "Deuteronomy",
   Jas: "James", Cor: "Corinthians", Tim: "Timothy", Thess: "Thessalonians", Pet: "Peter",
   Sam: "Samuel", Macc: "Maccabees", Chron: "Chronicles"
@@ -453,7 +454,8 @@ var VERSE_BOOK_TOKENS = ["Song of Songs", "Genesis", "Exodus", "Leviticus", "Num
   "Galatians", "Ephesians", "Philippians", "Colossians", "Titus", "Philemon", "Hebrews", "James",
   "Jude", "Revelation", "Corinthians", "Timothy", "Thessalonians", "Peter", "Kings", "Samuel",
   "Maccabees", "Chronicles", "Matt", "Heb", "Eph", "Rev", "Ps", "Phil", "Rom", "Gal", "Col",
-  "Deut", "Jas", "Cor", "Tim", "Thess", "Pet", "Sam", "Macc", "Chron"];
+  "Deut", "Jas", "Cor", "Tim", "Thess", "Pet", "Sam", "Macc", "Chron",
+  "Mt", "Mk", "Lk", "Jn", "Gen"];
 var VERSE_BOOK_ALT = VERSE_BOOK_TOKENS.slice().sort(function (a, b) { return b.length - a.length; }).join("|");
 
 function canonVerseBook(num, book) {
@@ -484,7 +486,7 @@ function parseVerseRef(ref) {
   var segments = [];
   var cur = { ch: +m[3], v1: +m[4], v2: +m[4] };
   var pos = m[0].length;
-  var tailSep = /\s*([,\u2013\u2014-])\s*/g;
+  var tailSep = /\s*(;(?=\s*\d+\s*:)|[,\u2013\u2014-])\s*/g;
   var tailOp = /(?:(\d+):)?(\d+)(?:\s*[-\u2013\u2014]\s*(?:(\d+):)?(\d+))?/g;
   while (pos < ref.length) {
     tailSep.lastIndex = pos;
@@ -496,7 +498,7 @@ function parseVerseRef(ref) {
     var om = tailOp.exec(ref);
     if (!om || om.index !== pos) return null;
     pos = tailOp.lastIndex;
-    if (sep === ",") {
+    if (sep === "," || sep === ";") {
       segments.push(cur);
       cur = { ch: om[1] ? +om[1] : cur.ch, v1: +om[2], v2: om[4] ? +om[4] : +om[2] };
     } else {
@@ -536,7 +538,7 @@ function verseRefVerses(parsed) {
 
 function linkVerseRefs(root) {
   var testRe = new RegExp("(?:([123])\\s+)?(" + VERSE_BOOK_ALT + ")\\s+\\d+:\\d+");
-  var matchRe = new RegExp("\\b(?:([123])\\s+)?(" + VERSE_BOOK_ALT + ")\\s+\\d+:\\d+((?:\\s*[,\\u2013\\u2014-]\\s*(?:\\d+:)?\\d+(?:\\s*[-\\u2013\\u2014]\\s*(?:\\d+:)?\\d+)?)*)", "g");
+  var matchRe = new RegExp("\\b(?:([123])\\s+)?(" + VERSE_BOOK_ALT + ")\\s+\\d+:\\d+((?:\\s*(?:[,\\u2013\\u2014-]\\s*(?:\\d+:)?\\d+|;\\s*\\d+:\\d+)(?:\\s*[-\\u2013\\u2014]\\s*(?:\\d+:)?\\d+)?)*)", "g");
   linkVersePass(root, testRe, matchRe);
   // Bare single-chapter refs: "Jude 7", "Philemon 10", "2 John 3" (no colon).
   var bareTest = /\b(?:Jude|Philemon|Obadiah)\s+\d+(?:\s*[-\u2013\u2014]\s*\d+)?(?!:)|\b[23]\s+John\s+\d+(?:\s*[-\u2013\u2014]\s*\d+)?(?!:)/;

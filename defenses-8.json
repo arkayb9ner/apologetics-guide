@@ -558,5 +558,55 @@
       "2 Timothy 2:13",
       "Genesis 32:24-31"
     ]
+  },
+  {
+    "audience": "g",
+    "basis": "history",
+    "ccc": "CCC 946-962",
+    "jumpLabel": "Halloween is a pagan holiday the Church stole",
+    "level": "intermediate",
+    "objection": "October 31st was the Celtic festival of Samhain — costumes, bonfires, the dead walking the earth. The Church just moved All Saints' Day to November 1st to absorb it. Halloween is pagan at the root, and Catholics shouldn't touch it.",
+    "oneLiner": "\"Halloween\" is short for All Hallows' Eve — the vigil of All Saints' Day. The \"stolen pagan festival\" story is mostly 19th-century folklore, not history.",
+    "related": [
+      {
+        "description": "",
+        "title": "Catholicism is just paganism with a Christian coat"
+      },
+      {
+        "description": "",
+        "title": "Christianity borrowed from pagan myths"
+      }
+    ],
+    "response": [
+      {
+        "body": "<p>\"Halloween\" is short for <em>All Hallows' Eve</em> — the vigil of All Saints' Day on November 1, one of the Church's great feasts. A \"hallow\" is a saint, a holy one: the same word on Jesus' lips in \"hallowed be thy name\" (Matthew 6:9). The night of October 31 exists on the Church's calendar for one reason — to keep watch before the feast of the saints in glory, the \"great multitude\" of Revelation 7:9. Whatever the neighbors do with costumes, the Church's October 31 is pointed at heaven.</p>",
+        "heading": "The name itself is the answer."
+      },
+      {
+        "body": "<p>The claim runs: the medieval Church moved All Saints to November 1 to co-opt the Celtic Samhain. Three problems. First, Pope Gregory III fixed All Saints on November 1 in Rome back in the 730s, and the earliest Irish sources on Samhain don't describe the \"dead walking the earth\" festival the modern story needs — that picture is largely later folklore. Second, the historian Ronald Hutton (<em>Stations of the Sun</em>) showed that the \"pagan origins of Halloween\" narrative was mostly assembled by 19th-century folklorists working from Frazer-style dying-god theories, not from evidence that the Church deliberately absorbed a Samhain death-cult. Third, vigils are a Christian instinct anyway — Christmas Eve, the Easter Vigil: the Church always kept watch the night before a great feast. October 31 needs no pagan explanation. It's how the Church does eves.</p>",
+        "heading": "The \"stolen Samhain\" story doesn't survive the sources."
+      },
+      {
+        "body": "<p>Even where a folk custom has murky roots, resemblance isn't guilt — that's the deck's whole answer on the pagan-borrowing charge. The Church baptizes cultures: she takes the form and fills it with Christ, the way Paul took the \"unknown god\" altar as his text on the Areopagus (Acts 17:23). Wedding rings and the names of the weekdays have pagan pasts too, and nobody thinks a Tuesday wedding is Thor worship. The question is never \"did anyone do something similar before?\" but \"what does it mean now?\" And on the Church's calendar, October 31 to November 2 means exactly one thing: the Church triumphant (All Saints), the Church suffering (All Souls), and us — the Church militant — praying for them and asking their prayers. That is the communion of saints (CCC 946–962).</p>",
+        "heading": "And the borrowing charge misunderstands the Church."
+      },
+      {
+        "body": "<p>None of this baptizes the occult fringe of the modern commercial Halloween — horror gore as entertainment, s&eacute;ances, dabbling in the demonic for thrills. That is a prudential call for Catholic families, and the Church's answer there is the same as ever: evil is real, and Christ has conquered it — \"O death, where is thy victory?\" (1 Corinthians 15:55). Catholics don't play at the edges of darkness for fun. But the growing Catholic tradition of dressing children as saints for an All Saints party reclaims the night for what it actually is: the eve of the saints.</p>",
+        "heading": "One honest distinction."
+      }
+    ],
+    "simple": "Halloween means the night before All Saints' Day — a big Church feast celebrating the saints in heaven. Some people say the Church stole the date from a pagan festival, but historians say that story was mostly made up in the 1800s. The scary costumes are just for fun; the real meaning of the night is the saints.",
+    "slug": "halloween-pagan-holiday",
+    "summary": "Halloween means All Hallows' Eve — the vigil of All Saints' Day. The \"stolen Samhain\" story is mostly 19th-century folklore, not history — and the Church's actual record is baptizing cultures, not borrowing gods.",
+    "title": "Halloween is a pagan holiday the Church stole",
+    "topic": "Mary & Saints",
+    "verses": [
+      "Matthew 6:9",
+      "Revelation 7:9",
+      "Hebrews 12:1",
+      "Wisdom 3:1",
+      "2 Maccabees 12:45",
+      "1 Corinthians 15:55"
+    ]
   }
 ]

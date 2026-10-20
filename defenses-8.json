@@ -608,5 +608,60 @@
       "2 Maccabees 12:45",
       "1 Corinthians 15:55"
     ]
+  },
+  {
+    "audience": "g",
+    "basis": "theology",
+    "ccc": "CCC 404–405",
+    "jumpLabel": "Does God punish children for their parents' sins?",
+    "level": "intermediate",
+    "objection": "The Bible says God \"visits the iniquity of the fathers on the children to the third and fourth generation\" (Exodus 20:5). But it also says \"the son shall not bear the iniquity of the father\" (Ezekiel 18:20). Which is it? Either God punishes innocent children for what their parents did — which would be unjust — or the Bible contradicts itself.",
+    "oneLiner": "Exodus describes sin's effects rippling through generations; Ezekiel teaches guilt never transfers. We inherit the damage, never the blame.",
+    "related": [
+      {
+        "description": "",
+        "title": "The Old Testament God commands atrocities"
+      },
+      {
+        "description": "",
+        "title": "Why would God create people He knows will go to hell?"
+      },
+      {
+        "description": "",
+        "title": "What about those who never heard the Gospel?"
+      }
+    ],
+    "response": [
+      {
+        "body": "<p>Exodus 20:5 is about the <em>effects</em> of sin spreading through a household and a people. A father's idolatry forms the world his children grow up in — its habits, its loves, its lies — and children tend to walk in the world they were given. That is why the damage reaches \"the third and the fourth generation.\" Ezekiel 18:20, Deuteronomy 24:16, and Jeremiah 31:29–30 are about <em>guilt</em> before God: no one stands condemned for someone else's sin. The Bible holds both at once because both are true. We inherit the damage. We never inherit the blame.</p><p>Notice, too, that the two statements do not even come from different authors. The &ldquo;visiting the iniquity&rdquo; line is Deuteronomy 5:9&ndash;10 &mdash; and &ldquo;each shall be put to death for his own sin&rdquo; is Deuteronomy 24:16. Same book, same Law. Whoever set them side by side saw no contradiction, because there is none. And the Old Testament shows us how the Law was actually applied: when King Amaziah executed the servants who had murdered his father, he deliberately spared their children, &ldquo;according to what is written in the book of the law of Moses&rdquo; (2 Kings 14:6). The Law&rsquo;s own first readers never understood &ldquo;visiting the iniquity&rdquo; as permission to punish the innocent.</p>",
+        "heading": "The two passages answer different questions."
+      },
+      {
+        "body": "<p>Exodus 20:5 does not end at \"the third and the fourth generation.\" Read the whole verse: the visiting falls on <em>\"those who hate me\"</em> — on those who take up their fathers' sin and make it their own, who continue in the hatred rather than breaking with it. And the very next verse turns it around: God shows \"steadfast love to the thousandth generation of those who love me\" (Exodus 20:6). The mercy outnumbers the judgment a thousand to three. When God names Himself in Exodus 34:6–7, mercy comes first and justice follows — never the reverse. The \"third and fourth generation\" is the natural horizon of a family's living memory: sin's patterns echo about that far, unless grace breaks them sooner.</p>",
+        "heading": "Read the whole verse — the key is in it."
+      },
+      {
+        "body": "<p>This is settled Catholic ground, not opinion. The Catechism teaches that original sin \"does not have the character of a personal fault in any of Adam's descendants\" (CCC 405): we inherit a wounded nature from Adam, never his personal guilt. Guilt before God requires a voluntary human act (CCC 1734–1735) — no one is guilty for what they did not choose. That is why the Church baptizes infants: not because babies are guilty criminals, but because grace is the gift every child of Adam needs. And it is why the Church has no teaching of inherited \"generational curses\" requiring special rites of breaking — Baptism remits original sin and all personal sins entirely (CCC 1263). One bath is enough.</p>",
+        "heading": "The Church's settled teaching: guilt is personal."
+      },
+      {
+        "body": "<p>None of this denies the painful half of the truth. Children really do <em>suffer</em> for their parents' sins — addiction, abandonment, violence, and poverty cascade down generations, and the Church names that suffering honestly instead of explaining it away. God permits it as part of a fallen world where our choices genuinely affect other people; that is the terrible dignity of human freedom. But suffering the <em>consequences</em> of another's sin is not the same as being <em>punished by God</em> as guilty of it. And the ripple runs both ways: \"Believe in the Lord Jesus, and you will be saved, you and your household\" (Acts 16:31). A parent's faith shapes the house, just as a parent's sin does — except grace runs to the thousandth generation.</p>",
+        "heading": "One honest distinction."
+      }
+    ],
+    "simple": "The Bible says two things that sound opposite: that God \"punishes\" children for their parents' sins, and that no one is punished for someone else's sin. Both are true. Bad choices hurt the whole family — that is the ripple. But God never treats you as guilty for what your parents did — that is the rule. You inherit the damage, never the blame.",
+    "slug": "god-punish-children-parents-sins",
+    "summary": "Exodus 20:5 describes sin's effects cascading through generations — \"of those who hate me,\" who carry the sin onward. Ezekiel 18:20 teaches guilt before God is personal and never transfers. Consequences ripple; guilt does not.",
+    "title": "Does God punish children for their parents' sins?",
+    "topic": "Scripture",
+    "verses": [
+      "Exodus 20:5",
+      "Exodus 20:6",
+      "Ezekiel 18:20",
+      "Deuteronomy 24:16",
+      "Jeremiah 31:29",
+      "Exodus 34:6",
+      "2 Kings 14:6"
+    ]
   }
 ]

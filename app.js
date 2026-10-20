@@ -435,8 +435,9 @@ function linkCccRefs(root) {
 }
 
 /* Scripture popups (CPDV): every cited verse opens the CPDV text in a modal.
-   verses.json is built by dev/build-verses.py from the CPDV JSON conversion of
-   sacredbible.org. Keys use the site's numbering; Psalm/Vulgate offsets are
+   verses-1.json / verses-2.json are built by dev/build-verses.py from the CPDV
+   JSON conversion of sacredbible.org (sharded: one verses.json outgrew the
+   push size ceiling). Keys use the site's numbering; Psalm/Vulgate offsets are
    resolved at build time, so the client looks up site numbering directly.
    Bare "5:21" continuations and Qur'an refs never match: a Bible book name
    is required. */
@@ -2014,6 +2015,10 @@ var topicCarousels = document.getElementById("topicCarousels");
 
 var ASSET_V = window.ASSET_V || "dev";
 var DEFENSE_SHARDS = ["defenses-1.json", "defenses-2.json", "defenses-3.json", "defenses-7.json", "defenses-4.json", "defenses-5.json", "defenses-6.json", "defenses-8.json"];
+/* Verse text is sharded like the defenses (verses.json outgrew the push size
+   ceiling); both halves load in parallel and merge into one VERSES object.
+   All-or-nothing: if either half fails, verse popups stay off, as before. */
+var VERSE_SHARDS = ["verses-1.json", "verses-2.json"];
 /* Glossary loads alongside the defenses so card text can link its terms. */
 Promise.all([
   Promise.all(DEFENSE_SHARDS.map(function (f) {
@@ -2022,8 +2027,13 @@ Promise.all([
   fetch("glossary.json?v=" + ASSET_V)
     .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
     .catch(function () { return null; }),
-  fetch("verses.json?v=" + ASSET_V)
-    .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+  Promise.all(VERSE_SHARDS.map(function (f) {
+    return fetch(f + "?v=" + ASSET_V).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); });
+  })).then(function (parts) {
+    var merged = {};
+    parts.forEach(function (p) { Object.keys(p).forEach(function (k) { merged[k] = p[k]; }); });
+    return merged;
+  })
     .catch(function () { return null; })
 ])
   .then(function (res) {

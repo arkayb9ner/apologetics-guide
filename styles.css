@@ -461,10 +461,10 @@
       }
       .entry-top .share-btn { margin: 16px 6px 0; }
       .entry blockquote {
-        font-family: "Cormorant Garamond", "Literata", Georgia, serif;
+        font-family: "Public Sans", sans-serif;
         font-style: italic;
         text-align: center;
-        font-size: clamp(1.25rem, 2.6vw, 1.6rem);
+        font-size: clamp(1.38rem, 2.8vw, 1.75rem);
         line-height: 1.55;
         color: var(--wine);
         max-width: 34ch;

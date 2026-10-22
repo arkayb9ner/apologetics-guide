@@ -540,7 +540,7 @@
         line-height: 1.8;
       }
       .answer-pillars > li:first-child > div > p:first-of-type::first-letter {
-        font-family: "Cormorant Garamond", "Literata", Georgia, serif;
+        font-family: "Public Sans", sans-serif;
         font-size: 3.2em;
         float: left;
         line-height: 0.85;
@@ -550,9 +550,10 @@
       }
       .answer-pillars { list-style: none; padding: 0; margin: 24px 0 0; border-top: 1px solid var(--line); }
       .answer-pillars li { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 18px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+      .answer-pillars li > div { font-family: "Public Sans", sans-serif; font-style: italic; font-size: 1.15rem; }
       .answer-pillars .num { font-family: "Cormorant Garamond", "Literata", Georgia, serif; color: var(--gold-deep); font-weight: 700; font-size: 1.15rem; }
       .answer-pillars b { color: var(--gold-deep); }
-      .answer-pillars p { margin: 3px 0 0; color: var(--ink); font-size: 1.04rem; line-height: 1.78; }
+      .answer-pillars p { margin: 3px 0 0; color: var(--ink); font-family: "Public Sans", sans-serif; font-style: italic; font-size: 1.15rem; line-height: 1.78; }
       .panel .say-it {
         background: none;
         border: 0;

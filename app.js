@@ -2014,7 +2014,7 @@ var topicCarousels = document.getElementById("topicCarousels");
 }
 
 var ASSET_V = window.ASSET_V || "dev";
-var DEFENSE_SHARDS = ["defenses-1.json", "defenses-2.json", "defenses-3.json", "defenses-7.json", "defenses-4.json", "defenses-5.json", "defenses-6.json", "defenses-8.json"];
+var DEFENSE_SHARDS = ["defenses-1.json", "defenses-2.json", "defenses-3.json", "defenses-7.json", "defenses-4.json", "defenses-5.json", "defenses-6.json", "defenses-8.json", "defenses-9.json"];
 /* Verse text is sharded like the defenses (verses.json outgrew the push size
    ceiling); both halves load in parallel and merge into one VERSES object.
    All-or-nothing: if either half fails, verse popups stay off, as before. */

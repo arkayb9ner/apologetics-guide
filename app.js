@@ -301,6 +301,14 @@ function toggleBookmark(slug) {
   saveBookmarks(list);
   return i === -1;
 }
+function isNewCard(card) {
+  if (!card.added || !/^\d{4}-\d{2}-\d{2}$/.test(card.added)) return false;
+  var now = new Date();
+  var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  var cutoff = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 6);
+  var added = new Date(card.added + "T00:00:00").getTime();
+  return added >= cutoff.getTime() && added <= today.getTime();
+}
 function renderStandardCard(card, n, total) {
   var points = linkGlossaryTerms(card.response.map(function (p, k) {
     return '<li><span class="num">' + pad2(k + 1) + '</span> <div><b>' + p.heading + '</b> ' + p.body + '</div></li>';
@@ -323,6 +331,7 @@ function renderStandardCard(card, n, total) {
     (card.level ? '<span class="level-pill level-' + card.level + '">' + levelLabel(card.level) + "</span>" : "") +
     (card.basis ? '<span class="basis-pill basis-' + card.basis + '">' + basisLabel(card.basis) + "</span>" : "") +
     (card.audience ? '<span class="audience-pill audience-' + card.audience + '">' + audienceLabel(card.audience) + "</span>" : "") +
+    (isNewCard(card) ? '<span class="new-pill">New</span>' : "") +
     "<h3>" + card.title + "</h3>" +
     '<p class="entry-lede">' + linkGlossaryTerms(card.objection) + "</p>" +
     '<button type="button" class="share-btn" data-share>⧉ Copy link to this defense</button>' +

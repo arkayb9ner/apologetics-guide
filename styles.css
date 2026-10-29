@@ -353,6 +353,8 @@
       .section-details > summary::-webkit-details-marker { display: none; }
       .section-details > summary::after { content: "Show section \25B8"; position: absolute; right: 0; top: 0; font-size: .78rem; font-weight: 700; letter-spacing: .05em; color: var(--gold-deep); border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; background: var(--paper); }
       .section-details[open] > summary::after { content: "Hide section \25BE"; }
+      /* A closed section's head needs no gap to content that is not shown. */
+      .section-details:not([open]) > summary { margin-bottom: 0; }
 
       .deck-shell { min-width: 0; }
       .deck-controls {
@@ -861,6 +863,12 @@
         .method li:nth-child(3) { border-left: 0; padding-left: 0; }
         .section-head, .entry-body, .closing, .support { grid-template-columns: 1fr; gap: 14px; }
         .section-no { padding-top: 0; }
+        /* Phones: tighter section rhythm, and the Hide/Show pill drops into
+           its own row under the intro instead of reserving 150px beside it —
+           that clearance crushed the intro text into a narrow column. */
+        .section { padding: 36px 0; }
+        .section-details > summary { padding-right: 0; }
+        .section-details > summary::after { position: static; justify-self: end; }
         .entry-nav { position: static; flex-direction: row; flex-wrap: wrap; gap: 6px 14px; border-bottom: 1px solid var(--line); padding-bottom: 16px; margin-bottom: 8px; }
         .deck-controls { grid-template-columns: 44px minmax(0, 1fr) 44px; gap: 10px; }
         .deck-arrow { width: 44px; height: 42px; }

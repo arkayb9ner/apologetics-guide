@@ -346,8 +346,10 @@
       .section-no { color: var(--gold-deep); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; font-size: .78rem; padding-top: 10px; }
       h2 { font-size: clamp(2rem, 4.4vw, 3.65rem); line-height: 1.08; letter-spacing: -.035em; margin: 0 0 12px; }
       .section-head p { color: var(--muted); font-size: 1.05rem; max-width: 720px; margin: 0; }
-      /* Collapsible reference sections: the section head is the disclosure summary. */
-      .section-details > summary { list-style: none; cursor: pointer; position: relative; }
+      /* Collapsible reference sections: the section head is the disclosure summary.
+         The Hide/Show pill is absolutely positioned at the summary's top-right,
+         so reserve clearance for it — otherwise it overlaps the heading text. */
+      .section-details > summary { list-style: none; cursor: pointer; position: relative; padding-right: 150px; }
       .section-details > summary::-webkit-details-marker { display: none; }
       .section-details > summary::after { content: "Show section \25B8"; position: absolute; right: 0; top: 0; font-size: .78rem; font-weight: 700; letter-spacing: .05em; color: var(--gold-deep); border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; background: var(--paper); }
       .section-details[open] > summary::after { content: "Hide section \25BE"; }
@@ -625,6 +627,16 @@
       .pillars .diff b { font-style: normal; color: var(--wine); }
       .pillars-close { margin: 26px 0 0; font-size: 1.03rem; }
       .pillars-close a { color: var(--gold); font-weight: 700; }
+      /* Essentials: the Nicene Creed, article by article. */
+      .essentials-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+      .essentials-grid li { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 22px; box-shadow: var(--shadow); }
+      .essential-no { display: block; font-family: "Cormorant Garamond", "Literata", Georgia, serif; font-size: 1.9rem; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 10px; }
+      .essentials-grid h3 { margin: 0 0 8px; font-size: 1.15rem; }
+      .essentials-grid p { margin: 0 0 10px; color: var(--muted); }
+      .essentials-grid p:last-child { margin-bottom: 0; }
+      .essentials-foot { margin: 26px 0 0; font-size: 1.03rem; }
+      @media (max-width: 1020px) { .essentials-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+      @media (max-width: 640px) { .essentials-grid { grid-template-columns: 1fr; } }
       @media (max-width: 720px) { .pillars { grid-template-columns: 1fr; } }
       .journey { margin: 30px 0 8px; }
       .journey ol { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; list-style: none; margin: 12px 0 0; padding: 0; }

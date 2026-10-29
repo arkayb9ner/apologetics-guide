@@ -697,6 +697,10 @@ function initApp(defenses) {
           });
         }
 
+        /* Essentials section: make its CCC references open the Catechism reader. */
+        var essentials = document.getElementById("essentials");
+        if (essentials) { linkCccRefs(essentials); }
+
         /* Guided path continuity: Step N of 8 banner inside the deck, with
            Next lesson / Back to the path, and Simply-put entry. Any other
            deck navigation leaves the path (see showCard). */

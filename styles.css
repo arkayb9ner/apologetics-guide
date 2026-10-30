@@ -808,7 +808,7 @@
       .daily-strip { display: flex; align-items: center; gap: 12px; width: 100%; margin: 14px 0 0; padding: 12px 18px; background: linear-gradient(135deg, rgba(212,175,55,.14), rgba(212,175,55,.05)); border: 1px solid var(--gold); border-radius: 12px; color: var(--ink); font: inherit; cursor: pointer; text-align: left; }
       .daily-strip[hidden] { display: none; }
       .daily-kicker { flex: none; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-deep); font-weight: 700; }
-      .daily-title { flex: 1; font-weight: 600; font-size: .95rem; }
+      .daily-title { flex: 1; min-width: 0; font-weight: 600; font-size: .95rem; }
       .daily-open { flex: none; color: var(--gold); font-weight: 700; font-size: .9rem; }
       @media (max-width: 900px) { .quiz-modes { margin-left: 0; } }
       .quiz-verdict:hover { border-color: var(--wine); color: var(--wine); }
@@ -881,6 +881,11 @@
         .roadmap-grid { grid-template-columns: 1fr; }
         .topic:nth-child(odd), .topic:nth-child(even) { padding: 17px 0; border-right: 0; }
         .closing, .support { gap: 10px; }
+        /* Phones: the dated daily strip stacks — the long kicker ("Today's
+           defense · October 30, 2026") never shrinks, so in a row it crushed
+           the title into a narrow column overflowing the card's edge. */
+        .daily-strip { flex-direction: column; align-items: stretch; gap: 6px; }
+        .daily-open { align-self: flex-end; }
       }
       @media (max-width: 480px) {
         h1 { font-size: 2.75rem; }

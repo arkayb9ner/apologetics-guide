@@ -690,6 +690,9 @@
       .start-num { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--wine); color: #fff; font-size: .85rem; flex: 0 0 auto; }
       .start-label { font-weight: 600; }
       .pocket-search-wrap { margin-bottom: 18px; }
+      .pocket-search-note { font-size: .88rem; color: var(--muted); margin: 0 0 8px; }
+      .section-teaser { font-weight: 600; margin-top: 8px; }
+      .handout-preview summary { cursor: pointer; font-weight: 700; margin-bottom: 12px; }
       #pocketSearch { width: 100%; min-height: 48px; border: 1px solid var(--line-strong); background: var(--surface); color: inherit; padding: 11px 15px; font: inherit; border-radius: 0; }
       .pocket-list { display: grid; gap: 14px; }
       .pocket-item { border: 1px solid var(--line); background: var(--surface); padding: 16px 18px; border-radius: 4px; }
@@ -762,6 +765,7 @@
       .suggest-form .support-btn { justify-self: start; border: 0; cursor: pointer; font: inherit; margin-top: 6px; }
       .suggest-note { min-height: 1.4em; color: var(--muted); font-size: .95rem; margin: 4px 0 0; }
 
+      .deck-jump-heading { font-size: .85rem; font-weight: 700; color: var(--muted); margin: 0; }
       .deck-shuffle-row { display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; margin: 2px 0 20px; }
       .deck-jump { display: flex; align-items: center; gap: 8px; }
       .deck-jump label { font-size: 0.88rem; color: var(--muted); font-weight: 600; white-space: nowrap; }
@@ -965,6 +969,8 @@
         body.print-handout #handout .handout-controls { display: none !important; }
         body.print-handout .handout-exit { display: none !important; }
         body.print-handout #handoutDoc { box-shadow: none; border: 0; padding: 0; max-width: none; }
+        body.print-handout details.handout-preview summary { display: none !important; }
+        body.print-handout details.handout-preview > :not(summary) { display: block !important; content-visibility: visible !important; }
         /* Full-page print opens every collapsed reference section. */
         details.section-details > :not(summary) { display: block !important; content-visibility: visible !important; }
       }

@@ -26,7 +26,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Literata:opsz,wght@7..72,400;7..72,600;7..72,700&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet" />
     <title>Christian Armory</title>
-    <link rel="stylesheet" href="styles.css?v=20261029d">
+    <link rel="stylesheet" href="styles.css?v=20261030a">
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to main content</a>
@@ -46,7 +46,7 @@
               <input id="heroSearch" type="search" placeholder="Ask in your own words…" autocomplete="off" aria-describedby="heroSearchHelp" aria-controls="heroSearchResults" aria-expanded="false" />
               <button type="button" class="hero-search-btn" id="heroSearchBtn">Search</button>
             </div>
-            <p class="hero-search-help" id="heroSearchHelp">Ask a question in plain words, then press Enter or tap Search to open the best match.</p>
+            <p class="hero-search-help" id="heroSearchHelp">Ask a question in plain words, then press Enter or use Search to open the best match.</p>
             <div class="hero-suggest" aria-label="Suggested searches">
               <span class="hero-suggest-label">Try:</span>
               <div class="topic-chips">
@@ -73,33 +73,26 @@
 
         <p class="hero-note">Christian Armory is a field guide, not the final word. It&rsquo;s here to point you in the right direction and help you defend the faith with clarity and charity &mdash; but no website finishes the journey. Growing in faith takes a lifetime; for deeper questions, please speak with your parish priest.</p>
 
-        <p class="whats-new"><b>What&rsquo;s new:</b> 26 defenses added &mdash; <a href="#answer-private-interpretation">private interpretation</a>, <a href="#answer-ethiopian-bible-vulgate">the Ethiopian Bible</a>, <a href="#answer-fiducia-supplicans"><i>Fiducia Supplicans</i></a>, <a href="#answer-cain-wife">Cain&rsquo;s wife</a>, <a href="#answer-mormonism">Mormonism</a>, <a href="#answer-clerical-abuse-crisis">the abuse crisis</a>, <a href="#answer-residential-schools">residential schools</a>, <a href="#answer-only-144000-heaven">the 144,000</a>, <a href="#answer-gods-name-jehovah">God&rsquo;s name</a>, <a href="#answer-virgin-birth-myth">the virgin birth</a>, <a href="#answer-church-vs-conscience">conscience vs. the Church</a>, and more. <a href="#completed-index">Browse them</a></p>
+        <p class="whats-new" id="whatsNew"></p>
 
         <nav class="jump-index" id="completed-index" aria-label="Jump to a completed defense">
           <div class="jump-index-head">
             <h2>Browse the defenses</h2>
-            <p>Pick a topic and swipe through its defenses — every defense is numbered in order. Tap one to open it.</p>
+            <p>Pick a topic and browse its defenses — every defense is numbered in order. Select one to open it.</p>
+            <p>Defenses are numbered in one sequence across all topics — the number on a card is its place in the whole armory, not in its topic.</p>
           </div>
           <div class="topic-carousels" id="topicCarousels"></div>
         </nav>
 
-        <section class="method" aria-label="How to use the guide">
+        <section class="method how-it-works" id="how-it-works" aria-label="How the armory works">
+          <p class="section-kicker">How the armory works — apologetics is defending the faith you have, with truth and honesty.</p>
           <ol>
             <li><b>Hear it fairly</b><span>State the objection in its strongest form.</span></li>
             <li><b>Make distinctions</b><span>Clarify what the Church actually claims.</span></li>
             <li><b>Give reasons</b><span>Use evidence without hiding the difficulty.</span></li>
             <li><b>Invite dialogue</b><span>Defend the faith without treating people as enemies.</span></li>
           </ol>
-        </section>
-
-        <section class="method how-it-works" id="how-it-works" aria-label="How the armory works">
-          <p class="section-kicker">How the armory works — apologetics is defending the faith you have, with truth and honesty.</p>
-          <ol>
-            <li><b>Fair objections</b><span>Each defense states the challenge in its strongest form, then answers it.</span></li>
-            <li><b>Sourced answers</b><span>Every answer is grounded in Scripture and the Catechism. Tap any verse or paragraph number to read it.</span></li>
-            <li><b>Plain language</b><span>“Simply put” says it simply; the one-liner says it in a sentence.</span></li>
-            <li><b>Open to correction</b><span>Found an error or unclear wording? <a href="https://github.com/arkayb9ner/apologetics-guide/issues" target="_blank" rel="noopener">Let us know</a> — the armory gets sharper when readers sharpen it.</span></li>
-          </ol>
+          <p class="method-note">Every answer is grounded in Scripture and the Catechism. &ldquo;Simply put&rdquo; says it simply; the one-liner says it in a sentence. And if anything is wrong, the armory stays <a href="https://github.com/arkayb9ner/apologetics-guide/issues" target="_blank" rel="noopener">open to correction</a>.</p>
         </section>
 
         <nav class="section-jump" aria-label="Jump to a section">
@@ -133,7 +126,7 @@
             <div class="section-no">Begin</div>
             <div>
               <h2>New to the armory?<br>Start here</h2>
-              <p>Eight defenses, in order &mdash; from &ldquo;Does God exist?&rdquo; to the Eucharist. About twenty minutes, and you&rsquo;ll hold the skeleton key.</p>
+              <p>Eight defenses, in order &mdash; from &ldquo;Does God exist?&rdquo; to the Eucharist. About twenty minutes, from the first question to the last.</p>
             </div>
           </div>
           <ol class="start-steps" id="startSteps"></ol>
@@ -166,6 +159,7 @@
             </div>
             <div class="deck-shuffle-row">
               <button class="shuffle-btn" id="deckShuffle" type="button">🔀 Surprise me</button>
+              <h3 class="deck-jump-heading">Know the number?</h3>
               <form class="deck-jump" id="deckJumpForm" aria-label="Jump to a defense by number">
                 <label for="deckJumpInput">Go to defense</label>
                 <input id="deckJumpInput" type="number" min="1" placeholder="#" inputmode="numeric" aria-label="Defense number" />
@@ -289,6 +283,7 @@
             </div>
           </div>
           <div class="pocket-search-wrap">
+            <p class="pocket-search-note">One-liners only. Full answers: Ask the Armory above.</p>
             <input id="pocketSearch" type="search" placeholder="Search one-liners&hellip;" autocomplete="off" aria-label="Search one-liners" />
           </div>
           <div class="pocket-list" id="pocketList"></div>
@@ -322,7 +317,10 @@
             <select id="handoutTopic"></select>
             <button type="button" class="support-btn" id="handoutPrint">Print handout</button>
           </div>
-          <div class="handout-doc" id="handoutDoc"></div>
+          <details class="handout-preview">
+            <summary>Preview the handout</summary>
+            <div class="handout-doc" id="handoutDoc"></div>
+          </details>
         </div>
       </section>
 
@@ -420,6 +418,7 @@
             <div>
               <h2>Seven sacraments every Catholic should know</h2>
               <p>Seven sure encounters with Christ&rsquo;s grace, instituted by Him and entrusted to the Church. Swipe through them &mdash; each with its Scripture, and its defense in the armory.</p>
+              <p class="section-teaser">Baptism &middot; Confirmation &middot; Eucharist &middot; Confession &middot; Anointing of the Sick &middot; Holy Orders &middot; Matrimony</p>
             </div>
           </summary>
           <div class="sacraments-carousel">
@@ -523,6 +522,7 @@
             <div>
               <h2>Glossary</h2>
               <p>The words the cards use and the objections assume. Know them, and you&rsquo;ll follow the argument wherever it goes.</p>
+              <p class="section-teaser">32 terms, plainly defined.</p>
             </div>
           </summary>
           <div class="glossary-carousel">
@@ -549,6 +549,7 @@
             <div>
               <h2>Meet the Apostles</h2>
               <p>The men behind the mission &mdash; what Scripture says, what tradition hands down, and an honest label for how certain each part is. Fourteen entries, not twelve: the Twelve as restored with Matthias, plus Paul the apostle to the Gentiles &mdash; and Judas Iscariot, whose betrayal belongs to the story too.</p>
+              <p class="section-teaser">14 entries &mdash; the Twelve restored with Matthias, plus Paul, and Judas.</p>
             </div>
           </summary>
           <div class="apostles-legend" aria-label="How to read the tradition labels">
@@ -691,8 +692,8 @@
       </div>
     </main>
 
-    <script>window.ASSET_V = "20261029d";</script>
-    <script src="app.js?v=20261029d"></script>
+    <script>window.ASSET_V = "20261030a";</script>
+    <script src="app.js?v=20261030a"></script>
     <div class="ccc-modal-backdrop" id="cccModalBackdrop" hidden>
       <div class="ccc-modal" role="dialog" aria-modal="true" aria-labelledby="cccModalTitle">
         <div class="ccc-modal-head">

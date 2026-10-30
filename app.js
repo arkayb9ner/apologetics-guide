@@ -309,6 +309,40 @@ function isNewCard(card) {
   var added = new Date(card.added + "T00:00:00").getTime();
   return added >= cutoff.getTime() && added <= today.getTime();
 }
+function shortAddedDate(added) {
+  var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  var parts = added.split("-");
+  var m = parseInt(parts[1], 10);
+  var d = parseInt(parts[2], 10);
+  if (!m || m < 1 || m > 12 || !d) return added;
+  return months[m - 1] + " " + d;
+}
+function renderWhatsNew(defenses) {
+  var el = document.getElementById("whatsNew");
+  if (!el || !defenses) return;
+  var dated = [];
+  defenses.forEach(function (card, i) {
+    if (card.added && /^\d{4}-\d{2}-\d{2}$/.test(card.added)) dated.push({ card: card, index: i });
+  });
+  function byNewest(a, b) {
+    if (a.card.added !== b.card.added) return a.card.added < b.card.added ? 1 : -1;
+    return b.index - a.index;
+  }
+  var recent = dated.filter(function (e) { return isNewCard(e.card); });
+  recent.sort(byNewest);
+  if (recent.length < 3) {
+    recent = dated.slice().sort(byNewest).slice(0, 6);
+  }
+  var html = "<b>New this week:</b> ";
+  if (recent.length) {
+    html += recent.map(function (e) {
+      return '<a href="#answer-' + e.card.slug + '">' + escapeHtml(e.card.title) + "</a> (" + shortAddedDate(e.card.added) + ")";
+    }).join(" &middot; ");
+    html += ". ";
+  }
+  html += '<a href="#completed-index">Browse them</a>';
+  el.innerHTML = html;
+}
 function renderStandardCard(card, n, total) {
   var points = linkGlossaryTerms(card.response.map(function (p, k) {
     return '<li><span class="num">' + pad2(k + 1) + '</span> <div><b>' + p.heading + '</b> ' + p.body + '</div></li>';
@@ -1564,8 +1598,17 @@ var topicCarousels = document.getElementById("topicCarousels");
           heroSearch.setAttribute("aria-expanded", "true");
         }
 
+        renderWhatsNew(defenses);
         var dailyStrip = document.getElementById("dailyStrip");
         if (dailyStrip && defenses && defenses.length) {
+          var dailyKicker = dailyStrip.querySelector(".daily-kicker");
+          if (dailyKicker) {
+            var dateLabel = "";
+            try {
+              dateLabel = new Date().toLocaleDateString("en-US", { timeZone: "America/Toronto", month: "long", day: "numeric", year: "numeric" });
+            } catch (e) { dateLabel = ""; }
+            if (dateLabel) dailyKicker.textContent = "Today\u2019s defense \u00b7 " + dateLabel;
+          }
           var dayIdx = Math.floor(Date.now() / 86400000) % defenses.length;
           var dayTitle = document.getElementById("dailyTitle");
           if (dayTitle) dayTitle.textContent = "#" + (dayIdx + 1) + " \u2014 " + defenses[dayIdx].title;

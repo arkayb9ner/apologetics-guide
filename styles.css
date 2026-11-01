@@ -463,6 +463,16 @@
         padding: 0;
         vertical-align: baseline;
       }
+      .entry-label {
+        margin: 16px auto 4px;
+        font-family: "Public Sans", sans-serif;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.26em;
+        text-indent: 0.26em;
+        text-transform: uppercase;
+        color: var(--gold-deep);
+      }
       .entry-top .share-btn { margin: 16px 6px 0; }
       .entry blockquote {
         font-family: "Public Sans", sans-serif;

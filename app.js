@@ -367,6 +367,7 @@ function renderStandardCard(card, n, total) {
     (card.audience ? '<span class="audience-pill audience-' + card.audience + '">' + audienceLabel(card.audience) + "</span>" : "") +
     (isNewCard(card) ? '<span class="new-pill">New</span>' : "") +
     "<h3>" + card.title + "</h3>" +
+    '<p class="entry-label">Objection</p>' +
     '<p class="entry-lede">' + linkGlossaryTerms(card.objection) + "</p>" +
     '<button type="button" class="share-btn" data-share>⧉ Copy link to this defense</button>' +
     (CAN_READ_ALOUD ? '<button type="button" class="share-btn" data-read>🔊 Listen</button>' : "") +
@@ -381,6 +382,7 @@ function renderStandardCard(card, n, total) {
     '<button type="button" role="tab" aria-selected="false" aria-controls="' + card.slug + '-related" data-panel="related">See also</button>' +
     "</nav><div>" +
     '<section class="panel active" id="' + card.slug + '-response" role="tabpanel">' +
+    '<p class="entry-label">Defense</p>' +
     '<ol class="answer-pillars">' + points + "</ol>" +
     '<aside class="quick-ref" aria-label="Quick references"><h4>Verses to remember</h4>' +
     '<div class="verse-list">' + verses + "</div>" +

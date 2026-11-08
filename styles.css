@@ -151,6 +151,13 @@
       .hero-choices a:hover, .hero-choices a:focus-visible { background: var(--gold); border-color: var(--gold); }
       .hero-choices a:hover b, .hero-choices a:hover span, .hero-choices a:focus-visible b, .hero-choices a:focus-visible span { color: #1a1714; }
       @media (max-width: 720px) { .hero-choices { grid-template-columns: 1fr; } }
+      .theologians-banner { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin: 20px 0 8px; padding: clamp(20px, 4vw, 32px); background: linear-gradient(135deg, var(--gold), var(--gold-deep)); border-radius: 20px; color: #1a1714; box-shadow: var(--shadow); }
+      .theologians-banner h2 { margin: 4px 0 8px; font-size: clamp(1.5rem, 4vw, 2rem); line-height: 1.1; color: #1a1714; }
+      .theologians-banner p { margin: 0; font-size: 0.98rem; line-height: 1.5; }
+      .theologians-kicker { font-size: 0.74rem !important; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
+      .theologians-btn { flex: none; display: inline-block; background: #1a1714; color: #fff; font-weight: 800; font-size: 1.08rem; text-decoration: none; padding: 15px 26px; border-radius: 999px; white-space: nowrap; }
+      .theologians-btn:hover, .theologians-btn:focus-visible { background: var(--wine); color: #fff; }
+      @media (max-width: 720px) { .theologians-banner { flex-direction: column; align-items: flex-start; } .theologians-btn { width: 100%; text-align: center; white-space: normal; } }
       .hero-search { order: 6; align-self: center; width: min(560px, 100%); min-width: 0; }
       .hero-search-label {
         display: block;

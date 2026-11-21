@@ -24,40 +24,377 @@
     <link rel="icon" href="data:," />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Literata:opsz,wght@7..72,400;7..72,600;7..72,700&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Literata:opsz,wght@7..72,400;7..72,600;7..72,700&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet" />
     <title>Christian Armory</title>
-    <link rel="stylesheet" href="styles.css?v=20261119a">
+    <link rel="stylesheet" href="styles.css?v=20261120b">
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="hp-topbar">
+      <div class="hp-topbar-inner">
+        <a class="hp-brand" href="#main" aria-label="Christian Armory — back to top">
+          <svg viewBox="0 0 48 56" fill="none" aria-hidden="true">
+            <path d="M24 2 L43 9 V27 C43 41 35 49 24 54 C13 49 5 41 5 27 V9 Z" stroke="#c19a2e" stroke-width="3" fill="rgba(193,154,46,.12)"/>
+            <path d="M24 13 V40 M15.5 21.5 H32.5" stroke="#e8c556" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+          <span class="hp-brand-name"><span>Christian</span><span>Armory</span></span>
+        </a>
+
+        <nav class="hp-mainnav" aria-label="Main">
+          <ul>
+            <li class="hp-nav-item">
+              <button class="hp-nav-btn" type="button" aria-expanded="false" aria-haspopup="true">Home
+                <svg class="hp-caret" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4 L6 8 L10 4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+              </button>
+              <div class="hp-menu" role="menu">
+                <a href="#main">Back to the top</a>
+              </div>
+            </li>
+            <li class="hp-nav-item">
+              <button class="hp-nav-btn" type="button" aria-expanded="false" aria-haspopup="true">Defenses
+                <svg class="hp-caret" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4 L6 8 L10 4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+              </button>
+              <div class="hp-menu" role="menu">
+                <div class="hp-menu-note">Browse by topic</div>
+                <a href="#defenseDeck">God &amp; Reason</a>
+                <a href="#defenseDeck">Scripture</a>
+                <a href="#defenseDeck">Jesus Christ</a>
+                <a href="#defenseDeck">The Church</a>
+                <a href="#defenseDeck">Mary &amp; Saints</a>
+                <a href="#defenseDeck">Sacraments &amp; Worship</a>
+                <a href="#defenseDeck">Moral Life</a>
+                <a href="#defenseDeck">Salvation &amp; Last Things</a>
+              </div>
+            </li>
+            <li class="hp-nav-item">
+              <button class="hp-nav-btn" type="button" aria-expanded="false" aria-haspopup="true">Learn
+                <svg class="hp-caret" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4 L6 8 L10 4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+              </button>
+              <div class="hp-menu" role="menu">
+                <a href="#start-here">Start Here — Guided Path</a>
+                <a href="https://theologians.christianarmory.org/">Learn the Theologians <span class="hp-ext">↗</span></a>
+                <a href="https://biblebreakdown.christianarmory.org/">Bible Breakdown <span class="hp-ext">↗</span></a>
+              </div>
+            </li>
+            <li class="hp-nav-item">
+              <button class="hp-nav-btn" type="button" aria-expanded="false" aria-haspopup="true">Practice
+                <svg class="hp-caret" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4 L6 8 L10 4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+              </button>
+              <div class="hp-menu" role="menu">
+                <a href="#quiz">Flashcards &amp; Quiz</a>
+                <a href="#myArmory">My Armory</a>
+              </div>
+            </li>
+            <li class="hp-nav-item">
+              <button class="hp-nav-btn" type="button" aria-expanded="false" aria-haspopup="true">References
+                <svg class="hp-caret" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4 L6 8 L10 4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+              </button>
+              <div class="hp-menu" role="menu">
+                <a href="#catechism">Catechism Reader</a>
+                <a href="#essentials">The Nicene Creed</a>
+                <a href="#sacraments">The Seven Sacraments</a>
+                <a href="#apostolic-churches">Catholic, Orthodox, and Oriental Orthodox</a>
+                <a href="#glossary">Theological Glossary</a>
+              </div>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="hp-top-actions">
+          <button class="hp-icon-btn" id="hpHeaderSearchBtn" type="button" aria-label="Search — jump to the question box">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="7" stroke="currentColor" stroke-width="2"/><path d="M16 16 L21.5 21.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <a class="hp-icon-btn hp-mobile-bookmark" href="#myArmory" aria-label="My Armory — saved defenses">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 3.5 H18 V21 L12 16.2 L6 21 Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="hp-btn-myarmory" href="#myArmory">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 3.5 H18 V21 L12 16.2 L6 21 Z"/></svg>
+            My Armory
+          </a>
+          <a class="hp-btn-support" href="https://ko-fi.com/christianarmory" target="_blank" rel="noopener">
+            Support
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 20.7 C6.4 16.9 3 13.6 3 9.9 C3 7.2 5 5 7.6 5 C9.2 5 10.9 5.9 12 7.3 C13.1 5.9 14.8 5 16.4 5 C19 5 21 7.2 21 9.9 C21 13.6 17.6 16.9 12 20.7 Z"/></svg>
+          </a>
+          <button class="hp-icon-btn hp-hamburger" id="hpHamburgerBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="hpMobilePanel">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3.5 6 H20.5 M3.5 12 H20.5 M3.5 18 H20.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="hp-mobile-panel" id="hpMobilePanel">
+        <div class="hp-m-group">
+          <button class="hp-m-toggle" type="button" aria-expanded="false">Home
+            <svg class="hp-caret" width="13" height="13" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4 L6 8 L10 4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+          </button>
+          <div class="hp-m-links">
+            <a href="#main">Back to the top</a>
+          </div>
+        </div>
+        <div class="hp-m-group">
+          <button class="hp-m-toggle" type="button" aria-expanded="false">Defenses
+            <svg class="hp-caret" width="13" height="13" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4 L6 8 L10 4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+          </button>
+          <div class="hp-m-links">
+            <a href="#defenseDeck">God &amp; Reason</a>
+            <a href="#defenseDeck">Scripture</a>
+            <a href="#defenseDeck">Jesus Christ</a>
+            <a href="#defenseDeck">The Church</a>
+            <a href="#defenseDeck">Mary &amp; Saints</a>
+            <a href="#defenseDeck">Sacraments &amp; Worship</a>
+            <a href="#defenseDeck">Moral Life</a>
+            <a href="#defenseDeck">Salvation &amp; Last Things</a>
+          </div>
+        </div>
+        <div class="hp-m-group">
+          <button class="hp-m-toggle" type="button" aria-expanded="false">Learn
+            <svg class="hp-caret" width="13" height="13" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4 L6 8 L10 4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+          </button>
+          <div class="hp-m-links">
+            <a href="#start-here">Start Here — Guided Path</a>
+            <a href="https://theologians.christianarmory.org/">Learn the Theologians ↗</a>
+            <a href="https://biblebreakdown.christianarmory.org/">Bible Breakdown ↗</a>
+          </div>
+        </div>
+        <div class="hp-m-group">
+          <button class="hp-m-toggle" type="button" aria-expanded="false">Practice
+            <svg class="hp-caret" width="13" height="13" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4 L6 8 L10 4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+          </button>
+          <div class="hp-m-links">
+            <a href="#quiz">Flashcards &amp; Quiz</a>
+            <a href="#myArmory">My Armory</a>
+          </div>
+        </div>
+        <div class="hp-m-group">
+          <button class="hp-m-toggle" type="button" aria-expanded="false">References
+            <svg class="hp-caret" width="13" height="13" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4 L6 8 L10 4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+          </button>
+          <div class="hp-m-links">
+            <a href="#catechism">Catechism Reader</a>
+            <a href="#essentials">The Nicene Creed</a>
+            <a href="#sacraments">The Seven Sacraments</a>
+            <a href="#apostolic-churches">Catholic, Orthodox, and Oriental Orthodox</a>
+            <a href="#glossary">Theological Glossary</a>
+          </div>
+        </div>
+        <div class="hp-m-actions">
+          <a class="hp-btn-myarmory" href="#myArmory">My Armory</a>
+          <a class="hp-btn-support" href="https://ko-fi.com/christianarmory" target="_blank" rel="noopener">Support</a>
+        </div>
+      </div>
+    </header>
     <main id="main">
       <div class="page">
         <header class="hero">
           <div>
             <span class="edition">Christian Armory</span>
-            <h1>Know what you believe. Answer with charity.</h1>
-            <p class="hero-copy">A Catholic field guide for meeting hard questions honestly—with Scripture, reason, history, and the teaching of the Church.</p>
+            <h1>Know what you believe.<span class="hp-line2">Answer with charity.</span></h1>
+            <p class="hero-copy">Catholic answers to life&rsquo;s biggest questions &mdash; grounded in Scripture, history, reason, and the Catechism.</p>
             <p class="hero-latin" lang="la"><span class="gilt">I</span>nduite vos armaturam <span class="gilt">D</span>ei</p>
             <p class="hero-verse">&ldquo;Put you on the armour of God, that you may be able to stand against the deceits of the devil.&rdquo; <span>&mdash; Ephesians 6:11</span></p>
           </div>
           <aside class="hero-search" aria-label="Find a defense">
             <label class="hero-search-label" for="heroSearch">Ask the Armory</label>
             <div class="hero-search-box">
-              <input id="heroSearch" type="search" placeholder="Ask in your own words…" autocomplete="off" aria-describedby="heroSearchHelp" aria-controls="heroSearchResults" aria-expanded="false" />
-              <button type="button" class="hero-search-btn" id="heroSearchBtn">Search</button>
+              <input id="heroSearch" type="search" placeholder="Ask a question about the Catholic faith..." autocomplete="off" aria-describedby="heroSearchHelp" aria-controls="heroSearchResults" aria-expanded="false" />
+              <button type="button" class="hero-search-btn" id="heroSearchBtn">Ask</button>
             </div>
-            <p class="hero-search-help" id="heroSearchHelp">Ask a question in plain words, then press Enter or use Search to open the best match.</p>
+            <p class="hero-search-help" id="heroSearchHelp">Ask a question in plain words, then press Enter or use Ask to open the best match.</p>
             <div class="hero-suggest" aria-label="Suggested searches">
               <span class="hero-suggest-label">Try:</span>
-              <div class="topic-chips">
+              <div class="topic-chips hp-chips-desktop">
                 <button type="button" class="topic-chip" data-hero-query="Why confess to a priest?">Why confess to a priest?</button>
                 <button type="button" class="topic-chip" data-hero-query="Is praying to Mary biblical?">Is praying to Mary biblical?</button>
-                <button type="button" class="topic-chip" data-hero-query="Why believe in the Eucharist?">Why believe in the Eucharist?</button>
+                <button type="button" class="topic-chip" data-hero-query="The Real Presence">The Real Presence</button>
+                <button type="button" class="topic-chip" data-hero-query="Purgatory">Purgatory</button>
+              </div>
+              <div class="topic-chips hp-chips-mobile">
+                <button type="button" class="topic-chip" data-hero-query="confess">Confession</button>
+                <button type="button" class="topic-chip" data-hero-query="Mary">Mary</button>
+                <button type="button" class="topic-chip" data-hero-query="Eucharist">Eucharist</button>
+                <button type="button" class="topic-chip" data-hero-query="Purgatory">Purgatory</button>
               </div>
             </div>
             <div class="hero-search-results" id="heroSearchResults" role="listbox" aria-label="Matching defenses" data-open="false"></div>
           </aside>
         </header>
+
+        <div class="hp-feature-shell">
+          <a class="hp-feature-card" href="#defenseDeck">
+            <span class="hp-f-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 6.2 C10.4 4.7 8.2 4 5.2 4 H4 V19.5 H5.4 C8.2 19.5 10.4 20.2 12 21.7 C13.6 20.2 15.8 19.5 18.6 19.5 H20 V4 H18.8 C15.8 4 13.6 4.7 12 6.2 Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 6.2 V21.5" stroke="currentColor" stroke-width="1.7"/></svg>
+            </span>
+            <span class="hp-f-text">
+              <h3>Explore Defenses</h3>
+              <p>In-depth, charitable answers to common objections.</p>
+            </span>
+            <span class="hp-f-chev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5 L16 12 L9 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+          <a class="hp-feature-card" href="#start-here">
+            <span class="hp-f-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5.5 18.5 C5.5 13 10 14.5 12.5 11.5 C14.3 9.4 13.8 6.8 15.5 5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-dasharray="0.1 3.4"/><circle cx="5.5" cy="19" r="2.1" stroke="currentColor" stroke-width="1.7"/><path d="M18.6 2.6 C20 2.6 21 3.6 21 5 C21 7.4 18.6 10 18.6 10 C18.6 10 16.2 7.4 16.2 5 C16.2 3.6 17.2 2.6 18.6 2.6 Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="hp-f-text">
+              <h3>Start Learning</h3>
+              <p>A guided path through 8 key defenses (&asymp; 20 minutes).</p>
+            </span>
+            <span class="hp-f-chev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5 L16 12 L9 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+          <a class="hp-feature-card" href="#quiz">
+            <span class="hp-f-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="7" width="12.5" height="13" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M8.5 7 L10.6 3.9 L20.6 7.2 L18.4 14" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="hp-f-text">
+              <h3>Practice &amp; Grow</h3>
+              <p>Flashcards, objections, and response training.</p>
+            </span>
+            <span class="hp-f-chev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5 L16 12 L9 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+          <a class="hp-feature-card" href="#myArmory">
+            <span class="hp-f-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6.5 3.5 H17.5 V21 L12 16.4 L6.5 21 Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="hp-f-text">
+              <h3>My Armory</h3>
+              <p>Save your favorite defenses, create a study list, and review anytime.</p>
+            </span>
+            <span class="hp-f-chev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5 L16 12 L9 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+        </div>
+
+        <div class="hp-main-grid">
+          <div class="hp-main-col">
+            <div class="hp-section-head">
+              <h2 class="hp-section-title">Featured Defenses</h2>
+              <a class="hp-view-all" href="#defenseDeck">View All Defenses
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12 H19 M13.5 6 L19.5 12 L13.5 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+            <div class="hp-featured-track" id="hpFeaturedTrack">
+              <a class="hp-defense-card" href="#answer-eucharist">
+                <span class="hp-defense-thumb hp-thumb-real-presence" role="img" aria-label="Golden chalice with a consecrated host against a sunset sky"></span>
+                <h3>Why do Catholics believe in the Real Presence?</h3>
+              </a>
+              <a class="hp-defense-card" href="#answer-confession">
+                <span class="hp-defense-thumb hp-thumb-confession" role="img" aria-label="Wooden confessional in a church lit by warm light"></span>
+                <h3>Why confess to a priest?</h3>
+              </a>
+              <a class="hp-defense-card" href="#answer-catholics-worship-mary">
+                <span class="hp-defense-thumb hp-thumb-mary" role="img" aria-label="The Virgin Mary in prayer beneath a golden sky"></span>
+                <h3>Is it biblical to pray to Mary?</h3>
+              </a>
+              <a class="hp-defense-card" href="#answer-papacy-unbiblical">
+                <span class="hp-defense-thumb hp-thumb-papacy" role="img" aria-label="The Colosseum in Rome at sunset"></span>
+                <h3>Why believe in the papacy?</h3>
+              </a>
+              <a class="hp-defense-card" href="#answer-purgatory">
+                <span class="hp-defense-thumb hp-thumb-purgatory" role="img" aria-label="A glowing cross among golden clouds"></span>
+                <h3>What is purgatory?</h3>
+              </a>
+            </div>
+            <div class="hp-carousel-controls" id="hpCarouselControls">
+              <button type="button" class="hp-car-btn" id="hpCarPrev" aria-label="Previous defenses">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5 L8 12 L15 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <div class="hp-dots" id="hpCarDots" role="tablist" aria-label="Featured defenses pages"></div>
+              <button type="button" class="hp-car-btn" id="hpCarNext" aria-label="Next defenses">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5 L16 12 L9 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+
+            <div class="hp-mobile-path">
+              <a class="hp-btn-path" href="#start-here">
+                <span class="hp-play"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.8 V19.2 L19.5 12 Z"/></svg></span>
+                <span>Take the 8-Defense Guided Path<small>&asymp; 20 minutes</small></span>
+              </a>
+            </div>
+          </div>
+
+          <aside>
+            <div class="hp-side-box">
+              <h2>New Here?</h2>
+              <p>Start with our quick, guided introduction to the Catholic faith and how to defend it.</p>
+              <a class="hp-btn-path" href="#start-here">
+                <span class="hp-play"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.8 V19.2 L19.5 12 Z"/></svg></span>
+                <span>Take the 8-Defense Guided Path <small>(&asymp; 20 minutes)</small></span>
+              </a>
+              <ol class="hp-path-steps">
+                <li>Does God exist?</li>
+                <li>Is Jesus God?</li>
+                <li>Did He really rise?</li>
+                <li>Why does God allow suffering?</li>
+                <li>Can I trust the Bible?</li>
+                <li>Why do I need Jesus?</li>
+                <li>Faith, works, and grace</li>
+                <li>The Eucharist</li>
+              </ol>
+            </div>
+
+            <div class="hp-side-box">
+              <h2>Quick Resources</h2>
+              <ul class="hp-quick-list">
+                <li>
+                  <a href="#catechism">
+                    <span class="hp-q-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 6.2 C10.4 4.7 8.2 4 5.2 4 H4 V19.5 H5.4 C8.2 19.5 10.4 20.2 12 21.7 C13.6 20.2 15.8 19.5 18.6 19.5 H20 V4 H18.8 C15.8 4 13.6 4.7 12 6.2 Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 6.2 V21.5" stroke="currentColor" stroke-width="1.7"/></svg></span>
+                    Catechism Reader (All 2,865 paragraphs)
+                    <span class="hp-q-chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5 L16 12 L9 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#essentials">
+                    <span class="hp-q-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 V21 M7.5 8 H16.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg></span>
+                    The Nicene Creed (With explanations)
+                    <span class="hp-q-chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5 L16 12 L9 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#sacraments">
+                    <span class="hp-q-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4 H19 C19 9 16.4 12 12.9 12 H11.1 C7.6 12 5 9 5 4 Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 12 V17 M8 20.5 H16 M12 17 L9.5 20.5 H14.5 Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                    The Seven Sacraments
+                    <span class="hp-q-chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5 L16 12 L9 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#apostolic-churches">
+                    <span class="hp-q-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="7.5" cy="9" r="2.6" stroke="currentColor" stroke-width="1.7"/><circle cx="16.5" cy="9" r="2.6" stroke="currentColor" stroke-width="1.7"/><path d="M2.8 19.5 C2.8 16.6 4.9 14.8 7.5 14.8 C10.1 14.8 12.2 16.6 12.2 19.5 M11.8 19.5 C11.8 16.6 13.9 14.8 16.5 14.8 C19.1 14.8 21.2 16.6 21.2 19.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+                    Catholic, Orthodox, and Oriental Orthodox
+                    <span class="hp-q-chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5 L16 12 L9 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#glossary">
+                    <span class="hp-q-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5.5 A1.5 1.5 0 0 1 5.5 4 H20 V18.5 H5.7 A1.7 1.7 0 0 0 4 20.2 Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M4 18.7 V5.5 M8.5 9 L10.8 14.5 L13.1 9 M9.3 12.6 H12.3 M14.5 14.5 H18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                    Theological Glossary
+                    <span class="hp-q-chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5 L16 12 L9 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+
+        <section class="hp-trust" aria-label="About this site">
+          <div class="hp-trust-item">
+            <span class="hp-t-icon"><svg width="42" height="42" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2.8 L19.5 5.8 V11.5 C19.5 16.4 16.6 19.6 12 21.4 C7.4 19.6 4.5 16.4 4.5 11.5 V5.8 Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8.8 11.8 L11.2 14.2 L15.4 9.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <div>
+              <h3>Faithful &amp; Reliable</h3>
+              <p>Grounded in the teaching of the Catholic Church.</p>
+            </div>
+          </div>
+          <div class="hp-trust-item">
+            <span class="hp-t-icon"><svg width="42" height="42" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="8" cy="9" r="2.7" stroke="currentColor" stroke-width="1.6"/><circle cx="16.5" cy="9" r="2.7" stroke="currentColor" stroke-width="1.6"/><path d="M3 19.5 C3 16.4 5.2 14.6 8 14.6 C10.8 14.6 13 16.4 13 19.5 M12.5 15.1 C13.4 14.7 14.8 14.6 15.7 14.6 C18.5 14.6 21 16.4 21 19.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+            <div>
+              <h3>Clear &amp; Charitable</h3>
+              <p>Presents objections fairly and answers with respect.</p>
+            </div>
+          </div>
+          <div class="hp-trust-item">
+            <span class="hp-t-icon"><svg width="42" height="42" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4 L22 9 L12 14 L2 9 Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M6 11.2 V16 C6 17.6 8.7 19 12 19 C15.3 19 18 17.6 18 16 V11.2 M22 9 V15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <div>
+              <h3>Practical &amp; Interactive</h3>
+              <p>Not just answers — tools to help you learn, practice, and explain the faith.</p>
+            </div>
+          </div>
+        </section>
 
         <nav class="hero-choices" aria-label="Choose where to begin">
           <a href="#pocket"><b>Get a quick answer</b><span>One-line answers to the common objections</span></a>
@@ -710,8 +1047,8 @@
       </div>
     </main>
 
-    <script>window.ASSET_V = "20261119a";</script>
-    <script src="app.js?v=20261119a"></script>
+    <script>window.ASSET_V = "20261120b";</script>
+    <script src="app.js?v=20261120b"></script>
     <div class="ccc-modal-backdrop" id="cccModalBackdrop" hidden>
       <div class="ccc-modal" role="dialog" aria-modal="true" aria-labelledby="cccModalTitle">
         <div class="ccc-modal-head">

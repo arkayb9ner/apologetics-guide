@@ -2199,9 +2199,146 @@ if ("serviceWorker" in navigator && /^https:$/.test(window.location.protocol)) {
     if (det && !det.open) det.open = true;
   }
   document.addEventListener("click", function (event) {
-    var a = event.target && event.target.closest ? event.target.closest(".section-jump a") : null;
+    var a = event.target && event.target.closest ? event.target.closest(".section-jump a, .hp-topbar a, .hp-mobile-panel a") : null;
     if (a) openDetailsForHash(a.getAttribute("href"));
   });
   window.addEventListener("hashchange", function () { openDetailsForHash(window.location.hash); });
   openDetailsForHash(window.location.hash);
+})();
+
+/* Homepage redesign (2026-11-20): sticky topbar menus, mobile panel,
+   header search shortcut, and the featured-defenses carousel. */
+(function () {
+  /* ----- Desktop dropdowns ----- */
+  var navItems = Array.prototype.slice.call(document.querySelectorAll(".hp-nav-item"));
+  function closeAllHpMenus(except) {
+    navItems.forEach(function (item) {
+      if (item !== except) {
+        item.classList.remove("open");
+        item.querySelector(".hp-nav-btn").setAttribute("aria-expanded", "false");
+      }
+    });
+  }
+  navItems.forEach(function (item) {
+    var btn = item.querySelector(".hp-nav-btn");
+    btn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var willOpen = !item.classList.contains("open");
+      closeAllHpMenus(item);
+      item.classList.toggle("open", willOpen);
+      btn.setAttribute("aria-expanded", willOpen ? "true" : "false");
+    });
+    item.querySelector(".hp-menu").addEventListener("click", function (e) { e.stopPropagation(); });
+    Array.prototype.forEach.call(item.querySelectorAll(".hp-menu a"), function (a) {
+      a.addEventListener("click", function () { closeAllHpMenus(null); });
+    });
+  });
+  document.addEventListener("click", function () { closeAllHpMenus(null); });
+
+  /* ----- Mobile panel ----- */
+  var hamburger = document.getElementById("hpHamburgerBtn");
+  var panel = document.getElementById("hpMobilePanel");
+  function closeHpMobile() {
+    if (!panel || !hamburger) return;
+    panel.classList.remove("open");
+    hamburger.setAttribute("aria-expanded", "false");
+    hamburger.setAttribute("aria-label", "Open menu");
+  }
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") { closeAllHpMenus(null); closeHpMobile(); }
+  });
+  if (hamburger && panel) {
+    hamburger.addEventListener("click", function () {
+      var open = panel.classList.toggle("open");
+      hamburger.setAttribute("aria-expanded", open ? "true" : "false");
+      hamburger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    });
+    Array.prototype.forEach.call(document.querySelectorAll(".hp-m-group"), function (group) {
+      var toggle = group.querySelector(".hp-m-toggle");
+      toggle.addEventListener("click", function () {
+        var open = group.classList.toggle("open");
+        toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+    });
+    /* Tapping a panel link closes the panel. */
+    Array.prototype.forEach.call(panel.querySelectorAll("a"), function (a) {
+      a.addEventListener("click", function () { closeHpMobile(); });
+    });
+  }
+
+  /* ----- Header search icon: jump to the question box ----- */
+  var headerSearchBtn = document.getElementById("hpHeaderSearchBtn");
+  var askInput = document.getElementById("heroSearch");
+  if (headerSearchBtn && askInput) {
+    headerSearchBtn.addEventListener("click", function () {
+      closeHpMobile();
+      if (askInput.scrollIntoView) {
+        askInput.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+      window.setTimeout(function () { askInput.focus({ preventScroll: true }); }, 350);
+    });
+  }
+
+  /* ----- Featured defenses carousel (phones) ----- */
+  var track = document.getElementById("hpFeaturedTrack");
+  var prevBtn = document.getElementById("hpCarPrev");
+  var nextBtn = document.getElementById("hpCarNext");
+  var dotsWrap = document.getElementById("hpCarDots");
+  if (track && prevBtn && nextBtn && dotsWrap) {
+    var cards = Array.prototype.slice.call(track.querySelectorAll(".hp-defense-card"));
+    var hpPage = 0;
+    function hpPageCount() {
+      return Math.max(1, Math.ceil(cards.length / 3));
+    }
+    function hpMaxScroll() {
+      return track.scrollWidth - track.clientWidth;
+    }
+    function hpUpdateCarousel() {
+      var max = hpMaxScroll();
+      var pages = hpPageCount();
+      var idx = hpPage;
+      if (max > 0 && pages > 1) {
+        idx = Math.round((track.scrollLeft / max) * (pages - 1));
+        hpPage = idx;
+      }
+      Array.prototype.forEach.call(dotsWrap.children, function (d, i) {
+        d.classList.toggle("active", i === idx);
+      });
+      prevBtn.classList.toggle("at-end", hpPage <= 0);
+      nextBtn.classList.toggle("at-end", hpPage >= pages - 1);
+    }
+    function hpGoToPage(p) {
+      var pages = hpPageCount();
+      hpPage = Math.min(pages - 1, Math.max(0, p));
+      var max = hpMaxScroll();
+      if (max > 0) {
+        track.scrollLeft = pages <= 1 ? 0 : (max * hpPage) / (pages - 1);
+      }
+      hpUpdateCarousel();
+    }
+    function hpBuildDots() {
+      dotsWrap.innerHTML = "";
+      var pages = hpPageCount();
+      for (var i = 0; i < pages; i++) {
+        var d = document.createElement("button");
+        d.type = "button";
+        d.className = "hp-dot" + (i === 0 ? " active" : "");
+        d.setAttribute("aria-label", "Go to page " + (i + 1) + " of featured defenses");
+        (function (idx) {
+          d.addEventListener("click", function () { hpGoToPage(idx); });
+        })(i);
+        dotsWrap.appendChild(d);
+      }
+      hpUpdateCarousel();
+    }
+    prevBtn.addEventListener("click", function () { hpGoToPage(hpPage - 1); });
+    nextBtn.addEventListener("click", function () { hpGoToPage(hpPage + 1); });
+    var hpScrollTimer = null;
+    track.addEventListener("scroll", function () {
+      if (hpScrollTimer) { window.clearTimeout(hpScrollTimer); }
+      hpScrollTimer = window.setTimeout(hpUpdateCarousel, 40);
+    });
+    window.addEventListener("resize", function () { hpBuildDots(); });
+    hpBuildDots();
+  }
 })();
